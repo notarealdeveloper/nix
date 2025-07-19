@@ -48,14 +48,15 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
-
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.displayManager.lightdm.greeter.name = "lightdm-gtk-greeter";
-  #services.xserver.displayManager.lightdm.greeters.gtk.enable = true;
-  #services.xserver.displayManager.lightdm.greeters.slick.enable = false; # is it a bug that this is required? find out :)
-  #services.xserver.displayManager.lightdm.greeters.gtk.theme.package = pkgs.lightdm_gtk_greeter; # what does this do?
-  #services.xserver.displayManager.lightdm.greeters.gtk.theme.name = "MyGreeterTheme";
-  #services.xserver.displayManager.lightdm.greeters.gtk.theme.background = "/path/to/image.png";
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      naturalScrolling = true;
+      tapping = true;
+      accelProfile = "adaptive";
+      accelSpeed = "0.5";
+    };
+  };
 
   services.xserver.displayManager.lightdm = {
     enable = true;
@@ -135,9 +136,6 @@
     cowsay
     xcowsay
 
-    # login manager
-    lightdm
-
     # desktop
     dconf
     nemo
@@ -152,10 +150,24 @@
     numix-icon-theme-circle
     nix-bash-completions
 
+    # video
+    vlc
+    ffmpeg
+    kdePackages.kdenlive
+    simplescreenrecorder
+
+    # games
+    stepmania
+
     # social
     wechat
     whatsapp-for-linux
     teams-for-linux
+
+    # crypt
+    tor
+    torsocks
+    tor-browser
 
     # dev
     vscode
