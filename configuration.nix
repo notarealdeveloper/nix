@@ -180,7 +180,7 @@
     lean4
 
     ## python: no venvs bitch
-    (import ./python.nix pkgs)
+    (import ./python/__init__.nix pkgs)
 
     ## python: let's get python 3.14 without the GIL
     python314FreeThreading
