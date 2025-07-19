@@ -115,10 +115,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable overlays
-  nixpkgs.overlays = [
-    (import ./overlays/mathlib.nix)
-  ];
+  # Enable overlays (not yet)
+  #
+  # nixpkgs.overlays = [
+  #   (import ./overlays/mathlib.nix)
+  # ];
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -177,7 +178,6 @@
     ## lean
     elan
     lean4
-    lean4Mathlib
 
     ## python: no venvs bitch
     (import ./python.nix pkgs)
@@ -188,6 +188,9 @@
   ];
 
   programs.dconf.enable = true;
+
+  programs.ssh.startAgent = true;
+
 
   # Vim: clipboard support
   programs.vim = {
