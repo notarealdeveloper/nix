@@ -117,6 +117,8 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
+
+    # tty
     vim_configurable
     wget
     gcc
@@ -124,40 +126,37 @@
     gh
     gnumake
     plocate
+    xclip
+    xdotool
+    cowsay
+    xcowsay
+
+    # login manager
+    lightdm
 
     # desktop
     dconf
-    lightdm
-    gnome-terminal
-    numix-icon-theme-circle
-    numix-gtk-theme
     nemo
     conky
-    google-chrome
-    obsidian
-    cowsay
-    xcowsay
-    xclip
-    xdotool
     eog
-    evince
     gedit
-
-    # dev
-    lean4
-    vscode
-
-    #mathlib4
+    evince
+    dropbox
+    google-chrome
+    gnome-terminal
+    numix-gtk-theme
+    numix-icon-theme-circle
     nix-bash-completions
 
-    whatsapp-for-linux
+    # social
     wechat
+    whatsapp-for-linux
     teams-for-linux
 
     # no venvs bitch
     (import ./python.nix pkgs)
 
-    # let's get python 3.14 without the GIL
+    ## python: let's get python 3.14 without the GIL
     python314FreeThreading
 
   ];
