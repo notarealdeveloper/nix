@@ -114,6 +114,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable overlays
+  nixpkgs.overlays = [
+    (import ./overlays/mathlib.nix)
+  ];
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -153,7 +157,16 @@
     whatsapp-for-linux
     teams-for-linux
 
-    # no venvs bitch
+    # dev
+    vscode
+    obsidian
+
+    ## lean
+    elan
+    lean4
+    lean4Mathlib
+
+    ## python: no venvs bitch
     (import ./python.nix pkgs)
 
     ## python: let's get python 3.14 without the GIL
