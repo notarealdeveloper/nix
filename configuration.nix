@@ -129,7 +129,8 @@
     let
 
       hello = pkgs.callPackage ./examples/hello.nix {};
-      jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
+      #jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
+      #jello = with pkgs; pkgs.callPackage ./examples/jello.nix { inherit python313Packages hello lib; };
 
     in
 
@@ -195,8 +196,11 @@
 
     ## python: no venvs bitch
     #hello
-    jello
+    #jello
     (import ./python.nix pkgs)
+    (python313Packages.callPackage ./examples/jello.nix {
+      inherit pkgs lib fetchFromGitHub hello;
+    })
 
     ## python: let's get python 3.14 without the GIL
     python314FreeThreading

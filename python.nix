@@ -42,6 +42,6 @@ pkgs: pkgs.python313.withPackages (ps:
     embd
 
     # cross-language dependency example
-    jello
+    #jello
 
   ])
