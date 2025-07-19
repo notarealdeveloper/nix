@@ -2,7 +2,6 @@ pkgs: pkgs.python313.withPackages (ps:
 
   let
 
-
     # These all work:
     #
     # (pkgs.callPackage ./python/callable-module.nix ps)
@@ -14,6 +13,7 @@ pkgs: pkgs.python313.withPackages (ps:
     is_instance     = ps.callPackage ./python/is-instance.nix { inherit callable_module; };
     assure          = ps.callPackage ./python/assure.nix {};
     mmry            = ps.callPackage ./python/mmry.nix {};
+    embd            = ps.callPackage ./python/embd.nix { inherit is_instance assure mmry; };
 
   in
 
@@ -38,9 +38,11 @@ pkgs: pkgs.python313.withPackages (ps:
     google-api-python-client
     geoip2
 
+    # external
     callable_module
     is_instance
     assure
     mmry
+    embd
 
   ])

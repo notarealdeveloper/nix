@@ -135,6 +135,7 @@
     xdotool
     cowsay
     xcowsay
+    inotify-tools
 
     # desktop
     dconf
