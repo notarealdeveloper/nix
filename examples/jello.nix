@@ -1,6 +1,6 @@
-{ lib , buildPythonPackage , fetchFromGitHub , pip , setuptools , hello ,  ... }:
+{ lib , buildPythonApplication , fetchFromGitHub , pip , setuptools , hello ,  ... }:
 
-buildPythonPackage rec {
+buildPythonApplication rec {
   pname = "jello";
   version = "1.0";
   pyproject = true;
