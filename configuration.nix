@@ -150,7 +150,10 @@
     gnome-terminal
     numix-gtk-theme
     numix-icon-theme-circle
+
+    # nix
     nix-bash-completions
+    nix-prefetch-github
 
     # video
     vlc
