@@ -1,37 +1,46 @@
-pkgs: pkgs.python313.withPackages (ps: with ps; [
+pkgs: pkgs.python313.withPackages (ps:
 
-  # basics
-  ipython
-  requests
-  beautifulsoup4
+  let
 
-  # numerical
-  numpy
-  scipy
-  pandas
-  matplotlib
-  seaborn
 
-  # gmail
-  google-auth-oauthlib
+    # These all work:
+    #
+    # (pkgs.callPackage ./python/callable-module.nix ps)
+    #
+    # (callPackage ./python/callable-module.nix ps)
+    #
+    # (import ./python/callable-module.nix ps)
+    callable_module = ps.callPackage ./python/callable-module.nix {};
+    is_instance     = ps.callPackage ./python/is-instance.nix { inherit callable_module; };
+    assure          = ps.callPackage ./python/assure.nix {};
+    mmry            = ps.callPackage ./python/mmry.nix {};
 
-  # getbtcprice
-  google-api-python-client
-  geoip2
+  in
 
-  # These all work:
-  #
-  # (pkgs.callPackage ./python/callable-module.nix ps)
-  #
-  # (callPackage ./python/callable-module.nix ps)
-  #
-  # (import ./python/callable-module.nix ps)
+    with ps; [
 
-  # This works
-  (ps.callPackage ./python/callable-module.nix {})
+    # basics
+    ipython
+    requests
+    beautifulsoup4
 
-  # This works, but it's clear we're doing something
-  # stupid here. How can we make this more elegant?
-  (ps.callPackage ./python/is-instance.nix { callable_module = (ps.callPackage ./python/callable-module.nix {}); })
+    # numerical
+    numpy
+    scipy
+    pandas
+    matplotlib
+    seaborn
 
-])
+    # gmail
+    google-auth-oauthlib
+
+    # getbtcprice
+    google-api-python-client
+    geoip2
+
+    callable_module
+    is_instance
+    assure
+    mmry
+
+  ])
