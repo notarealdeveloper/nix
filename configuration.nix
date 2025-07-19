@@ -101,10 +101,12 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.groups.plocate = {};
+
   users.users.jason = {
     isNormalUser = true;
     description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "plocate" ];
     packages = with pkgs; [
     ];
   };
@@ -112,8 +114,8 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim_configurable
     wget
@@ -121,7 +123,7 @@
     git
     gh
     gnumake
-    mlocate
+    plocate
 
     # desktop
     dconf
@@ -153,10 +155,7 @@
     teams-for-linux
 
     # no venvs bitch
-    python313
-    python313Packages.ipython
-    python313Packages.google-api-python-client
-    python313Packages.beautifulsoup4
+    (import ./python.nix pkgs)
 
     # let's get python 3.14 without the GIL
     python314FreeThreading
@@ -188,6 +187,9 @@
   # };
 
   environment.etc."gitconfig".text = ''
+    [init]
+      defaultBranch = master
+
     [user]
       name = Jason Wilkes
       email = notarealdeveloper@gmail.com
