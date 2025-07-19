@@ -129,7 +129,7 @@
     let
 
       hello = pkgs.callPackage ./examples/hello.nix {};
-      #jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
+      jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
 
     in
 
@@ -194,8 +194,9 @@
     lean4
 
     ## python: no venvs bitch
-    hello # how can we get this installed by jello?
+    #hello # how can we get this installed by jello?
     (import ./python.nix pkgs)
+    jello
 
     ## python: let's get python 3.14 without the GIL
     python314FreeThreading
