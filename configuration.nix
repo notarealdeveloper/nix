@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 
 {
+
   imports =
     [
       ./hardware-configuration.nix
@@ -122,73 +123,94 @@
   # ];
 
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
 
-    # tty
-    vim_configurable
-    wget
-    gcc
-    git
-    gh
-    gnumake
-    plocate
-    xclip
-    xdotool
-    cowsay
-    xcowsay
-    inotify-tools
+  environment.systemPackages =
+  
+    let
 
-    # desktop
-    dconf
-    nemo
-    conky
-    eog
-    gedit
-    evince
-    dropbox
-    google-chrome
-    gnome-terminal
-    numix-gtk-theme
-    numix-icon-theme-circle
+      #hello = pkgs.callPackage ./examples/hello.nix {};
+      #jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
 
-    # nix
-    nix-bash-completions
-    nix-prefetch-github
+    in
 
-    # video
-    vlc
-    ffmpeg
-    kdePackages.kdenlive
-    simplescreenrecorder
+      with pkgs; [
 
-    # games
-    stepmania
+      # tty
+      vim_configurable
+      wget
+      gcc
+      git
+      gh
+      gnumake
+      plocate
+      xclip
+      xdotool
+      cowsay
+      xcowsay
+      inotify-tools
 
-    # social
-    wechat
-    whatsapp-for-linux
-    teams-for-linux
+      # desktop
+      dconf
+      nemo
+      conky
+      eog
+      gedit
+      evince
+      dropbox
+      google-chrome
+      gnome-terminal
+      numix-gtk-theme
+      numix-icon-theme-circle
 
-    # crypt
-    tor
-    torsocks
-    tor-browser
+      # nix
+      nix-bash-completions
+      nix-prefetch-github
 
-    # dev
-    vscode
-    obsidian
+      # video
+      vlc
+      ffmpeg
+      kdePackages.kdenlive
+      simplescreenrecorder
 
-    ## lean
-    elan
-    lean4
+      # games
+      stepmania
 
-    ## python: no venvs bitch
-    (import ./python/__init__.nix pkgs)
+      # social
+      wechat
+      whatsapp-for-linux
+      teams-for-linux
 
-    ## python: let's get python 3.14 without the GIL
-    python314FreeThreading
+      # crypt
+      tor
+      torsocks
+      tor-browser
 
-  ];
+      # dev
+      vscode
+      obsidian
+
+      ## lean
+      elan
+      lean4
+
+      ## python: no venvs bitch
+      (import ./python.nix pkgs)
+
+      ## python: let's get python 3.14 without the GIL
+      python314FreeThreading
+
+      ################
+      ### examples ###
+      ################
+
+      ## a c hello world program
+      hello
+
+      ## a python program that depends on it, but
+      ## can't declare that dependency in pyproject.toml
+      #jello
+
+    ];
 
   programs.dconf.enable = true;
 
