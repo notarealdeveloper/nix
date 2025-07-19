@@ -1,7 +1,7 @@
 { lib , buildPythonPackage , fetchPypi , pip , setuptools , python , callable_module, ... }:
 
 buildPythonPackage rec {
-  pname = "is-instance";
+  pname = "is_instance";
   version = "0.0.12";
   pyproject = true;
 
