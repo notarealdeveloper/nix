@@ -128,89 +128,80 @@
   
     let
 
-      #hello = pkgs.callPackage ./examples/hello.nix {};
+      hello = pkgs.callPackage ./examples/hello.nix {};
       #jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
 
     in
 
-      with pkgs; [
+    with pkgs; [
 
-      # tty
-      vim_configurable
-      wget
-      gcc
-      git
-      gh
-      gnumake
-      plocate
-      xclip
-      xdotool
-      cowsay
-      xcowsay
-      inotify-tools
+    # tty
+    vim_configurable
+    wget
+    gcc
+    git
+    gh
+    gnumake
+    plocate
+    xclip
+    xdotool
+    cowsay
+    xcowsay
+    inotify-tools
 
-      # desktop
-      dconf
-      nemo
-      conky
-      eog
-      gedit
-      evince
-      dropbox
-      google-chrome
-      gnome-terminal
-      numix-gtk-theme
-      numix-icon-theme-circle
+    # desktop
+    dconf
+    nemo
+    conky
+    eog
+    gedit
+    evince
+    dropbox
+    google-chrome
+    gnome-terminal
+    numix-gtk-theme
+    numix-icon-theme-circle
 
-      # nix
-      nix-bash-completions
-      nix-prefetch-github
+    # nix
+    nix-bash-completions
+    nix-prefetch-github
 
-      # video
-      vlc
-      ffmpeg
-      kdePackages.kdenlive
-      simplescreenrecorder
+    # video
+    vlc
+    ffmpeg
+    kdePackages.kdenlive
+    simplescreenrecorder
 
-      # games
-      stepmania
+    # games
+    stepmania
 
-      # social
-      wechat
-      whatsapp-for-linux
-      teams-for-linux
+    # social
+    wechat
+    whatsapp-for-linux
+    teams-for-linux
 
-      # crypt
-      tor
-      torsocks
-      tor-browser
+    # crypt
+    tor
+    torsocks
+    tor-browser
 
-      # dev
-      vscode
-      obsidian
+    # dev
+    vscode
+    obsidian
 
-      ## lean
-      elan
-      lean4
+    ## lean
+    elan
+    lean4
 
-      ## python: no venvs bitch
-      (import ./python.nix pkgs)
+    ## python: no venvs bitch
+    hello # how can we get this installed by jello?
+    (import ./python.nix pkgs)
 
-      ## python: let's get python 3.14 without the GIL
-      python314FreeThreading
+    ## python: let's get python 3.14 without the GIL
+    python314FreeThreading
 
-      ################
-      ### examples ###
-      ################
 
-      ## a c hello world program
-      hello
-
-      ## a python program that depends on it, but
-      ## can't declare that dependency in pyproject.toml
-      #jello
-
-    ];
+  ];
 
   programs.dconf.enable = true;
 

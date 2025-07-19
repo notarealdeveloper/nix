@@ -12,10 +12,10 @@ buildPythonPackage rec {
     sha256 = "sha256-rnNoGpyab8bbaRA/QuZRIOolv+FTrCGf++IBayVQUMM=";
   };
 
-  nativeBuildInputs = [  ];
+  nativeBuildInputs = [ pip setuptools hello ];
 
   buildInputs = [ hello ];
 
-  propagatedBuildInputs = [ pip setuptools ];
+  propagatedBuildInputs = [ hello ];
 }
 

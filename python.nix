@@ -41,7 +41,7 @@ pkgs: pkgs.python313.withPackages (ps:
     mmry
     embd
 
-    # experiment
+    # cross-language dependency example
     jello
 
   ])
