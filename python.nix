@@ -11,6 +11,15 @@ pkgs: pkgs.python313.withPackages (ps:
     hello           = ps.callPackage ./examples/hello.nix {};
     jello           = ps.callPackage ./examples/jello.nix { inherit hello; };
 
+    #auditwheel = callPackage ../development/python-modules/auditwheel {
+    #  inherit (pkgs)
+    #    bzip2
+    #    gnutar
+    #    patchelf
+    #    unzip
+    #    ;
+    #};
+
   in
 
     with ps; [

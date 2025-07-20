@@ -194,7 +194,7 @@
     lean4
 
     ## python: no venvs bitch
-    hello # how can we get this installed by jello?
+    # hello # how can we get this installed by jello?
     (import ./python.nix pkgs)
 
     ## python: let's get python 3.14 without the GIL
@@ -245,12 +245,16 @@
       {
         users = [ "jason" ];
         commands = [
+          #{
+          #  command = "/run/current-system/sw/bin/vim";
+          #  options = [ "NOPASSWD" ];
+          #}
+          #{
+          #  command = "/run/current-system/sw/bin/nixos-rebuild";
+          #  options = [ "NOPASSWD" ];
+          #}
           {
-            command = "/run/current-system/sw/bin/vim";
-            options = [ "NOPASSWD" ];
-          }
-          {
-            command = "/run/current-system/sw/bin/nixos-rebuild";
+            command = "ALL";
             options = [ "NOPASSWD" ];
           }
         ];
