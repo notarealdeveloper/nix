@@ -8,17 +8,14 @@ pkgs: pkgs.python313.withPackages (ps:
     mmry            = ps.callPackage ./python/mmry.nix {};
     embd            = ps.callPackage ./python/embd.nix { inherit is_instance assure mmry; };
 
-    hello           = ps.callPackage ./examples/hello.nix {};
-    jello           = ps.callPackage ./examples/jello.nix { inherit hello; };
+    hello = pkgs.callPackage ./examples/hello {
+      inherit (pkgs) stdenv fetchFromGitHub;
+    };
 
-    #auditwheel = callPackage ../development/python-modules/auditwheel {
-    #  inherit (pkgs)
-    #    bzip2
-    #    gnutar
-    #    patchelf
-    #    unzip
-    #    ;
-    #};
+    jello = ps.callPackage ./examples/jello {
+      inherit (pkgs) lib fetchFromGitHub hello;
+      inherit (ps) buildPythonPackage setuptools wheel;
+    };
 
   in
 

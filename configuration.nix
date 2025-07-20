@@ -128,7 +128,27 @@
   
     let
 
-      hello = pkgs.callPackage ./examples/hello.nix {};
+      /*
+        Note: import and pkgs.callPackage are the same in certain circumstances:
+
+        nix-repl> hello = (import ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; })           
+
+        nix-repl> hello                                                                            
+        «derivation /nix/store/w4jzy2r9a34jpqrb0mzamv0rjir2a8lk-hello-1.0.drv»
+
+        nix-repl> hello = (pkgs.callPackage ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; })
+
+        nix-repl> hello                                                                                      
+        «derivation /nix/store/w4jzy2r9a34jpqrb0mzamv0rjir2a8lk-hello-1.0.drv»
+
+       */
+
+      #hello = (import ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
+
+      # This seems to work enough to start doing... something
+      # pkgs.extend (final: prev: { inherit hello; } )
+
+      #hello = pkgs.callPackage ./examples/hello.nix {};
       #jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
 
     in
