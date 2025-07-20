@@ -1,9 +1,10 @@
-{ pkgs, lib, python313Packages, fetchFromGitHub, hello }:
+{ lib , buildPythonPackage , fetchFromGitHub , pip , setuptools , hello ,  ... }:
 
-pkgs.buildPythonApplication rec {
+buildPythonPackage rec {
   pname = "jello";
   version = "1.0";
   pyproject = true;
+
   src = fetchFromGitHub {
     owner = "notarealdeveloper";
     repo = "jello";
@@ -11,10 +12,10 @@ pkgs.buildPythonApplication rec {
     sha256 = "sha256-rnNoGpyab8bbaRA/QuZRIOolv+FTrCGf++IBayVQUMM=";
   };
 
-  propagatedBuildInputs = [ hello ];
+  nativeBuildInputs = [ pip setuptools hello ];
 
-  # Additional paths for wrapping the jello executable:
-  makeWrapperArgs = [
-    "--prefix" "PATH" ":" "${lib.makeBinPath [hello]}"
-  ];
+  buildInputs = [ hello ];
+
+  propagatedBuildInputs = [ hello ];
 }
+
