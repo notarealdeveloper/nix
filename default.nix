@@ -22,6 +22,10 @@ pkgs: pkgs.python313.withPackages (ps:
     build
     twine
     pytest
+    editdistance
+    multiprocess
+    trio
+    curio
 
     # numerical
     numpy
@@ -30,6 +34,7 @@ pkgs: pkgs.python313.withPackages (ps:
     matplotlib
     seaborn
     scikit-learn
+    tensorflow
     torch
 
     # gmail
