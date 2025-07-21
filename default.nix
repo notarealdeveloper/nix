@@ -23,6 +23,7 @@ pkgs: pkgs.python313.withPackages (ps:
     twine
     pytest
     editdistance
+    multiprocess
 
     # numerical
     numpy
