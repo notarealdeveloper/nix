@@ -24,6 +24,7 @@ pkgs: pkgs.python313.withPackages (ps:
     pytest
     editdistance
     multiprocess
+    trio
 
     # numerical
     numpy
