@@ -30,6 +30,7 @@ pkgs: pkgs.python313.withPackages (ps:
     matplotlib
     seaborn
     scikit-learn
+    tensorflow
     torch
 
     # gmail
