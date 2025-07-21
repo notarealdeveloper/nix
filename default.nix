@@ -5,7 +5,7 @@ in {
   myenv = pkgs.buildEnv {
     name = "ld";
     paths = with pkgs; [
-      cowsay
+      # cowsay
       (import ./python pkgs)
     ];
   };
