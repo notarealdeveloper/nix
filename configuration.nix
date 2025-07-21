@@ -6,6 +6,8 @@
 
 {
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   imports =
     [
       ./hardware-configuration.nix
@@ -19,13 +21,10 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "turing";    # Define your hostname.
+  # Set hostname.
+  networking.hostName = "turing";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  # Enable networking.
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -33,7 +32,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -46,9 +44,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
   services.libinput = {
     enable = true;
     touchpad = {
@@ -59,6 +54,9 @@
     };
   };
 
+  # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
+  services.xserver.enable = true;
   services.xserver.displayManager.lightdm = {
     enable = true;
     greeters.gtk = {
@@ -116,14 +114,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable overlays (not yet)
-  #
-  # nixpkgs.overlays = [
-  #   (import ./overlays/mathlib.nix)
-  # ];
-
-  # List packages installed in system profile. To search, run:
-
+  # System packages
   environment.systemPackages =
   
     let
@@ -132,24 +123,11 @@
         Note: import and pkgs.callPackage are the same in certain circumstances:
 
         nix-repl> hello = (import ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; })           
-
-        nix-repl> hello                                                                            
         «derivation /nix/store/w4jzy2r9a34jpqrb0mzamv0rjir2a8lk-hello-1.0.drv»
-
         nix-repl> hello = (pkgs.callPackage ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; })
-
-        nix-repl> hello                                                                                      
         «derivation /nix/store/w4jzy2r9a34jpqrb0mzamv0rjir2a8lk-hello-1.0.drv»
 
        */
-
-      #hello = (import ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
-
-      # This seems to work enough to start doing... something
-      # pkgs.extend (final: prev: { inherit hello; } )
-
-      #hello = pkgs.callPackage ./examples/hello.nix {};
-      #jello = pkgs.callPackage ./examples/jello.nix { inherit hello; };
 
     in
 
@@ -168,9 +146,10 @@
     cowsay
     xcowsay
     inotify-tools
+    imagemagick
+    pcre
 
     # desktop
-    dconf
     nemo
     conky
     eog
@@ -209,24 +188,17 @@
     vscode
     obsidian
 
-    ## lean
+    # dev lean
     elan
     lean4
 
-    ## python: no venvs bitch
-    # hello # how can we get this installed by jello?
+    # dev python: no venvs bitch
     (import ./python.nix pkgs)
 
-    ## python: let's get python 3.14 without the GIL
+    # dev python: let's get python 3.14 without the GIL
     python314FreeThreading
 
-
   ];
-
-  programs.dconf.enable = true;
-
-  programs.ssh.startAgent = true;
-
 
   # Vim: clipboard support
   programs.vim = {
@@ -234,11 +206,11 @@
     package = pkgs.vim;  # this is the default full-featured vim with +clipboard
   };
 
+  programs.dconf.enable = true;
+
   environment.shellInit = ''
     dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
   '';
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Git config
   # This should really be done with home-manager,

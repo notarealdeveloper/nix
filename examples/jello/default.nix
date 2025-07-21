@@ -6,6 +6,7 @@
   buildPythonPackage,
   setuptools,
   wheel,
+  pip,
 
   # non-python dependencies
   hello,
@@ -19,8 +20,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "notarealdeveloper";
     repo = "jello";
-    rev = "18d6bc75b6d16133ca8b5ebd3db486da36cbecc9";
-    sha256 = "sha256-rnNoGpyab8bbaRA/QuZRIOolv+FTrCGf++IBayVQUMM=";
+    rev = "4d7b0eec71d3a2794df789cde6441e7397d3ff8f";
+    sha256 = "sha256-bhwppgatuij1Mkl7YzD7jZnW/4gMGBs+/63g8c9MR9Q=";
   };
 
   build-system = [ setuptools wheel ];
@@ -30,6 +31,12 @@ buildPythonPackage rec {
   ];
 
   buildInputs = [
+    pip
+    setuptools
+    hello
+  ];
+
+  propagatedBuildInputs = [
     hello
   ];
 
@@ -46,18 +53,4 @@ buildPythonPackage rec {
       hello
     ])
   ];
-
-  #meta = with lib; {
-  #  changelog = "https://github.com/pypa/auditwheel/blob/${version}/CHANGELOG.md";
-  #  description = "Auditing and relabeling cross-distribution Linux wheels";
-  #  homepage = "https://github.com/pypa/auditwheel";
-  #  license = with licenses; [
-  #    mit # auditwheel and nibabel
-  #    bsd2 # from https://github.com/matthew-brett/delocate
-  #    bsd3 # from https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-projects/pax-utils/lddtree.py
-  #  ];
-  #  mainProgram = "auditwheel";
-  #  maintainers = with maintainers; [ davhau ];
-  #  platforms = platforms.linux;
-  #};
 }
