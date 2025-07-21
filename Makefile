@@ -9,7 +9,7 @@ install:
 uninstall:
 	nix profile remove $(PKG)
 
-upgrade: uninstall install
+update: uninstall install
 
 clean:
 	rm -rfv result
