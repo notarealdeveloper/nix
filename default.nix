@@ -14,7 +14,7 @@ in {
       asciiquarium
       gh
       google-chrome
-      
+      xclip
       (import ./python pkgs)
     ];
   };
