@@ -25,6 +25,7 @@ pkgs: pkgs.python313.withPackages (ps:
     editdistance
     multiprocess
     trio
+    curio
 
     # numerical
     numpy
