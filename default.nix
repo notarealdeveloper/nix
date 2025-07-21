@@ -5,7 +5,11 @@ in {
   myenv = pkgs.buildEnv {
     name = "ld";
     paths = with pkgs; [
+      vim
+      git
+      gh
       cowsay
+      xcowsay
       xorg.xeyes
       figlet
       toilet
@@ -13,6 +17,7 @@ in {
       cmatrix
       asciiquarium
       gh
+      xdg-utils
       google-chrome
       xclip
       (import ./python pkgs)
