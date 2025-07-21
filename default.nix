@@ -13,7 +13,8 @@ in {
       cmatrix
       asciiquarium
       gh
-      firefox
+      google-chrome
+      
       (import ./python pkgs)
     ];
   };
