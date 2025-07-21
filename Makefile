@@ -9,7 +9,7 @@ update:
 
 pull:
 	git pull
-	git subtree pull --prefix=python nix-python master
+	git subtree pull --prefix=python nix-python master --squash
 
 push:
 	git push
