@@ -20,4 +20,4 @@ pull:
 
 push:
 	git push
-	git subtree push --prefix=python nix-python master --squash
+	git subtree push --prefix=python nix-python master
