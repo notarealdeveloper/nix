@@ -6,6 +6,14 @@ in {
     name = "ld";
     paths = with pkgs; [
       cowsay
+      xorg.xeyes
+      figlet
+      toilet
+      lolcat
+      cmatrix
+      asciiquarium
+      gh
+      firefox
       (import ./python pkgs)
     ];
   };
