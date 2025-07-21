@@ -22,6 +22,10 @@ pkgs: pkgs.python313.withPackages (ps:
     build
     twine
     pytest
+    editdistance
+    multiprocess
+    trio
+    curio
 
     # numerical
     numpy
