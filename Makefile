@@ -13,3 +13,11 @@ upgrade: uninstall install
 
 clean:
 	rm -rfv result
+
+pull:
+	git pull
+	git subtree pull --prefix=python nix-python master
+
+push:
+	git push
+	git subtree push --prefix=python nix-python master
