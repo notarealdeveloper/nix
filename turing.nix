@@ -183,21 +183,31 @@
     openvpn3
     openssh
 
-    # dev python: let's get python 3.14 without the GIL
-    #python314FreeThreading
 
-    # dev python: no venvs bitch
-    #(pkgs.python313.withPackages (ps: import ./python pkgs ps))
-    #(pkgs.python313.withPackages (ps: import ./python pkgs ps))
+    /* THE IMPORT VS EXEC ISSUE */
 
-    (import ./test.nix pkgs) # this makes jello IMPORTABLE
 
-    #yello # this makes hello executable and makes jello executable
+    /*
+      This gives:
 
-    #(import ./python/jello.nix pkgs pkgs.python313Packages)
-    # import vs exec issue
+      root@turing nixos $ hello
+      bash: hello: command not found
+
+      root@turing nixos $ jello
+      Jello world
+
+      root@turing nixos $ python -c "import jello"
+
+      root@turing nixos $ python -c "import jello; jello.main()"
+      /nix/store/p79bgyzmmmddi554ckwzbqlavbkw07zh-bash-5.2p37/bin/sh: line 1: hello: command not found
+
+    */
+
+    (import ./test.nix pkgs)
+
     # hello
     # jello
+    # yello
 
   ];
 
