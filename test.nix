@@ -8,6 +8,7 @@ pkgs: pkgs.python313.withPackages (ps:
 
     with ps; [
 
+    ipython
     jello
 
   ])
