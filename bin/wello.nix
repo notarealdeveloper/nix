@@ -8,7 +8,7 @@ let
     version = "1.0";
     format = "pyproject";
 
-    build-system = [ setuptools wheel ];
+    build-system = with python313Packages; [ setuptools wheel ];
 
     src = fetchFromGitHub {
       owner = "notarealdeveloper";
