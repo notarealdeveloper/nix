@@ -17,13 +17,4 @@ pkgs:
       jello
     ];
     dontUnpack = true;
-
-    buildPhase = ''
-      ls
-    '';
-
-
-    installPhase = ''
-      ls
-    '';
   }
