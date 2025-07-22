@@ -1,4 +1,4 @@
-(ps:
+pkgs: ps:
 
   let
 
@@ -9,6 +9,8 @@
     embd            = ps.callPackage ./embd.nix { inherit is_instance assure mmry; };
     kern            = ps.callPackage ./kern.nix { inherit assure mmry; };
     wnix            = ps.callPackage ./wnix.nix { inherit assure mmry is_instance embd kern; };
+    jello           = ps.callPackage ./jello.nix { inherit pkgs ps; };
+
 
   in
 
@@ -49,5 +51,7 @@
     embd
     kern
     wnix
+
+    # import vs exec issue
+    jello
   ]
-)

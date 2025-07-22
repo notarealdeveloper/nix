@@ -1,5 +1,0 @@
-(ps:
-  with ps; [
-    curio
-  ]
-)

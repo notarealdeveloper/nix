@@ -109,7 +109,7 @@
   
     let
 
-      hello = (import ./bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
+      #hello = (import ./bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
 
     in
 
@@ -184,16 +184,7 @@
     python314FreeThreading
 
     # dev python: no venvs bitch
-    (
-      pkgs.python313.withPackages (pypkgs:
-
-        (import ./bin/jello.nix { pkgs = pkgs; pypkgs = pypkgs; })
-        ++
-        (import ./python pypkgs)
-        ++
-        (import ./boop pypkgs)
-      )
-    )
+    (pkgs.python313.withPackages (ps: import ./python pkgs ps))
 
     # import vs exec issue
     # hello
