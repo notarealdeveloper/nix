@@ -8,9 +8,15 @@
   wheel,
   pip,
 
-  # non-python dependencies
+  # non-python-dependencies
   hello,
 }:
+  
+let
+
+  hello = (import ../bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
+
+in
 
 buildPythonPackage rec {
   pname = "jello";

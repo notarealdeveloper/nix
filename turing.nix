@@ -109,7 +109,7 @@
   
     let
 
-      hello = (import ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
+      hello = (import ./bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
 
     in
 
@@ -185,6 +185,9 @@
 
     # dev python: no venvs bitch
     (pkgs.python313.withPackages (import ./python))
+
+    # import vs exec issue
+    hello
 
   ];
 
