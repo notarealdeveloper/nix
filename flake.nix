@@ -10,8 +10,17 @@
     nixosConfigurations.turing = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
+        ./turing.nix
       ];
     };
+
+
+    nixosConfigurations.gates = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./gates.nix
+      ];
+    };
+
   };
 }
