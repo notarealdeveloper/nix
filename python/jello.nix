@@ -38,7 +38,7 @@ pkgs: ps:
       hello
     ];
 
-    nativeBuildInputs = [ makeWrapper ];
+    #nativeBuildInputs = [ makeWrapper ];
 
     # Ensure that there are no undeclared deps
     postCheck = ''
