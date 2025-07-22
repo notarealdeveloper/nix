@@ -61,8 +61,11 @@ in
 stdenv.mkDerivation {
   pname = "wello";
   version = "1.0";
-  nativeBuildInputs = [];  # no build in this step
-  dontBuild = true;        # no build phases
+
+  #nativeBuildInputs = [];  # no build in this step
+  #dontBuild = true;        # no build phases
+
+  phases = [ "installPhase" ];
 
   installPhase = ''
     mkdir -p $out/bin
