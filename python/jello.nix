@@ -1,12 +1,10 @@
 pkgs: ps:
 
-let
+  let
 
-  hello = pkgs.callPackage ../bin/hello.nix {
-    inherit (pkgs) stdenv fetchFromGitHub;
-  };
+    hello = import ../bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; };
 
-in
+  in
 
   with pkgs;
 
@@ -40,6 +38,8 @@ in
       hello
     ];
 
+    nativeBuildInputs = [ makeWrapper ];
+
     # Ensure that there are no undeclared deps
     postCheck = ''
       PATH= PYTHONPATH= $out/bin/hello
@@ -51,4 +51,10 @@ in
       ":"
       (lib.makeBinPath [ hello ])
     ];
+
+    #postFixup = ''
+    #  wrapProgram "$out/bin/jello" \
+    #    --prefix PATH : "${hello}/bin" \
+    #    --prefix PYTHONPATH : "$PYTHONPATH"
+    #'';
   }

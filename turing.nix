@@ -110,8 +110,9 @@
     let
 
       hello = (import ./bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
-      jello = (import ./bin/jello.nix pkgs);
-      wello = (import ./bin/wello.nix { inherit (pkgs) stdenv fetchFromGitHub python313Packages; });
+      #jello = (import ./bin/jello.nix pkgs);
+      #jello = (import ./python/jello.nix pkgs python313);
+      yello = with pkgs; (import ./bin/yello.nix pkgs python313Packages);
 
     in
 
@@ -183,15 +184,16 @@
     openssh
 
     # dev python: let's get python 3.14 without the GIL
-    python314FreeThreading
+    #python314FreeThreading
 
     # dev python: no venvs bitch
     (pkgs.python313.withPackages (ps: import ./python pkgs ps))
 
+    (import ./python/jello.nix pkgs pkgs.python313Packages)
     # import vs exec issue
     # hello
     # jello
-    wello
+    yello
 
   ];
 
