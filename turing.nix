@@ -189,13 +189,15 @@
     # dev python: no venvs bitch
     #(pkgs.python313.withPackages (ps: import ./python pkgs ps))
     #(pkgs.python313.withPackages (ps: import ./python pkgs ps))
-    (import ./test.nix pkgs)
+
+    (import ./test.nix pkgs) # this makes jello IMPORTABLE
+
+    #yello # this makes hello executable and makes jello executable
 
     #(import ./python/jello.nix pkgs pkgs.python313Packages)
     # import vs exec issue
     # hello
     # jello
-    #yello
 
   ];
 
