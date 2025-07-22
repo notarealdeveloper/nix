@@ -17,7 +17,31 @@ let
       sha256 = "4yUktoHDea6f6Z6MjG7xams1g+ticCV+ecfT9PeZV6A=";
     };
 
-    propagatedBuildInputs = [ hello ];
+    dependencies = [
+      hello
+    ];
+
+    buildInputs = [
+      pip
+      setuptools
+      hello
+    ];
+
+    propagatedBuildInputs = [
+      hello
+    ];
+
+    # Ensure that there are no undeclared deps
+    postCheck = ''
+      PATH= PYTHONPATH= $out/bin/hello
+    '';
+
+    makeWrapperArgs = [
+      "--prefix"
+      "PATH"
+      ":"
+      (lib.makeBinPath [ hello ])
+    ];
 
     # wrap CLI to find both python module & hello binary
     postFixup = ''
