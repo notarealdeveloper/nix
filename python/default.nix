@@ -1,4 +1,4 @@
-pkgs: pkgs.python313.withPackages (ps:
+(ps:
 
   let
 
@@ -51,4 +51,5 @@ pkgs: pkgs.python313.withPackages (ps:
     embd
     kern
     wnix
-  ])
+  ]
+)

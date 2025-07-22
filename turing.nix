@@ -180,11 +180,11 @@
     openvpn3
     openssh
 
-    # dev python: no venvs bitch
-    (import ./python pkgs)
-
     # dev python: let's get python 3.14 without the GIL
     python314FreeThreading
+
+    # dev python: no venvs bitch
+    (pkgs.python313.withPackages (import ./python))
 
   ];
 

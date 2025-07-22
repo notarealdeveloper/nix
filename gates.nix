@@ -13,8 +13,12 @@
     <nixos-wsl/modules>
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   wsl.enable = true;
   wsl.defaultUser = "nixos";
+
+  # Set hostname.
+  networking.hostName = "gates";
 
   nixpkgs.config.allowUnfree = true;
 
@@ -35,9 +39,19 @@
     google-chrome
     xclip
     sl
-    ]
-    ++
-    [(pkgs.python312.withPackages (import ./python))];
+
+    (pkgs.python312.withPackages (import ./python))
+
+  ];
+
+  # Define a user
+  #users.users.jason = {
+  #  isNormalUser = true;
+  #  description = "Jason";
+  #  extraGroups = [ "networkmanager" "wheel" ];
+  #  packages = with pkgs; [
+  #  ];
+  #};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
