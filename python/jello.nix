@@ -1,4 +1,4 @@
-{ pkgs, ps }:
+pkgs: ps:
 
 let
 

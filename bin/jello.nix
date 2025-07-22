@@ -1,4 +1,4 @@
-{ pkgs, python }:
+pkgs:
 
   let
 
@@ -14,7 +14,7 @@
     version = "0.0.2";
     propagatedBuildInputs = [
       hello
-      python.withPackages (ps: [ jello ps ])
+      python313Packages (ps: [ jello ps ])
     ];
     dontUnpack = true;
   }
