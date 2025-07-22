@@ -3,7 +3,7 @@ pkgs:
   let
 
     hello = (import ./hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
-    jello = (import ../python/jello.nix pkgs python313Packages);
+    jello = with pkgs; (import ../python/jello.nix pkgs python313Packages);
 
   in
 
