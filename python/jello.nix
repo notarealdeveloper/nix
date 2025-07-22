@@ -1,14 +1,17 @@
-pkgs: ps:
+{ lib
+, stdenv
+, fetchFromGitHub
+, buildPythonPackage
+, setuptools
+, wheel
+, pip
+}:
 
   let
 
-    hello = import ../bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; };
+    hello = import ../bin/hello.nix { inherit stdenv fetchFromGitHub; };
 
   in
-
-  with pkgs;
-
-  with ps;
 
   buildPythonPackage rec {
     pname = "jello";

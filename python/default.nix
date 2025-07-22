@@ -1,4 +1,4 @@
-pkgs: ps:
+pkgs: pkgs.python313.withPackages (ps:
 
   let
 
@@ -9,8 +9,12 @@ pkgs: ps:
     embd            = ps.callPackage ./embd.nix { inherit is_instance assure mmry; };
     kern            = ps.callPackage ./kern.nix { inherit assure mmry; };
     wnix            = ps.callPackage ./wnix.nix { inherit assure mmry is_instance embd kern; };
-    jello           = ps.callPackage ./jello.nix { inherit pkgs ps; };
+    #jello           = ps.callPackage ./jello.nix { inherit pkgs ps; };
 
+    jello = ps.callPackage ./jello.nix {
+      inherit (pkgs) lib stdenv fetchFromGitHub;
+      inherit (ps) buildPythonPackage setuptools wheel;
+    };
 
   in
 
@@ -55,3 +59,4 @@ pkgs: ps:
     # import vs exec issue
     jello
   ]
+)
