@@ -3,9 +3,10 @@
 let
   hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
 
-  jelloPy = python313Packages.buildPythonApplication rec {
+  jello = python313Packages.buildPythonApplication rec {
     pname = "jello";
     version = "1.0";
+    format = "pyproject";
 
     src = fetchFromGitHub {
       owner = "notarealdeveloper";
@@ -28,7 +29,7 @@ let
 in
 
 stdenv.mkDerivation {
-  pname = "jello-full";
+  pname = "wello";
   version = "1.0";
   nativeBuildInputs = [];  # no build in this step
   dontBuild = true;        # no build phases
@@ -40,5 +41,5 @@ stdenv.mkDerivation {
   '';
 
   # runtime dependencies:
-  buildInputs = [ hello jelloPy ];
+  buildInputs = [ hello jello ];
 }
