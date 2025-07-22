@@ -8,6 +8,8 @@ let
     version = "1.0";
     format = "pyproject";
 
+    build-system = [ setuptools wheel ];
+
     src = fetchFromGitHub {
       owner = "notarealdeveloper";
       repo = "jello";
