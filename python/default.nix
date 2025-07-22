@@ -24,8 +24,6 @@
     pytest
     editdistance
     multiprocess
-    trio
-    curio
 
     # numerical
     numpy

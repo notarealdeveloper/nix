@@ -184,12 +184,19 @@
     python314FreeThreading
 
     # dev python: no venvs bitch
-    (pkgs.python313.withPackages (import ./python))
+    (
+      pkgs.python313.withPackages (pypkgs:
 
-    (pkgs.python312.withPackages (import ./bin/jello.nix pkgs))
+        (import ./bin/jello.nix { pkgs = pkgs; pypkgs = pypkgs; })
+        ++
+        (import ./python pypkgs)
+        ++
+        (import ./boop pypkgs)
+      )
+    )
 
     # import vs exec issue
-    hello
+    # hello
 
   ];
 
