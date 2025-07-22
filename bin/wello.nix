@@ -37,7 +37,7 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/bin
     ln -s ${hello}/bin/hello $out/bin/hello
-    ln -s ${jelloPy}/bin/jello $out/bin/jello
+    ln -s ${jello}/bin/jello $out/bin/jello
   '';
 
   # runtime dependencies:
