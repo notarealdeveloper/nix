@@ -1,14 +1,13 @@
 { stdenv, fetchFromGitHub, python313Packages }:
 
 let
+
   hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
 
   jello = with python313Packages; buildPythonApplication rec {
     pname = "jello";
     version = "1.0";
-    format = "pyproject";
-
-    build-system = [ setuptools wheel ];
+    pyproject = true;
 
     src = fetchFromGitHub {
       owner = "notarealdeveloper";
@@ -16,6 +15,8 @@ let
       rev = "0.0.2";
       sha256 = "4yUktoHDea6f6Z6MjG7xams1g+ticCV+ecfT9PeZV6A=";
     };
+
+    build-system = [ setuptools wheel ];
 
     dependencies = [
       hello
@@ -44,6 +45,7 @@ let
     ];
 
     # wrap CLI to find both python module & hello binary
+    /*
     postFixup = ''
       for bin in "$out/bin/"*; do
         wrapProgram "$bin" \
@@ -51,7 +53,9 @@ let
           --prefix PYTHONPATH ":" "$(python313Packages.python.sitePackages)"
       done
     '';
+    */
   };
+
 in
 
 stdenv.mkDerivation {
