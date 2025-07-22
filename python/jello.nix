@@ -2,7 +2,7 @@
 
 let
 
-  hello = pkgs.callPackage ../bin/hello {
+  hello = pkgs.callPackage ../bin/hello.nix {
     inherit (pkgs) stdenv fetchFromGitHub;
   };
 
