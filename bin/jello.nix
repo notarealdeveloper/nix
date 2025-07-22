@@ -16,5 +16,14 @@ pkgs:
       hello
       jello
     ];
-    #dontUnpack = true;
+    dontUnpack = true;
+
+    buildPhase = ''
+      ls
+    '';
+
+
+    installPhase = ''
+      ls
+    '';
   }
