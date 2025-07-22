@@ -24,9 +24,6 @@
   # Set hostname.
   networking.hostName = "turing";
 
-  # Enable networking.
-  networking.networkmanager.enable = true;
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -100,13 +97,21 @@
     pulse.enable = true;
   };
 
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "jason" ];
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.groups.plocate = {};
 
   users.users.jason = {
     isNormalUser = true;
     description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" "plocate" ];
+    extraGroups = [ "networkmanager" "wheel" "plocate" "docker" ];
     packages = with pkgs; [
     ];
   };
@@ -148,6 +153,7 @@
     inotify-tools
     imagemagick
     pcre
+    jq
 
     # desktop
     nemo
@@ -155,7 +161,6 @@
     eog
     gedit
     evince
-    dropbox
     google-chrome
     gnome-terminal
     numix-gtk-theme
@@ -198,6 +203,11 @@
     # dev python: let's get python 3.14 without the GIL
     python314FreeThreading
 
+    # ld
+    dropbox
+    dropbox-cli
+    openvpn3
+    openssh
   ];
 
   # Vim: clipboard support
@@ -207,6 +217,7 @@
   };
 
   programs.dconf.enable = true;
+  programs.openvpn3.enable = true;
 
   environment.shellInit = ''
     dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
@@ -223,12 +234,13 @@
   # };
 
   environment.etc."gitconfig".text = ''
-    [init]
-      defaultBranch = master
-
     [user]
       name = Jason Wilkes
       email = notarealdeveloper@gmail.com
+    [init]
+      defaultBranch = master
+    [pull]
+	    rebase = true
   '';
 
   security.sudo = {
@@ -267,11 +279,12 @@
     Comment=Start Conky at login
   '';
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # Networking.
+  networking.networkmanager.enable = true;
+
+  networking.networkmanager.plugins = [
+    pkgs.networkmanager-openvpn
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
