@@ -3,7 +3,7 @@ pkgs:
   let
 
     hello = (import ./hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
-    jello = (import ../python/jello.nix pkgs);
+    jello = (import ../python/jello.nix pkgs python313Packages);
 
   in
 
@@ -14,7 +14,7 @@ pkgs:
     version = "0.0.2";
     propagatedBuildInputs = [
       hello
-      python313Packages (ps: [ jello ps ])
+      jello
     ];
     dontUnpack = true;
   }
