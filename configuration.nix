@@ -27,6 +27,10 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
+  environment.variables = {
+    EDITOR = "vim";
+  };
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -84,10 +88,10 @@
     options = "caps:escape";
   };
 
-  # Enable CUPS to print documents.
+  # Enable CUPS
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
+  # Enable sound
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -95,25 +99,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-
-  virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = [ "jason" ];
-
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.groups.plocate = {};
-
-  users.users.jason = {
-    isNormalUser = true;
-    description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" "plocate" "docker" ];
-    packages = with pkgs; [
-    ];
   };
 
   # Allow unfree packages
@@ -124,15 +109,7 @@
   
     let
 
-      /*
-        Note: import and pkgs.callPackage are the same in certain circumstances:
-
-        nix-repl> hello = (import ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; })           
-        «derivation /nix/store/w4jzy2r9a34jpqrb0mzamv0rjir2a8lk-hello-1.0.drv»
-        nix-repl> hello = (pkgs.callPackage ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; })
-        «derivation /nix/store/w4jzy2r9a34jpqrb0mzamv0rjir2a8lk-hello-1.0.drv»
-
-       */
+      hello = (import ./examples/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
 
     in
 
@@ -197,18 +174,35 @@
     elan
     lean4
 
-    # dev python: no venvs bitch
-    (import ./python.nix pkgs)
-
-    # dev python: let's get python 3.14 without the GIL
-    python314FreeThreading
-
     # ld
     dropbox
     dropbox-cli
     openvpn3
     openssh
+
+    # dev python: no venvs bitch
+    (import ./python pkgs)
+
+    # dev python: let's get python 3.14 without the GIL
+    python314FreeThreading
+
   ];
+
+  # Define a user
+  users.users.jason = {
+    isNormalUser = true;
+    description = "Jason";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+    ];
+  };
+
+  # Enable docker
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
   # Vim: clipboard support
   programs.vim = {
@@ -216,9 +210,15 @@
     package = pkgs.vim;  # this is the default full-featured vim with +clipboard
   };
 
+  # Enable some programs
   programs.dconf.enable = true;
   programs.openvpn3.enable = true;
 
+  # Extra groups
+  users.extraGroups.docker.members = [ "jason" ];
+  users.extraGroups.plocate.members = [ "jason" ];
+
+  # Shell init
   environment.shellInit = ''
     dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
   '';
