@@ -111,7 +111,7 @@
 
       hello = (import ./bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
       jello = (import ./bin/jello.nix pkgs);
-      wello = (import ./bin/wello.nix { inherit pkgs stdenv fetchFromGitHub python313Packages; });
+      wello = (import ./bin/wello.nix { inherit (pkgs) stdenv fetchFromGitHub python313Packages; });
 
     in
 

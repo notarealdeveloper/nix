@@ -1,7 +1,7 @@
-{ pkgs, stdenv, fetchFromGitHub, python313Packages }:
+{ stdenv, fetchFromGitHub, python313Packages }:
 
 let
-  hello = import ./hello.nix { inherit pkgs stdenv fetchFromGitHub; };
+  hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
 
   jelloPy = python313Packages.buildPythonApplication rec {
     pname = "jello";
