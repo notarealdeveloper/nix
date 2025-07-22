@@ -3,12 +3,12 @@
 let
   hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
 
-  jello = python313Packages.buildPythonApplication rec {
+  jello = with python313Packages; buildPythonApplication rec {
     pname = "jello";
     version = "1.0";
     format = "pyproject";
 
-    build-system = with python313Packages; [ setuptools wheel ];
+    build-system = [ setuptools wheel ];
 
     src = fetchFromGitHub {
       owner = "notarealdeveloper";
