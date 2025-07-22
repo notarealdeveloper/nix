@@ -188,7 +188,7 @@
 
     # dev python: no venvs bitch
     #(pkgs.python313.withPackages (ps: import ./python pkgs ps))
-    (import ./python pkgs pkgs.python313Packages)
+    pkgs.python313.withPackages (ps: import ./python pkgs ps)
 
     (import ./python/jello.nix pkgs pkgs.python313Packages)
     # import vs exec issue
