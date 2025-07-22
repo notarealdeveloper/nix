@@ -10,7 +10,7 @@
 
   imports =
     [
-      ./hardware-configuration.nix
+      ./hardware/system76.nix
     ];
 
   # Bootloader.
