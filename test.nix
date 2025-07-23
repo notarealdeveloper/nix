@@ -1,4 +1,4 @@
-pkgs: pkgs.python313.withPackages (ps:
+pkgs: python: python.withPackages (ps:
 
   let
 
