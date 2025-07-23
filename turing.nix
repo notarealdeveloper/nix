@@ -158,6 +158,7 @@
     nix-bash-completions
     nix-prefetch-github
     home-manager
+    dconf2nix
 
     # video
     vlc
