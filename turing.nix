@@ -209,7 +209,7 @@
   };
 
   # Extra groups
-  #users.extraGroups.nix.members = [ "jason" ];
+  users.extraGroups.nix.members = [ "jason" ];
   users.extraGroups.plocate.members = [ "jason" ];
 
   # Vim: clipboard support
@@ -223,10 +223,10 @@
   programs.openvpn3.enable = true;
 
   # Make members of the nix group have write access to /etc/nixos
-  #systemd.tmpfiles.settings."10-nixos-dir"."/etc/nixos".d = {
-  #  group = "nix";
-  #  mode  = "0775";
-  #};
+  systemd.tmpfiles.settings."10-nixos-dir"."/etc/nixos".d = {
+    group = "nix";
+    mode  = "0775";
+  };
 
   # Shell init
   environment.shellInit = ''
