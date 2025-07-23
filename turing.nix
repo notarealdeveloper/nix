@@ -178,10 +178,6 @@
     vscode
     obsidian
 
-    # dev lean
-    elan
-    lean4
-
     # ld
     dropbox
     dropbox-cli
@@ -197,6 +193,14 @@
 
 
   ];
+
+  home-manager = {
+    useGlobalPkgs  = true;
+    useUserPackages = true;
+    users = {
+      jason = import ./users/jason.nix;
+    };
+  };
 
   # Define a user
   users.users.jason = {
@@ -244,15 +248,15 @@
   #   userEmail = "notarealdeveloper@gmail.com";
   # };
 
-  environment.etc."gitconfig".text = ''
-    [user]
-      name = Jason Wilkes
-      email = notarealdeveloper@gmail.com
-    [init]
-      defaultBranch = master
-    [pull]
-	    rebase = true
-  '';
+  #environment.etc."gitconfig".text = ''
+  #  [user]
+  #    name = Jason Wilkes
+  #    email = notarealdeveloper@gmail.com
+  #  [init]
+  #    defaultBranch = master
+  #  [pull]
+	#    rebase = true
+  #'';
 
   security.sudo = {
     enable = true;
