@@ -23,7 +23,6 @@ pkgs: python:
       mkdir -p $out/bin
       ln -s ${hello}/bin/hello $out/bin/hello
       ln -s ${jello}/bin/jello $out/bin/jello
-      ln -s ${jello}/lib       $out/lib
     '';
 
     # runtime dependencies
