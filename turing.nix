@@ -8,14 +8,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  #home-manager = {
-  #  useGlobalPkgs  = true;
-  #  useUserPackages = true;
-  #  users = {
-  #    jason = import ./users/jason;
-  #  };
-  #};
-
   imports =
     [
       ./hardware/system76.nix
@@ -182,7 +174,7 @@
     # dev
     vscode
     obsidian
-    adb-sync
+    adbfs-rootless
 
     # ld
     dropbox
@@ -204,7 +196,7 @@
   users.users.jason = {
     isNormalUser = true;
     description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     packages = with pkgs; [
     ];
   };
@@ -212,6 +204,9 @@
   # Extra groups
   users.extraGroups.nix.members = [ "jason" ];
   users.extraGroups.plocate.members = [ "jason" ];
+
+  # Android Debug Bridge
+  programs.adb.enable = true;
 
   # Vim: clipboard support
   programs.vim = {
