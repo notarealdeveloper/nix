@@ -186,9 +186,9 @@
 
     /* THE IMPORT VS EXEC ISSUE */
 
-    #yello
+    yello
 
-    (import ./python pkgs python313)
+    #(import ./python pkgs python313)
 
 
   ];
