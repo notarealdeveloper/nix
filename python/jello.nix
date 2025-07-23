@@ -27,23 +27,15 @@
 
     build-system = [ setuptools wheel ];
 
-    dependencies = [
-    ];
-
     buildInputs = [
       pip
       setuptools
     ];
 
-    propagatedBuildInputs = [
-    ];
-
-    #nativeBuildInputs = [ makeWrapper ];
-
     # Ensure that there are no undeclared deps
-    postCheck = ''
-      PATH= PYTHONPATH= $out/bin/hello
-    '';
+    #postCheck = ''
+    #  PATH= PYTHONPATH= $out/bin/hello
+    #'';
 
     makeWrapperArgs = [
       "--prefix"
@@ -52,9 +44,4 @@
       (lib.makeBinPath [ hello ])
     ];
 
-    #postFixup = ''
-    #  wrapProgram "$out/bin/jello" \
-    #    --prefix PATH : "${hello}/bin" \
-    #    --prefix PYTHONPATH : "$PYTHONPATH"
-    #'';
   }
