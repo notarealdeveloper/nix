@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.username      = "jason";
@@ -16,6 +16,22 @@
     };
   };
 
+  # conky autostart
+  # creates ~/.config/autostart/conky.desktop
+  xdg.configFile."autostart/conky.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Conky
+    Exec=conky-smart-start
+    X-GNOME-Autostart-enabled=true
+    NoDisplay=false
+    Comment=Start Conky at login
+  '';
+
+  home.activation.setNemoView = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
+  '';
+
   home.packages = with pkgs; [
 
     # terminal
@@ -23,9 +39,9 @@
     cmatrix
     figlet
     toilet
+    dconf
 
     # lean
-    #elan
     lean4
   ];
 }
