@@ -28,17 +28,14 @@
     build-system = [ setuptools wheel ];
 
     dependencies = [
-      hello
     ];
 
     buildInputs = [
       pip
       setuptools
-      hello
     ];
 
     propagatedBuildInputs = [
-      hello
     ];
 
     #nativeBuildInputs = [ makeWrapper ];
