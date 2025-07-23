@@ -184,9 +184,10 @@
 
     /* THE IMPORT VS EXEC ISSUE */
 
+    yello
+
     (import ./test.nix pkgs python313)
 
-    yello
 
   ];
 
