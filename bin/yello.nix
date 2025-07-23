@@ -31,11 +31,4 @@ pkgs: python:
       jello
     ];
 
-    makeWrapperArgs = [
-      "--prefix" "PYTHONPATH" ":" (python.pkgs.makePythonPath [ jello ])
-    ];
-    #makeWrapperArgs = [
-    #  "--set" "PYTHONPATH" "${jello}/${python.sitePackages}"
-    #];
-
   }

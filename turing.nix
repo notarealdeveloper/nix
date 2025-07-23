@@ -188,7 +188,16 @@
 
     yello
 
-    python313
+    (python.withPackages (ps:
+      [
+        (
+          import ./python/jello.nix {
+            inherit (pkgs) lib stdenv fetchFromGitHub;
+            inherit (ps) buildPythonPackage setuptools wheel pip;
+          }
+        )
+      ]
+    ))
     #(import ./python pkgs python313)
 
 
