@@ -4,11 +4,15 @@ with pkgs;
 let
 
   hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
-  #jello = import ../python/jello.nix pkgs ps;
-  jello = with pkgs; with ps; ps.callPackage ./jello.nix {
-    inherit (pkgs) lib fetchFromGitHub;
+  jello = (import ../python/jello.nix {
+    inherit (pkgs) lib stdenv fetchFromGitHub;
     inherit (ps) buildPythonPackage setuptools wheel pip;
-  };
+  });
+  #jello = import ../python/jello.nix pkgs ps;
+  #jello = with pkgs; with ps; ps.callPackage ./jello.nix {
+  #  inherit (pkgs) lib fetchFromGitHub;
+  #  inherit (ps) buildPythonPackage setuptools wheel pip;
+  #};
 
 in
 
