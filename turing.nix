@@ -12,7 +12,7 @@
     useGlobalPkgs  = true;
     useUserPackages = true;
     users = {
-      jason = import ./users/jason.nix;
+      jason = import ./users/jason;
     };
   };
 

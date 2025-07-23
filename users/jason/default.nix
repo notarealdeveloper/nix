@@ -5,6 +5,10 @@
   home.homeDirectory = "/home/jason";
   home.stateVersion  = "25.05";   # keep this line
 
+  imports = [
+    ./org-cinnamon-desktop-keybindings.nix
+  ];
+
   # ~/.config/git/config
   programs.git = {
     enable    = true;
