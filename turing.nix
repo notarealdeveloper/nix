@@ -21,6 +21,11 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  systemd.tmpfiles.settings."10-nixos-dir"."/etc/nixos".d = {
+    group = "nix";
+    mode  = "0775";
+  };
+
   # Set hostname.
   networking.hostName = "turing";
 
@@ -220,6 +225,7 @@
   programs.openvpn3.enable = true;
 
   # Extra groups
+  users.extraGroups.nix.members = [ "jason" ];
   users.extraGroups.docker.members = [ "jason" ];
   users.extraGroups.plocate.members = [ "jason" ];
 
