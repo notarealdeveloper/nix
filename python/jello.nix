@@ -15,14 +15,14 @@
 
   buildPythonPackage rec {
     pname = "jello";
-    version = "1.0";
+    version = "0.0.3";
     pyproject = true;
 
     src = fetchFromGitHub {
       owner = "notarealdeveloper";
       repo = "jello";
-      rev = "0.0.2";
-      sha256 = "sha256-4yUktoHDea6f6Z6MjG7xams1g+ticCV+ecfT9PeZV6A=";
+      rev = "0.0.3";
+      sha256 = "sha256-O19WSAnCtISHOSd5P+b6j//fSoKiiXnNwLbuZ2m2tNs=";
     };
 
     build-system = [ setuptools wheel ];
