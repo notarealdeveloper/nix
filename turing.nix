@@ -191,7 +191,14 @@
 
     (import ./python pkgs python)
 
-    python311
+    (python311.withPackages (ps: with ps; [
+        python
+        pip
+        numpy
+        pandas
+        scikit-learn
+        lightgbm
+    ]))
 
   ];
 
