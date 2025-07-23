@@ -25,7 +25,7 @@
       sha256 = "sha256-O19WSAnCtISHOSd5P+b6j//fSoKiiXnNwLbuZ2m2tNs=";
     };
 
-    build-system = [ setuptools wheel ];
+    #build-system = [ setuptools wheel ];
 
     buildInputs = [
       pip
