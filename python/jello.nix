@@ -25,23 +25,10 @@
       sha256 = "sha256-O19WSAnCtISHOSd5P+b6j//fSoKiiXnNwLbuZ2m2tNs=";
     };
 
-    #build-system = [ setuptools wheel ];
-
     buildInputs = [
       pip
       setuptools
     ];
 
-    # Ensure that there are no undeclared deps
-    #postCheck = ''
-    #  PATH= PYTHONPATH= $out/bin/hello
-    #'';
-
-    makeWrapperArgs = [
-      "--prefix"
-      "PATH"
-      ":"
-      (lib.makeBinPath [ hello ])
-    ];
-
+    makeWrapperArgs = [ "--prefix" "PATH" ":" (lib.makeBinPath [ hello ]) ];
   }

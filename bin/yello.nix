@@ -30,4 +30,7 @@ pkgs: python:
       hello
       jello
     ];
+
+    makeWrapperArgs = [ "--prefix" "PYTHONPATH" ":" (lib.makeLibraryPath [ jello ]) ];
+
   }
