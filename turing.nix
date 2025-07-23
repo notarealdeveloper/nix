@@ -182,6 +182,7 @@
     # dev
     vscode
     obsidian
+    adb-sync
 
     # ld
     dropbox
