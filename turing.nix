@@ -8,6 +8,14 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  home-manager = {
+    useGlobalPkgs  = true;
+    useUserPackages = true;
+    users = {
+      jason = import ./users/jason.nix;
+    };
+  };
+
   imports =
     [
       ./hardware/system76.nix
@@ -20,11 +28,6 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  systemd.tmpfiles.settings."10-nixos-dir"."/etc/nixos".d = {
-    group = "nix";
-    mode  = "0775";
-  };
 
   # Set hostname.
   networking.hostName = "turing";
@@ -189,18 +192,10 @@
 
     yello
 
-    (import ./python pkgs python313)
+    (import ./python pkgs python)
 
 
   ];
-
-  home-manager = {
-    useGlobalPkgs  = true;
-    useUserPackages = true;
-    users = {
-      jason = import ./users/jason.nix;
-    };
-  };
 
   # Define a user
   users.users.jason = {
@@ -211,12 +206,15 @@
     ];
   };
 
-  # Enable docker
-  virtualisation.docker.enable = true;
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
+  # Make members of the nix group have write access to /etc/nixos
+  systemd.tmpfiles.settings."10-nixos-dir"."/etc/nixos".d = {
+    group = "nix";
+    mode  = "0775";
   };
+
+  # Extra groups
+  users.extraGroups.nix.members = [ "jason" ];
+  users.extraGroups.plocate.members = [ "jason" ];
 
   # Vim: clipboard support
   programs.vim = {
@@ -228,35 +226,20 @@
   programs.dconf.enable = true;
   programs.openvpn3.enable = true;
 
-  # Extra groups
-  users.extraGroups.nix.members = [ "jason" ];
-  users.extraGroups.docker.members = [ "jason" ];
-  users.extraGroups.plocate.members = [ "jason" ];
-
   # Shell init
   environment.shellInit = ''
     dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
   '';
 
-  # Git config
-  # This should really be done with home-manager,
-  # but we're not there yet. Once we get there, do this:
-  #
-  # programs.git = {
-  #   enable = true;
-  #   userName = "Jason Wilkes";
-  #   userEmail = "notarealdeveloper@gmail.com";
-  # };
-
-  #environment.etc."gitconfig".text = ''
-  #  [user]
-  #    name = Jason Wilkes
-  #    email = notarealdeveloper@gmail.com
-  #  [init]
-  #    defaultBranch = master
-  #  [pull]
-	#    rebase = true
-  #'';
+  environment.etc."gitconfig".text = ''
+    [user]
+      name = Jason Wilkes
+      email = notarealdeveloper@gmail.com
+    [init]
+      defaultBranch = master
+    [pull]
+	    rebase = true
+  '';
 
   security.sudo = {
     enable = true;
@@ -264,14 +247,6 @@
       {
         users = [ "jason" ];
         commands = [
-          #{
-          #  command = "/run/current-system/sw/bin/vim";
-          #  options = [ "NOPASSWD" ];
-          #}
-          #{
-          #  command = "/run/current-system/sw/bin/nixos-rebuild";
-          #  options = [ "NOPASSWD" ];
-          #}
           {
             command = "ALL";
             options = [ "NOPASSWD" ];
