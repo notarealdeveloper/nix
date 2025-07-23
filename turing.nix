@@ -110,9 +110,7 @@
     let
 
       hello = (import ./bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
-      #jello = (import ./bin/jello.nix pkgs);
-      #jello = (import ./python/jello.nix pkgs python313);
-      yello = with pkgs; (import ./bin/yello.nix pkgs python313Packages);
+      yello = (import ./bin/yello.nix pkgs pkgs.python313Packages);
 
     in
 
