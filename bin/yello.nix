@@ -1,4 +1,4 @@
-pkgs: python: python.withPackages (ps:
+pkgs: python:
 
   with pkgs;
 
@@ -6,10 +6,10 @@ pkgs: python: python.withPackages (ps:
 
     hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
 
-    jello = (import ../python/jello.nix {
+    jello = import ../python/jello.nix {
       inherit (pkgs) lib stdenv fetchFromGitHub;
-      inherit (ps) buildPythonPackage setuptools wheel pip;
-    });
+      inherit (python.pkgs) buildPythonPackage setuptools wheel pip;
+    };
 
   in
 
@@ -25,10 +25,9 @@ pkgs: python: python.withPackages (ps:
       ln -s ${jello}/bin/jello $out/bin/jello
     '';
 
-    # runtime dependencies:
+    # runtime dependencies
     buildInputs = [
       hello
       jello
     ];
   }
-)
