@@ -157,6 +157,7 @@
     # nix
     nix-bash-completions
     nix-prefetch-github
+    home-manager
 
     # video
     vlc

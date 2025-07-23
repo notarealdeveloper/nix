@@ -5,6 +5,7 @@
   home.homeDirectory = "/home/jason";
   home.stateVersion  = "25.05";   # keep this line
 
+  # ~/.config/git/config
   programs.git = {
     enable    = true;
     userName  = "Jason Wilkes";
@@ -16,8 +17,13 @@
     };
   };
 
-  # conky autostart
-  # creates ~/.config/autostart/conky.desktop
+  # gh
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+  };
+
+  # ~/.config/autostart/conky.desktop
   xdg.configFile."autostart/conky.desktop".text = ''
     [Desktop Entry]
     Type=Application
@@ -28,9 +34,12 @@
     Comment=Start Conky at login
   '';
 
-  home.activation.setNemoView = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
-  '';
+  # /org/nemo/preferences/default-folder-viewer
+  dconf.settings = {
+    "org/nemo/preferences" = {
+      "default-folder-viewer" = "list-view";
+    };
+  };
 
   home.packages = with pkgs; [
 
@@ -40,8 +49,10 @@
     figlet
     toilet
     dconf
+    home-manager
 
     # lean
     lean4
   ];
+
 }
