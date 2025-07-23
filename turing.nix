@@ -191,6 +191,7 @@
 
     (import ./python pkgs python)
 
+    python311
 
   ];
 
