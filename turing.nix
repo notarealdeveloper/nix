@@ -134,6 +134,8 @@
     imagemagick
     pcre
     jq
+    file
+    patchelf
 
     # desktop
     nemo
