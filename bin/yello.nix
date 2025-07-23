@@ -1,36 +1,34 @@
-pkgs: ps:
+pkgs: python: python.withPackages (ps:
 
-with pkgs;
-let
+  with pkgs;
 
-  hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
-  jello = (import ../python/jello.nix {
-    inherit (pkgs) lib stdenv fetchFromGitHub;
-    inherit (ps) buildPythonPackage setuptools wheel pip;
-  });
-  #jello = import ../python/jello.nix pkgs ps;
-  #jello = with pkgs; with ps; ps.callPackage ./jello.nix {
-  #  inherit (pkgs) lib fetchFromGitHub;
-  #  inherit (ps) buildPythonPackage setuptools wheel pip;
-  #};
+  let
 
-in
+    hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
 
-stdenv.mkDerivation {
-  pname = "yello";
-  version = "1.0";
+    jello = (import ../python/jello.nix {
+      inherit (pkgs) lib stdenv fetchFromGitHub;
+      inherit (ps) buildPythonPackage setuptools wheel pip;
+    });
 
-  phases = [ "installPhase" ];
+  in
 
-  installPhase = ''
-    mkdir -p $out/bin
-    ln -s ${hello}/bin/hello $out/bin/hello
-    ln -s ${jello}/bin/jello $out/bin/jello
-  '';
+  stdenv.mkDerivation {
+    pname = "yello";
+    version = "1.0";
 
-  # runtime dependencies:
-  buildInputs = [
-    hello
-    jello
-  ];
-}
+    phases = [ "installPhase" ];
+
+    installPhase = ''
+      mkdir -p $out/bin
+      ln -s ${hello}/bin/hello $out/bin/hello
+      ln -s ${jello}/bin/jello $out/bin/jello
+    '';
+
+    # runtime dependencies:
+    buildInputs = [
+      hello
+      jello
+    ];
+  }
+)
