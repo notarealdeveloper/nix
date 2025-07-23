@@ -189,11 +189,13 @@
 
     yello
 
-    (import ./python pkgs python)
+    #(import ./python pkgs python)
 
     (python311.withPackages (ps: with ps; [
         python
         pip
+        setuptools
+        ipython
         numpy
         pandas
         scikit-learn
