@@ -29,5 +29,6 @@ pkgs: python:
     buildInputs = [
       hello
       jello
+      (import ../python pkgs python)
     ];
   }
