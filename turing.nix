@@ -186,7 +186,7 @@
 
     yello
 
-    (import ./test.nix pkgs python313)
+    (import ./python pkgs python313)
 
 
   ];
