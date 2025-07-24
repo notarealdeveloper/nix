@@ -111,7 +111,7 @@
   
     let
 
-      python = pkgs.python314;
+      python       = pkgs.python313;
 
     in
 
@@ -197,51 +197,54 @@
 
     (python.withPackages (ps: with ps; [
 
-        # basics
+      # basics
+      ipython
+      requests
+      beautifulsoup4
+      yt-dlp
+      build
+      twine
+      pytest
+      editdistance
+      multiprocess
+
+      # numerical
+      numpy
+      scipy
+      pandas
+      matplotlib
+      seaborn
+      scikit-learn
+      torch
+
+      # gmail
+      google-auth-oauthlib
+
+      # getbtcprice
+      google-api-python-client
+      geoip2
+
+      # overlay
+      is_instance
+      embd
+      wnix
+      jello
+
+    ]))
+
+    (python314FreeThreading.withPackages (ps: with ps; [
+    ]))
+
+    (python311.withPackages (ps: with ps; [
+        python
+        pip
+        setuptools
         ipython
-        requests
-        beautifulsoup4
-        yt-dlp
-        build
-        twine
-        pytest
-        editdistance
-        multiprocess
-
-        # numerical
         numpy
-        scipy
         pandas
-        matplotlib
-        seaborn
         scikit-learn
-        torch
-
-        # gmail
-        google-auth-oauthlib
-
-        # getbtcprice
-        google-api-python-client
-        geoip2
-
-        # overlay
-        is_instance
-        embd
-        wnix
-        jello
-      ])
-    )
-    
-    #(python311.withPackages (ps: with ps; [
-    #    python
-    #    pip
-    #    setuptools
-    #    ipython
-    #    numpy
-    #    pandas
-    #    scikit-learn
-    #    lightgbm
-    #]))
+        lightgbm
+    ]))
 
   ];
 
