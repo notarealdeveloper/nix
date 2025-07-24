@@ -21,6 +21,14 @@ final: prev: rec {
     };
   });
 
+  #########################
+  ### Local Executables ###
+  #########################
+
+  hello = (import ./bin/hello.nix { inherit (prev) stdenv fetchFromGitHub; });
+
+  yello = (import ./bin/yello.nix prev prev.python);
+
   ######################
   ### Python Overlay ###
   ######################
@@ -29,6 +37,6 @@ final: prev: rec {
   pythonPackagesExtensions = (prev.pythonPackagesExtensions or []) ++ [ (import ./python/extend.nix) ];
 
   # 2) (Optional) Expose them at top-level too, like normal pkgs:
-  inherit (final.python3Packages) callable_module is_instance assure mmry embd kern wnix;
+  inherit (final.python3Packages) callable_module is_instance assure mmry embd kern wnix jello;
 
 }

@@ -113,8 +113,7 @@
 
       python = pkgs.python313;
 
-      hello = (import ./bin/hello.nix { inherit (pkgs) stdenv fetchFromGitHub; });
-      yello = (import ./bin/yello.nix pkgs python);
+      #yello = (import ./bin/yello.nix pkgs python);
 
     in
 
@@ -196,7 +195,7 @@
 
     /* THE IMPORT VS EXEC ISSUE */
 
-    yello
+    #yello
 
     (python313.withPackages (ps: with ps; [
 
