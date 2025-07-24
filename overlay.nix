@@ -26,20 +26,9 @@ final: prev: rec {
   ######################
 
   # 1) Register your extension so *every* pythonXPackages set sees it.
-  pythonPackagesExtensions =
-    (prev.pythonPackagesExtensions or []) ++ [
-      (import ./python/extend.nix)
-    ];
+  pythonPackagesExtensions = (prev.pythonPackagesExtensions or []) ++ [ (import ./python/extend.nix) ];
 
   # 2) (Optional) Expose them at top-level too, like normal pkgs:
-  inherit (final.python3Packages)
-    callable_module
-    is_instance
-    assure
-    mmry
-    embd
-    kern
-    wnix
-  ;
+  inherit (final.python3Packages) callable_module is_instance assure mmry embd kern wnix;
 
 }
