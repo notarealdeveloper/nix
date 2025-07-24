@@ -202,7 +202,7 @@
         ipython
         is_instance
         wnix
-      ]
+      ])
     )
     
     #(import ./python pkgs python)
