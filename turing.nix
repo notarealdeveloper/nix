@@ -102,7 +102,9 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # Note: we now do this in flake.nix since we're passing
+  # in an extended nixpkgs that includes our overlay.
+  # nixpkgs.config.allowUnfree = true;
 
   # System packages
   environment.systemPackages =
