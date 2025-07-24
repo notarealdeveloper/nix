@@ -113,8 +113,6 @@
 
       python = pkgs.python313;
 
-      #yello = (import ./bin/yello.nix pkgs python);
-
     in
 
     with pkgs; [
@@ -197,7 +195,7 @@
 
     yello
 
-    (python313.withPackages (ps: with ps; [
+    (python.withPackages (ps: with ps; [
 
         # basics
         ipython
@@ -230,7 +228,7 @@
         is_instance
         embd
         wnix
-        #jello
+        jello
       ])
     )
     
