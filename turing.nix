@@ -236,7 +236,6 @@
     ]))
 
     (python311.withPackages (ps: with ps; [
-        python
         pip
         setuptools
         ipython
