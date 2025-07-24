@@ -32,6 +32,7 @@ final: prev: rec {
       hash  = "sha256-tXxYVCnwqp11PD5nQaLTHySVv0xf+4wuLN1eC4JiRBw=";
     };
     patches = [];
+    patchPhase = [];
     doCheck = false;
   });
 
