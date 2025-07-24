@@ -22,7 +22,7 @@ final: prev: rec {
   });
 
 
-  python-head = prev.python313.overrideAttrs (old: rec {
+  python-head = prev.python314.overrideAttrs (old: rec {
     pname   = "python-head";
     version = "git-${builtins.substring 0 7 src.rev}";
     src = prev.fetchFromGitHub {
