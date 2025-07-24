@@ -3,7 +3,7 @@
 
 self: super:
 let
-  call = super.callPackage;
+  call = self.callPackage;
 in {
 
   callable_module = call ./callable-module.nix {};
