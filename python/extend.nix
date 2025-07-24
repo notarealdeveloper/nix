@@ -15,7 +15,7 @@ in {
   wnix            = call ./wnix.nix { inherit (self) assure mmry is_instance embd kern; };
 
   jello = call ./jello.nix {
-    inherit (super) lib stdenv fetchFromGitHub;
-    inherit (self) buildPythonPackage setuptools wheel;
+    inherit (self) lib stdenv fetchFromGitHub;
+    inherit (self.python.pkgs) buildPythonPackage setuptools wheel;
   };
 }
