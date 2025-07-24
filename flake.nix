@@ -2,35 +2,39 @@
   description = "NixOS configurations";
 
   inputs = {
-
-    nixpkgs = {
-      url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    };
-
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
-
-    nixosConfigurations.turing = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        home-manager.nixosModules.home-manager
-        ./turing.nix
-      ];
+  outputs = { self, nixpkgs, home-manager, ... }:
+  let
+    system  = "x86_64-linux";
+    overlay = import ./overlay.nix;
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [ overlay ];
     };
 
+  in {
+    nixosConfigurations = {
+      turing = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./turing.nix
+        ];
+      };
 
-    nixosConfigurations.gates = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./gates.nix
-      ];
+      gates = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./gates.nix
+        ];
+      };
     };
-
   };
 }
