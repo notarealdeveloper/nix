@@ -228,7 +228,7 @@
         is_instance
         embd
         wnix
-        jello
+        #jello
       ])
     )
     
