@@ -1,6 +1,7 @@
 # overlay.nix
 final: prev: {
   sl2 = prev.sl.overrideAttrs (_: {
+    pname = "sl2";
     src = prev.fetchFromGitHub {
       owner = "mtoyoda";
       repo  = "sl";
