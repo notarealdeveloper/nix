@@ -111,7 +111,7 @@
   
     let
 
-      python = pkgs.python313;
+      python = pkgs.python314;
 
     in
 
@@ -232,8 +232,6 @@
       ])
     )
     
-    #(import ./python pkgs python)
-
     #(python311.withPackages (ps: with ps; [
     #    python
     #    pip
