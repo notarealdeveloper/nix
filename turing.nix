@@ -198,10 +198,40 @@
 
     yello
 
-    (python.withPackages (ps: with ps; [
+    (python313.withPackages (ps: with ps; [
+
+        # basics
         ipython
+        requests
+        beautifulsoup4
+        yt-dlp
+        build
+        twine
+        pytest
+        editdistance
+        multiprocess
+
+        # numerical
+        numpy
+        scipy
+        pandas
+        matplotlib
+        seaborn
+        scikit-learn
+        torch
+
+        # gmail
+        google-auth-oauthlib
+
+        # getbtcprice
+        google-api-python-client
+        geoip2
+
+        # overlay
         is_instance
+        embd
         wnix
+        #jello
       ])
     )
     
