@@ -31,9 +31,19 @@ final: prev: rec {
       rev = "777159fa318f39c36ad60039cdf35a8dbb319637";
       hash  = "sha256-tXxYVCnwqp11PD5nQaLTHySVv0xf+4wuLN1eC4JiRBw=";
     };
+
+    # make patchPhase a no-op
     patches = [];
-    patchPhase = [];
+    # nixpkgs python also sticks stuff here
+    postPatch = "";
+    patchPhase = ''
+      runHook prePatch
+      # nothing
+      runHook postPatch
+    '';
+
     doCheck = false;
+
   });
 
   #########################
