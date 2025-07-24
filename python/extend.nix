@@ -1,7 +1,6 @@
 # python/extend.nix
 # This is a pythonPackages *scope* extension: self = the extended scope, super = old scope
-
-{ fetchFromGitHub }:
+pkgs:
 
   self: super:
   let
@@ -17,8 +16,7 @@
     wnix            = call ./wnix.nix { inherit (self) assure mmry is_instance embd kern; };
 
     jello = call ./jello.nix {
-      inherit fetchFromGitHub;
-      inherit (super) lib stdenv;
+      inherit (pkgs) lib stdenv fetchFromGitHub;
       inherit (self) buildPythonPackage setuptools wheel pip;
     };
   }
