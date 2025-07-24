@@ -4,7 +4,7 @@ build:
 	nixos-rebuild switch
 
 update:
-	nix channel --update
+	nix-channel --update
 	nixos-rebuild switch --upgrade
 
 pull:
