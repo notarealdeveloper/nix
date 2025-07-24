@@ -8,7 +8,6 @@ final: prev: {
       mkdir -pv     $out/{bin,share/man/man1}
       mv -v sl      $out/bin/sl2
       mv -v sl.1    $out/share/man/man1/sl2.1
-      mv -v sl.1.ja $out/share/man/man1/sl2.1.ja
 
       runHook postInstall
     '';
