@@ -144,7 +144,7 @@
     cmatrix
     figlet
     toilet
-    sl
+    sl sl2
 
     # desktop
     nemo
