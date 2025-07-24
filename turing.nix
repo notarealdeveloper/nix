@@ -198,18 +198,25 @@
 
     yello
 
+    (python.withPackages (ps: with ps; [
+        ipython
+        is_instance
+        wnix
+      ]
+    )
+    
     #(import ./python pkgs python)
 
-    (python311.withPackages (ps: with ps; [
-        python
-        pip
-        setuptools
-        ipython
-        numpy
-        pandas
-        scikit-learn
-        lightgbm
-    ]))
+    #(python311.withPackages (ps: with ps; [
+    #    python
+    #    pip
+    #    setuptools
+    #    ipython
+    #    numpy
+    #    pandas
+    #    scikit-learn
+    #    lightgbm
+    #]))
 
   ];
 
