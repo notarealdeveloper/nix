@@ -21,6 +21,20 @@ final: prev: rec {
     };
   });
 
+
+  python-head = prev.python313.overrideAttrs (old: rec {
+    pname   = "python-head";
+    version = "git-${builtins.substring 0 7 src.rev}";
+    src = prev.fetchFromGitHub {
+      owner = "python";
+      repo  = "cpython";
+      rev = "777159fa318f39c36ad60039cdf35a8dbb319637";
+      hash  = "sha256-tXxYVCnwqp11PD5nQaLTHySVv0xf+4wuLN1eC4JiRBw=";
+    };
+    patches = [];
+    doCheck = false;
+  });
+
   #########################
   ### Local Executables ###
   #########################

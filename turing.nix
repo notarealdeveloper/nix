@@ -235,6 +235,8 @@
     (python314FreeThreading.withPackages (ps: with ps; [
     ]))
 
+    python-head
+
     (python311.withPackages (ps: with ps; [
         pip
         setuptools
