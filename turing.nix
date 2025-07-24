@@ -195,7 +195,7 @@
 
     /* THE IMPORT VS EXEC ISSUE */
 
-    #yello
+    yello
 
     (python313.withPackages (ps: with ps; [
 

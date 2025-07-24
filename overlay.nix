@@ -25,9 +25,9 @@ final: prev: rec {
   ### Local Executables ###
   #########################
 
-  hello = (import ./bin/hello.nix { inherit (prev) stdenv fetchFromGitHub; });
+  hello = (import ./bin/hello.nix { inherit (final) stdenv fetchFromGitHub; });
 
-  yello = (import ./bin/yello.nix prev prev.python);
+  yello = (import ./bin/yello.nix final final.python3);
 
   ######################
   ### Python Overlay ###
