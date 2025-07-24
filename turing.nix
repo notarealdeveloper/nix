@@ -130,14 +130,21 @@
     plocate
     xclip
     xdotool
-    cowsay
-    xcowsay
     inotify-tools
     imagemagick
     pcre
     jq
     file
     patchelf
+
+    # silly
+    cowsay
+    xcowsay
+    asciiquarium
+    cmatrix
+    figlet
+    toilet
+    sl
 
     # desktop
     nemo
