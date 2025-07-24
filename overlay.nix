@@ -24,7 +24,14 @@ final: prev: rec {
 
   python-head = prev.python314.overrideAttrs (old: rec {
     pname   = "python-head";
-    version = "git-${builtins.substring 0 7 src.rev}";
+    sourceVersion = {
+      major = "3";
+      minor = "15";
+      patch = "0";
+      suffix = "a1";
+    };
+    version = "${sourceVersion.major}.${sourceVersion.minor}.${sourceVersion.patch}${sourceVersion.suffix}";
+    pythonVersion = "${sourceVersion.major}.${sourceVersion.minor}";
     src = prev.fetchFromGitHub {
       owner = "python";
       repo  = "cpython";
