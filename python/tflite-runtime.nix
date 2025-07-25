@@ -1,5 +1,5 @@
-{
-  lib
+{ pkgs
+, lib
 , buildPythonPackage
 , fetchPypi
 , pip
@@ -25,5 +25,6 @@ buildPythonPackage rec {
 
   # PyPI dependencies
   propagatedBuildInputs = [
+    pkgs.stdenv.cc.cc.lib
   ];
 }
