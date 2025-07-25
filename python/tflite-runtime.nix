@@ -1,6 +1,4 @@
-
-{
-  lib
+{ lib
 , buildPythonPackage
 , fetchPypi
 , pip

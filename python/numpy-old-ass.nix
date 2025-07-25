@@ -1,18 +1,17 @@
-
-{
-  lib
+{ lib
 , buildPythonPackage
 , fetchPypi
 , pip
 , setuptools
 , wheel
+, gfortran
 , python
 , ...
 } @ inputs:
 
 buildPythonPackage rec {
-  pname = "tflite-runtime";
-  version = "2.14.0";
+  pname = "numpy";
+  version = "1.26.4";
   format = "wheel";
 
   src = builtins.fetchurl {
@@ -26,5 +25,6 @@ buildPythonPackage rec {
   propagatedBuildInputs = [
     pip
     setuptools
+    gfortran
   ];
 }
