@@ -54,14 +54,14 @@
         pkgs.mkShell {
           buildInputs = [
             (python311.withPackages (ps: with ps; [
-              #pip
-              #setuptools
+              pip
+              setuptools
               ipython
               numpy
-              #pandas
-              #scikit-learn
-              #lightgbm
-              #lambda-multiprocessing
+              pandas
+              scikit-learn
+              lightgbm
+              lambda-multiprocessing
               tflite-runtime
             ]))
           ];
