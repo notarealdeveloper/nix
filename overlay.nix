@@ -39,6 +39,10 @@ final: prev: rec {
       hash  = "sha256-tXxYVCnwqp11PD5nQaLTHySVv0xf+4wuLN1eC4JiRBw=";
     };
 
+    configureFlags = (old.configureFlags or []) ++ [
+      "--with-openssl=${prev.openssl.dev}"
+    ];
+
     # make patchPhase a no-op
     patches = [];
     # nixpkgs python also sticks stuff here
@@ -53,6 +57,10 @@ final: prev: rec {
 
     #postInstall = "runHook postInstall";
     postInstall = "";
+
+    propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [
+      prev.openssl
+    ];
 
   });
 
