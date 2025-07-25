@@ -1,7 +1,33 @@
+# python/tflite-runtime.nix
 { pkgs, python }:
 
-with python.pkgs;
-buildPythonPackage {
+let
+  evilStub = pkgs.stdenv.mkDerivation {
+    pname = "evil-py-unchecked-stub";
+    version = "1.0";
+
+    src = pkgs.writeText "evil_stub.c" ''
+      #include <Python.h>
+      __attribute__((visibility("default")))
+      PyThreadState* _PyThreadState_UncheckedGet(void) {
+          return PyThreadState_Get();
+      }
+    '';
+
+    nativeBuildInputs = [ pkgs.pkg-config ];
+    buildInputs = [ python pkgs.gcc ];
+
+    installPhase = ''
+      mkdir -p $out/lib
+      gcc -shared -fPIC $src -o $out/lib/libevil.so \
+        -I $(python -c "import sysconfig; print(sysconfig.get_path('include'))") \
+        -lpython3.13
+    '';
+  };
+
+in
+  with python.pkgs;
+  buildPythonPackage {
   pname = "tflite-runtime";
   version = "2.14.0";
   format = "wheel";
@@ -13,23 +39,17 @@ buildPythonPackage {
 
   nativeBuildInputs = [ pkgs.autoPatchelfHook ];
 
-  buildInputs = [
-    pkgs.stdenv.cc.cc.lib
-    pkgs.python311  # only for libpython3.11.so.1.0
-  ];
+  buildInputs = [ pkgs.stdenv.cc.cc.lib pkgs.python311 ]; # get libstdc++ and libpython3.11.so
 
   dontWrapPythonPrograms = true;
 
   postFixup = ''
-    echo "Patching _pywrap_tensorflow_interpreter_wrapper.so to link against Python 3.11"
+    echo "🔧 Patching RPATH to include Python 3.11 lib and evil stub"
     for f in $out/${python.sitePackages}/tflite_runtime/*.so; do
       echo "patching $f"
-
-      # Set RPATH so it can find libpython3.11.so.1.0
-      patchelf --set-rpath ${pkgs.python311}/lib:$(patchelf --print-rpath "$f") "$f"
-
-      # Ensure the linker *knows* to load libpython3.11.so.1.0
-      patchelf --add-needed libpython3.11.so.1.0 "$f"
+      patchelf \
+        --set-rpath ${pkgs.python311}/lib:${evilStub}/lib:$(patchelf --print-rpath $f) \
+        $f
     done
   '';
 }
