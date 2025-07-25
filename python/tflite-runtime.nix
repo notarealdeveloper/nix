@@ -21,10 +21,19 @@ buildPythonPackage rec {
     sha256 = "195ab752e7e57329a68e54dd3dd5439fad888b9bff1be0f0dc042a3237a90e4d";
   };
 
-  #build-system = [ setuptools wheel ];
+  nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+  buildInputs = [ pkgs.stdenv.cc.cc.lib ];
 
-  # PyPI dependencies
+  # Optional: helpful for debugging
+  postFixup = ''
+    echo "🔧 Final RPATHs:"
+    find $out -type f -exec file {} \; | grep ELF | awk '{print $1}' | sed 's/://g' | xargs -n1 patchelf --print-rpath || true
+  '';
+
   propagatedBuildInputs = [
     pkgs.stdenv.cc.cc.lib
   ];
+
+  #propagatedBuildInputs = [ ]; # not needed unless runtime Python deps
+
 }
