@@ -49,7 +49,7 @@
           pip
           setuptools
           ipython
-          numpy
+          (numpy.overridePythonAttrs (old: { version = "1.26.4"; }))
           pandas
           scikit-learn
           lightgbm
