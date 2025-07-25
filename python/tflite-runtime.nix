@@ -22,7 +22,7 @@ let
     buildPhase = ''
       gcc -shared -fPIC $src -o libevil.so \
         -I $(python -c "import sysconfig; print(sysconfig.get_path('include'))") \
-        -lpython3.13
+        -Wl,--unresolved-symbols=ignore-in-object-files
     '';
 
     installPhase = ''
