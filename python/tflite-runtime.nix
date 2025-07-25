@@ -38,4 +38,10 @@ buildPythonPackage rec {
     pkgs.stdenv.cc.cc.lib
   ];
 
+  dontWrapPythonPrograms = true;
+
+  postFixup = ''
+    echo "✅ tflite-runtime patched"
+  '';
+
 }
