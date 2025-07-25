@@ -22,7 +22,9 @@
     };
 
   in {
+
     nixosConfigurations = {
+
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         modules = [
@@ -38,6 +40,24 @@
           ./gates.nix
         ];
       };
+
     };
+
+    devShells.${system}.default = pkgs.mkShell {
+      buildInputs = [
+        (pkgs.python311.withPackages (ps: with ps; [
+          pip
+          setuptools
+          ipython
+          numpy
+          pandas
+          scikit-learn
+          lightgbm
+          lambda-multiprocessing
+          tflite-runtime
+        ]))
+      ];
+    };
+
   };
 }
