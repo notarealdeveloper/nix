@@ -43,21 +43,30 @@
 
     };
 
-    devShells.${system}.workboop = pkgs.mkShell {
-      buildInputs = [
-        (pkgs.python311.withPackages (ps: with ps; [
-          pip
-          setuptools
-          ipython
-          numpy_1
-          pandas
-          scikit-learn
-          lightgbm
-          lambda-multiprocessing
-          tflite-runtime
-        ]))
-      ];
-    };
+    devShells.${system}.work = 
+      let
+        python311 = pkgs.python311.override {
+          packageOverrides = self: super: {
+            numpy = pkgs.python311Packages.numpy_1;
+          };
+        };
+      in
+        pkgs.mkShell {
+          buildInputs = [
+            (python311.withPackages (ps: with ps; [
+              #pip
+              #setuptools
+              ipython
+              numpy
+              #pandas
+              #scikit-learn
+              #lightgbm
+              #lambda-multiprocessing
+              tflite-runtime
+            ]))
+          ];
+          doCheck = false;
+        };
 
   };
 }
