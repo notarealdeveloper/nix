@@ -14,10 +14,8 @@ let
       }
     '';
 
-    phases = [ "buildPhase" "installPhase" ];
-
     nativeBuildInputs = [ pkgs.pkg-config ];
-    buildInputs = [ python pkgs.gcc ];
+    buildInputs = [ ];
 
     buildPhase = ''
       gcc -shared -fPIC $src -o libevil.so \
@@ -31,9 +29,7 @@ let
     '';
   };
 
-in
-  with python.pkgs;
-  buildPythonPackage {
+in pkgs.buildPythonPackage {
   pname = "tflite-runtime";
   version = "2.14.0";
   format = "wheel";
