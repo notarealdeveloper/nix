@@ -24,16 +24,18 @@ buildPythonPackage rec {
   nativeBuildInputs = [ pkgs.autoPatchelfHook ];
   buildInputs = [ pkgs.stdenv.cc.cc.lib ];
 
-  # Optional: helpful for debugging
+  # LD_PRELOAD!
   postFixup = ''
-    echo "🔧 Final RPATHs:"
-    find $out -type f -exec file {} \; | grep ELF | awk '{print $1}' | sed 's/://g' | xargs -n1 patchelf --print-rpath || true
-  '';
+    echo "void *_PyThreadState_UncheckedGet(void) { return 0; }" | \
+      gcc -shared -fPIC -o $out/lib/libfake_py.so -xc -
+    
+    wrapProgram $out/bin/python --set LD_PRELOAD "$out/lib/libfake_py.so"
 
+    #echo "🔧 Final RPATHs:"
+    #find $out -type f -exec file {} \; | grep ELF | awk '{print $1}' | sed 's/://g' | xargs -n1 patchelf --print-rpath || true
+  '';
   propagatedBuildInputs = [
     pkgs.stdenv.cc.cc.lib
   ];
-
-  #propagatedBuildInputs = [ ]; # not needed unless runtime Python deps
 
 }
