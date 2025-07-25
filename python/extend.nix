@@ -16,6 +16,7 @@ pkgs:
     wnix            = call ./wnix.nix { inherit (self) assure mmry is_instance embd kern; };
 
     lambda-multiprocessing = call ./lambda-multiprocessing.nix { };
+    tflite-runtime = call ./tflite-runtime.nix { };
 
     jello = call ./jello.nix {
       inherit (pkgs) lib stdenv fetchFromGitHub;

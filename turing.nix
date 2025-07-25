@@ -229,7 +229,9 @@
       embd
       wnix
       jello
+
       lambda-multiprocessing
+      tflite-runtime
 
     ]))
 
