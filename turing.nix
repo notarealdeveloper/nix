@@ -230,9 +230,6 @@
       wnix
       jello
 
-      lambda-multiprocessing
-      tflite-runtime
-
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; [
@@ -249,6 +246,8 @@
         pandas
         scikit-learn
         lightgbm
+        lambda-multiprocessing
+        tflite-runtime
     ]))
 
   ];
