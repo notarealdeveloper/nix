@@ -47,7 +47,7 @@
       let
         python311 = pkgs.python311.override {
           packageOverrides = self: super: {
-            numpy = pkgs.python311Packages.numpy_1.overridePythonAttributes { version = "2.2.2"; };
+            numpy = pkgs.python311Packages.numpy_1;
           };
         };
       in
