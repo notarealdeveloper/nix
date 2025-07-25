@@ -1,7 +1,7 @@
 # overlay.nix
 final: prev: rec {
 
-  sl2 = prev.sl.overrideAttrs (_: {
+  sl2 = prev.sl.overrideAttrs (old: {
     pname = "sl2";
     installPhase = ''
       runHook preInstall
