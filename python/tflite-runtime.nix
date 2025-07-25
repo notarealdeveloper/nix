@@ -14,14 +14,20 @@ let
       }
     '';
 
+    phases = [ "buildPhase" "installPhase" ];
+
     nativeBuildInputs = [ pkgs.pkg-config ];
     buildInputs = [ python pkgs.gcc ];
 
-    installPhase = ''
-      mkdir -p $out/lib
-      gcc -shared -fPIC $src -o $out/lib/libevil.so \
+    buildPhase = ''
+      gcc -shared -fPIC $src -o libevil.so \
         -I $(python -c "import sysconfig; print(sysconfig.get_path('include'))") \
         -lpython3.13
+    '';
+
+    installPhase = ''
+      mkdir -p $out/lib
+      mv libevil.so $out/lib/
     '';
   };
 
