@@ -46,15 +46,15 @@
     devShells.${system}.work = pkgs.mkShell {
       buildInputs = [
         (pkgs.python311.withPackages (ps: with ps; [
-          #pip
-          #setuptools
-          #ipython
+          pip
+          setuptools
+          ipython
           numpy_1
-          #pandas
-          #scikit-learn
+          pandas
+          scikit-learn
           #lightgbm
-          #lambda-multiprocessing
-          #tflite-runtime
+          lambda-multiprocessing
+          tflite-runtime
         ]))
       ];
     };
