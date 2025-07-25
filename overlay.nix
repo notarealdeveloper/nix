@@ -51,7 +51,8 @@ final: prev: rec {
 
     doCheck = false;
 
-    postInstall = "runHook postInstall";
+    #postInstall = "runHook postInstall";
+    postInstall = "";
 
   });
 
