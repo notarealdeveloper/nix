@@ -240,15 +240,15 @@
     # python-head
 
     (pkgs.python311.withPackages (ps: with ps; [
-      pip
-      setuptools
-      ipython
-      pandas
+      #pip
+      #setuptools
+      #ipython
+      #pandas
       numpy_1
-      scikit-learn
-      lightgbm
-      lambda-multiprocessing
-      tflite-runtime
+      #scikit-learn
+      #lightgbm
+      #lambda-multiprocessing
+      #tflite-runtime
     ]))
 
   ];
