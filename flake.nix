@@ -43,7 +43,7 @@
 
     };
 
-    devShells.${system}.default = pkgs.mkShell {
+    devShells.${system}.work = pkgs.mkShell {
       buildInputs = [
         (pkgs.python311.withPackages (ps: with ps; [
           pip
