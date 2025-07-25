@@ -1,62 +1,31 @@
-# python/tflite-runtime.nix
-{ pkgs, python }:
 
-let
-  evilStub = pkgs.stdenv.mkDerivation {
-    pname = "evil-py-unchecked-stub";
-    version = "1.0";
+{
+  lib
+, buildPythonPackage
+, fetchPypi
+, pip
+, setuptools
+, wheel
+, python
+, ...
+} @ inputs:
 
-    src = pkgs.writeText "evil_stub.c" ''
-      #include <Python.h>
-      __attribute__((visibility("default")))
-      PyThreadState* _PyThreadState_UncheckedGet(void) {
-          return PyThreadState_Get();
-      }
-    '';
-
-    phases = [ "buildPhase" "installPhase" ];
-
-    nativeBuildInputs = [ pkgs.pkg-config ];
-    buildInputs = [ python pkgs.gcc ];
-
-    buildPhase = ''
-      gcc -shared -fPIC $src -o libevil.so \
-        -I $(python -c "import sysconfig; print(sysconfig.get_path('include'))") \
-        -Wl,--unresolved-symbols=ignore-in-object-files
-    '';
-
-    installPhase = ''
-      mkdir -p $out/lib
-      mv libevil.so $out/lib/
-    '';
-  };
-
-in 
-  with python.pkgs;
-  buildPythonPackage {
+buildPythonPackage rec {
   pname = "tflite-runtime";
   version = "2.14.0";
   format = "wheel";
 
-  src = pkgs.fetchurl {
-    url = "https://files.pythonhosted.org/packages/8f/a6/02d68cb62cd221589a0ff055073251d883936237c9c990e34a1d7cecd06f/tflite_runtime-2.14.0-cp311-cp311-manylinux2014_x86_64.whl";
-    sha256 = "195ab752e7e57329a68e54dd3dd5439fad888b9bff1be0f0dc042a3237a90e4d";
+  # fetch source
+  src = builtins.fetchurl {
+    url = "https://files.pythonhosted.org/packages/fb/76/e246c39d92929655bac8878d76406d6fb0293c678237e55621e7ece4a269/tflite_runtime-2.14.0-cp311-cp311-manylinux_2_34_armv7l.whl";
+    sha256 = "c4e66a74165b18089c86788400af19fa551768ac782d231a9beae2f6434f7949";
   };
 
-  nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+  build-system = [ setuptools wheel ];
 
-  buildInputs = [ pkgs.stdenv.cc.cc.lib pkgs.python311 ]; # get libstdc++ and libpython3.11.so
-
-  dontWrapPythonPrograms = true;
-
-  postFixup = ''
-    echo "🔧 Patching RPATH to include Python 3.11 lib and evil stub"
-    for f in $out/${python.sitePackages}/tflite_runtime/*.so; do
-      echo "patching $f"
-      patchelf \
-        --set-rpath ${pkgs.python311}/lib:${evilStub}/lib:$(patchelf --print-rpath $f) \
-        $f
-    done
-  '';
+  # PyPI dependencies
+  propagatedBuildInputs = [
+    pip
+    setuptools
+  ];
 }
-
