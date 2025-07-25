@@ -191,10 +191,6 @@
     openssh
     strace
     ltrace
-    stdenv.cc.cc.lib # libstdc++.so.6
-
-    libgcc
-    gcc-unwrapped
 
     /* THE IMPORT VS EXEC ISSUE */
 
