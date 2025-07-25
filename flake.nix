@@ -43,7 +43,7 @@
 
     };
 
-    devShells.${system}.work = pkgs.mkShell {
+    devShells.${system}.workboop = pkgs.mkShell {
       buildInputs = [
         (pkgs.python311.withPackages (ps: with ps; [
           pip
@@ -52,10 +52,40 @@
           numpy_1
           pandas
           scikit-learn
-          #lightgbm
+          lightgbm
           lambda-multiprocessing
           tflite-runtime
         ]))
+      ];
+    };
+
+    devShells.${system}.work = pkgs.mkShell {
+      buildInputs = [
+        (
+          (pkgs.python311.override {
+            packageOverrides = self: super: {
+              numpy = super.numpy.overridePythonAttrs (old: rec {
+                version = "1.26.4";
+                src     = pkgs.fetchurl {
+                  url = "https://files.pythonhosted.org/…/numpy-1.26.4-…manylinux2014_x86_64.whl";
+                  sha256 = "666dbfb6ec68962c033a450943ded891bed2d54e6755e35e5835d63f4f6931d5";
+                };
+                # runtime libs needed by the wheel
+                propagatedBuildInputs = old.propagatedBuildInputs ++ [ pkgs.gfortran.cc.lib ];
+              });
+            };
+          }).withPackages (ps: with ps; [
+            pip
+            setuptools
+            ipython
+            numpy
+            pandas
+            scikit-learn
+            lightgbm
+            lambda-multiprocessing
+            tflite-runtime
+          ])
+        )
       ];
     };
 
