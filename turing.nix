@@ -189,7 +189,8 @@
     dropbox-cli
     openvpn3
     openssh
-
+    strace
+    ltrace
 
     /* THE IMPORT VS EXEC ISSUE */
 
