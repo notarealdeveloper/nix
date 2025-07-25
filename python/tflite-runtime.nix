@@ -21,10 +21,15 @@ buildPythonPackage {
   dontWrapPythonPrograms = true;
 
   postFixup = ''
-    echo "🔧 Patching RPATH to include Python 3.11 lib"
+    echo "Patching _pywrap_tensorflow_interpreter_wrapper.so to link against Python 3.11"
     for f in $out/${python.sitePackages}/tflite_runtime/*.so; do
       echo "patching $f"
-      patchelf --set-rpath ${pkgs.python311}/lib:$(patchelf --print-rpath $f) $f
+
+      # Set RPATH so it can find libpython3.11.so.1.0
+      patchelf --set-rpath ${pkgs.python311}/lib:$(patchelf --print-rpath "$f") "$f"
+
+      # Ensure the linker *knows* to load libpython3.11.so.1.0
+      patchelf --add-needed libpython3.11.so.1.0 "$f"
     done
   '';
 }
