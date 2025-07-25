@@ -29,7 +29,9 @@ let
     '';
   };
 
-in pkgs.buildPythonPackage {
+in
+  with python.pkgs;
+  buildPythonPackage {
   pname = "tflite-runtime";
   version = "2.14.0";
   format = "wheel";
