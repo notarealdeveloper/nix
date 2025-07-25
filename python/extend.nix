@@ -17,6 +17,7 @@ pkgs:
 
     lambda-multiprocessing = call ./lambda-multiprocessing.nix { };
     tflite-runtime = call ./tflite-runtime.nix { inherit pkgs; python = pkgs.python3; };
+    numpy-old-ass  = call ./numpy-old-ass.nix { inherit pkgs; python = pkgs.python3; };
 
     jello = call ./jello.nix {
       inherit (pkgs) lib stdenv fetchFromGitHub;
