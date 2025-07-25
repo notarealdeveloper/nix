@@ -229,13 +229,15 @@
       embd
       wnix
       jello
+      lambda-multiprocessing
 
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; [
     ]))
 
-    python-head
+    # So close!
+    # python-head
 
     (python311.withPackages (ps: with ps; [
         pip
