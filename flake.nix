@@ -11,14 +11,15 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
   let
+
     system  = "x86_64-linux";
+
     overlay = import ./overlay;
+
     pkgs = import nixpkgs {
       inherit system;
       overlays = [ overlay ];
-      config = {
-        allowUnfree = true;
-      };
+      config = { allowUnfree = true; };
     };
 
   in {
@@ -29,15 +30,7 @@
         inherit system pkgs;
         modules = [
           home-manager.nixosModules.home-manager
-          ./turing.nix
-        ];
-      };
-
-      gates = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          home-manager.nixosModules.home-manager
-          ./gates.nix
+          ./configuration.nix
         ];
       };
 
@@ -45,17 +38,6 @@
 
     devShells.${system}.work = pkgs.mkShell {
       buildInputs = [
-        (pkgs.python311.withPackages (ps: with ps; [
-          pip
-          setuptools
-          ipython
-          numpy
-          pandas
-          scikit-learn
-          lightgbm
-          lambda-multiprocessing
-          tflite-runtime
-        ]))
       ];
     };
 
