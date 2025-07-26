@@ -28,6 +28,6 @@ final: prev: rec {
   pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
 
   # 2) (Optional) Expose them at top-level too, like normal pkgs:
-  inherit (final.python3Packages) callable_module is_instance assure mmry embd kern wnix jello;
+  # inherit (final.python3Packages) callable_module is_instance assure mmry embd kern wnix jello;
 
 }
