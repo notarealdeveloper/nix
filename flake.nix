@@ -12,7 +12,7 @@
   outputs = { self, nixpkgs, home-manager, ... }:
   let
     system  = "x86_64-linux";
-    overlay = import ./overlay.nix;
+    overlay = import ./overlay;
     pkgs = import nixpkgs {
       inherit system;
       overlays = [ overlay ];
