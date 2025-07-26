@@ -37,8 +37,7 @@
     };
 
     devShells.${system}.work = pkgs.mkShell {
-      buildInputs = [
-      ];
+      buildInputs = [ (import ./python311.nix pkgs) ];
     };
 
   };
