@@ -48,10 +48,10 @@ final: prev: with prev; rec {
   bye = derivation {
     name = "bye";
     system = prev.system;
-    builder = "${prev.bash}/bin/bash";
+    builder = "${final.bash}/bin/bash";
     args = ["-c" ''
-      ${prev.coreutils}/bin/mkdir -pv $out
-      ${prev.coreutils}/bin/echo "Hello World!" > $out/file
+      ${final.coreutils}/bin/mkdir -pv $out
+      ${final.coreutils}/bin/echo "Hello World!" > $out/file
     ''];
   };
 
@@ -60,9 +60,9 @@ final: prev: with prev; rec {
     system = prev.system;
     builder = "${prev.bash}/bin/bash";
     args = ["-c" ''
-      ${prev.coreutils}/bin/mkdir -pv $out/bin
-      ${prev.coreutils}/bin/cat ${bye}/file" > $out/bin/saybye
-      ${prev.coreutils}/bin/chmod +x $out/bin/saybye
+      ${final.coreutils}/bin/mkdir -pv $out/bin
+      ${final.coreutils}/bin/printf "#!/bin/sh\n\n${final.coreutils}/bin/cat ${bye}/file" > $out/bin/saybye
+      ${final.coreutils}/bin/chmod +x $out/bin/saybye
     ''];
   };
 }
