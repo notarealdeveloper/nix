@@ -21,13 +21,6 @@ final: prev: rec {
   ### Python Overlay ###
   ######################
 
-  # Note: Once you have multiple overlays, include them like this
-  # pythonPackagesExtensions = (prev.pythonPackagesExtensions or []) ++ [ (import ./python/extend.nix prev) ];
-
-  # 1) Register your extension so *every* pythonXPackages set sees it.
   pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
-
-  # 2) (Optional) Expose them at top-level too, like normal pkgs:
-  # inherit (final.python3Packages) callable_module is_instance assure mmry embd kern wnix jello;
 
 }
