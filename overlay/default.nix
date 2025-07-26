@@ -1,5 +1,5 @@
 # overlay.nix
-final: prev: rec {
+final: prev: with prev; rec {
 
   ############################
   ### Existing Executables ###
@@ -15,12 +15,24 @@ final: prev: rec {
 
   hello = import ./bin/hello.nix { inherit (prev) stdenv fetchFromGitHub; };
 
-  yello = import ./bin/yello.nix prev prev.python3;
+  yello = import ./bin/yello.nix prev python3;
 
   ######################
   ### Python Overlay ###
   ######################
 
   pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
+
+  #######################
+  ### Raw derivations ###
+  #######################
+  hi = stdenv.mkDerivation {
+    name = "hi";
+    phases = [ "installPhase" ];
+    installPhase = ''
+      mkdir -pv $out
+      echo "Hello World!" > $out/hi
+    '';
+  };
 
 }

@@ -132,7 +132,6 @@
     gnumake
     adbfs-rootless
     lean4
-    elan
 
     # debugging
     gdb
@@ -172,7 +171,6 @@
 
     # net
     dropbox
-    dropbox-cli
     openvpn3
     openssh
 
@@ -183,6 +181,9 @@
 
     # games
     stepmania
+
+    # raw derivations
+    hi
 
     /* THE IMPORT VS EXEC ISSUE */
 
