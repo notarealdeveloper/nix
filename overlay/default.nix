@@ -51,7 +51,7 @@ final: prev: with prev; rec {
     builder = "${final.bash}/bin/bash";
     args = ["-c" ''
       ${final.coreutils}/bin/mkdir -pv $out
-      ${final.coreutils}/bin/echo "Hello World!" > $out/file
+      ${final.coreutils}/bin/echo "Goodbye World, I'm moving to Nix!" > $out/file
     ''];
   };
 

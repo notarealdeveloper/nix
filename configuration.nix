@@ -183,10 +183,8 @@
     stepmania
 
     # raw derivations
-    sayhi
-
-    bye
-    saybye
+    sayhi   # stdenv.mkDerivation, depends on hi
+    saybye  # builtins.derivation, depends on raw bye
 
     /* THE IMPORT VS EXEC ISSUE */
 
