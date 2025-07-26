@@ -31,8 +31,17 @@ final: prev: with prev; rec {
     phases = [ "installPhase" ];
     installPhase = ''
       mkdir -pv $out
-      echo "Hello World!" > $out/hi
+      echo "Hello World!" > $out/file
     '';
   };
 
+  sayhi = stdenv.mkDerivation {
+    name = "sayhi";
+    phases = [ "installPhase" ];
+    installPhase = ''
+      mkdir -pv $out/bin
+      printf "#!/bin/sh\n\ncat ${hi}/file" > $out/bin/sayhi
+      chmod +x $out/bin/sayhi
+    '';
+  };
 }
