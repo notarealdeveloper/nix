@@ -198,28 +198,32 @@
 
     (python.withPackages (ps: with ps; [
 
+      # pkg
+      pip
+      setuptools
+      build
+      twine
+      pytest
+
       # basics
       ipython
       requests
       beautifulsoup4
       yt-dlp
-      build
-      twine
-      pytest
-      editdistance
-      multiprocess
 
       # numerical
+      numpy
+      scipy
+      pandas
+      scikit-learn
       matplotlib
       seaborn
       torch
 
-      # gmail
-      google-auth-oauthlib
-
-      # getbtcprice
-      google-api-python-client
-      geoip2
+      # ~/bin depends
+      google-auth-oauthlib      # gmail
+      google-api-python-client  # getbtcprice
+      geoip2                    # getbtcprice
 
       # overlay
       is_instance
@@ -227,32 +231,22 @@
       wnix
       jello
 
-      # work
-      pip
-      setuptools
-      numpy
-      scipy
-      pandas
-      scikit-learn
-      lightgbm
-      lambda-multiprocessing
     ]))
 
-    (python314FreeThreading.withPackages (ps: with ps; [
-    ]))
+    python314FreeThreading
 
     # So close!
     # python-head
 
     (pkgs.python311.withPackages (ps: with ps; [
-      #pip
-      #setuptools
-      #ipython
-      numpy_1
-      #pandas
-      #scikit-learn
-      #lightgbm
-      #lambda-multiprocessing
+      pip
+      setuptools
+      ipython
+      numpy
+      pandas
+      scikit-learn
+      lightgbm
+      lambda-multiprocessing
       tflite-runtime
     ]))
 
