@@ -183,8 +183,10 @@
     stepmania
 
     # raw derivations
-    #hi
     sayhi
+
+    bye
+    saybye
 
     /* THE IMPORT VS EXEC ISSUE */
 

@@ -44,4 +44,25 @@ final: prev: with prev; rec {
       chmod +x $out/bin/sayhi
     '';
   };
+
+  bye = derivation {
+    name = "bye";
+    system = prev.system;
+    builder = "${prev.bash}/bin/bash";
+    args = ["-c" ''
+      ${prev.coreutils}/bin/mkdir -pv $out
+      ${prev.coreutils}/bin/echo "Hello World!" > $out/file
+    ''];
+  };
+
+  saybye = derivation {
+    name = "saybye";
+    system = prev.system;
+    builder = "${prev.bash}/bin/bash";
+    args = ["-c" ''
+      ${prev.coreutils}/bin/mkdir -pv $out/bin
+      ${prev.coreutils}/bin/cat ${bye}/file" > $out/bin/saybye
+      ${prev.coreutils}/bin/chmod +x $out/bin/saybye
+    ''];
+  };
 }
