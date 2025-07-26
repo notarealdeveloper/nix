@@ -1,6 +1,4 @@
-# Edit this configuration file to define what should be installed on your system.
-# Help is available in the configuration.nix(5) man page and in the NixOS manual
-# (accessible by running ‘nixos-help’).
+# run nixos-help or man configuration.nix for more info
 
 { config, pkgs, ... }:
 
@@ -8,30 +6,27 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  imports =
-    [
-      ./system76.nix
-    ];
+  imports = [ ./system76.nix ];
 
-  # Bootloader.
+  # bootloader
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
+  # kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Set hostname.
+  # hostname
   networking.hostName = "turing";
 
-  # Set your time zone.
+  # time
   time.timeZone = "America/Chicago";
 
   environment.variables = {
     EDITOR = "vim";
   };
 
-  # Select internationalisation properties.
+  # internationalisation
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -55,43 +50,37 @@
     };
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
+  # x11 (todo: wayland)
   services.xserver.enable = true;
-  services.xserver.displayManager.lightdm = {
-    enable = true;
-    greeters.gtk = {
-      enable = true;
-      theme = {
-        package = pkgs.arc-theme;
-        name = "Arc-Dark";
-      };
-      cursorTheme = {
-        package = pkgs.vanilla-dmz;
-        name = "Vanilla-DMZ";
-        size = 24;
-      };
-    };
-    greeters.slick.enable = false; # is it a bug that this is required? find out :)
-  };
-
-  # Enable cinnamon desktop
-  services.xserver.desktopManager.cinnamon.enable = true;
-
-  # Enable the KDE desktop
-  #services.desktopManager.plasma6.enable = true;
-
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
     options = "caps:escape";
   };
+  services.xserver.displayManager.lightdm = {
+    enable = true;
+    greeters.gtk = {
+      enable = true;
+      #theme = {
+      #  package = pkgs.arc-theme;
+      #  name = "Arc-Dark";
+      #};
+      #cursorTheme = {
+      #  package = pkgs.vanilla-dmz;
+      #  name = "Vanilla-DMZ";
+      #  size = 24;
+      #};
+    };
+    greeters.slick.enable = false; # is it a bug that this is required? find out :)
+  };
 
-  # Enable CUPS
+  # desktop
+  services.xserver.desktopManager.cinnamon.enable = true;
+
+  # cups
   services.printing.enable = true;
 
-  # Enable sound
+  # sound
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -101,12 +90,7 @@
     pulse.enable = true;
   };
 
-  # Allow unfree packages
-  # Note: we now do this in flake.nix since we're passing
-  # in an extended nixpkgs that includes our overlay.
-  # nixpkgs.config.allowUnfree = true;
-
-  # System packages
+  # system
   environment.systemPackages =
   
     let
@@ -117,22 +101,21 @@
 
     with pkgs; [
 
-    # tty
-    vim_configurable
+    # nix
+    nix-bash-completions
+    nix-prefetch-github
+    home-manager
+    dconf2nix
+
+    # unix
+    #vim_configurable
+    vim
+    file
     wget
-    gcc
+    plocate
     git
     gh
-    gnumake
-    plocate
-    xclip
-    xdotool
-    inotify-tools
-    imagemagick
-    pcre
     jq
-    file
-    patchelf
 
     # silly
     cowsay
@@ -141,7 +124,32 @@
     cmatrix
     figlet
     toilet
-    sl sl2
+    sl
+    sl2
+
+    # dev
+    gcc
+    gnumake
+    adbfs-rootless
+    lean4
+    elan
+
+    # debugging
+    gdb
+    strace
+    ltrace
+    patchelf
+    inotify-tools
+
+    # mid-level
+    xclip
+    xdotool
+    imagemagick
+
+    # crypt
+    tor
+    torsocks
+    tor-browser
 
     # desktop
     nemo
@@ -153,12 +161,8 @@
     gnome-terminal
     numix-gtk-theme
     numix-icon-theme-circle
-
-    # nix
-    nix-bash-completions
-    nix-prefetch-github
-    home-manager
-    dconf2nix
+    vscode
+    obsidian
 
     # video
     vlc
@@ -166,31 +170,19 @@
     kdePackages.kdenlive
     simplescreenrecorder
 
-    # games
-    stepmania
+    # net
+    dropbox
+    dropbox-cli
+    openvpn3
+    openssh
 
     # social
     wechat
     whatsapp-for-linux
     teams-for-linux
 
-    # crypt
-    tor
-    torsocks
-    tor-browser
-
-    # dev
-    vscode
-    obsidian
-    adbfs-rootless
-
-    # ld
-    dropbox
-    dropbox-cli
-    openvpn3
-    openssh
-    strace
-    ltrace
+    # games
+    stepmania
 
     /* THE IMPORT VS EXEC ISSUE */
 
@@ -198,7 +190,7 @@
 
     (python.withPackages (ps: with ps; [
 
-      # pkg
+      # packaging
       pip
       setuptools
       build
@@ -208,6 +200,8 @@
       # basics
       ipython
       requests
+
+      # net
       beautifulsoup4
       yt-dlp
 
@@ -242,7 +236,7 @@
 
   ];
 
-  # Define a user
+  # users
   users.users.jason = {
     isNormalUser = true;
     description = "Jason";
@@ -251,8 +245,7 @@
     ];
   };
 
-  # Extra groups
-  users.extraGroups.nix.members = [ "jason" ];
+  # groups
   users.extraGroups.plocate.members = [ "jason" ];
 
   # Android Debug Bridge
@@ -264,21 +257,13 @@
     package = pkgs.vim;  # this is the default full-featured vim with +clipboard
   };
 
-  # Enable some programs
+  # dconf
   programs.dconf.enable = true;
-  programs.openvpn3.enable = true;
-
-  # Make members of the nix group have write access to /etc/nixos
-  systemd.tmpfiles.settings."10-nixos-dir"."/etc/nixos".d = {
-    group = "nix";
-    mode  = "0775";
-  };
-
-  # Shell init
   environment.shellInit = ''
     dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
   '';
 
+  # git
   environment.etc."gitconfig".text = ''
     [user]
       name = Jason Wilkes
@@ -294,11 +279,7 @@
     extraRules = [
       {
         users = [ "jason" ];
-        commands = [
-          {
-            command = "ALL";
-            options = [ "NOPASSWD" ];
-          }
+        commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; }
         ];
       }
     ];
@@ -317,19 +298,12 @@
     Comment=Start Conky at login
   '';
 
-  # Networking.
+  # net
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
+  programs.openvpn3.enable = true;
 
-  networking.networkmanager.plugins = [
-    pkgs.networkmanager-openvpn
-  ];
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  # don't change this
+  system.stateVersion = "25.05";
 
 }
