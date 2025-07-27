@@ -4,7 +4,10 @@
 
 {
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    download-buffer-size = 64*(1024*1024);
+  };
 
   imports = [ ./system76.nix ];
 
@@ -234,7 +237,7 @@
     # So close!
     # python-head
 
-    (import ./python311.nix pkgs)
+    #(import ./python311.nix pkgs)
 
   ];
 
