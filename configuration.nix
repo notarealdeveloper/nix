@@ -157,6 +157,7 @@
     nemo
     conky
     eog
+    meld
     gedit
     evince
     google-chrome
