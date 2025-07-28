@@ -114,6 +114,7 @@
     vim_configurable
     file
     wget
+    tree
     plocate
     git
     gh
