@@ -111,8 +111,7 @@
     dconf2nix
 
     # unix
-    #vim_configurable
-    vim
+    vim_configurable
     file
     wget
     plocate
