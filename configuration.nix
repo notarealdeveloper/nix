@@ -152,6 +152,7 @@ let
 
       # mid-level
       xorg.xinit
+      xorg.xeyes
       xclip
       xdotool
       imagemagick
