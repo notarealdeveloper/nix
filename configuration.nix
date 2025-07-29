@@ -31,7 +31,7 @@ let
 
   wsl = lib.mkIf isWsl {
     wsl.enable = true;
-    wsl.defaultUser = "nixos";
+    wsl.defaultUser = "jason";
     system.stateVersion = "24.11";
   };
 
