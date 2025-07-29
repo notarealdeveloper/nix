@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-set +e
-
-hello
-jello
-python -c "import jello"
-python -c "import jello; print(jello.main())"
