@@ -1,6 +1,6 @@
 # run nixos-help or man configuration.nix for more info
 
-{ config, pkgs, ... }:
+{ config, pkgs, pip2nix, ... }:
 
 {
 
@@ -60,20 +60,10 @@
     variant = "";
     options = "caps:escape";
   };
+
   services.xserver.displayManager.lightdm = {
     enable = true;
-    greeters.gtk = {
-      enable = true;
-      #theme = {
-      #  package = pkgs.arc-theme;
-      #  name = "Arc-Dark";
-      #};
-      #cursorTheme = {
-      #  package = pkgs.vanilla-dmz;
-      #  name = "Vanilla-DMZ";
-      #  size = 24;
-      #};
-    };
+    greeters.gtk.enable = true;
     greeters.slick.enable = false; # is it a bug that this is required? find out :)
   };
 
@@ -194,6 +184,8 @@
 
     yello
 
+    pip2nix.packages.${pkgs.system}.default
+
     (python.withPackages (ps: with ps; [
 
       # packaging
@@ -238,7 +230,7 @@
     # So close!
     # python-head
 
-    (import ./python311.nix pkgs)
+    #(import ./python311.nix pkgs)
 
   ];
 

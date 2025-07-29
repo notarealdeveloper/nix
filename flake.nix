@@ -7,9 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pip2nix.url = "github:nix-community/pip2nix";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, pip2nix, ... }:
   let
 
     system  = "x86_64-linux";
@@ -32,6 +33,7 @@
           home-manager.nixosModules.home-manager
           ./configuration.nix
         ];
+        specialArgs = { inherit pip2nix; };
       };
 
     };
