@@ -151,6 +151,7 @@ let
       inotify-tools
 
       # mid-level
+      xorg.xinit
       xclip
       xdotool
       imagemagick
