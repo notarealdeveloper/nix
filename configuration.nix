@@ -184,10 +184,6 @@
 
     yello
 
-    pip2nix.packages.${pkgs.system}.default
-
-    cmake
-
     (python.withPackages (ps: with ps; [
 
       # packaging
@@ -232,7 +228,7 @@
     # So close!
     # python-head
 
-    #(import ./python311.nix pkgs)
+    (import ./python311.nix pkgs)
 
   ];
 
