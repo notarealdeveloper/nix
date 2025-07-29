@@ -243,6 +243,10 @@ let
 
       python311
 
+      # trying to make cinnamon work on wsl
+      muffin
+      cinnamon-settings-daemon
+      bluez
       # So close!
       # python-head
 
