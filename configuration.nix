@@ -1,308 +1,321 @@
-# run nixos-help or man configuration.nix for more info
+# NixOS-WSL specific options are documented on the NixOS-WSL repository:
+# https://github.com/nix-community/NixOS-WSL
 
-{ config, pkgs, pip2nix, ... }:
+{ config, lib, pkgs, ... }:
 
-{
+let
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    download-buffer-size = 64*(1024*1024);
+  isWsl    = !builtins.isNull (builtins.getEnv "WSL_DISTRO_NAME");
+  isLinux  = pkgs.stdenv.isLinux;
+  isDarwin = pkgs.stdenv.isDarwin;
+  isNative = isLinux && !isWsl;
+
+  linux = lib.mkIf isNative {
+
+    # bootloader
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.systemd-boot.configurationLimit = 5;
+    boot.loader.efi.canTouchEfiVariables = true;
+
+    # kernel
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    system.stateVersion = "25.05";
   };
 
-  imports = [ ./system76.nix ];
-
-  # bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  # hostname
-  networking.hostName = "turing";
-
-  # time
-  time.timeZone = "America/Chicago";
-
-  environment.variables = {
-    EDITOR = "vim";
+  wsl = lib.mkIf isWsl {
+    wsl.enable = true;
+    wsl.defaultUser = "jason";
+    system.stateVersion = "24.11";
   };
 
-  # internationalisation
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
+  common = {
 
-  services.libinput = {
-    enable = true;
-    touchpad = {
-      naturalScrolling = true;
-      tapping = true;
-      accelProfile = "adaptive";
-      accelSpeed = "0.5";
+    nix.settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      download-buffer-size = 64*(1024*1024);
     };
-  };
 
-  # x11 (todo: wayland)
-  services.xserver.enable = true;
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-    options = "caps:escape";
-  };
+    # hostname
+    networking.hostName = "turing";
 
-  services.xserver.displayManager.lightdm = {
-    enable = true;
-    greeters.gtk.enable = true;
-    greeters.slick.enable = false; # is it a bug that this is required? find out :)
-  };
+    # time
+    time.timeZone = "America/Chicago";
 
-  # desktop
-  services.xserver.desktopManager.cinnamon.enable = true;
+    environment.variables = {
+      EDITOR = "vim";
+    };
 
-  # cups
-  services.printing.enable = true;
+    # internationalisation
+    i18n.defaultLocale = "en_US.UTF-8";
+    i18n.extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
 
-  # sound
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+    services.libinput = {
+      enable = true;
+      touchpad = {
+        naturalScrolling = true;
+        tapping = true;
+        accelProfile = "adaptive";
+        accelSpeed = "0.5";
+      };
+    };
 
-  # system
-  environment.systemPackages =
-  
-    let
+    # x11 (todo: wayland)
+    services.xserver.enable = true;
+    services.xserver.xkb = {
+      layout = "us";
+      variant = "";
+      options = "caps:escape";
+    };
 
-      python = pkgs.python313;
-
-    in
-
-    with pkgs; [
-
-    # nix
-    nix-bash-completions
-    nix-prefetch-github
-    home-manager
-    dconf2nix
-
-    # unix
-    vim_configurable
-    file
-    wget
-    tree
-    plocate
-    git
-    gh
-    jq
-
-    # silly
-    cowsay
-    xcowsay
-    asciiquarium
-    cmatrix
-    figlet
-    toilet
-    sl
-    sl2
-
-    # dev
-    gcc
-    gnumake
-    adbfs-rootless
-    lean4
-
-    # debugging
-    gdb
-    strace
-    ltrace
-    patchelf
-    inotify-tools
-
-    # mid-level
-    xclip
-    xdotool
-    imagemagick
-
-    # crypt
-    tor
-    torsocks
-    tor-browser
+    services.xserver.displayManager.lightdm = {
+      enable = true;
+      greeters.gtk.enable = true;
+      greeters.slick.enable = false; # is it a bug that this is required? find out :)
+    };
 
     # desktop
-    nemo
-    conky
-    eog
-    meld
-    gedit
-    evince
-    google-chrome
-    gnome-terminal
-    numix-gtk-theme
-    numix-icon-theme-circle
-    vscode
-    obsidian
+    services.xserver.desktopManager.cinnamon.enable = true;
 
-    # video
-    vlc
-    ffmpeg
-    kdePackages.kdenlive
-    simplescreenrecorder
+    # cups
+    services.printing.enable = true;
 
-    # net
-    dropbox
-    openvpn3
-    openssh
+    # sound
+    services.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
 
-    # social
-    wechat
-    whatsapp-for-linux
-    teams-for-linux
+    # system
+    environment.systemPackages =
+    
+      let
 
-    # games
-    stepmania
+        python = pkgs.python313;
 
-    # raw derivations
-    sayhi   # stdenv.mkDerivation, depends on hi
-    saybye  # builtins.derivation, depends on raw bye
+      in
 
-    /* THE IMPORT VS EXEC ISSUE */
+      with pkgs; [
 
-    yello
+      # nix
+      nix-bash-completions
+      nix-prefetch-github
+      home-manager
+      dconf2nix
 
-    (python.withPackages (ps: with ps; [
+      # unix
+      vim_configurable
+      file
+      wget
+      tree
+      plocate
+      git
+      gh
+      jq
 
-      # packaging
-      pip
-      setuptools
-      build
-      twine
-      pytest
+      # silly
+      cowsay
+      xcowsay
+      asciiquarium
+      cmatrix
+      figlet
+      toilet
+      sl
+      sl2
 
-      # basics
-      ipython
-      requests
+      # dev
+      gcc
+      gnumake
+      adbfs-rootless
+      lean4
+
+      # debugging
+      gdb
+      strace
+      ltrace
+      patchelf
+      inotify-tools
+
+      # mid-level
+      xclip
+      xdotool
+      imagemagick
+
+      # crypt
+      tor
+      torsocks
+      tor-browser
+
+      # desktop
+      nemo
+      conky
+      eog
+      meld
+      gedit
+      evince
+      google-chrome
+      gnome-terminal
+      numix-gtk-theme
+      numix-icon-theme-circle
+      vscode
+      obsidian
+
+      # video
+      vlc
+      ffmpeg
+      kdePackages.kdenlive
+      simplescreenrecorder
 
       # net
-      beautifulsoup4
-      yt-dlp
+      dropbox
+      openvpn3
+      openssh
 
-      # numerical
-      numpy
-      scipy
-      pandas
-      scikit-learn
-      matplotlib
-      seaborn
-      torch
+      # social
+      wechat
+      whatsapp-for-linux
+      teams-for-linux
 
-      # ~/bin depends
-      google-auth-oauthlib      # gmail
-      google-api-python-client  # getbtcprice
-      geoip2                    # getbtcprice
+      # games
+      stepmania
 
-      # overlay
-      is_instance
-      embd
-      wnix
-      jello
+      # raw derivations
+      sayhi   # stdenv.mkDerivation, depends on hi
+      saybye  # builtins.derivation, depends on raw bye
+      yello   # attempt to declare an importable that depends on an executable
 
-    ]))
+      (python.withPackages (ps: with ps; [
 
-    python314FreeThreading
+        # packaging
+        pip
+        setuptools
+        build
+        twine
+        pytest
 
-    # So close!
-    # python-head
+        # basics
+        ipython
+        requests
 
-    python311
-    gcc.cc.lib
+        # net
+        beautifulsoup4
+        yt-dlp
 
-    #(import ./python311.nix pkgs)
+        # numerical
+        numpy
+        scipy
+        pandas
+        scikit-learn
+        matplotlib
+        seaborn
+        torch
 
-  ];
+        # ~/bin depends
+        google-auth-oauthlib      # gmail
+        google-api-python-client  # getbtcprice
+        geoip2                    # getbtcprice
 
-  # users
-  users.users.jason = {
-    isNormalUser = true;
-    description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
-    packages = with pkgs; [
+        # overlay
+        is_instance
+        embd
+        wnix
+        jello
+
+      ]))
+
+      python314FreeThreading
+
+      python311
+
+      # So close!
+      # python-head
+
     ];
-  };
 
-  # groups
-  users.extraGroups.plocate.members = [ "jason" ];
+    # users
+    users.users.jason = {
+      isNormalUser = true;
+      description = "Jason";
+      extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+      packages = with pkgs; [
+      ];
+    };
 
-  # Android Debug Bridge
-  programs.adb.enable = true;
+    # groups
+    users.extraGroups.plocate.members = [ "jason" ];
 
-  # Vim: clipboard support
-  programs.vim = {
-    enable = true;
-    package = pkgs.vim;  # this is the default full-featured vim with +clipboard
-  };
+    # Android Debug Bridge
+    programs.adb.enable = true;
 
-  # dconf
-  programs.dconf.enable = true;
-  environment.shellInit = ''
-    dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
-  '';
+    # Vim: clipboard support
+    programs.vim = {
+      enable = true;
+      package = pkgs.vim;  # this is the default full-featured vim with +clipboard
+    };
 
-  # git
-  environment.etc."gitconfig".text = ''
-    [user]
-      name = Jason Wilkes
-      email = notarealdeveloper@gmail.com
-    [init]
-      defaultBranch = master
-    [pull]
-	    rebase = true
-  '';
+    # dconf
+    programs.dconf.enable = true;
+    environment.shellInit = ''
+      dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
+    '';
 
-  security.sudo = {
-    enable = true;
-    extraRules = [
-      {
-        users = [ "jason" ];
-        commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; }
-        ];
-      }
-    ];
-  };
+    # git
+    environment.etc."gitconfig".text = ''
+      [user]
+        name = Jason Wilkes
+        email = notarealdeveloper@gmail.com
+      [init]
+        defaultBranch = master
+      [pull]
+        rebase = true
+    '';
 
-  # Create autostart .desktop files for programs
-  # that should be automatically started by all
-  # desktop environments
-  environment.etc."xdg/autostart/conky.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Name=Conky
-    Exec=conky-smart-start
-    X-GNOME-Autostart-enabled=true
-    NoDisplay=false
-    Comment=Start Conky at login
-  '';
+    security.sudo = {
+      enable = true;
+      extraRules = [
+        {
+          users = [ "jason" ];
+          commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; }
+          ];
+        }
+      ];
+    };
 
-  # net
-  networking.networkmanager.enable = true;
-  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
-  programs.openvpn3.enable = true;
+    # Create autostart .desktop files for programs
+    # that should be automatically started by all
+    # desktop environments
+    environment.etc."xdg/autostart/conky.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Conky
+      Exec=conky-smart-start
+      X-GNOME-Autostart-enabled=true
+      NoDisplay=false
+      Comment=Start Conky at login
+    '';
 
-  # don't change this
-  system.stateVersion = "25.05";
+    # net
+    networking.networkmanager.enable = true;
+    networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
+    programs.openvpn3.enable = true;
 
+    };
+
+in
+
+{
+  config = lib.mkMerge [ linux wsl common ];
 }
