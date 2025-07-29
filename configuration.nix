@@ -229,6 +229,7 @@
     # python-head
 
     python311
+    gcc.cc.lib
 
     #(import ./python311.nix pkgs)
 
