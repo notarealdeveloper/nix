@@ -163,7 +163,6 @@ let
       tor-browser
 
       # desktop
-      nemo
       conky
       eog
       meld
@@ -244,9 +243,16 @@ let
       python311
 
       # trying to make cinnamon work on wsl
+      nemo
       muffin
+      cinnamon-session
+      cinnamon-common
+      cinnamon-desktop
+      cinnamon-screensaver
+      cinnamon-menus
       cinnamon-settings-daemon
-      bluez
+      cinnamon-gsettings-overrides
+
       # So close!
       # python-head
 
