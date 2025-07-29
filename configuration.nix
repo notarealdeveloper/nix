@@ -20,6 +20,13 @@ let
     # kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
     system.stateVersion = "25.05";
+
+    services.xserver.displayManager.lightdm = {
+      enable = true;
+      greeters.gtk.enable = true;
+      greeters.slick.enable = false; # is it a bug that this is required? find out :)
+    };
+
   };
 
   wsl = lib.mkIf isWsl {
@@ -75,12 +82,6 @@ let
       layout = "us";
       variant = "";
       options = "caps:escape";
-    };
-
-    services.xserver.displayManager.lightdm = {
-      enable = true;
-      greeters.gtk.enable = true;
-      greeters.slick.enable = false; # is it a bug that this is required? find out :)
     };
 
     # desktop
