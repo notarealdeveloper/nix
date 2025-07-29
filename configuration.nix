@@ -186,6 +186,8 @@
 
     pip2nix.packages.${pkgs.system}.default
 
+    cmake
+
     (python.withPackages (ps: with ps; [
 
       # packaging
