@@ -228,7 +228,9 @@
     # So close!
     # python-head
 
-    (import ./python311.nix pkgs)
+    python311
+
+    #(import ./python311.nix pkgs)
 
   ];
 
