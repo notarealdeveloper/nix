@@ -48,6 +48,7 @@
 
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs modules;
+        modules = [ ./users.nix ./configuration.nix ];
       };
 
       default = turing;

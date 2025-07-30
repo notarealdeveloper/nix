@@ -4,8 +4,6 @@
 
 {
 
-  modules = [ ./users.nix ];
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     download-buffer-size = 64*(1024*1024);
