@@ -1,12 +1,12 @@
-{ pkgs, lib, config, ... }:
-
 user:
+
+{ pkgs, lib, config, ... }:
 
 let
 
   # TODO: Add ~/.config/mimeapps.list setup
 
-  user = user;
+  inherit user;
   link = config.lib.file.mkOutOfStoreSymlink;
 
   # system
@@ -140,7 +140,7 @@ in
     dconf-editor
     dbus # wsl
     gnome-terminal
-    xcowsay
+    #xcowsay
   ];
 
   # gtk theme for cinnamon
