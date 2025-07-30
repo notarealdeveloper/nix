@@ -16,7 +16,6 @@
 
     mkdir -pv "${config.home.homeDirectory}/bin"
     mkdir -pv "${config.home.homeDirectory}/daxingxing"
-    chmod +x ${config.home.homeDirectory}/bin/kan
 
     yt-dlp -P "$HOME/daxingxing" \
       https://www.youtube.com/watch?v=06Kg6XeMhQU \
