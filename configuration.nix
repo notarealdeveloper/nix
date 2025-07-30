@@ -243,8 +243,6 @@ let
       python311
 
       # trying to make cinnamon work on wsl
-      nemo
-      muffin
       cinnamon-session
       cinnamon-common
       cinnamon-desktop
@@ -252,6 +250,9 @@ let
       cinnamon-menus
       cinnamon-settings-daemon
       cinnamon-gsettings-overrides
+      nemo-with-extensions
+      muffin
+      cjs
 
       # So close!
       # python-head
