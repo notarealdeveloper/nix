@@ -4,7 +4,8 @@ system:
 	sudo nixos-rebuild switch --flake .#default
 
 home:
-	nix run .#homeConfigurations.default.activationPackage
+	#nix run .#homeConfigurations.default.activationPackage
+	home-manager switch --flake .#default
 
 jason:
 	sudo -iu jason -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.jason.activationPackage
