@@ -20,7 +20,7 @@ in {
     else
     if isSystem76
     then ../hardware/system76.nix
-    else ../hardware/none.nix
+    else ../hardware/system76.nix
   )];
 
   # bootloader
