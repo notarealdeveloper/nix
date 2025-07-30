@@ -30,9 +30,9 @@
 
   home.file."bin/kan" = {
     text = ''
-      #!/bin/sh
+      #!/usr/bin/env bash
       songs=("$(find "$HOME/daxingxing" | sort -R)")
-      exec vlc ${songs[*]} 2> $HOME/.kan.log
+      exec vlc ''${songs[*]} 2> $HOME/.kan.log
     '';
     executable = true;
   };
