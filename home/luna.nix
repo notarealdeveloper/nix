@@ -32,7 +32,7 @@
     text = ''
       #!/bin/sh
       export PATH="${pkgs.vlc}/bin:$PATH"
-      exec vlc "$HOME/daxingxing"
+      find "$HOME/daxingxing" | sort -R | exec xargs vlc
     '';
     executable = true;
   };
