@@ -150,6 +150,7 @@ let
       ltrace
       patchelf
       inotify-tools
+      pkg-config
 
       # mid-level
       xorg.xinit
