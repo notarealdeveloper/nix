@@ -31,7 +31,6 @@
   home.file."bin/kan" = {
     text = ''
       #!/bin/sh
-      export PATH="${pkgs.vlc}/bin:$PATH"
       find "$HOME/daxingxing" | sort -R | exec xargs vlc
     '';
     executable = true;
