@@ -37,18 +37,28 @@
       ]
     );
 
-    modules = platform-specific ++ [
-      ./users.nix
-      ./configuration.nix
-      home-manager.nixosModules.home-manager
-    ];
+    home = home-manager.nixosModules.home-manager;
 
   in {
 
     nixosConfigurations = rec {
 
       turing = nixpkgs.lib.nixosSystem {
-        inherit system pkgs modules;
+        inherit system pkgs;
+        modules = platform-specific ++ [
+          ./users.nix
+          ./configuration.nix
+          ./hardware/system76.nix
+        ];
+      };
+
+      kleene = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = platform-specific ++ [
+          ./users.nix
+          ./configuration.nix
+          ./hardware/lenovo.nix
+        ];
       };
 
       default = turing;
