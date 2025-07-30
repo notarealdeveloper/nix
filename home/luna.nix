@@ -10,7 +10,6 @@
     vlc
   ];
 
-  # git clone repos if not present
   home.activation.prepareDaXingXing = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
     export PATH="${pkgs.yt-dlp}/bin:$PATH"
 
@@ -21,11 +20,16 @@
       yt-dlp -P "$HOME/daxingxing" -o "$1.%(ext)s" "$2"
     }
 
-    mkkan happy      https://www.youtube.com/watch?v=06Kg6XeMhQU
     mkkan yayomyca   https://www.youtube.com/watch?v=ZZiTNJ6QleA
     mkkan cawoomwoom https://www.youtube.com/watch?v=B1u-ylQR6Fo
+    mkkan driving    https://www.youtube.com/watch?v=BdrZWu2dZ4c
     mkkan eieio      https://www.youtube.com/watch?v=_6HzoUcx3eo
-
+    mkkan happy      https://www.youtube.com/watch?v=06Kg6XeMhQU
+    mkkan babyshark  https://www.youtube.com/watch?v=XqZsoesa55w
+    mkkan putshoes   https://www.youtube.com/watch?v=D_FGBpQ0iOg
+    mkkan sunnyday   https://www.youtube.com/watch?v=CEFL-4weVsI
+    mkkan abcquack   https://www.youtube.com/watch?v=I_3mbra4dHU
+    mkkan monster    https://www.youtube.com/watch?v=JC29ZvTkBT0
   '';
 
   home.file."bin/kan" = {
