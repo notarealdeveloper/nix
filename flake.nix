@@ -28,21 +28,28 @@
     isDarwin = pkgs.stdenv.isDarwin;
     isNative = isLinux && !isWsl;
 
-    modules = [
-      home-manager.nixosModules.home-manager
-      (if isWsl then nixos-wsl.nixosModules.wsl else /dev/null)
+    platform-specific = (
+      if isWsl then [
+        nixos-wsl.nixosModules.wsl
+        ./nixos/wsl.nix
+      ] else [
+        ./nixos/native.nix
+      ]
+    );
+
+    modules = platform-specific ++ [
       ./configuration.nix
+      home-manager.nixosModules.home-manager
     ];
 
   in {
 
     nixosConfigurations = {
-
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs modules;
       };
-
     };
 
   };
+
 }
