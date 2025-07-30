@@ -7,7 +7,7 @@ home:
 	nix run .#homeConfigurations.default.activationPackage
 
 jason:
-	nix run .#homeConfigurations.jason.activationPackage
+	sudo -iu jason -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.jason.activationPackage
 
 ramya:
 	sudo -iu ramya -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.ramya.activationPackage
