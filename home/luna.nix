@@ -42,6 +42,13 @@
 
   home.sessionVariables.PATH = "$HOME/bin:$HOME/.local/bin:$PATH";
 
+  programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+      export PATH="$HOME/bin:$PATH"
+    '';
+  };
+
   # Keep this line
   home.stateVersion  = "25.05";
 
