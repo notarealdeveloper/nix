@@ -229,6 +229,19 @@
     package = pkgs.vim;  # this is the default full-featured vim with +clipboard
   };
 
+  # Create autostart .desktop files for programs
+  # that should be automatically started by all
+  # desktop environments
+  environment.etc."xdg/autostart/conky.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Conky
+    Exec=conky-smart-start
+    X-GNOME-Autostart-enabled=true
+    NoDisplay=false
+    Comment=Start Conky at login
+  ''
+
   # net
   networking.networkmanager.enable = true;
   networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
