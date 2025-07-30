@@ -31,7 +31,8 @@
   home.file."bin/kan" = {
     text = ''
       #!/bin/sh
-      find "$HOME/daxingxing" | sort -R | exec xargs vlc
+      songs=("$(find "$HOME/daxingxing" | sort -R)")
+      exec vlc ${songs[*]} 2> $HOME/.kan.log
     '';
     executable = true;
   };
