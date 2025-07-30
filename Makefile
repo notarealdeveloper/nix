@@ -12,6 +12,9 @@ jason:
 ramya:
 	nix run .#homeConfigurations.ramya.activationPackage
 
+luna:
+	nix run .#homeConfigurations.luna.activationPackage
+
 update:
 	nix-channel --update
 

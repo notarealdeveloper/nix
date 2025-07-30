@@ -2,8 +2,6 @@
 
 let
 
-  modules = [ ./default.nix ];
-
   user = "ramya";
   name = "Ramya Kottapalli";
   email = "ramya@thedynamiclinker.com";
@@ -15,12 +13,9 @@ let
     dst = "${config.home.homeDirectory}/src/exec";
   };
 
-  numix-icons = pkgs.numix-icon-theme-circle;
-
 in
 
 {
-  imports = [ ];
 
   home.username = user;
   home.homeDirectory = "/home/${user}";
@@ -28,8 +23,6 @@ in
   home.sessionVariables = {
     EDITOR = "vim";
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   # ~/.config/git
   programs.git = {
@@ -50,7 +43,6 @@ in
 
   # git clone repos if not present
   home.activation.cloneExec = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
-
     export PATH="${pkgs.git}/bin:$PATH"
 
     if [ ! -d "${exec.dst}" ]; then
@@ -88,10 +80,4 @@ in
     git
     gh
   ];
-
-  # Keep this line
-  home.stateVersion  = "25.05";
-
-  # Let Home Manager install and manage itself.
-  # programs.home-manager.enable = true;
 }

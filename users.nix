@@ -19,6 +19,16 @@
     ];
   };
 
+  users.users.luna = {
+    isNormalUser = true;
+    description = "Luna";
+    extraGroups = [ "networkmanager" ];
+    packages = with pkgs; [
+      google-chrome
+      yt-dlp
+    ];
+  };
+
   # groups
   users.extraGroups.plocate.members = [ "jason" "ramya" ];
 
