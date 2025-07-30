@@ -57,8 +57,7 @@
 
       jason = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/home.nix ];
-        # override in case you ever reuse this on another box:
+        modules = [ ./users/jason.nix ];
         extraSpecialArgs = { inherit pkgs; };
       };
 
