@@ -1,6 +1,6 @@
-PKG := nixos
+# Makefile for system and user setup on any OS
 
-nixos:
+root:
 	sudo nixos-rebuild switch --flake .#default
 
 home:
@@ -9,9 +9,3 @@ home:
 update:
 	nix-channel --update
 	sudo nixos-rebuild switch --upgrade --flake .#default
-
-pull:
-	git pull
-
-push:
-	git push
