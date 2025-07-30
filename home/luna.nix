@@ -22,7 +22,7 @@
       https://www.youtube.com/watch?v=06Kg6XeMhQU \
       https://www.youtube.com/watch?v=ZZiTNJ6QleA \
       https://www.youtube.com/watch?v=B1u-ylQR6Fo
-  ''
+  '';
 
   home.file."bin/kan".text = ''
     #!/bin/sh
