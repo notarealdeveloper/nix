@@ -9,9 +9,6 @@
     download-buffer-size = 64*(1024*1024);
   };
 
-  # hostname
-  networking.hostName = "turing";
-
   # time
   time.timeZone = "America/Chicago";
 

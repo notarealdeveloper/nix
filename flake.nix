@@ -25,8 +25,25 @@
 
     isWsl    = !(builtins.getEnv "WSL_DISTRO_NAME" == "");
     isLinux  = pkgs.stdenv.isLinux;
-    isDarwin = pkgs.stdenv.isDarwin;
+    isDarwin = pkgs.stdenv.isDarwin; 
     isNative = isLinux && !isWsl;
+
+    #sysVendor = builtins.unsafeDiscardStringContext (pkgs.runCommandLocal "get-sys-vendor" {} ''
+    #  cat /sys/class/dmi/id/sys_vendor > $out
+    #'');
+
+    sysVendor  = builtins.unsafeDiscardStringContext (builtins.readFile /sys/class/dmi/id/sys_vendor);
+    isLenovo   = sysVendor == "LENOVO\n";
+    isSystem76 = sysVendor == "To be determined...\n";
+
+    hardware-specific = (
+      if isLenovo then
+        [./hardware/lenovo.nix]
+      else if isSystem76 then
+        [./hardware/system76.nix]
+      else
+        []
+    );
 
     platform-specific = (
       if isWsl then [
@@ -45,19 +62,21 @@
 
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        modules = platform-specific ++ [
+        modules =
+          platform-specific ++
+          hardware-specific ++ [
           ./users.nix
           ./configuration.nix
-          ./hardware/system76.nix
         ];
       };
 
       kleene = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        modules = platform-specific ++ [
+        modules =
+          platform-specific ++
+          hardware-specific ++ [
           ./users.nix
           ./configuration.nix
-          ./hardware/lenovo.nix
         ];
       };
 
