@@ -62,27 +62,15 @@
         extraSpecialArgs = { inherit pkgs; };
       };
 
-      #ramya = home-manager.lib.homeManagerConfiguration {
-      #  inherit pkgs;
-      #  modules = [ ./home/ramya.nix ];
-      #  extraSpecialArgs = { inherit pkgs; };
-      #};
+      ramya = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/ramya.nix ];
+        extraSpecialArgs = { inherit pkgs; };
+      };
 
       default = jason;
 
     };
-
-    /*
-    packages.${system}.hmSwitch = self.homeConfigurations.jason.activationPackage;
-
-    apps.${system}.switch = {
-      type = "app";
-      program = builtins.toString (pkgs.writeShellScript "switch" ''
-        sudo nixos-rebuild switch --flake ${self}#turing
-        ${self.packages.${system}.hmSwitch}/activate
-      '');
-    };
-    */
 
   };
 
