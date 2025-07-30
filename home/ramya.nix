@@ -5,12 +5,18 @@ let
   user = "ramya";
   name = "Ramya Kottapalli";
   email = "ramya@thedynamiclinker.com";
+  dst = "${config.home.homeDirectory}/src";
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
   exec = {
     src = "https://github.com/thedynamiclinker/exec";
-    dst = "${config.home.homeDirectory}/src/exec";
+    dst = "${dst}/exec";
+  };
+
+  personal = {
+    src = "https://github.com/rskottap/personal";
+    dst = "${dst}/personal";
   };
 
 in
@@ -48,6 +54,11 @@ in
     if [ ! -d "${exec.dst}" ]; then
       git clone "${exec.src}" "${exec.dst}"
     fi
+
+    if [ ! -d "${personal.dst}" ]; then
+      git clone "${personal.src}" "${personal.dst}"
+    fi
+
   '';
 
   home.file = {
@@ -57,22 +68,24 @@ in
     ".face".source      = link "${exec.dst}/etc/dot-face";
 
     # auto-generated
-    ".hotdogrc".text    = ''This is not a config file'';
+    ".notdogrc".text    = ''This is not a hotdog'';
   };
 
   programs.bash = {
     enable = true;
     bashrcExtra = ''
       source "${exec.dst}/etc/bashrc"
+      source "${personal.dst}/etc/bashrc"
     '';
   };
 
   # PATH for interactive shells
-  home.sessionVariables.PATH = "${exec.dst}/bin:$HOME/.local/bin:$PATH";
+  home.sessionVariables.PATH = "${exec.dst}/bin:${personal.dst}/bin:$HOME/.local/bin:$PATH";
 
   # PATH for login shells
   home.sessionPath = [
     "${exec.dst}/bin"
+    "${personal.dst}/bin"
     "$HOME/.local/bin"
   ];
 
