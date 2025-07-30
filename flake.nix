@@ -31,9 +31,9 @@
     platform-specific = (
       if isWsl then [
         nixos-wsl.nixosModules.wsl
-        ./nixos/wsl.nix
+        ./os/windows-nixos.nix
       ] else [
-        ./nixos/native.nix
+        ./os/linux-nixos.nix
       ]
     );
 
