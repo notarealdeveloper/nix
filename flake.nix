@@ -38,6 +38,7 @@
     );
 
     modules = platform-specific ++ [
+      ./users.nix
       ./configuration.nix
       home-manager.nixosModules.home-manager
     ];
@@ -48,7 +49,6 @@
 
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs modules;
-        modules = [ ./users.nix ./configuration.nix ];
       };
 
       default = turing;
