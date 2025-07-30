@@ -212,47 +212,22 @@
 
     python311
 
-    # trying to make cinnamon work on wsl
-    cinnamon-session
-    cinnamon-common
-    cinnamon-desktop
-    cinnamon-screensaver
-    cinnamon-menus
-    cinnamon-settings-daemon
-    cinnamon-gsettings-overrides
-    nemo-with-extensions
-    muffin
-    cjs
-
     # So close!
     # python-head
 
   ];
 
-  # Android Debug Bridge
+  # android debug bridge
   programs.adb.enable = true;
-
-  # Vim: clipboard support
-  programs.vim = {
-    enable = true;
-    package = pkgs.vim;  # this is the default full-featured vim with +clipboard
-  };
 
   # dconf
   programs.dconf.enable = true;
 
-  # Create autostart .desktop files for programs
-  # that should be automatically started by all
-  # desktop environments
-  environment.etc."xdg/autostart/conky.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Name=Conky
-    Exec=conky-smart-start
-    X-GNOME-Autostart-enabled=true
-    NoDisplay=false
-    Comment=Start Conky at login
-  '';
+  # vim: clipboard support
+  programs.vim = {
+    enable = true;
+    package = pkgs.vim;  # this is the default full-featured vim with +clipboard
+  };
 
   # net
   networking.networkmanager.enable = true;
