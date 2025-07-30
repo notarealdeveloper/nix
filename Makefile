@@ -10,10 +10,10 @@ jason:
 	nix run .#homeConfigurations.jason.activationPackage
 
 ramya:
-	nix run .#homeConfigurations.ramya.activationPackage
+	sudo -iu ramya -- nix run github:/notarealdeveloper/nixos#homeConfigurations.ramya.activationPackage
 
 luna:
-	nix run .#homeConfigurations.luna.activationPackage
+	sudo -iu luna -- nix run github:/notarealdeveloper/nixos#homeConfigurations.luna.activationPackage
 
 update:
 	nix-channel --update
