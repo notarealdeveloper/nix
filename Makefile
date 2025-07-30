@@ -20,3 +20,5 @@ update:
 
 upgrade: update
 	sudo nixos-rebuild switch --upgrade --flake .#default
+
+.PHONY: home
