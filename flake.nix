@@ -52,6 +52,7 @@
       };
 
       default = turing;
+
     };
 
     homeConfigurations = rec {

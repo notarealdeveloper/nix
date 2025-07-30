@@ -15,14 +15,12 @@
 
   fileSystems."/" =
     {
-      #device = "/dev/disk/by-uuid/674efd12-697c-4410-bade-5634984baf08";
       device = "/dev/disk/by-label/NixOS";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     {
-      #device = "/dev/disk/by-uuid/3B52-0E54";
       device = "/dev/disk/by-label/EFI";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
@@ -30,7 +28,6 @@
 
   fileSystems."/home/jason/Desktop" =
     {
-      #device = "/dev/disk/by-uuid/4bdc5d0f-19b2-410d-88ca-a8892b1db448";
       device = "/dev/disk/by-label/Desktop";
       fsType = "ext4";
     };
@@ -38,7 +35,6 @@
   swapDevices =
     [ {
         device = "/dev/disk/by-label/Swap"; }
-        #device = "/dev/disk/by-uuid/62b54817-058f-41a6-8ec8-00e2334411de"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -46,7 +42,6 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
