@@ -240,7 +240,7 @@
     X-GNOME-Autostart-enabled=true
     NoDisplay=false
     Comment=Start Conky at login
-  ''
+  '';
 
   # net
   networking.networkmanager.enable = true;
