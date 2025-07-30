@@ -4,7 +4,6 @@ system:
 	sudo nixos-rebuild switch --flake .#default
 
 home:
-	#nix run .#homeConfigurations.default.activationPackage
 	home-manager switch --flake .#default
 
 jason:
