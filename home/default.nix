@@ -1,12 +1,9 @@
-user:
-
 { pkgs, lib, config, ... }:
 
 let
 
   # TODO: Add ~/.config/mimeapps.list setup
 
-  inherit user;
   link = config.lib.file.mkOutOfStoreSymlink;
 
   # system
@@ -44,9 +41,6 @@ in
 {
   imports = [ ];
 
-  home.username = user;
-  home.homeDirectory = "/home/${user}";
-
   home.sessionVariables = {
     EDITOR = "vim";
   };
@@ -74,17 +68,6 @@ in
       git clone "${legacy.src}" "${legacy.dst}"
     fi
   '';
-
-  # ~/.config/git
-  programs.git = {
-    enable    = true;
-    userName  = "Jason Wilkes";
-    userEmail = "notarealdeveloper@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "master";
-      pull.rebase = true;
-    };
-  };
 
   # ~/.config/gh
   programs.gh = {
@@ -140,7 +123,7 @@ in
     dconf-editor
     dbus # wsl
     gnome-terminal
-    #xcowsay
+    xcowsay
   ];
 
   # gtk theme for cinnamon

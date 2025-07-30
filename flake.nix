@@ -57,7 +57,13 @@
 
       jason = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ (import ./home.nix "jason") ];
+        modules = [ (import ./home/jason.nix ) ];
+        extraSpecialArgs = { inherit pkgs; };
+      };
+
+      ramya = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ (import ./home/ramya.nix ) ];
         extraSpecialArgs = { inherit pkgs; };
       };
 
