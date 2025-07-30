@@ -22,10 +22,10 @@
   users.users.luna = {
     isNormalUser = true;
     description = "Luna";
-    extraGroups = [ "networkmanager" ];
+    extraGroups = [ "audio" "video" ];
     packages = with pkgs; [
-      google-chrome
       yt-dlp
+      vlc
     ];
   };
 
