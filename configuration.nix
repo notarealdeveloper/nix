@@ -285,9 +285,6 @@ let
 
     # dconf
     programs.dconf.enable = true;
-    environment.shellInit = ''
-      dconf write /org/nemo/preferences/default-folder-viewer "'list-view'"
-    '';
 
     # git
     environment.etc."gitconfig".text = ''
