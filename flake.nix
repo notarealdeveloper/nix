@@ -44,10 +44,13 @@
 
   in {
 
-    nixosConfigurations = {
+    nixosConfigurations = rec {
+
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs modules;
       };
+
+      default = turing;
     };
 
   };
