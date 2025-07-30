@@ -23,7 +23,7 @@
       config = { allowUnfree = true; };
     };
 
-    isWsl    = !builtins.isNull (builtins.getEnv "WSL_DISTRO_NAME");
+    isWsl    = !(builtins.getEnv "WSL_DISTRO_NAME" == "");
     isLinux  = pkgs.stdenv.isLinux;
     isDarwin = pkgs.stdenv.isDarwin;
     isNative = isLinux && !isWsl;
