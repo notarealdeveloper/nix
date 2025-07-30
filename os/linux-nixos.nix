@@ -1,27 +1,28 @@
 # native nixos
 
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
 
-  pkgs = import <nixpkgs> {}; # we're --impure
-  sysVendor = builtins.unsafeDiscardStringContext (pkgs.runCommandLocal "get-sys-vendor" {} ''
-    cat /sys/class/dmi/id/sys_vendor > $out
-  '');
+  #pkgs = import <nixpkgs> {}; # we're --impure
+  #sysVendor = builtins.unsafeDiscardStringContext (pkgs.runCommandLocal "get-sys-vendor" {} ''
+  #  cat /sys/class/dmi/id/sys_vendor > $out
+  #'');
   #sysVendor  = builtins.unsafeDiscardStringContext (builtins.readFile /sys/class/dmi/id/sys_vendor);
-  isLenovo   = sysVendor == "LENOVO\n";
-  isSystem76 = sysVendor == "To be determined...\n";
+  #isLenovo   = sysVendor == "LENOVO\n";
+  #isSystem76 = sysVendor == "To be determined...\n";
 
 in {
 
-  imports = [(
-    if isLenovo
-    then ../hardware/lenovo.nix
-    else
-    if isSystem76
-    then ../hardware/system76.nix
-    else ../hardware/system76.nix
-  )];
+  imports = [ ../hardware/lenovo.nix ];
+  #imports = [(
+  #  if isLenovo
+  #  then ../hardware/lenovo.nix
+  #  else
+  #  if isSystem76
+  #  then ../hardware/system76.nix
+  #  else ../hardware/system76.nix
+  #)];
 
   # bootloader
   boot.loader.systemd-boot.enable = true;
