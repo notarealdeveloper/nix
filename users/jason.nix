@@ -138,7 +138,7 @@ in
     dconf-editor
     dbus # wsl
     gnome-terminal
-    #xcowsay
+    xcowsay
   ];
 
   # gtk theme for cinnamon
