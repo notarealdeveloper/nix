@@ -17,10 +17,15 @@
     mkdir -pv "${config.home.homeDirectory}/bin"
     mkdir -pv "${config.home.homeDirectory}/daxingxing"
 
-    yt-dlp -P "$HOME/daxingxing" \
-      https://www.youtube.com/watch?v=06Kg6XeMhQU \
-      https://www.youtube.com/watch?v=ZZiTNJ6QleA \
-      https://www.youtube.com/watch?v=B1u-ylQR6Fo
+    mkkan() {
+      yt-dlp -P "$HOME/daxingxing" -o "$1.%(ext)s" "$2"
+    }
+
+    mkkan happy      https://www.youtube.com/watch?v=06Kg6XeMhQU
+    mkkan yayomyca   https://www.youtube.com/watch?v=ZZiTNJ6QleA
+    mkkan cawoomwoom https://www.youtube.com/watch?v=B1u-ylQR6Fo
+    mkkan eieio      https://www.youtube.com/watch?v=_6HzoUcx3eo
+
   '';
 
   home.file."bin/kan" = {
@@ -34,6 +39,8 @@
 
   # add ~/bin to PATH persistently
   home.sessionPath = [ "$HOME/bin" ];
+
+  home.sessionVariables.PATH = "$HOME/bin:$HOME/.local/bin:$PATH";
 
   # Keep this line
   home.stateVersion  = "25.05";
