@@ -67,7 +67,7 @@
         extraSpecialArgs = { inherit pkgs; };
       };
 
-      #default = jason;
+      default = jason;
 
     };
 

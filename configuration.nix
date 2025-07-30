@@ -241,7 +241,7 @@
   users.users.ramya = {
     isNormalUser = true;
     description = "Ramya";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     ];
   };
@@ -265,7 +265,7 @@
   environment.etc."gitconfig".text = ''
     [user]
       name = Jason Wilkes
-      email = notarealdeveloper@gmail.com
+      email = root@thedynamiclinker.com
     [init]
       defaultBranch = master
     [pull]
