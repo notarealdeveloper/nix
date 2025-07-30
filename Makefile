@@ -1,11 +1,11 @@
 PKG := nixos
 
-build:
-	nixos-rebuild switch --flake .#turing
+nixos:
+	sudo nixos-rebuild switch --flake .#default
 
 update:
 	nix-channel --update
-	nixos-rebuild switch --upgrade --flake .#turing
+	sudo nixos-rebuild switch --upgrade --flake .#default
 
 pull:
 	git pull
