@@ -23,17 +23,23 @@
       config = { allowUnfree = true; };
     };
 
+    isWsl    = !builtins.isNull (builtins.getEnv "WSL_DISTRO_NAME");
+    isLinux  = pkgs.stdenv.isLinux;
+    isDarwin = pkgs.stdenv.isDarwin;
+    isNative = isLinux && !isWsl;
+
+    modules = [
+      home-manager.nixosModules.home-manager
+      (if isWsl then nixos-wsl.nixosModules.wsl else /dev/null)
+      ./configuration.nix
+    ];
+
   in {
 
     nixosConfigurations = {
 
       turing = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          home-manager.nixosModules.home-manager
-          nixos-wsl.nixosModules.wsl
-          ./configuration.nix
-        ];
+        inherit system pkgs modules;
       };
 
     };
