@@ -1,10 +1,12 @@
 { pkgs, lib, config, ... }:
 
+user:
+
 let
 
   # TODO: Add ~/.config/mimeapps.list setup
 
-  user = "jason";
+  user = user;
   link = config.lib.file.mkOutOfStoreSymlink;
 
   # system
