@@ -4,6 +4,8 @@
 
 {
 
+  modules = [ ./users.nix ];
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     download-buffer-size = 64*(1024*1024);
@@ -229,26 +231,6 @@
 
   ];
 
-  # users
-  users.users.jason = {
-    isNormalUser = true;
-    description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
-    packages = with pkgs; [
-    ];
-  };
-
-  users.users.ramya = {
-    isNormalUser = true;
-    description = "Ramya";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
-  };
-
-  # groups
-  users.extraGroups.plocate.members = [ "jason" "ramya" ];
-
   # Android Debug Bridge
   programs.adb.enable = true;
 
@@ -260,28 +242,6 @@
 
   # dconf
   programs.dconf.enable = true;
-
-  # git
-  environment.etc."gitconfig".text = ''
-    [user]
-      name = Jason Wilkes
-      email = root@thedynamiclinker.com
-    [init]
-      defaultBranch = master
-    [pull]
-      rebase = true
-  '';
-
-  security.sudo = {
-    enable = true;
-    extraRules = [
-      {
-        users = [ "jason" ];
-        commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; }
-        ];
-      }
-    ];
-  };
 
   # Create autostart .desktop files for programs
   # that should be automatically started by all
