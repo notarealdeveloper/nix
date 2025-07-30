@@ -162,6 +162,7 @@ let
       tor
       torsocks
       tor-browser
+      cryptsetup
 
       # desktop
       conky
