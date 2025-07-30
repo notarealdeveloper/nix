@@ -97,7 +97,7 @@
 
     # silly
     cowsay
-    xcowsay
+    #xcowsay
     asciiquarium
     cmatrix
     figlet
