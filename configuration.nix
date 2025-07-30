@@ -126,6 +126,7 @@ let
       git
       gh
       jq
+      acpi
 
       # silly
       cowsay
