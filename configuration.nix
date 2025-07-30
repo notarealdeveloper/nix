@@ -238,8 +238,16 @@
     ];
   };
 
+  users.users.ramya = {
+    isNormalUser = true;
+    description = "Ramya";
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+    packages = with pkgs; [
+    ];
+  };
+
   # groups
-  users.extraGroups.plocate.members = [ "jason" ];
+  users.extraGroups.plocate.members = [ "jason" "ramya" ];
 
   # Android Debug Bridge
   programs.adb.enable = true;

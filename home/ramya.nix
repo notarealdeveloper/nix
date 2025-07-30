@@ -6,9 +6,7 @@ let
   name = "Ramya Kottapalli";
   email = "ramya@thedynamiclinker.com";
 
-in
-
-(import ./default.nix { inherit pkgs lib config; }) // {
+in {
 
   home.username = user;
   home.homeDirectory = "/home/${user}";
