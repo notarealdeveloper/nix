@@ -24,16 +24,14 @@
       https://www.youtube.com/watch?v=B1u-ylQR6Fo
   '';
 
-  home.file."bin/kan".text = ''
-    #!/bin/sh
-    export PATH="${pkgs.vlc}/bin:$PATH"
-    exec vlc "$HOME/daxingxing"
-  '';
-
-  # ensure ~/bin/kan is executable
-  home.activation.chmodKan = lib.hm.dag.entryAfter ["linkGeneration"] ''
-    chmod +x "$HOME/bin/kan"
-  '';
+  home.file."bin/kan" = {
+    text = ''
+      #!/bin/sh
+      export PATH="${pkgs.vlc}/bin:$PATH"
+      exec vlc "$HOME/daxingxing"
+    '';
+    executable = true;
+  };
 
   # add ~/bin to PATH persistently
   home.sessionPath = [ "$HOME/bin" ];
