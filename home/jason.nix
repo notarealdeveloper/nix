@@ -8,6 +8,9 @@ let
   common    = (import ./common.nix user);
   gitconfig = (import ./lib/git.nix name email);
 
+  system = import ./system.nix { inherit pkgs lib config; };
+  inherit (system) nixos exec personal;
+
 in {
 
   imports = [
