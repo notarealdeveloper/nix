@@ -74,7 +74,7 @@
       kleene    = mkHome { user = "jason"; };
       gates     = mkHome { user = "jason"; desktop = false; };
 
-      turing    = mkHome { user = "jason"; };
+      jason     = mkHome { user = "jason"; };
       ramya     = mkHome { user = "ramya"; };
       luna      = mkHome { user = "luna";  };
 

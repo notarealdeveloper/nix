@@ -8,11 +8,8 @@ ifeq ($(filter $(HOST),$(HOSTS)),)
 $(error Host "$(HOST)" not recognised; choose one of $(HOSTS))
 endif
 
-system:
-	system-$(HOST)
-
-home:
-	home-$(HOST)
+system home:
+	@$(MAKE) $@-$(HOST)
 
 $(HOSTS): %: system-% home-%
 
@@ -20,12 +17,6 @@ system-%:
 	sudo nixos-rebuild switch --flake .#$*
 
 home-%:
-	home-manager switch --flake .#$*
-
-home-ramya:
-	sudo -iu ramya -- home-manager switch --flake .#ramya -b backup
-
-home-luna:
-	sudo -iu luna  -- home-manager switch --flake .#luna  -b backup
+	sudo -iu $* -- home-manager switch --flake .#$* -b backup
 
 .PHONY: default system home $(HOSTS)
