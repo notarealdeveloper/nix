@@ -31,10 +31,10 @@ in
       local name="$1"
       local url="$2"
       if [[ $(ls "$HOME/daxingxing/$name"* | wc -l) == 0 ]]; then
-        echo "Making kan: ${1}"
+        echo "Making kan: $1"
         yt-dlp -P "$HOME/daxingxing" -o "$name.%(ext)s" "$url"
       else
-        echo "Already have kan: ${1}"
+        echo "Already have kan: $1"
       fi
     }
 
