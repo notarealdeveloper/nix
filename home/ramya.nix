@@ -5,13 +5,14 @@ let
   user = "ramya";
   name = "Ramya Kottaplli";
   email = "rskottap@gmail.com";
+  gitconfig = (import ./lib/git.nix user name email);
 
 in {
 
   imports = [
-    (import ./lib/git.nix user name email)
-    ./lib/github-public.nix
-    ./lib/common.nix
+    gitconfig
+    ./lib/system.nix
+    ./lib/public.nix
   ];
 
 }

@@ -5,15 +5,17 @@ let
   user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
+  gitconfig = (import ./lib/git.nix user name email);
 
 in {
 
   imports = [
-    (import ./lib/git.nix user name email)
-    ./lib/github-public.nix
-    ./lib/github-private.nix
-    ./lib/common.nix
+    gitconfig
+    ./lib/system.nix
+    ./lib/public.nix
+    ./lib/private.nix
   ]
-  ++ (pkgs.lib.optional desktop ./lib/desktop.nix)
+  ++
+  (pkgs.lib.optional desktop ./lib/desktop.nix)
   ;
 }

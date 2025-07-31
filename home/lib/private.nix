@@ -1,4 +1,6 @@
-# the type system described in public.nix
+# private.nix
+#
+# the type system described in system.nix
 # referred to certain types as "secret"
 #
 # the secrets in question
@@ -43,21 +45,14 @@ let
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
-  # requires auth
-  secret = {
-    src = "https://github.com/notarealdeveloper/secret";
-    dst = "${config.home.homeDirectory}/src/secret";
-  };
-
-  # requires auth
-  legacy = {
-    src = "https://github.com/notarealdeveloper/legacy";
-    dst = "${config.home.homeDirectory}/src/legacy";
-  };
-
 in
 
 {
+
+  imports = [
+    ./system.nix
+  ];
+
   # git clone private repos
   home.activation.clonePrivate = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
 
