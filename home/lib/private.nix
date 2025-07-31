@@ -74,6 +74,9 @@ in
     ".ssh".source       = link "${secret.dst}/etc/ssh";
   }];
 
+  # PATH for interactive shells
+  home.sessionVariables.PATH = "${secret.dst}/bin:$PATH";
+
   # PATH for login shells
   home.sessionPath = [
     "${secret.dst}/bin"

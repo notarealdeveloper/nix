@@ -46,6 +46,15 @@ in
 
   }];
 
+  # PATH for interactive shells
+  home.sessionVariables.PATH = "${exec.dst}/bin:${personal.dst}/bin:$PATH";
+
+  # PATH for login shells
+  home.sessionPath = [
+    "${exec.dst}/bin"
+    "${personal.dst}/bin"
+  ];
+
   programs.bash = {
     enable = true;
     bashrcExtra = ''
@@ -53,9 +62,6 @@ in
       source "${personal.dst}/etc/bashrc"
     '';
   };
-
-  # PATH for interactive shells
-  home.sessionVariables.PATH = lib.mkBefore "${exec.dst}/bin:${personal.dst}/bin";
 
   home.packages = with pkgs; [
     git
