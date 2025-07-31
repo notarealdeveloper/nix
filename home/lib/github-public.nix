@@ -116,12 +116,6 @@ in
   # PATH for interactive shells
   home.sessionVariables.PATH = lib.mkBefore "${exec.dst}/bin:${personal.dst}/bin";
 
-  # PATH for login shells
-  home.sessionPath = [
-    "${exec.dst}/bin"
-    "${personal.dst}/bin"
-  ];
-
   home.packages = with pkgs; [
     git
     dconf

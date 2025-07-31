@@ -80,9 +80,6 @@ in
     ".ssh".source       = link "${secret.dst}/etc/ssh";
   }];
 
-  # PATH for interactive shells
-  home.sessionVariables.PATH = lib.mkBefore "${secret.dst}/bin:";
-
   # PATH for login shells
   home.sessionPath = [
     "${secret.dst}/bin"
