@@ -209,6 +209,7 @@
     python314FreeThreading
 
     python311
+    glab
 
     # So close!
     # python-head
