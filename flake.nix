@@ -67,6 +67,7 @@
           ./hardware/system76.nix
           ./users.nix
           ./configuration.nix
+          home
         ];
       };
 
@@ -76,10 +77,11 @@
           ./hardware/lenovo.nix
           ./users.nix
           ./configuration.nix
+          home
         ];
       };
 
-      default = turing;
+      #default = turing;
 
     };
 
