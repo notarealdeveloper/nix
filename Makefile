@@ -2,6 +2,7 @@
 
 HOST := $(shell hostname -s)
 HOSTS := turing kleene gates
+USERS := jason ramya mei luna
 
 # fail fast if we’re on an unknown machine
 ifeq ($(filter $(HOST),$(HOSTS)),)
@@ -19,6 +20,15 @@ system-%:
 	sudo nixos-rebuild switch --flake .#$*
 
 home-%:
-	sudo -iu $* -- home-manager switch --flake .#$* -b backup
+	home-manager switch -b backup --flake .#$*
+
+ramya:
+	sudo -iu $* -- home-manager switch -b backup --flake .#ramya
+
+mei:
+	sudo -iu $* -- home-manager switch -b backup --flake .#mei
+
+luna:
+	sudo -iu $* -- home-manager switch -b backup --flake .#luna
 
 .PHONY: default system home $(HOSTS)

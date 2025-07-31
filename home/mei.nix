@@ -2,11 +2,11 @@
 
 let
 
-  user = "ramya";
-  name = "Ramya Kottaplli";
-  email = "rskottap@gmail.com";
+  user = "mei";
+  name = "Mei Mei Wilkes";
+  email = "meimei85768@gmail.com";
   common    = (import ./common.nix user);
-  gitconfig = (import ./lib/git.nix user name email);
+  gitconfig = (import ./lib/git.nix name email);
 
 in {
 
@@ -17,7 +17,13 @@ in {
     (if desktop then ./lib/desktop.nix else ./lib/none.nix)
   ];
 
+  home.packages = with pkgs; [
+    cowsay
+    lolcat
+  ];
+
   # Keep this line
   home.stateVersion  = "25.05";
 
 }
+

@@ -19,6 +19,14 @@
     ];
   };
 
+  users.users.mei = {
+    isNormalUser = true;
+    description = "Mei";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+    ];
+  };
+
   users.users.luna = {
     isNormalUser = true;
     description = "Luna";
@@ -30,7 +38,7 @@
   };
 
   # groups
-  users.extraGroups.plocate.members = [ "jason" "ramya" ];
+  users.extraGroups.plocate.members = [ "jason" "ramya" "mei" ];
 
   security.sudo = {
     enable = true;

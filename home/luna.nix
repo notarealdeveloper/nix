@@ -1,20 +1,20 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, desktop ? true, ... }:
 
 let
 
   user = "luna";
-  name = "Luna Wilkes";
+  common = (import ./common.nix user);
 
 in
 
 {
 
   imports = [
-    ./lib/common.nix
+    common
+    ./lib/public.nix
+    (if desktop then ./lib/desktop.nix else ./lib/none.nix)
   ];
 
-  home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
   home.packages = with pkgs; [
     yt-dlp
     vlc

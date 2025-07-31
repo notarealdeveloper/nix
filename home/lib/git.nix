@@ -1,14 +1,8 @@
-user: name: email: (
+name: email: (
 
   { pkgs, lib, config, ... }:
 
   {
-    home.username = user;
-    home.homeDirectory = "/home/${user}";
-
-    home.sessionVariables = {
-      EDITOR = "vim";
-    };
 
     # ~/.config/git
     programs.git = {
