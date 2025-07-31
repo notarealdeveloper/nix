@@ -122,8 +122,7 @@
     xclip
     xdotool
     imagemagick
-    dbus
-    dbus-launch
+    dbus-x11 
 
     # crypt
     tor
