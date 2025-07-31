@@ -8,6 +8,8 @@ ifeq ($(filter $(HOST),$(HOSTS)),)
 $(error Host "$(HOST)" not recognised; choose one of $(HOSTS))
 endif
 
+default: $(HOST)
+
 system home:
 	@$(MAKE) $@-$(HOST)
 
