@@ -22,56 +22,50 @@
       config.allowUnfree = true;
     };
 
-    hmLib = home-manager.lib;
-    hmMod = home-manager.nixosModules.home-manager;
-
-    mkHome = { user, desktop ? true }: hmLib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [ ./home/${user}.nix ];
-      extraSpecialArgs = {
+    mkHome = { user, desktop ? true }:
+      home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        desktop = desktop;
+        modules = [ ./home/${user}.nix ];
+        extraSpecialArgs = {
+          inherit pkgs;
+          desktop = desktop;
+        };
       };
-    };
 
+    mkSystem = { hw, os, name }:
+      nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          hw
+          os
+          ./users.nix
+          ./configuration.nix
+          { networking.hostName = name; }
+          home-manager.nixosModules.home-manager
+        ];
+      };
   in {
 
     nixosConfigurations = {
-      turing = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          ./hardware/system76.nix
-          ./os/linux-nixos.nix
-          ./users.nix
-          ./configuration.nix
-          { networking.hostName = "turing"; }
-          hmMod
-        ];
+
+      turing = mkSystem {
+        hw = ./hardware/system76.nix;
+        os = ./os/linux-nixos.nix
+        name = "turing"
       };
 
-      kleene = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          ./hardware/lenovo.nix
-          ./os/linux-nixos.nix
-          ./users.nix
-          ./configuration.nix
-          { networking.hostName = "kleene"; }
-          hmMod
-        ];
+      kleene = mkSystem {
+        hw = ./hardware/lenovo.nix;
+        os = ./os/linux-nixos.nix
+        name = "kleene"
       };
 
-      gates = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          nixos-wsl.nixosModules.wsl
-          ./os/windows-nixos.nix
-          ./users.nix
-          ./configuration.nix
-          { networking.hostName = "gates"; }
-          hmMod
-        ];
+      gates = mkSystem {
+        hw = nixos-wsl.nixosModules.wsl;
+        os = ./os/windows-nixos.nix
+        name = "gates"
       };
+
     };
 
     homeConfigurations = rec {
@@ -79,7 +73,6 @@
       ramya     = mkHome { user = "ramya"; };
       luna      = mkHome { user = "luna";  };
       headless  = mkHome { user = "jason"; desktop = false; };
-      default   = jason;
     };
 
   };

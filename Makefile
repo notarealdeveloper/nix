@@ -16,10 +16,10 @@ system-gates:
 	sudo nixos-rebuild switch --flake .#gates
 
 home-turing:
-	home-manager switch --flake .#default -b backup
+	home-manager switch --flake .#jason -b backup
 
 home-kleene:
-	home-manager switch --flake .#default -b backup
+	home-manager switch --flake .#jason -b backup
 
 home-gates:
 	home-manager switch --flake .#headless -b backup
