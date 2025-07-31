@@ -6,7 +6,7 @@ let
   name = "Ramya Kottaplli";
   email = "rskottap@gmail.com";
   common    = (import ./common.nix user);
-  gitconfig = (import ./lib/git.nix user name email);
+  gitconfig = (import ./lib/git.nix name email);
 
 in {
 
