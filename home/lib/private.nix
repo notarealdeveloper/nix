@@ -72,6 +72,9 @@ in
     ".pypirc".source    = link "${secret.dst}/etc/pypirc";
     ".netrc".source     = link "${secret.dst}/etc/netrc";
     ".ssh".source       = link "${secret.dst}/etc/ssh";
+
+    # gitlab
+    ".config/glab-cli/config.yml".source = link "${secret.dst}/etc/glab-cli-config.yml";
   }];
 
   # PATH for interactive shells
