@@ -94,7 +94,7 @@
 
     # silly
     cowsay
-    #xcowsay
+    xcowsay
     asciiquarium
     cmatrix
     figlet
@@ -105,6 +105,7 @@
     # dev
     gcc
     gnumake
+    ranger
     adbfs-rootless
     lean4
 
