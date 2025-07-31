@@ -98,10 +98,7 @@
 
     };
 
-    homeConfigurations = 
-      let
-        lib = home-manager.lib;
-      in rec {
+    homeConfigurations = rec {
 
       jason = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -112,7 +109,10 @@
       jason-no-desktop = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home/jason.nix ];
-        extraSpecialArgs = { inherit pkgs; lib = hmlib; desktop = false; };
+        extraSpecialArgs = {
+          inherit pkgs;
+          desktop = false;
+        };
       };
 
       luna = home-manager.lib.homeManagerConfiguration {

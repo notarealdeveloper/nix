@@ -1,4 +1,4 @@
-{ pkgs, lib, desktop ? true, ... }:
+{ pkgs, lib, config, desktop ? true, ... }:
 
 let
 
@@ -14,6 +14,6 @@ in {
     ./lib/github-private.nix
     ./lib/common.nix
   ]
-  ++ (lib.optional desktop ./lib/desktop.nix)
+  ++ (pkgs.lib.optional desktop ./lib/desktop.nix)
   ;
 }
