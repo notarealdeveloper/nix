@@ -1,4 +1,4 @@
-# Makefile for system and user setup on any OS
+# Makefile for the WNIX Operating System
 
 HOST := $(shell hostname -s)
 HOSTS := turing kleene gates
