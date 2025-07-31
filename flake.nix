@@ -85,6 +85,7 @@
       gates = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         modules = [
+          nixos-wsl.nixosModules.wsl
           ./os/windows-nixos.nix
           ./users.nix
           ./configuration.nix
