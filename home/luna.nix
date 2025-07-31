@@ -1,16 +1,27 @@
 { pkgs, lib, config, ... }:
 
+let
+
+  user = "luna";
+  name = "Luna Wilkes";
+
+in
+
 {
 
-  home.username = "luna";
-  home.homeDirectory = "/home/luna";
+  imports = [
+    ./lib/common.nix
+  ];
 
+  home.username = "${user}";
+  home.homeDirectory = "/home/${user}";
   home.packages = with pkgs; [
     yt-dlp
     vlc
   ];
 
   home.activation.prepareDaXingXing = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
+
     export PATH="${pkgs.yt-dlp}/bin:$PATH"
 
     mkdir -pv "${config.home.homeDirectory}/bin"
@@ -52,9 +63,6 @@
       export PATH="$HOME/bin:$PATH"
     '';
   };
-
-  # Keep this line
-  home.stateVersion  = "25.05";
 
   # Let Home Manager install and manage itself.
   # programs.home-manager.enable = true;

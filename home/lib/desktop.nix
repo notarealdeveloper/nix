@@ -1,16 +1,15 @@
 { pkgs, lib, config, ... }:
 
 let
+
     icons = pkgs.numix-icon-theme-circle;
     theme = pkgs.numix-gtk-theme;
 
 in {
 
-  nixpkgs.config.allowUnfree = true;
-
   home.packages = with pkgs; [
-    numix-gtk-theme
-    numix-icon-theme-circle
+    theme
+    icons
   ];
 
   gtk = {
