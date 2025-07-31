@@ -22,6 +22,13 @@ in {
     lolcat
   ];
 
+  programs.bash = {
+    enable = true;
+    bashrcExtra = lib.mkAfter ''
+      echo hi kitty | cowsay | lolcat -a
+    '';
+  };
+
   # Keep this line
   home.stateVersion  = "25.05";
 
