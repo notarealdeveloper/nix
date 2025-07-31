@@ -50,20 +50,20 @@
 
       turing = mkSystem {
         hw = ./hardware/system76.nix;
-        os = ./os/linux-nixos.nix
-        name = "turing"
+        os = ./os/linux-nixos.nix;
+        name = "turing";
       };
 
       kleene = mkSystem {
         hw = ./hardware/lenovo.nix;
-        os = ./os/linux-nixos.nix
-        name = "kleene"
+        os = ./os/linux-nixos.nix;
+        name = "kleene";
       };
 
       gates = mkSystem {
         hw = nixos-wsl.nixosModules.wsl;
-        os = ./os/windows-nixos.nix
-        name = "gates"
+        os = ./os/windows-nixos.nix;
+        name = "gates";
       };
 
     };
