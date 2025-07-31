@@ -78,7 +78,7 @@ in
   # home.sessionVariables.PATH = lib.mkBefore "${secret.dst}/bin";
 
   # PATH for login shells
-  home.sessionPath = lib.mkAfter [
+  home.sessionPath = [
     "${secret.dst}/bin"
   ];
 

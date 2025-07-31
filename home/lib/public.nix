@@ -58,7 +58,7 @@ in
 
   programs.bash = {
     enable = true;
-    bashrcExtra = ''
+    bashrcExtra = lib.mkAfter ''
       source "${exec.dst}/etc/bashrc"
       source "${personal.dst}/etc/bashrc"
     '';
