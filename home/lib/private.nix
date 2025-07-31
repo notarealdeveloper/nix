@@ -75,7 +75,7 @@ in
   }];
 
   # PATH for interactive shells
-  home.sessionVariables.PATH = "${secret.dst}/bin:$PATH";
+  home.sessionVariables.PATH = lib.mkBefore "${secret.dst}/bin";
 
   # PATH for login shells
   home.sessionPath = [
