@@ -2,6 +2,7 @@ user: name: email: (
 
   { pkgs, lib, config, ... }:
 
+  {
     home.username = user;
     home.homeDirectory = "/home/${user}";
 
@@ -25,5 +26,5 @@ user: name: email: (
       enable = true;
       gitCredentialHelper.enable = true;
     };
-
+  }
 )

@@ -41,6 +41,8 @@
 
 let
 
+  link = config.lib.file.mkOutOfStoreSymlink;
+
   # requires auth
   secret = {
     src = "https://github.com/notarealdeveloper/secret";
@@ -71,9 +73,25 @@ in
 
   '';
 
+  home.file = {
     # sooper serious secrets zomg
     ".pypirc".source    = link "${secret.dst}/etc/pypirc";
     ".netrc".source     = link "${secret.dst}/etc/netrc";
     ".ssh".source       = link "${secret.dst}/etc/ssh";
+  };
 
+  # PATH for interactive shells
+  home.sessionVariables.PATH = "${secret.dst}/bin:$HOME/.local/bin:$PATH";
+
+  # PATH for login shells
+  home.sessionPath = [
+    "${secret.dst}/bin"
+  ];
+
+  programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+      source "${secret.dst}/etc/bashrc"
+    '';
+  };
 }

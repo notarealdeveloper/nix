@@ -9,7 +9,7 @@ let
 in {
 
   imports = [
-   (./lib/git.nix user name email)
+    (import ./lib/git.nix user name email)
     ./lib/github-public.nix
     ./lib/common.nix
   ];

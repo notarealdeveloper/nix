@@ -110,18 +110,16 @@ in
     bashrcExtra = ''
       source "${exec.dst}/etc/bashrc"
       source "${personal.dst}/etc/bashrc"
-      source "${secret.dst}/etc/bashrc"
     '';
   };
 
   # PATH for interactive shells
-  home.sessionVariables.PATH = "${exec.dst}/bin:${personal.dst}/bin:${secret.dst}/bin:$HOME/.local/bin:$PATH";
+  home.sessionVariables.PATH = "${exec.dst}/bin:${personal.dst}/bin:$HOME/.local/bin:$PATH";
 
   # PATH for login shells
   home.sessionPath = [
     "${exec.dst}/bin"
     "${personal.dst}/bin"
-    "${secret.dst}/bin"
     "$HOME/.local/bin"
   ];
 
