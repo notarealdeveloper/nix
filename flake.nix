@@ -20,44 +20,11 @@
     pkgs = import nixpkgs {
       inherit system;
       overlays = [ overlay ];
-      config = { allowUnfree = true; };
+      config.allowUnfree = true;
     };
 
-    isWsl    = !(builtins.getEnv "WSL_DISTRO_NAME" == "");
-    isLinux  = pkgs.stdenv.isLinux;
-    isDarwin = pkgs.stdenv.isDarwin; 
-    isNative = isLinux && !isWsl;
-
-    #sysVendor = builtins.unsafeDiscardStringContext (pkgs.runCommandLocal "get-sys-vendor" {} ''
-    #  cat /sys/class/dmi/id/sys_vendor > $out
-    #'');
-
-    #sysVendor  = builtins.unsafeDiscardStringContext (builtins.readFile /sys/class/dmi/id/sys_vendor);
-    #isLenovo   = sysVendor == "LENOVO\n";
-    #isSystem76 = sysVendor == "To be determined...\n";
-
-    #hardware-specific = (
-    #  if isWsl then [] else
-    #  (
-    #    if isSystem76 && isNative then [./hardware/system76.nix]
-    #    else if isLenovo && isNative then [./hardware/lenovo.nix]
-    #    else []
-    #  )
-    #);
-
-    # TODO: try: builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop"; 
-
-    platform-specific = (
-      if isWsl then [
-        nixos-wsl.nixosModules.wsl
-        ./os/windows-nixos.nix
-      ] else [
-        ./os/linux-nixos.nix
-      ]
-    );
-
-    hmmod = home-manager.nixosModules.home-manager;
-    hmlib = home-manager.lib;
+    hmLib = home-manager.lib;
+    hmMod = home-manager.nixosModules.home-manager;
 
   in {
 
@@ -70,7 +37,7 @@
           ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
-          hmmod
+          hmMod
         ];
       };
 
@@ -81,7 +48,7 @@
           ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
-          hmmod
+          hmMod
         ];
       };
 
@@ -92,7 +59,7 @@
           ./os/windows-nixos.nix
           ./users.nix
           ./configuration.nix
-          hmmod
+          hmMod
         ];
       };
 
