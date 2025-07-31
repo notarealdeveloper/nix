@@ -142,6 +142,7 @@
     numix-icon-theme-circle
     vscode
     obsidian
+    gimp
 
     # video
     vlc
