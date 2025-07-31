@@ -73,15 +73,15 @@ in
 
   '';
 
-  home.file = {
+  home.file = lib.mkMerge [{
     # sooper serious secrets zomg
     ".pypirc".source    = link "${secret.dst}/etc/pypirc";
     ".netrc".source     = link "${secret.dst}/etc/netrc";
     ".ssh".source       = link "${secret.dst}/etc/ssh";
-  };
+  }];
 
   # PATH for interactive shells
-  home.sessionVariables.PATH = "${secret.dst}/bin:$HOME/.local/bin:$PATH";
+  home.sessionVariables.PATH = lib.mkBefore "${secret.dst}/bin:";
 
   # PATH for login shells
   home.sessionPath = [

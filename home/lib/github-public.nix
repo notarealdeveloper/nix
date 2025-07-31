@@ -91,7 +91,7 @@ in
 
   '';
 
-  home.file = {
+  home.file = lib.mkMerge [{
 
     # symlinks from exec
     ".vimrc".source     = link "${exec.dst}/etc/vimrc";
@@ -103,7 +103,7 @@ in
     # auto-generated
     ".hotdogrc".text    = ''This is not a config file'';
 
-  };
+  }];
 
   programs.bash = {
     enable = true;
@@ -114,13 +114,12 @@ in
   };
 
   # PATH for interactive shells
-  home.sessionVariables.PATH = "${exec.dst}/bin:${personal.dst}/bin:$HOME/.local/bin:$PATH";
+  home.sessionVariables.PATH = lib.mkBefore "${exec.dst}/bin:${personal.dst}/bin";
 
   # PATH for login shells
   home.sessionPath = [
     "${exec.dst}/bin"
     "${personal.dst}/bin"
-    "$HOME/.local/bin"
   ];
 
   home.packages = with pkgs; [
