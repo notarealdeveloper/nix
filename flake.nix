@@ -45,6 +45,8 @@
     #  )
     #);
 
+    # TODO: try: builtins.pathExists "/proc/sys/fs/binfmt_misc/WSLInterop"; 
+
     platform-specific = (
       if isWsl then [
         nixos-wsl.nixosModules.wsl

@@ -5,7 +5,7 @@ let
   # TODO: Add ~/.config/mimeapps.list setup
 
   user = "jason";
-  name = "jason wilkes";
+  name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
   link = config.lib.file.mkOutOfStoreSymlink;
