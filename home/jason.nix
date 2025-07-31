@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, desktop ? true, ... }:
 
 let
 
@@ -12,8 +12,8 @@ in {
     (import ./lib/git.nix user name email)
     ./lib/github-public.nix
     ./lib/github-private.nix
-    ./lib/desktop.nix
     ./lib/common.nix
-  ];
-
+  ]
+  ++ (lib.optional desktop ./lib/desktop.nix)
+  ;
 }

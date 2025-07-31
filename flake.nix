@@ -56,7 +56,8 @@
       ]
     );
 
-    home = home-manager.nixosModules.home-manager;
+    hmmod = home-manager.nixosModules.home-manager;
+    hmlib = home-manager.lib;
 
   in {
 
@@ -69,7 +70,7 @@
           ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
-          home
+          hmmod
         ];
       };
 
@@ -80,7 +81,7 @@
           ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
-          home
+          hmmod
         ];
       };
 
@@ -91,18 +92,27 @@
           ./os/windows-nixos.nix
           ./users.nix
           ./configuration.nix
-          home
+          hmmod
         ];
       };
 
     };
 
-    homeConfigurations = rec {
+    homeConfigurations = 
+      let
+        lib = home-manager.lib;
+      in rec {
 
       jason = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home/jason.nix ];
         extraSpecialArgs = { inherit pkgs; };
+      };
+
+      jason-no-desktop = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/jason.nix ];
+        extraSpecialArgs = { inherit pkgs; lib = hmlib; desktop = false; };
       };
 
       luna = home-manager.lib.homeManagerConfiguration {

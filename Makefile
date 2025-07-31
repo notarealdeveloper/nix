@@ -17,7 +17,10 @@ home:
 	home-manager switch --flake .#default -b backup
 
 jason:
-	sudo -iu jason -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.jason.activationPackage
+	home-manager switch --flake .#jason -b backup
+
+jason-no-desktop:
+	home-manager switch --flake .#jason-no-desktop -b backup
 
 ramya:
 	sudo -iu ramya -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.ramya.activationPackage
