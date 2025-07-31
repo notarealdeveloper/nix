@@ -1,5 +1,5 @@
 {
-  description = "The WNIX Operating System";
+  description = "The WNIX Operating System!";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
