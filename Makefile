@@ -1,37 +1,36 @@
 # Makefile for system and user setup on any OS
 
+turing: system-turing home-turing
 
-system:
-	sudo nixos-rebuild switch --flake .#
+kleene: system-turing home-turing
 
-turing:
+gates:  system-gates  home-gates
+
+system-turing:
 	sudo nixos-rebuild switch --flake .#turing
 
-kleene:
+system-kleene:
 	sudo nixos-rebuild switch --flake .#kleene
 
-gates:
+system-gates:
 	sudo nixos-rebuild switch --flake .#gates
 
-home:
+home-turing:
 	home-manager switch --flake .#default -b backup
 
-jason:
+home-kleene:
+	home-manager switch --flake .#default -b backup
+
+home-gates:
+	home-manager switch --flake .#headless -b backup
+
+home-jason:
 	home-manager switch --flake .#jason -b backup
 
-jason-no-desktop:
-	home-manager switch --flake .#jason-no-desktop -b backup
+home-ramya:
+	sudo -iu ramya -- home-manager switch --flake .#ramya -b backup
 
-ramya:
-	sudo -iu ramya -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.ramya.activationPackage
-
-luna:
-	sudo -iu luna -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.luna.activationPackage
-
-update:
-	nix-channel --update
-
-upgrade: update
-	sudo nixos-rebuild switch --upgrade --flake .#default
+home-luna:
+	sudo -iu luna -- home-manager switch --flake .#luna -b backup
 
 .PHONY: home

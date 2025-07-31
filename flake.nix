@@ -72,11 +72,11 @@
     };
 
     homeConfigurations = rec {
-      jason = mkHome { ./home/jason.nix, true };
-      ramya = mkHome { ./home/ramya.nix, true };
-      luna  = mkHome { ./home/luna.nix,  true };
-      gates = mkHome { ./home/jason.nix, false };
-      default = jason;
+      jason     = mkHome { ./home/jason.nix; };
+      ramya     = mkHome { ./home/ramya.nix; };
+      luna      = mkHome { ./home/luna.nix;  };
+      headless  = mkHome { ./home/jason.nix; desktop = false; };
+      default   = jason;
     };
 
   };
