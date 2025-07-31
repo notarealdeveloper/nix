@@ -32,17 +32,17 @@
     #  cat /sys/class/dmi/id/sys_vendor > $out
     #'');
 
-    sysVendor  = builtins.unsafeDiscardStringContext (builtins.readFile /sys/class/dmi/id/sys_vendor);
-    isLenovo   = sysVendor == "LENOVO\n";
-    isSystem76 = sysVendor == "To be determined...\n";
+    #sysVendor  = builtins.unsafeDiscardStringContext (builtins.readFile /sys/class/dmi/id/sys_vendor);
+    #isLenovo   = sysVendor == "LENOVO\n";
+    #isSystem76 = sysVendor == "To be determined...\n";
 
     #hardware-specific = (
-    #  if isLenovo then
-    #    [./hardware/lenovo.nix]
-    #  else if isSystem76 then
-    #    [./hardware/system76.nix]
-    #  else
-    #    []
+    #  if isWsl then [] else
+    #  (
+    #    if isSystem76 && isNative then [./hardware/system76.nix]
+    #    else if isLenovo && isNative then [./hardware/lenovo.nix]
+    #    else []
+    #  )
     #);
 
     platform-specific = (
@@ -62,9 +62,9 @@
 
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        modules =
-          platform-specific ++ [
+        modules = [
           ./hardware/system76.nix
+          ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
           home
@@ -73,15 +73,24 @@
 
       kleene = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        modules = platform-specific ++ [
+        modules = [
           ./hardware/lenovo.nix
+          ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
           home
         ];
       };
 
-      #default = turing;
+      gates = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          ./os/windows-nixos.nix
+          ./users.nix
+          ./configuration.nix
+          home
+        ];
+      };
 
     };
 
