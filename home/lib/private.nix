@@ -78,13 +78,13 @@ in
   # home.sessionVariables.PATH = lib.mkBefore "${secret.dst}/bin";
 
   # PATH for login shells
-  home.sessionPath = [
+  home.sessionPath = lib.mkAfter [
     "${secret.dst}/bin"
   ];
 
   programs.bash = {
     enable = true;
-    bashrcExtra = ''
+    bashrcExtra = lib.mkAfter ''
       source "${secret.dst}/etc/bashrc"
     '';
   };
