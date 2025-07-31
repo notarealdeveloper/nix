@@ -123,6 +123,7 @@
     xdotool
     imagemagick
     dbus
+    dbus-launch
 
     # crypt
     tor
