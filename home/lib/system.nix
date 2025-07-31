@@ -26,8 +26,6 @@
 
 {
 
-  nixpkgs.config.allowUnfree = true;
-
   # system
   nixos = {
     src = "https://github.com/notarealdeveloper/nixos";

@@ -2,6 +2,9 @@
 
 let
 
+    system = import ./system.nix { inherit pkgs lib config; };
+    inherit (system) personal;
+
     icons = pkgs.numix-icon-theme-circle;
     theme = pkgs.numix-gtk-theme;
 
