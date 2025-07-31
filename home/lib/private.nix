@@ -45,6 +45,7 @@ let
 
   system = import ./system.nix { inherit pkgs lib config; };
   inherit (system) secret legacy;
+
   link = config.lib.file.mkOutOfStoreSymlink;
 
 in

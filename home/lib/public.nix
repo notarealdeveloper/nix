@@ -13,10 +13,6 @@ in
 
 {
 
-  imports = [
-    ./system.nix
-  ];
-
   # git clone public repos
   home.activation.clonePublic = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
 
