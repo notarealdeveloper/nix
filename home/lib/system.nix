@@ -75,7 +75,4 @@
     dst = "${config.home.homeDirectory}/src/legacy";
   };
 
-  # Keep this line
-  home.stateVersion  = "25.05";
-
 }

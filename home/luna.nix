@@ -64,6 +64,7 @@ in
     '';
   };
 
-  # Let Home Manager install and manage itself.
-  # programs.home-manager.enable = true;
+  # Keep this line
+  home.stateVersion  = "25.05";
+
 }

@@ -15,4 +15,7 @@ in {
     ./lib/public.nix
   ];
 
+  # Keep this line
+  home.stateVersion  = "25.05";
+
 }
