@@ -27,7 +27,7 @@
 
     mkHome = { user, desktop ? true }: hmLib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ user ];
+      modules = [ ./home/${user}.nix ];
       extraSpecialArgs = {
         inherit pkgs;
         desktop = desktop;
@@ -44,6 +44,7 @@
           ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
+          { networking.hostName = "turing"; }
           hmMod
         ];
       };
@@ -55,6 +56,7 @@
           ./os/linux-nixos.nix
           ./users.nix
           ./configuration.nix
+          { networking.hostName = "kleene"; }
           hmMod
         ];
       };
@@ -66,16 +68,17 @@
           ./os/windows-nixos.nix
           ./users.nix
           ./configuration.nix
+          { networking.hostName = "gates"; }
           hmMod
         ];
       };
     };
 
     homeConfigurations = rec {
-      jason     = mkHome { ./home/jason.nix; };
-      ramya     = mkHome { ./home/ramya.nix; };
-      luna      = mkHome { ./home/luna.nix;  };
-      headless  = mkHome { ./home/jason.nix; desktop = false; };
+      jason     = mkHome { user = "jason"; };
+      ramya     = mkHome { user = "ramya"; };
+      luna      = mkHome { user = "luna";  };
+      headless  = mkHome { user = "jason"; desktop = false; };
       default   = jason;
     };
 

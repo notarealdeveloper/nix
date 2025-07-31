@@ -8,9 +8,6 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  # hostname
-  networking.hostName = "turing";
-
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
