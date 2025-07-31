@@ -21,7 +21,7 @@ in {
     iconTheme = { name = "Numix-Circle"; package = icons; };
   };
 
-  home.file = {
+  home.file = lib.mkMerge [{
 
     # ~/.local/share/icons
     ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png".source = ./icons/obsidian.png;
@@ -33,7 +33,7 @@ in {
           icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
         in
           builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
-  };
+  }];
 
   home.activation.setupDconf = lib.hm.dag.entryAfter ["installPackages"] ''
     export PATH="${config.home.path}/bin:$PATH"
