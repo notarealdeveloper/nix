@@ -36,14 +36,14 @@
     isLenovo   = sysVendor == "LENOVO\n";
     isSystem76 = sysVendor == "To be determined...\n";
 
-    hardware-specific = (
-      if isLenovo then
-        [./hardware/lenovo.nix]
-      else if isSystem76 then
-        [./hardware/system76.nix]
-      else
-        []
-    );
+    #hardware-specific = (
+    #  if isLenovo then
+    #    [./hardware/lenovo.nix]
+    #  else if isSystem76 then
+    #    [./hardware/system76.nix]
+    #  else
+    #    []
+    #);
 
     platform-specific = (
       if isWsl then [
@@ -63,8 +63,8 @@
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         modules =
-          platform-specific ++
-          hardware-specific ++ [
+          platform-specific ++ [
+          ./hardware/system76.nix
           ./users.nix
           ./configuration.nix
         ];
@@ -72,9 +72,8 @@
 
       kleene = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
-        modules =
-          platform-specific ++
-          hardware-specific ++ [
+        modules = platform-specific ++ [
+          ./hardware/lenovo.nix
           ./users.nix
           ./configuration.nix
         ];
