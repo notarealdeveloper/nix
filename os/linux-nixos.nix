@@ -18,7 +18,5 @@
     greeters.slick.enable = false; # is it a bug that this is required? find out :)
   };
 
-  programs.dbus.enable = true;
-
   system.stateVersion = "25.05";
 }
