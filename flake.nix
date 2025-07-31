@@ -69,10 +69,15 @@
     };
 
     homeConfigurations = rec {
-      jason     = mkHome { user = "jason"; };
+
+      turing    = mkHome { user = "jason"; };
+      kleene    = mkHome { user = "jason"; };
+      gates     = mkHome { user = "jason"; desktop = false; };
+
+      turing    = mkHome { user = "jason"; };
       ramya     = mkHome { user = "ramya"; };
       luna      = mkHome { user = "luna";  };
-      headless  = mkHome { user = "jason"; desktop = false; };
+
     };
 
   };

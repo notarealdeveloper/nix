@@ -1,36 +1,31 @@
 # Makefile for system and user setup on any OS
 
-turing: system-turing home-turing
+HOST := $(shell hostname -s)
+HOSTS := turing kleene gates
 
-kleene: system-turing home-turing
+# fail fast if we’re on an unknown machine
+ifeq ($(filter $(HOST),$(HOSTS)),)
+$(error Host "$(HOST)" not recognised; choose one of $(HOSTS))
+endif
 
-gates:  system-gates  home-gates
+system:
+	system-$(HOST)
 
-system-turing:
-	sudo nixos-rebuild switch --flake .#turing
+home:
+	home-$(HOST)
 
-system-kleene:
-	sudo nixos-rebuild switch --flake .#kleene
+$(HOSTS): %: system-% home-%
 
-system-gates:
-	sudo nixos-rebuild switch --flake .#gates
+system-%:
+	sudo nixos-rebuild switch --flake .#$*
 
-home-turing:
-	home-manager switch --flake .#jason -b backup
-
-home-kleene:
-	home-manager switch --flake .#jason -b backup
-
-home-gates:
-	home-manager switch --flake .#headless -b backup
-
-home-jason:
-	home-manager switch --flake .#jason -b backup
+home-%:
+	home-manager switch --flake .#$*
 
 home-ramya:
 	sudo -iu ramya -- home-manager switch --flake .#ramya -b backup
 
 home-luna:
-	sudo -iu luna -- home-manager switch --flake .#luna -b backup
+	sudo -iu luna  -- home-manager switch --flake .#luna  -b backup
 
-.PHONY: home
+.PHONY: default system home $(HOSTS)
