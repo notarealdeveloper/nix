@@ -47,7 +47,8 @@ in
   }];
 
   # PATH for interactive shells
-  home.sessionVariables.PATH = lib.mkBefore "${exec.dst}/bin:${personal.dst}/bin";
+  # home.sessionVariables.PATH = lib.mkBefore "${exec.dst}/bin:${personal.dst}/bin";
+
 
   # PATH for login shells
   home.sessionPath = [
