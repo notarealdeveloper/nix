@@ -22,13 +22,7 @@ system-%:
 home-%:
 	home-manager switch -b backup --flake .#$*
 
-ramya:
-	sudo -iu $* -- home-manager switch -b backup --flake .#ramya
-
-mei:
-	sudo -iu $* -- home-manager switch -b backup --flake .#mei
-
-luna:
-	sudo -iu $* -- home-manager switch -b backup --flake .#luna
+ramya mei luna:
+	sudo -iu $@ -- home-manager switch -b backup --flake github:notarealdeveloper/nixos#$@
 
 .PHONY: default system home $(HOSTS)
