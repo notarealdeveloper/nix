@@ -7,10 +7,6 @@ let
 
 in {
 
-  imports = [
-    ./system.nix
-  ];
-
   home.packages = with pkgs; [
     theme
     icons

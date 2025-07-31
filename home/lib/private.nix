@@ -51,10 +51,6 @@ in
 
 {
 
-  imports = [
-    ./system.nix
-  ];
-
   # git clone private repos
   home.activation.clonePrivate = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
 
