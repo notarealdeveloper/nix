@@ -25,15 +25,17 @@
     hmLib = home-manager.lib;
     hmMod = home-manager.nixosModules.home-manager;
 
-    mkHome = desktop: hmLib.homeManagerConfiguration {
+    mkHome = { user, desktop ? true }: hmLib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ ./home/jason.nix ];
+      modules = [ user ];
       extraSpecialArgs = {
         inherit pkgs;
         desktop = desktop;
       };
     };
+
   in {
+
     nixosConfigurations = {
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
@@ -69,11 +71,14 @@
       };
     };
 
-    homeConfigurations = {
-      jason = mkHome true;
-      jason-no-desktop = mkHome false;
-      default = mkHome true;
+    homeConfigurations = rec {
+      jason = mkHome { ./home/jason.nix, true };
+      ramya = mkHome { ./home/ramya.nix, true };
+      luna  = mkHome { ./home/luna.nix,  true };
+      gates = mkHome { ./home/jason.nix, false };
+      default = jason;
     };
+
   };
 }
 
