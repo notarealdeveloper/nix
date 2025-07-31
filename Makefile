@@ -1,7 +1,7 @@
 # Makefile for system and user setup on any OS
 
 system:
-	sudo nixos-rebuild switch --flake .#default
+	sudo nixos-rebuild switch --flake .#$(hostname)
 
 home:
 	home-manager switch --flake .#default
