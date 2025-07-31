@@ -1,8 +1,8 @@
 {
-  description = "NixOS configurations";
+  description = "The WNIX Operating System";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -10,10 +10,9 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }:
   let
-
-    system  = "x86_64-linux";
+    system = "x86_64-linux";
 
     overlay = import ./overlay;
 
@@ -26,10 +25,16 @@
     hmLib = home-manager.lib;
     hmMod = home-manager.nixosModules.home-manager;
 
+    mkHome = desktop: hmLib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [ ./home/jason.nix ];
+      extraSpecialArgs = {
+        inherit pkgs;
+        desktop = desktop;
+      };
+    };
   in {
-
-    nixosConfigurations = rec {
-
+    nixosConfigurations = {
       turing = nixpkgs.lib.nixosSystem {
         inherit system pkgs;
         modules = [
@@ -62,42 +67,13 @@
           hmMod
         ];
       };
-
     };
 
-    homeConfigurations = rec {
-
-      jason = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home/jason.nix ];
-        extraSpecialArgs = { inherit pkgs; };
-      };
-
-      jason-no-desktop = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home/jason.nix ];
-        extraSpecialArgs = {
-          inherit pkgs;
-          desktop = false;
-        };
-      };
-
-      luna = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home/luna.nix ];
-        extraSpecialArgs = { inherit pkgs; };
-      };
-
-      ramya = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home/ramya.nix ];
-        extraSpecialArgs = { inherit pkgs; };
-      };
-
-      default = jason;
-
+    homeConfigurations = {
+      jason = mkHome true;
+      jason-no-desktop = mkHome false;
+      default = mkHome true;
     };
-
   };
-
 }
+
