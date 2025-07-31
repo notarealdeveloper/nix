@@ -30,11 +30,11 @@ in
     mkkan() {
       local name="$1"
       local url="$2"
-      if [[ $(ls "$HOME/daxingxing/$name"* | wc -l) == 0 ]]; then
+      if [[ $(ls daxingxing/ | grep "^$name" | wc -l) > 0 ]]; then
+        echo "Already have kan: $1"
+      else
         echo "Making kan: $1"
         yt-dlp -P "$HOME/daxingxing" -o "$name.%(ext)s" "$url"
-      else
-        echo "Already have kan: $1"
       fi
     }
 
