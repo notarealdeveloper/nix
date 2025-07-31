@@ -14,7 +14,7 @@ gates:
 	sudo nixos-rebuild switch --flake .#gates
 
 home:
-	home-manager switch --flake .#default
+	home-manager switch --flake .#default -b backup
 
 jason:
 	sudo -iu jason -- nix run --refresh github:/notarealdeveloper/nixos#homeConfigurations.jason.activationPackage
