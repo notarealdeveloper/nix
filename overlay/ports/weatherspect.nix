@@ -13,10 +13,10 @@ pkgs: (with pkgs;
       hash  = "sha256-rTZTNcnehL6PR5VagCMTs1MnRCap/XXjxQMSZyBMiuE=";
     };
 
-    buildInputs = [
+    propagatedBuildInputs = [
       (perl.withPackages (ps: with ps; [
-        LWP
         TermAnimation
+        LWP
       ]))
     ];
 
