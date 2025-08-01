@@ -1,41 +1,34 @@
-# weatherspect.nix
 { lib, stdenv, fetchFromGitHub, perl }:
 
-let
+stdenv.mkDerivation rec {
 
-  perlEnv = perl.withPackages (ps: with ps; [
-    TermAnimation
-    JSON
-    LWP
-  ]);
+  pname = "weatherspect";
+  version = "2.0";
 
-in
+  src = fetchFromGitHub {
+    owner = "notarealdeveloper";
+    repo = "weatherspect";
+    rev = "54cf9e6a0c7eca95a307115da9afd3bc5dbf3daa";
+    hash = "sha256-4iT0i4CnrVyBRhWUmpK+nPLGR9kXXqAr5V6JwPoAGCE=";
+  };
 
-  stdenv.mkDerivation rec {
+  propagatedBuildInputs = [
+    (perl.withPackages (ps: with ps; [
+      TermAnimation
+      JSON
+      LWP
+    ]))
+  ];
 
-    pname = "weatherspect";
-    version = "2.0";
+  installPhase = ''
+    install -Dm755 weatherspect $out/bin/weatherspect
+  '';
 
-    src = fetchFromGitHub {
-      owner = "notarealdeveloper";
-      repo = "weatherspect";
-      rev = "136bb28bce77b06ca72e87cfba256066ac8fef4e";
-      hash = "sha256-92bX+pRnzwgXoEEz4oRqcQDV+sP+ruCVZmzbagh9YLQ=";
-    };
+  meta = with lib; {
+    description = "Look at me. I am de maintainer now.";
+    homepage    = "https://github.com/notarealdeveloper/weatherspect";
+    license     = licenses.gpl2;
+    platforms   = platforms.unix;
+  };
 
-    propagatedBuildInputs = [
-      perlEnv
-    ];
-
-    installPhase = ''
-      install -Dm755 weatherspect $out/bin/weatherspect
-    '';
-
-    meta = with lib; {
-      description = "Look at me. I am de maintainer now.";
-      homepage    = "https://knowyourmeme.com/memes/look-at-me-im-the-captain-now";
-      license     = licenses.gpl2;
-      platforms   = platforms.unix;
-    };
-
-  }
+}
