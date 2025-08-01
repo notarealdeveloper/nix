@@ -209,7 +209,10 @@
 
     python314FreeThreading
 
-    python311
+    python311.withPackages (ps: with ps; [
+      pip
+    ])
+
     glab
 
     # So close!
