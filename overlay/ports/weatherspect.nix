@@ -27,7 +27,7 @@ pkgs: (with pkgs;
       chmod -v +x weatherspect
 
       # b/c idk what's in this shit, I'm just here
-      mv -v weatherspect $out/bin
+      cp -v weatherspect $out/bin
     '';
 
     meta = with lib; {
