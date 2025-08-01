@@ -1,12 +1,6 @@
 # weatherspect.nix
 pkgs: with pkgs;
 
-{ lib
-, stdenv
-, fetchFromGitHub
-, perl
-}:
-
 stdenv.mkDerivation rec {
 
   pname = "weatherspect";
