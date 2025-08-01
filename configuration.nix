@@ -89,6 +89,7 @@
     plocate
     git
     gh
+    glab
     jq
     acpi
 
@@ -169,11 +170,6 @@
     # games
     stepmania
 
-    # raw derivations
-    sayhi   # stdenv.mkDerivation, depends on hi
-    saybye  # builtins.derivation, depends on raw bye
-    yello   # attempt to declare an importable that depends on an executable
-
     (python.withPackages (ps: with ps; [
 
       # packaging
@@ -220,10 +216,16 @@
       pip
     ]))
 
-    glab
-
     # So close!
     # python-head
+
+    # raw derivations
+    sayhi   # stdenv.mkDerivation, depends on hi
+    saybye  # builtins.derivation, depends on raw bye
+    yello   # attempt to declare an importable that depends on an executable
+
+    # ports
+    weatherspect
 
   ];
 
