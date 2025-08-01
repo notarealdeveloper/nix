@@ -93,16 +93,6 @@
     jq
     acpi
 
-    # silly
-    cowsay
-    xcowsay
-    asciiquarium
-    cmatrix
-    figlet
-    toilet
-    sl
-    sl2
-
     # dev
     gcc
     gnumake
@@ -223,6 +213,17 @@
     sayhi   # stdenv.mkDerivation, depends on hi
     saybye  # builtins.derivation, depends on raw bye
     yello   # attempt to declare an importable that depends on an executable
+
+    # ascii
+    cowsay
+    xcowsay
+    asciiquarium
+    cmatrix
+    neofetch
+    figlet
+    toilet
+    sl
+    sl2
 
     # ports
     weatherspect
