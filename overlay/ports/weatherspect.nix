@@ -16,6 +16,7 @@ pkgs: (with pkgs;
     propagatedBuildInputs = [
       (perl.withPackages (ps: with ps; [
         TermAnimation
+        LWP
       ]))
     ];
 
@@ -27,6 +28,7 @@ pkgs: (with pkgs;
 
       # b/c idk what's in this shit, I'm just here
       cp -v weatherspect $out/bin
+      touch $out/bin/hotdog
     '';
 
     meta = with lib; {
