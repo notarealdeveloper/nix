@@ -22,6 +22,11 @@ system-%:
 home-%:
 	home-manager switch -b backup --flake .#$*
 
+arch:
+	sudo pacman -S nix
+	nix profile add home-manager
+	home-manager switch -b backup --refresh --flake github:notarealdeveloper/nixos#jason
+
 ramya mei luna:
 	sudo -iu $@ -- home-manager switch -b backup --refresh --flake github:notarealdeveloper/nixos#$@
 
