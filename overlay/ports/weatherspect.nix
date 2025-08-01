@@ -20,7 +20,7 @@ in
       owner   = "notarealdeveloper";
       repo    = "weatherspect";
       rev     = "0143c4aa9a71f020dd073e10939c9e8242a11403";
-      sha256  = "sha256-rTZTNcnehL6PR5VagCMTs1MnRCap/XXjxQMSZyBMiuE=";
+      sha256  = "sha256-+aNsutTDNkgau8wrt0dpPsJm+1zJvQQXOL9cp5m0CTg=";
     };
 
     propagatedBuildInputs = [
