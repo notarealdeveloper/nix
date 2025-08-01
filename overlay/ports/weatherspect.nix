@@ -1,11 +1,11 @@
 # weatherspect.nix
 { lib
-, stdenvNoCC
 , fetchFromGitHub
 , perl
 }:
 
-stdenvNoCC.mkDerivation rec {
+stdenv.mkDerivation rec {
+
   pname = "weatherspect";
   version = "2.0";
 
@@ -13,7 +13,7 @@ stdenvNoCC.mkDerivation rec {
     owner = "AnotherFoxGuy";
     repo  = "weatherspect";
     rev   = version;
-    hash  = "";
+    hash  = "sha256-rTZTNcnehL6PR5VagCMTs1MnRCap/XXjxQMSZyBMiuE=";
   };
 
   nativeBuildInputs = [
@@ -23,6 +23,8 @@ stdenvNoCC.mkDerivation rec {
   ];
 
   installPhase = ''
+    mkdir -pv $out/bin
+    mv -v * $out/bin    # b/c idk what's in this shit, I'm just here
   '';
 
   meta = with lib; {
@@ -31,5 +33,6 @@ stdenvNoCC.mkDerivation rec {
     license     = licenses.wtfpl;
     platforms   = platforms.unix;
   };
+
 }
 
