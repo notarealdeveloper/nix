@@ -140,6 +140,7 @@
     gnome-terminal
     numix-gtk-theme
     numix-icon-theme-circle
+    ffmpegthumbnailer
     vscode
     obsidian
     gimp
