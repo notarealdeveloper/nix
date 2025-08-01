@@ -229,6 +229,12 @@
     # ports
     weatherspect
 
+    (pkgs.perl.withPackages (ps: with ps; [
+      TermAnimation
+      JSON
+      LWP
+    ]))
+
   ];
 
   # android debug bridge
