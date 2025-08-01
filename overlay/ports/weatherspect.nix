@@ -7,10 +7,10 @@
     version = "2.0";
 
     src = fetchFromGitHub {
-      owner = "AnotherFoxGuy";
+      owner = "notarealdeveloper";
       repo  = "weatherspect";
       rev   = version;
-      hash  = "sha256-rTZTNcnehL6PR5VagCMTs1MnRCap/XXjxQMSZyBMiuE=";
+      hash  = "sha256-xqUJvRakUNlsKpeuB1DpH2cIA3W9EAeSL8Gygki7PAA=";
     };
 
     propagatedBuildInputs = [
@@ -22,20 +22,13 @@
     ];
 
     installPhase = ''
-      mkdir -pv $out/bin
-
-      # cuz fuck it, that's why
-      chmod -v +x weatherspect
-
-      # b/c idk what's in this shit, I'm just here
-      cp -v weatherspect $out/bin
-      touch $out/bin/notdog
+      install -Dm755 weatherspect $out/bin/weatherspect
     '';
 
     meta = with lib; {
-      description = "I'm trying to get ascii weather";
-      homepage    = "They all died long ago";
-      license     = licenses.wtfpl;
+      description = "Look at me. I am de maintainer now.";
+      homepage    = "https://knowyourmeme.com/memes/look-at-me-im-the-captain-now";
+      license     = licenses.gpl2;
       platforms   = platforms.unix;
     };
 
