@@ -17,10 +17,10 @@ in
     version = "2.0";
 
     src = fetchFromGitHub {
-      owner   = "notarealdeveloper";
-      repo    = "weatherspect";
-      rev     = "0143c4aa9a71f020dd073e10939c9e8242a11403";
-      sha256  = "sha256-+aNsutTDNkgau8wrt0dpPsJm+1zJvQQXOL9cp5m0CTg=";
+      owner = "notarealdeveloper";
+      repo  = "weatherspect";
+      rev   = "c39bbae22feb240968a1b02b05ba019e6678a57c";
+      hash  = "sha256-LwKn9FBuCND1QCCbXzf7MM6J4km7PrbyYBPN5iBRNpM=";
     };
 
     propagatedBuildInputs = [
@@ -28,9 +28,7 @@ in
     ];
 
     installPhase = ''
-      mkdir -pv $out/bin
-      chmod -v +x weatherspect
-      cp -v weatherspect $out/bin
+      install -Dm755 weatherspect $out/bin/weatherspect
     '';
 
     meta = with lib; {
