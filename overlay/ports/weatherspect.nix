@@ -28,11 +28,6 @@ pkgs: (with pkgs;
 
       # b/c idk what's in this shit, I'm just here
       mv -v weatherspect $out/bin
-
-      rm -v *
-      here="$PWD"
-      cd ..
-      rm -rfv "$here"
     '';
 
     meta = with lib; {
