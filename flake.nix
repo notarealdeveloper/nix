@@ -81,6 +81,10 @@
 
     };
 
+    packages = {
+      inherit (pkgs) weatherspect;
+    };
+
   };
 }
 
