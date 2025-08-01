@@ -209,9 +209,9 @@
 
     python314FreeThreading
 
-    python311.withPackages (ps: with ps; [
+    (python311.withPackages (ps: with ps; [
       pip
-    ])
+    ]))
 
     glab
 
