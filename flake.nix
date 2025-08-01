@@ -82,7 +82,7 @@
     };
 
     packages.${system} = with pkgs; {
-      hotdog = weatherspect;
+      weatherspect = weatherspect;
     };
 
   };

@@ -16,7 +16,6 @@ pkgs: (with pkgs;
     propagatedBuildInputs = [
       (perl.withPackages (ps: with ps; [
         TermAnimation
-        LWP
       ]))
     ];
 
