@@ -210,6 +210,7 @@
     python314FreeThreading
 
     (python311.withPackages (ps: with ps; [
+      build
       pip
     ]))
 
