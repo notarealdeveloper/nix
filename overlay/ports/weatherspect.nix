@@ -1,5 +1,8 @@
 # weatherspect.nix
+pkgs: with pkgs;
+
 { lib
+, stdenv
 , fetchFromGitHub
 , perl
 }:
