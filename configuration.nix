@@ -124,6 +124,7 @@
     xdotool
     imagemagick
     sshfs
+    thc-secure-delete
     srm
     nasm
     minitube # for lulu <3
