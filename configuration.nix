@@ -123,6 +123,10 @@
     xclip
     xdotool
     imagemagick
+    sshfs
+    srm
+    nasm
+    minitube # for lulu <3
 
     # crypt
     tor
