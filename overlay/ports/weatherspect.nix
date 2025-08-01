@@ -13,26 +13,22 @@ stdenvNoCC.mkDerivation rec {
     owner = "AnotherFoxGuy";
     repo  = "weatherspect";
     rev   = version;
-    hash  = "sha256-rTZTNcnehL6PR5VagCMTs1MnRCap/XXjxQMSZyBMiuE=";
+    hash  = "";
   };
 
   nativeBuildInputs = [
     (perl.withPackages (ps: with ps; [
-      JSON
       TermAnimation
-      LWP
     ]))
   ];
 
   installPhase = ''
-    install -Dm755 weatherspect $out/bin/weatherspect
-    patchShebangs $out/bin
   '';
 
   meta = with lib; {
-    description = "A virtual weather environment in ASCII";
-    homepage    = "https://github.com/AnotherFoxGuy/weatherspect";
-    license     = licenses.gpl2Only;
+    description = "I'm trying to get ascii weather";
+    homepage    = "They all died long ago";
+    license     = licenses.wtfpl;
     platforms   = platforms.unix;
   };
 }
