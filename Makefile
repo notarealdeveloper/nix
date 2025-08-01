@@ -17,7 +17,7 @@ system home:
 $(HOSTS): %: system-% home-%
 
 system-%:
-	sudo nixos-rebuild switch --flake .#$*
+	sudo nixos-rebuild --print-build-logs --show-trace --debug switch --flake .#$*
 
 home-%:
 	home-manager switch -b backup --flake .#$*
