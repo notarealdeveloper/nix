@@ -25,7 +25,13 @@ home-%:
 arch:
 	sudo pacman -S nix
 	nix profile add home-manager
-	home-manager switch -b backup --refresh --flake github:notarealdeveloper/nixos#jason
+	home-manager switch -b backup --refresh --flake "github:notarealdeveloper/nixos#jason"
+
+gentoo:
+	sh <(curl -L https://nixos.org/nix/install) --daemon
+	mkdir -pv ~/.config/nix
+	echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+	bash -l -c "nix profile add home-manager && home-manager switch -b backup --refresh --flake github:notarealdeveloper/nixos#jason"
 
 ramya mei luna:
 	sudo -iu $@ -- home-manager switch -b backup --refresh --flake github:notarealdeveloper/nixos#$@
