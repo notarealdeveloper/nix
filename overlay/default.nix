@@ -9,7 +9,7 @@ final: prev: with prev; rec {
 
   python-head = import ./python/python-head.nix final prev; # work in progress
 
-  weatherspect = import ./ports/weatherspect.nix final;
+  weatherspect = import ./ports/weatherspect.nix { inherit (prev) lib stdenv fetchFromGitHub perl; };
 
   #########################
   ### Local Executables ###

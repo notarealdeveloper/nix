@@ -1,5 +1,5 @@
 # weatherspect.nix
-pkgs: (with pkgs;
+{ lib, stdenv, fetchFromGitHub, perl }:
 
   stdenv.mkDerivation rec {
 
@@ -17,6 +17,7 @@ pkgs: (with pkgs;
       (perl.withPackages (ps: with ps; [
         TermAnimation
         LWP
+        JSON
       ]))
     ];
 
@@ -28,7 +29,7 @@ pkgs: (with pkgs;
 
       # b/c idk what's in this shit, I'm just here
       cp -v weatherspect $out/bin
-      touch $out/bin/hotdog
+      touch $out/bin/notdog
     '';
 
     meta = with lib; {
@@ -39,5 +40,3 @@ pkgs: (with pkgs;
     };
 
   }
-
-)
