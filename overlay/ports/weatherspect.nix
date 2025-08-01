@@ -18,9 +18,9 @@ in
 
     src = fetchFromGitHub {
       owner = "notarealdeveloper";
-      repo  = "weatherspect";
-      rev   = "c39bbae22feb240968a1b02b05ba019e6678a57c";
-      hash  = "sha256-LwKn9FBuCND1QCCbXzf7MM6J4km7PrbyYBPN5iBRNpM=";
+      repo = "weatherspect";
+      rev = "136bb28bce77b06ca72e87cfba256066ac8fef4e";
+      hash = "sha256-92bX+pRnzwgXoEEz4oRqcQDV+sP+ruCVZmzbagh9YLQ=";
     };
 
     propagatedBuildInputs = [
