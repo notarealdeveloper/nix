@@ -82,7 +82,8 @@
     dconf2nix
 
     # unix
-    vim_configurable
+    #vim_configurable
+    vim
     file
     wget
     tree
