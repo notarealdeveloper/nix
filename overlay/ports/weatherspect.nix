@@ -13,8 +13,9 @@ pkgs: (with pkgs;
       hash  = "sha256-rTZTNcnehL6PR5VagCMTs1MnRCap/XXjxQMSZyBMiuE=";
     };
 
-    nativeBuildInputs = [
+    buildInputs = [
       (perl.withPackages (ps: with ps; [
+        LWP
         TermAnimation
       ]))
     ];
@@ -22,14 +23,16 @@ pkgs: (with pkgs;
     installPhase = ''
       mkdir -pv $out/bin
 
-      echo "let's see what we've got"
-      ls
-
       # cuz fuck it, that's why
-      chmod -v +x *
+      chmod -v +x weatherspect
 
       # b/c idk what's in this shit, I'm just here
-      mv -v * $out/bin
+      mv -v weatherspect $out/bin
+
+      rm -v *
+      here="$PWD"
+      cd ..
+      rm -rfv "$here"
     '';
 
     meta = with lib; {

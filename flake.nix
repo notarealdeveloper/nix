@@ -81,8 +81,8 @@
 
     };
 
-    packages = {
-      inherit (pkgs) weatherspect;
+    packages.${system} = with pkgs; {
+      hotdog = weatherspect;
     };
 
   };
