@@ -18,6 +18,7 @@ in
   home.packages = with pkgs; [
     yt-dlp
     vlc
+    weatherspect
   ];
 
   home.activation.prepareDaXingXing = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
