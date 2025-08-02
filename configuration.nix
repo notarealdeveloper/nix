@@ -243,6 +243,14 @@
   # dconf
   programs.dconf.enable = true;
 
+  # hell yeah
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    gcc
+    zlib
+    glibc
+  ];
+
   # vim: clipboard support
   programs.vim = {
     enable = true;
