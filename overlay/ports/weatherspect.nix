@@ -3,13 +3,13 @@
 stdenv.mkDerivation rec {
 
   pname = "weatherspect";
-  version = "2.0";
+  version = "2.1";
 
   src = fetchFromGitHub {
     owner = "notarealdeveloper";
     repo = "weatherspect";
-    rev = "54cf9e6a0c7eca95a307115da9afd3bc5dbf3daa";
-    hash = "sha256-4iT0i4CnrVyBRhWUmpK+nPLGR9kXXqAr5V6JwPoAGCE=";
+    rev = "f44d7e483d4a7a4c64411fe46ea39a67c7504002";
+    hash = "sha256-3aZAoWBBOwRy8eBEIgX+UU7ji0QvEsBfIm1fkNJ3feQ=";
   };
 
   propagatedBuildInputs = [
