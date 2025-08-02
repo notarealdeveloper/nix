@@ -81,9 +81,7 @@
 
     };
 
-    packages.${system} = with pkgs; {
-      weatherspect = weatherspect;
-    };
+    packages.${system} = pkgs;
 
   };
 }
