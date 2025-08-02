@@ -83,10 +83,10 @@
 
     # unix
     vim_configurable
-    #vim
     file
     wget
     tree
+    unzip
     plocate
     git
     gh
