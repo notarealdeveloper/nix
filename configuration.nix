@@ -99,6 +99,7 @@
     gnumake
     ranger
     adbfs-rootless
+    android-udev-rules
     lean4
 
     # debugging
