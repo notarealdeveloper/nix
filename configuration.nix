@@ -153,7 +153,6 @@
     dropbox
     openvpn3
     openssh
-    awscli2
     nmap
 
     # social
@@ -202,11 +201,6 @@
 
     python314FreeThreading
 
-    (python311.withPackages (ps: with ps; [
-      build
-      pip
-    ]))
-
     # So close!
     # python-head
 
@@ -233,6 +227,19 @@
       TermAnimation
       JSON
       LWP
+    ]))
+
+    # experiment
+    awscli2
+    (python311.withPackages (ps: with ps; [
+      pip
+      numpy_1
+      pandas
+      scikit-learn
+      lightgbm
+      lambda-multiprocessing
+      dvc-s3
+      tflite-runtime
     ]))
 
   ];
