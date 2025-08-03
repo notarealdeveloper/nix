@@ -152,6 +152,7 @@
     dropbox
     openvpn3
     openssh
+    awscli2
 
     # social
     wechat
