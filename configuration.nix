@@ -153,6 +153,7 @@
     openvpn3
     openssh
     awscli2
+    nmap
 
     # social
     wechat
