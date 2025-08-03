@@ -250,6 +250,7 @@
     gcc
     zlib
     glibc
+    gcc.cc.lib
   ];
 
   # vim: clipboard support
