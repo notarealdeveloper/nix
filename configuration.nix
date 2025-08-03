@@ -169,9 +169,6 @@
       # packaging
       pip
       setuptools
-      build
-      twine
-      pytest
 
       # basics
       ipython
