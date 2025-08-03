@@ -230,19 +230,19 @@
     ]))
 
     # experiment
-    awscli2
-    (python311.withPackages (ps: with ps; [
-      pip
-      setuptools
-      build
-      #numpy
-      #pandas
-      #scikit-learn
-      #lightgbm
-      #lambda-multiprocessing
-      #dvc-s3
-      #tflite-runtime
-    ]))
+    #awscli2
+    #(python311.withPackages (ps: with ps; [
+    #  pip
+    #  setuptools
+    #  build
+    #  #numpy
+    #  #pandas
+    #  #scikit-learn
+    #  #lightgbm
+    #  #lambda-multiprocessing
+    #  #dvc-s3
+    #  #tflite-runtime
+    #]))
 
   ];
 
