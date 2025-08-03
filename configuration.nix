@@ -230,7 +230,8 @@
     ]))
 
     # experiment
-    #awscli2
+    awscli2
+    python311
     #(python311.withPackages (ps: with ps; [
     #  pip
     #  setuptools
