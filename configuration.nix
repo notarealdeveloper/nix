@@ -232,6 +232,7 @@
     # experiment
     awscli2
     #gitlab-runner
+    gitlab-ci-local
     python311
     #(python311.withPackages (ps: with ps; [
     #  pip
