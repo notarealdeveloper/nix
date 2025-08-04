@@ -43,11 +43,8 @@
   security.sudo = {
     enable = true;
     extraRules = [
-      {
-        users = [ "jason" ];
-        commands = [];
-        #commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
-      }
+      #{ users = [ "jason" ]; commands = []; }
+      { users = [ "jason" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
     ];
   };
 
