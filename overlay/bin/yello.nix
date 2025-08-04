@@ -22,7 +22,9 @@ pkgs: python:
     installPhase = ''
       mkdir -p $out/bin
       ln -s ${hello}/bin/hello $out/bin/hello
-      ln -s ${jello}/bin/jello $out/bin/jello
+      # Had this before, but it caused a "colliding subpath" warning
+      # that only appeared during --print-build-logs
+      # ln -s ${jello}/bin/jello $out/bin/jello
     '';
 
     # runtime dependencies
