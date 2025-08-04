@@ -2,6 +2,27 @@
 
 { config, lib, pkgs, ... }:
 
+let
+
+  python311submissive = pkgs.python311.overrideAttrs (pkg: {
+    postInstall = (pkg.postInstall or "") + ''
+      ${pkgs.cowsay}/bin/cowsay "Here we go!"
+      for file in $(ls "$out/bin"); do
+        if [[ "$file" == python3.11 ]]; then
+          continue
+        fi
+        rm -v "$out/bin/$file"
+      done
+      rm -rv $out/share
+      echo "$out now contains:"
+      for f in $(find $out/ -type f); do echo " * $f"; done
+      ${pkgs.cowsay}/bin/cowsay \
+        "Nothing beside remains... " \
+        "The lone and level s&&s stretch far away."
+    '';
+  });
+
+in
 {
 
   nix.settings = {
@@ -230,8 +251,7 @@
     # experiment
     awscli2
     gitlab-ci-local
-    python311
-
+    python311submissive
   ];
 
   # android debug bridge
