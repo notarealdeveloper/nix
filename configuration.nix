@@ -253,6 +253,13 @@ in
     gitlab-ci-local
     #python311submissive
     python311
+
+    # bash bug
+    fish
+    dash
+    tcsh
+    ksh
+    zsh
   ];
 
   # android debug bridge
