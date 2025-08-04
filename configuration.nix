@@ -251,7 +251,8 @@ in
     # experiment
     awscli2
     gitlab-ci-local
-    python311submissive
+    #python311submissive
+    python311
   ];
 
   # android debug bridge
