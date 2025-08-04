@@ -45,8 +45,8 @@
     extraRules = [
       {
         users = [ "jason" ];
-        commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; }
-        ];
+        commands = [];
+        #commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
       }
     ];
   };
