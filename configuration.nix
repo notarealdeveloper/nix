@@ -249,6 +249,8 @@
     gcc.cc.lib
   ];
 
+  gtk.iconCache.enable = false;
+
   # vim: clipboard support
   programs.vim = {
     enable = true;
