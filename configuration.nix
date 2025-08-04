@@ -230,7 +230,7 @@
     # experiment
     awscli2
     gitlab-ci-local
-    python311
+    # python311
 
   ];
 
