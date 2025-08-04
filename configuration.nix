@@ -267,7 +267,7 @@
   # vim: clipboard support
   programs.vim = {
     enable = true;
-    package = pkgs.vim;  # this is the default full-featured vim with +clipboard
+    package = pkgs.vim_configurable;  # this is the default full-featured vim with +clipboard
   };
 
   # Create autostart .desktop files for programs
