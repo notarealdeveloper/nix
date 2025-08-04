@@ -118,9 +118,7 @@
     imagemagick
     sshfs
     thc-secure-delete
-    srm
     nasm
-    minitube # for lulu <3
 
     # crypt
     tor
@@ -199,7 +197,7 @@
 
     ]))
 
-    python314FreeThreading
+    #python314FreeThreading
 
     # So close!
     # python-head
@@ -231,21 +229,8 @@
 
     # experiment
     awscli2
-    #gitlab-runner
     gitlab-ci-local
     python311
-    #(python311.withPackages (ps: with ps; [
-    #  pip
-    #  setuptools
-    #  build
-    #  #numpy
-    #  #pandas
-    #  #scikit-learn
-    #  #lightgbm
-    #  #lambda-multiprocessing
-    #  #dvc-s3
-    #  #tflite-runtime
-    #]))
 
   ];
 
