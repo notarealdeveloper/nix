@@ -248,11 +248,13 @@ in
       LWP
     ]))
 
+    #python311submissive
+    python311
+
     # experiment
     awscli2
     gitlab-ci-local
-    #python311submissive
-    python311
+    conda # for proving horrible points
 
     # bash bug
     fish
@@ -269,13 +271,13 @@ in
   programs.dconf.enable = true;
 
   # hell yeah
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    gcc
-    zlib
-    glibc
-    gcc.cc.lib
-  ];
+  #programs.nix-ld.enable = true;
+  #programs.nix-ld.libraries = with pkgs; [
+  #  gcc
+  #  zlib
+  #  glibc
+  #  gcc.cc.lib
+  #];
 
   gtk.iconCache.enable = false;
 
