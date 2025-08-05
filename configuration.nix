@@ -249,7 +249,7 @@ in
     ]))
 
     #python311submissive
-    python311
+    (python311.withPackages (ps: with ps; [ pip ]))
 
     # experiment
     awscli2
@@ -272,8 +272,8 @@ in
     ### > "Get thee behind Me, Satan!
     ### > Thou art an offense unto Me;
     ### > for thou savorest not the things
-    ### > that be of /bin, but those that
-    ### > be of /opt/apps/docker/prod/lib/conda/env/bin
+    ### > that be of /bin, but those that be of
+    ### > /home/user/.cache/pypoetry/virtualenvs/repo-UJ6YPHE3-py3.13/bin
     ### > -Matthew 16:23
     poetry
     ### Don't touch me poetry.
