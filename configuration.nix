@@ -254,7 +254,32 @@ in
     # experiment
     awscli2
     gitlab-ci-local
-    conda # for proving horrible points
+
+    # <abominations>
+    ## This little guy (1) installs X11 when
+    ## you install numpy, (2) downgrades
+    ## your python version in non-commutative
+    ## ways, and (3) modifies /proc/self/root
+    ## such that you see a different set of
+    ## directories when you `ls /`, and does
+    ## so without requiring root. Clearly some
+    ## kind of call to `unshare` or something
+    ## else that's practically equivalent to
+    ## a sizable subset of docker.
+    conda
+    ## <QUARANTINE>
+    ### > But He turned and said unto Ptr
+    ### > "Get thee behind Me, Satan!
+    ### > Thou art an offense unto Me;
+    ### > for thou savorest not the things
+    ### > that be of /bin, but those that
+    ### > be of /opt/apps/docker/prod/lib/conda/env/bin
+    ### > -Matthew 16:23
+    poetry
+    ### Don't touch me poetry.
+    ### I'm just using you to make a point.
+    ## </QUARANTINE>
+    # </abominations>
 
     # bash bug
     fish
