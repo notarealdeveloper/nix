@@ -218,6 +218,11 @@ in
 
     ]))
 
+    # python311submissive
+    (python311.withPackages (ps: with ps; [ pip ]))
+    awscli2
+    gitlab-ci-local
+
     #python314FreeThreading
 
     # So close!
@@ -241,32 +246,58 @@ in
 
     # ports
     weatherspect
-
     (pkgs.perl.withPackages (ps: with ps; [
       TermAnimation
       JSON
       LWP
     ]))
 
-    #python311submissive
-    (python311.withPackages (ps: with ps; [ pip ]))
-
-    # experiment
-    awscli2
-    gitlab-ci-local
-
-    # <abominations>
+    # <ABOMINATIONS>
+    ##
+    ## Hi there!
+    ##
+    ## Welcome to the abominations section.
+    ##
+    ## In this section we install packages
+    ## that happen also to be crimes against
+    ## humanity, morality, and whatever set
+    ## of gods (possibly empty) might happen
+    ## to exist. First abomination on the list...
+    ##
+    ## conda!
+    ##
+    ## Ok this one's actually kinda cute,
+    ## despite also being a total abortion.
+    ##
     ## This little guy (1) installs X11 when
     ## you install numpy, (2) downgrades
     ## your python version in non-commutative
     ## ways, and (3) modifies /proc/self/root
     ## such that you see a different set of
     ## directories when you `ls /`, and does
-    ## so without requiring root. Clearly some
-    ## kind of call to `unshare` or something
-    ## else that's practically equivalent to
-    ## a sizable subset of docker.
+    ## so without requiring root! The final
+    ## part isn't necessarily mysterious or
+    ## whatever. It's clearly just some simple
+    ## call to `unshare` or something, but in
+    ## practice it's equivalent to a sizable
+    ## subset of docker, and it got there by
+    ## wanting to install numpy and other stuff
+    ## in a way that's consistent with whatever
+    ## silly overfit shit is hard-coded in your
+    ## company's 79 year old requirements.txt
+    ## Ladies and gentlemen give a big round of
+    ## applause to...
     conda
+    ## Haha what a weird little guy conda is...
+    ## Almost cute though, if you squint.
+    ## Ok what's next?
+    ## (Narrator: The host's eyes widen in terror)
+    ## Oh jesus
+    ## Oh fuck
+    ## Um wow ok.
+    ## Holy my beer
+    ## 
+    ##  ☢️  ☢️  ☢️  ☢️
     ## <QUARANTINE>
     ### > But He turned and said unto Ptr
     ### > "Get thee behind Me, Satan!
@@ -274,19 +305,25 @@ in
     ### > for thou savorest not the things
     ### > that be of /bin, but those that be of
     ### > /home/user/.cache/pypoetry/virtualenvs/repo-UJ6YPHE3-py3.13/bin
-    ### > -Matthew 16:23
-    poetry
+    ### > -Jesus fucking Christ
+    ### >  Matthew 16:23
+    ### >  Paraphrased
+    #############
+    ###############                   # (Narrator: The inverse funnel on the left is
+    #################                 #  a common mechanism found in devices like crab
+                        poetry        #  traps to make sure the little bastard can't
+    #################                 #  figure out how to escape out into the
+    ###############     # ^ ew gross  #  rest of the package list.)
+    #############
     ### Don't touch me poetry.
-    ### I'm just using you to make a point.
+    ### I'm just using you in a
+    ### book as part of a joke.
+    ##
     ## </QUARANTINE>
-    # </abominations>
+    ##  ☢️  ☢️  ☢️  ☢️
+    ##
+    # </ABOMINATIONS>
 
-    # bash bug
-    fish
-    dash
-    tcsh
-    ksh
-    zsh
   ];
 
   # android debug bridge
