@@ -10,7 +10,8 @@ buildPythonPackage rec {
   pyproject = true;
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "python_cowsay";
+    inherit version;
     sha256 = "e4d6ff9794cbf776129ffbef9addcda0021ad4e63b6cd8cbe9c12ea415311139";
   };
 
