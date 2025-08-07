@@ -20,6 +20,11 @@ pkgs:
       inherit (self) buildPythonPackage setuptools wheel pip;
     };
 
+    python-bin = call ./python-bin.nix {
+      inherit (pkgs) lib;
+      inherit (self) buildPythonPackage fetchPypi python-cowsay;
+    };
+
     lambda-multiprocessing  = call ./lambda-multiprocessing.nix { };
     tflite-runtime          = call ./tflite-runtime.nix { inherit pkgs; python = pkgs.python3; };
     dvc-s3                  = call ./dvc-s3.nix { inherit pkgs; python = pkgs.python3; };
