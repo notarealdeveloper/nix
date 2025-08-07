@@ -2,6 +2,8 @@
 { lib
 , buildPythonPackage
 , fetchPypi
+, pip
+, setuptools
 , ... }:
 
 buildPythonPackage rec {
@@ -16,5 +18,7 @@ buildPythonPackage rec {
   };
 
   propagatedBuildInputs = [
+    pip
+    setuptools
   ];
 }

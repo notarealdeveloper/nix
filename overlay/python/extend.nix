@@ -22,12 +22,12 @@ pkgs:
 
     python-cowsay = call ./python-cowsay.nix {
       inherit (pkgs) lib;
-      inherit (self) buildPythonPackage fetchPypi;
+      inherit (self) buildPythonPackage fetchPypi pip setuptools;
     };
 
     python-bin = call ./python-bin.nix {
       inherit (pkgs) lib;
-      inherit (self) buildPythonPackage fetchPypi python-cowsay;
+      inherit (self) buildPythonPackage fetchPypi pip setuptools python-cowsay;
     };
 
     lambda-multiprocessing  = call ./lambda-multiprocessing.nix { };

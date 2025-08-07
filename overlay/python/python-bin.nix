@@ -3,6 +3,8 @@
 , buildPythonPackage
 , fetchPypi
 , python-cowsay
+, pip
+, setuptools
 , ... }:
 
 buildPythonPackage rec {
@@ -16,6 +18,8 @@ buildPythonPackage rec {
   };
 
   propagatedBuildInputs = [
+    pip
+    setuptools
     python-cowsay
   ];
 
