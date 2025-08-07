@@ -111,6 +111,7 @@ in
     plocate
     git
     gh
+    zlib
     glab
     jq
     acpi
