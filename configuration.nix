@@ -187,7 +187,9 @@ in
 
       # packaging
       pip
+      build
       setuptools
+      twine
 
       # basics
       ipython
