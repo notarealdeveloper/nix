@@ -186,16 +186,16 @@ in
     (python.withPackages (ps: with ps; [
 
       # packaging
-      pip
-      build
-      setuptools
-      twine
+      #pip
+      #setuptools
+      #build
+      #twine
 
       # basics
       ipython
-      requests
 
       # net
+      requests
       beautifulsoup4
       yt-dlp
 
@@ -213,11 +213,14 @@ in
       google-api-python-client  # getbtcprice
       geoip2                    # getbtcprice
 
+      # derivations
+      jello
+
       # overlay
       is_instance
+      python-bin
       embd
       wnix
-      jello
 
     ]))
 
