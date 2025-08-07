@@ -20,6 +20,11 @@ pkgs:
       inherit (self) buildPythonPackage setuptools wheel pip;
     };
 
+    python-cowsay = call ./python-bin.nix {
+      inherit (pkgs) lib;
+      inherit (self) buildPythonPackage fetchPypi;
+    };
+
     python-bin = call ./python-bin.nix {
       inherit (pkgs) lib;
       inherit (self) buildPythonPackage fetchPypi python-cowsay;
