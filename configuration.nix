@@ -240,7 +240,7 @@ in
     yello   # attempt to declare an importable that depends on an executable
 
     # ascii
-    cowsay
+    # cowsay
     xcowsay
     asciiquarium
     cmatrix

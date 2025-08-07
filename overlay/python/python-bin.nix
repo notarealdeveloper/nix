@@ -13,7 +13,8 @@ buildPythonPackage rec {
   pyproject = true;
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "python_bin";
+    inherit version;
     sha256 = "36b61ec88cd0f59dd740403fd6c5bb99ba1ca3cae4199d2c6af1b6fc535e8ef4";
   };
 
