@@ -255,7 +255,7 @@ in
     sl2
 
     # ports
-    weatherspect
+    # weatherspect
     (pkgs.perl.withPackages (ps: with ps; [
       TermAnimation
       JSON
