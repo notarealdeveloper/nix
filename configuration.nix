@@ -338,6 +338,9 @@ in
   # dconf
   programs.dconf.enable = true;
 
+  # this i guess...
+  services.docker.enable = true;
+
   # hell yeah
   #programs.nix-ld.enable = true;
   #programs.nix-ld.libraries = with pkgs; [

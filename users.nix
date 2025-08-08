@@ -6,7 +6,7 @@
   users.users.jason = {
     isNormalUser = true;
     description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
     packages = with pkgs; [
     ];
   };
