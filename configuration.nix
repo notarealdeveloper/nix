@@ -115,6 +115,7 @@ in
     glab
     jq
     acpi
+    tmux
 
     # dev
     gcc
