@@ -224,14 +224,17 @@ in
 
     ]))
 
-    # python311submissive
+    # work
     (python311.withPackages (ps: with ps; [ pip ]))
     awscli2
+    docker
+    docker-buildx
+    docker-client
     gitlab-ci-local
+    gitlab-container-registry
 
-    #python314FreeThreading
-
-    # So close!
+    # python311submissive
+    # python314FreeThreading
     # python-head
 
     # raw derivations
@@ -339,7 +342,7 @@ in
   programs.dconf.enable = true;
 
   # this i guess...
-  services.docker.enable = true;
+  # services.docker.enable = true;
 
   # hell yeah
   #programs.nix-ld.enable = true;
