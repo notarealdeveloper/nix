@@ -9,13 +9,13 @@
 
 buildPythonPackage rec {
   pname = "python-bin";
-  version = "0.0.1";
+  version = "0.0.2";
   pyproject = true;
 
   src = fetchPypi {
     pname = "python_bin";
     inherit version;
-    sha256 = "36b61ec88cd0f59dd740403fd6c5bb99ba1ca3cae4199d2c6af1b6fc535e8ef4";
+    sha256 = "ae6a69025b600844cf0c30eda9ec2eb2797387a6a74a46ce9c1a51c7ddcd6b6b";
   };
 
   propagatedBuildInputs = [
