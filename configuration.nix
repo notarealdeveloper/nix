@@ -333,10 +333,8 @@ in
     ##  ☢️  ☢️  ☢️  ☢️
     ##
     # </ABOMINATIONS>
-
-    # Hello Corporation © ® ™
-    autoconf
   ];
+
 
   # android debug bridge
   programs.adb.enable = true;

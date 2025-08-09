@@ -8,6 +8,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hello-corporation.url = "path:./hello-corporation";
+
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }:
@@ -82,6 +85,8 @@
     };
 
     packages.${system} = pkgs;
+
+    devShells.${system} = devShells.${system}.hello-corporation;
 
   };
 }
