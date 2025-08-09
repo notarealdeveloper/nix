@@ -31,15 +31,15 @@
               - $(autoconf --version | head -1)
               - $(meson --version)
               - $(ninja --version)
-              Python
-              - $(python --version)
-              - packages: $(echo && pip list)
               Rust
               - $(rustc --version)
               - $(cargo --version)
               Haskell
               - $(ghc --version)
               - $(cabal --version | head -1)
+              Python
+              - $(python --version)
+              - packages: $(echo && pip list)
             ==============================================
             EOF
 
