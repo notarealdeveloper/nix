@@ -20,7 +20,7 @@
           python = pkgs.python313;
 
           helloBanner = ''
-            cat << "EOF"
+            cat << EOF
             ==============================================
              Hello Corporation environment is ready.  ✅
               Basics
@@ -42,10 +42,6 @@
               - $(cabal --version | head -1)
             ==============================================
             EOF
-
-            #if [ -e "$HOME/.bashrc" ]; then
-            #  source "$HOME/.bashrc"
-            #fi
 
             export PS1="(Hello Corporation Development Environment) $PS1"
           '';
