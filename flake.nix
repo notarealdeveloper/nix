@@ -1,15 +1,24 @@
 {
-  description = "The WNIX Operating System!";
+  description = "The WNIX Operating System";
 
   inputs = {
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hello-corporation.url = "path:./hello-corporation";
+    hello-corporation = {
+      url = "path:./hello-corporation";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }
 
   };
 
