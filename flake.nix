@@ -13,7 +13,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, hello-corporation, ... }:
   let
     system = "x86_64-linux";
 
@@ -86,7 +86,11 @@
 
     packages.${system} = pkgs;
 
-    devShells.${system} = devShells.${system}.hello-corporation;
+    devShells.${system} = {
+      hello-corporation = hello-corporation.devShells.${system}.default;
+      # optional: make it the default devShell
+      default = hello-corporation.devShells.${system}.default;
+    };
 
   };
 }

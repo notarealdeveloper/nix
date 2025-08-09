@@ -4,75 +4,22 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
   outputs = { self, nixpkgs }:
-
   let
+    systems = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
 
-    systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+    forAllSystems = f:
+      nixpkgs.lib.genAttrs systems (system:
+        let
+          pkgs   = import nixpkgs { inherit system; };
+          python = pkgs.python313;
 
-    forAllSystems = f: nixpkgs.lib.genAttrs systems (system:
-
-      let
-
-        pkgs = import nixpkgs { inherit system; };
-
-        pypkgs = pkgs.python313;
-
-      in
-
-        f pkgs pypkgs
-
-    );
-
-  in
-
-  {
-
-    devShells = forAllSystems (pkgs: py:
-
-      {
-
-        default = pkgs.mkShell {
-
-          name = "hello-corporation";
-
-          packages = with pkgs; [
-
-            ################################
-            ### Hello Technologies © ® ™ ###
-            ################################
-
-            # basics
-            git
-            gnumake
-
-            # c
-            gcc
-            autoconf
-            automake
-            libtool
-            pkg-config
-            meson
-            ninja
-
-            # python
-            (py.withPackages (ps: with ps; [
-              setuptools
-              wheel
-              cython
-            ]))
-
-            # rust
-            rustc
-            cargo
-
-            # haskell
-            ghc
-            cabal-install
-
-          ];
-
-          shellHook = ''
-            cat << EOF
+          helloBanner = ''
+            cat << "EOF"
             ==============================================
              Hello Corporation environment is ready.  ✅
               Basics
@@ -90,14 +37,58 @@
               - $(rustc --version)
               - $(cargo --version)
               Haskell
-              - $(ghc --verison)
-              - $(cabal --version)
+              - $(ghc --version)
+              - $(cabal --version | head -1)
             ==============================================
             EOF
           '';
-        };
-      }
-    );
+
+          basePackages = with pkgs; [
+            # basics
+            git
+            gnumake
+
+            # C toolchain
+            gcc autoconf automake libtool pkg-config meson ninja
+
+            # Python (3.13) + libs
+            (python.withPackages (ps: with ps; [ setuptools wheel cython ]))
+
+            # Rust
+            rustc cargo
+
+            # Haskell
+            ghc cabal-install
+          ];
+        in
+        f pkgs python helloBanner basePackages
+      );
+
+  in
+  {
+    ##########################################################################
+    # Packages
+    ##########################################################################
+    packages = forAllSystems (pkgs: python: helloBanner: basePackages: {
+      hello-corporation = pkgs.writeShellApplication {
+        name = "hello-corporation";
+        runtimeInputs = basePackages;
+        text = helloBanner;
+      };
+
+      default = self.packages.${pkgs.system}.hello-corporation;
+    });
+
+    ##########################################################################
+    # Dev Shell
+    ##########################################################################
+    devShells = forAllSystems (pkgs: python: helloBanner: basePackages: {
+      default = pkgs.mkShell {
+        name = "hello-corporation";
+        packages = basePackages;
+        shellHook = helloBanner;
+      };
+    });
   };
 }
 
