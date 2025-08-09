@@ -41,6 +41,7 @@
               - $(cabal --version | head -1)
             ==============================================
             EOF
+            export PS1="(Hello Corporation Development Environment) $PS1"
           '';
 
           basePackages = with pkgs; [
