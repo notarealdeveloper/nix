@@ -59,7 +59,7 @@
             gcc autoconf automake libtool pkg-config meson ninja
 
             # Python (3.13) + libs
-            (python.withPackages (ps: with ps; [ setuptools wheel cython ]))
+            (python.withPackages (ps: with ps; [ pip setuptools build pytest twine wheel cython ]))
 
             # Rust
             rustc cargo
