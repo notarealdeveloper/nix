@@ -43,9 +43,9 @@
             ==============================================
             EOF
 
-            if [ -e "$HOME/.bashrc" ]; then
-              source "$HOME/.bashrc"
-            fi
+            #if [ -e "$HOME/.bashrc" ]; then
+            #  source "$HOME/.bashrc"
+            #fi
 
             export PS1="(Hello Corporation Development Environment) $PS1"
           '';
