@@ -18,7 +18,7 @@
     hello-corporation = {
       url = "path:./hello-corporation";
       inputs.nixpkgs.follows = "nixpkgs";
-    }
+    };
 
   };
 
