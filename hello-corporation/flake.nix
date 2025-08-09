@@ -16,6 +16,7 @@
       nixpkgs.lib.genAttrs systems (system:
         let
           pkgs   = import nixpkgs { inherit system; };
+
           python = pkgs.python313;
 
           helloBanner = ''
@@ -93,6 +94,7 @@
         name = "hello-corporation";
         packages = basePackages;
         shellHook = helloBanner;
+        SHELL = pkgs.bashInteractive;
       };
     });
   };
