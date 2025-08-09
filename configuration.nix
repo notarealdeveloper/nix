@@ -334,6 +334,8 @@ in
     ##
     # </ABOMINATIONS>
 
+    # Hello Corporation © ® ™
+    autoconf
   ];
 
   # android debug bridge
