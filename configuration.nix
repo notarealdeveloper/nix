@@ -123,7 +123,6 @@ in
     ranger
     adbfs-rootless
     android-udev-rules
-    lean4
 
     # debugging
     gdb
@@ -140,14 +139,15 @@ in
     xdotool
     imagemagick
     sshfs
-    thc-secure-delete
     nasm
 
-    # crypt
+    # sec
+    gpg
     tor
     torsocks
     tor-browser
     cryptsetup
+    thc-secure-delete
 
     # desktop
     conky
@@ -183,6 +183,9 @@ in
 
     # games
     stepmania
+
+    # mathematics
+    lean4
 
     (python.withPackages (ps: with ps; [
 
@@ -234,17 +237,8 @@ in
     gitlab-ci-local
     gitlab-container-registry
 
-    # python311submissive
-    # python314FreeThreading
-    # python-head
-
-    # raw derivations
-    sayhi   # stdenv.mkDerivation, depends on hi
-    saybye  # builtins.derivation, depends on raw bye
-    yello   # attempt to declare an importable that depends on an executable
-
     # ascii
-    # cowsay
+    cowsay
     xcowsay
     asciiquarium
     cmatrix
@@ -255,12 +249,21 @@ in
     sl2
 
     # ports
-    # weatherspect
+    weatherspect
     (pkgs.perl.withPackages (ps: with ps; [
       TermAnimation
       JSON
       LWP
     ]))
+
+    # rust
+    rustc
+    cargo
+
+    # haskell
+    ghc
+    cabal-install
+    xmonad
 
     # <ABOMINATIONS>
     ##
@@ -333,6 +336,16 @@ in
     ##  ☢️  ☢️  ☢️  ☢️
     ##
     # </ABOMINATIONS>
+
+    # experiments
+    python314FreeThreading
+    # python311submissive
+    # python-head
+
+    # raw derivations
+    sayhi   # stdenv.mkDerivation, depends on hi
+    saybye  # builtins.derivation, depends on raw bye
+    yello   # attempt to declare an importable that depends on an executable
   ];
 
 
