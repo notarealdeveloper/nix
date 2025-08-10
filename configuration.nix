@@ -227,11 +227,14 @@ in
     # work
     (python311.withPackages (ps: with ps; [ pip ]))
     awscli2
+    gitlab-ci-local
+    gitlab-container-registry
+
+    # software and hardware virtualisation
+    qemu
     docker
     docker-buildx
     docker-client
-    gitlab-ci-local
-    gitlab-container-registry
 
     # ascii
     cowsay
