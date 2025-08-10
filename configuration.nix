@@ -142,7 +142,7 @@ in
     nasm
 
     # sec
-    gpg
+    gnupg
     tor
     torsocks
     tor-browser
