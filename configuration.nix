@@ -190,12 +190,6 @@ in
 
     (python.withPackages (ps: with ps; [
 
-      # packaging
-      #pip
-      #setuptools
-      #build
-      #twine
-
       # basics
       ipython
 
@@ -361,15 +355,6 @@ in
 
   # this i guess...
   virtualisation.docker.enable = true;
-
-  # hell yeah
-  #programs.nix-ld.enable = true;
-  #programs.nix-ld.libraries = with pkgs; [
-  #  gcc
-  #  zlib
-  #  glibc
-  #  gcc.cc.lib
-  #];
 
   gtk.iconCache.enable = false;
 
