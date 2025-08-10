@@ -175,7 +175,6 @@ in
     dropbox
     openvpn3
     openssh
-    telnet
     nmap
 
     # social
