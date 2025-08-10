@@ -57,6 +57,8 @@
       defaultBranch = master
     [pull]
       rebase = true
+    [commit]
+      verbose = true
   '';
 
 }
