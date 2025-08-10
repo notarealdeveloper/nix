@@ -163,6 +163,7 @@ in
     vscode
     obsidian
     gimp
+    gparted
 
     # video
     vlc
