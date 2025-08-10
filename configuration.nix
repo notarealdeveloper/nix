@@ -263,7 +263,10 @@ in
     # haskell
     ghc
     cabal-install
-    xmonad
+
+    # window managers
+    awesome
+    xmonad-with-packages
 
     # <ABOMINATIONS>
     ##
