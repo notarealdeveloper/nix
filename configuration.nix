@@ -190,6 +190,13 @@ in
 
     (python.withPackages (ps: with ps; [
 
+      # packaging
+      pip
+      build
+      twine
+      pytest
+      setuptools
+
       # basics
       ipython
 
