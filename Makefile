@@ -21,7 +21,6 @@ system-%:
 
 home-%:
 	home-manager switch -b backup --flake .#$*
-	#nix run .#home-manager -- switch -b backup
 
 arch:
 	sudo pacman -S nix
