@@ -1,5 +1,37 @@
 {
   "nodes": {
+    "LD-mkdir-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754939135,
+        "narHash": "sha256-clep5U5swfPrfpexlZcdvFvVh9SE6++J8NjYZ8L31B8=",
+        "owner": "hello-corporation",
+        "repo": "LD-mkdir",
+        "rev": "4de0a982ae480031171459a2b75d1bddf8030c65",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hello-corporation",
+        "repo": "LD-mkdir",
+        "type": "github"
+      }
+    },
+    "LD-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754938258,
+        "narHash": "sha256-/a4E/kJVd87PfTTaEwE7r3nUrzGGnEwdZroN2CzLXTk=",
+        "owner": "hello-corporation",
+        "repo": "LD",
+        "rev": "52998e392b2983a9597413159404969870a32fd5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hello-corporation",
+        "repo": "LD",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -33,6 +65,28 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nix-LD": {
+      "inputs": {
+        "LD-mkdir-src": "LD-mkdir-src",
+        "LD-src": "LD-src",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754944860,
+        "narHash": "sha256-eazFO3AOHrUd5Sk0BVB2ajteMnWKGiuGyCHvrLnHIQw=",
+        "owner": "doubleunix",
+        "repo": "nix-LD",
+        "rev": "c2b17387fc31dc39d9cdc2645b56adda688eb17b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "repo": "nix-LD",
         "type": "github"
       }
     },
@@ -96,6 +150,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "nix-LD": "nix-LD",
         "nix-python": "nix-python",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs"
