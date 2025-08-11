@@ -23,7 +23,7 @@ final: prev: with prev; rec {
   ### Python Overlay ###
   ######################
 
-  pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
+  # pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
 
   #######################
   ### Raw derivations ###

@@ -15,6 +15,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    python-overlay = {
+      url = "github:doubleunix/python-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hello-corporation = {
       url = "path:./hello-corporation";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,15 +27,17 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, hello-corporation, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, python-overlay, hello-corporation, ... }:
+
   let
+
     system = "x86_64-linux";
 
     overlay = import ./overlay;
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ overlay ];
+      overlays = [ overlay python-overlay ];
       config.allowUnfree = true;
     };
 
