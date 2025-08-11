@@ -37,7 +37,7 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ overlay python-overlay ];
+      overlays = [ overlay python-overlay.overlays.default ];
       config.allowUnfree = true;
     };
 
