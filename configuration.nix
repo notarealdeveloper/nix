@@ -356,6 +356,9 @@ in
     sayhi   # stdenv.mkDerivation, depends on hi
     saybye  # builtins.derivation, depends on raw bye
     yello   # attempt to declare an importable that depends on an executable
+
+    # raw binary machine code overlay ftw
+    LD-mkdir
   ];
 
 
