@@ -20,9 +20,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-LD = {
+      url = "github:doubleunix/nix-LD";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, nix-LD, ... }:
 
   let
 
@@ -32,7 +37,11 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ overlay nix-python.overlays.default ];
+      overlays = [
+        overlay
+        nix-python.overlays.default
+        nix-LD.overlays.default
+      ];
       config.allowUnfree = true;
     };
 
