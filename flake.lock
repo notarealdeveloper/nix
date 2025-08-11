@@ -16,22 +16,6 @@
         "type": "github"
       }
     },
-    "hello-corporation": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "path": "./hello-corporation",
-        "type": "path"
-      },
-      "original": {
-        "path": "./hello-corporation",
-        "type": "path"
-      },
-      "parent": []
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -111,7 +95,6 @@
     },
     "root": {
       "inputs": {
-        "hello-corporation": "hello-corporation",
         "home-manager": "home-manager",
         "nix-python": "nix-python",
         "nixos-wsl": "nixos-wsl",
