@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
   version = "2.1";
 
   src = fetchFromGitHub {
-    owner = "notarealdeveloper";
+    owner = "doubleunix";
     repo = "weatherspect";
     rev = "f44d7e483d4a7a4c64411fe46ea39a67c7504002";
     hash = "sha256-3aZAoWBBOwRy8eBEIgX+UU7ji0QvEsBfIm1fkNJ3feQ=";
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Look at me. I am de maintainer now.";
-    homepage    = "https://github.com/notarealdeveloper/weatherspect";
+    homepage    = "https://github.com/doubleunix/weatherspect";
     license     = licenses.gpl2;
     platforms   = platforms.unix;
   };
