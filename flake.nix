@@ -105,6 +105,12 @@
     # For now, nix flake check seems not to like it.
     # packages.${system} = pkgs;
 
+    packages.${system} = {
+      inherit (pkgs)
+        weatherspect
+      ;
+    };
+
     legacyPackages.${system} = pkgs;
 
     devShells.${system} = {
