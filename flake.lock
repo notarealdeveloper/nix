@@ -52,6 +52,26 @@
         "type": "github"
       }
     },
+    "nix-python": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754907807,
+        "narHash": "sha256-eyE6ecGnAbgSPaOIwyQArANR3T3AccG73jJA0TcGBrY=",
+        "owner": "doubleunix",
+        "repo": "nix-python",
+        "rev": "e7c910991af3206a8fe28f5d115f0eba540d2179",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "repo": "nix-python",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -89,33 +109,13 @@
         "type": "github"
       }
     },
-    "python-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1754907807,
-        "narHash": "sha256-eyE6ecGnAbgSPaOIwyQArANR3T3AccG73jJA0TcGBrY=",
-        "owner": "doubleunix",
-        "repo": "python-overlay",
-        "rev": "e7c910991af3206a8fe28f5d115f0eba540d2179",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "repo": "python-overlay",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "hello-corporation": "hello-corporation",
         "home-manager": "home-manager",
+        "nix-python": "nix-python",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs",
-        "python-overlay": "python-overlay"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
