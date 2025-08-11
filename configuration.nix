@@ -358,6 +358,7 @@ in
     yello   # attempt to declare an importable that depends on an executable
 
     # raw binary machine code overlay ftw
+    LD
     LD-mkdir
     LD-rmdir
   ];
