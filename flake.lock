@@ -96,11 +96,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754905781,
-        "narHash": "sha256-qCOfdN6OPN4mgsSm0fTh64ADI7w6yewJUbRvPp6dBBo=",
+        "lastModified": 1754907343,
+        "narHash": "sha256-+oIyheyJZmdtVKV0FkVcxCrn8rPjJVLQQWkBAR1Fcy4=",
         "owner": "doubleunix",
         "repo": "python-overlay",
-        "rev": "47e8686256ea13a34d635affe2833a11334dc7a0",
+        "rev": "f969f194aec6743b92a47fcb89e8c2741aa6d86a",
         "type": "github"
       },
       "original": {
