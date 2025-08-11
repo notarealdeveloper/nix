@@ -20,14 +20,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hello-corporation = {
-      url = "path:./hello-corporation";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, hello-corporation, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, ... }:
 
   let
 
@@ -112,12 +107,6 @@
     };
 
     legacyPackages.${system} = pkgs;
-
-    devShells.${system} = {
-      hello-corporation = hello-corporation.devShells.${system}.default;
-      # optional: make it the default devShell
-      default = hello-corporation.devShells.${system}.default;
-    };
 
   };
 }
