@@ -196,6 +196,7 @@ in
       twine
       pytest
       setuptools
+      cython
 
       # basics
       ipython
