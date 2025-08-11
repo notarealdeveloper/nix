@@ -135,6 +135,7 @@ in
     # mid-level
     xorg.xinit
     xorg.xeyes
+    xorg.xhost
     xclip
     xdotool
     imagemagick
