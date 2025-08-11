@@ -37,7 +37,7 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ overlay python-overlay ];
+      overlays = [ overlay python-overlay.overlays.default ];
       config.allowUnfree = true;
     };
 
@@ -100,7 +100,12 @@
 
     };
 
-    packages.${system} = pkgs;
+    # Make sure this doesn't break the cool remote
+    # searchability thing before removing it.
+    # For now, nix flake check seems not to like it.
+    # packages.${system} = pkgs;
+
+    legacyPackages.${system} = pkgs;
 
     devShells.${system} = {
       hello-corporation = hello-corporation.devShells.${system}.default;
