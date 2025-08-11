@@ -19,11 +19,11 @@
     "LD-rmdir-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1754946261,
-        "narHash": "sha256-JmKnZKVEjZ2SWxBclyXPs7QixHeMTKNl9ccSVDdwAIs=",
+        "lastModified": 1754947427,
+        "narHash": "sha256-HEsoJW/gqap2UCYbJP3f/DUYUBGC49yClYqzAdtnDSU=",
         "owner": "hello-corporation",
         "repo": "LD-rmdir",
-        "rev": "de9f4078fef88341103cedf5fb95f854d9396cf4",
+        "rev": "c2444f509db4be0f7f35a2f7a452298587487af2",
         "type": "github"
       },
       "original": {
