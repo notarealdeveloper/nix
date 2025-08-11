@@ -20,8 +20,8 @@ system-%:
 	sudo nixos-rebuild --print-build-logs switch --flake .#$*
 
 home-%:
-	#home-manager switch -b backup --flake .#$*
-	nix run .#home-manager -- switch -b backup
+	home-manager switch -b backup --flake .#$*
+	#nix run .#home-manager -- switch -b backup
 
 arch:
 	sudo pacman -S nix
