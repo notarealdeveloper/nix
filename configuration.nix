@@ -359,8 +359,8 @@ in
 
     # raw binary machine code overlay ftw
     LD-mkdir
+    LD-rmdir
   ];
-
 
   # android debug bridge
   programs.adb.enable = true;

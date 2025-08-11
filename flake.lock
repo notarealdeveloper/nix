@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "LD-rmdir-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754946261,
+        "narHash": "sha256-JmKnZKVEjZ2SWxBclyXPs7QixHeMTKNl9ccSVDdwAIs=",
+        "owner": "hello-corporation",
+        "repo": "LD-rmdir",
+        "rev": "de9f4078fef88341103cedf5fb95f854d9396cf4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hello-corporation",
+        "repo": "LD-rmdir",
+        "type": "github"
+      }
+    },
     "LD-src": {
       "flake": false,
       "locked": {
@@ -55,11 +71,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754886238,
-        "narHash": "sha256-LTQomWOwG70lZR+78ZYSZ9sYELWNq3HJ7/tdHzfif/s=",
+        "lastModified": 1754924470,
+        "narHash": "sha256-asI/or9AcUMydwzodCgpHGytnMSNUlciw3uaycpXm4E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0d492b89d1993579e63b9dbdaed17fd7824834da",
+        "rev": "67393957c27b4e4c6c48a60108a201413ced7800",
         "type": "github"
       },
       "original": {
@@ -71,17 +87,18 @@
     "nix-LD": {
       "inputs": {
         "LD-mkdir-src": "LD-mkdir-src",
+        "LD-rmdir-src": "LD-rmdir-src",
         "LD-src": "LD-src",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1754944860,
-        "narHash": "sha256-eazFO3AOHrUd5Sk0BVB2ajteMnWKGiuGyCHvrLnHIQw=",
+        "lastModified": 1754947203,
+        "narHash": "sha256-oIQJ0B8hq1hsCjvm63xSHbVXQpGqR3E6OsJInIeJ9F8=",
         "owner": "doubleunix",
         "repo": "nix-LD",
-        "rev": "c2b17387fc31dc39d9cdc2645b56adda688eb17b",
+        "rev": "678991dac3de48711eca578e0dc3d93ed0314556",
         "type": "github"
       },
       "original": {
@@ -118,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754326498,
-        "narHash": "sha256-3ynDaygIzQYlBZFHGDeQzXmPkX2ILeZ0wWJ84FR4g7E=",
+        "lastModified": 1754944986,
+        "narHash": "sha256-g2SOagAYw8bGxmOQRdrdjhpNTWmSuXEAGWyrYqxqi8Q=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "ca55236cd9ef3cdea29b51a0b52a9402c60e9a27",
+        "rev": "bb5971d6bff4bcfe505b9348e66a78048a3ccedf",
         "type": "github"
       },
       "original": {
