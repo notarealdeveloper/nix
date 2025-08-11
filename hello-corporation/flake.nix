@@ -12,9 +12,12 @@
       "aarch64-darwin"
     ];
 
-    forAllSystems = f:
+    forAllSystems = func:
+
       nixpkgs.lib.genAttrs systems (system:
+
         let
+
           pkgs   = import nixpkgs { inherit system; };
 
           python = pkgs.python313;
@@ -63,14 +66,12 @@
             ghc cabal-install
           ];
         in
-        f pkgs python helloBanner basePackages
+        func pkgs python helloBanner basePackages
       );
 
   in
   {
-    ##########################################################################
-    # Packages
-    ##########################################################################
+
     packages = forAllSystems (pkgs: python: helloBanner: basePackages: {
       hello-corporation = pkgs.writeShellApplication {
         name = "hello-corporation";
@@ -81,9 +82,6 @@
       default = self.packages.${pkgs.system}.hello-corporation;
     });
 
-    ##########################################################################
-    # Dev Shell
-    ##########################################################################
     devShells = forAllSystems (pkgs: python: helloBanner: basePackages: {
       default = pkgs.mkShell {
         name = "hello-corporation";
