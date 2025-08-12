@@ -38,6 +38,9 @@ in
     ".vimrc".source     = link "${exec.dst}/etc/vimrc";
     ".face".source      = link "${exec.dst}/etc/dot-face";
 
+    # ipython startup file
+    ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/lib/python/00-pyrc.py";
+
     # symlinks from personal
     "Templates".source  = link "${personal.dst}/etc/Templates";
 
