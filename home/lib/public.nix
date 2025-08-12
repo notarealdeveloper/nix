@@ -39,7 +39,7 @@ in
     ".face".source      = link "${exec.dst}/etc/dot-face";
 
     # ipython startup file
-    ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/lib/python/00-pyrc.py";
+    ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/bin/pyrc";
 
     # symlinks from personal
     "Templates".source  = link "${personal.dst}/etc/Templates";
