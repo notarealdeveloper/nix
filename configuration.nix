@@ -239,6 +239,7 @@ in
     awscli2
     gitlab-ci-local
     gitlab-container-registry
+    git-lfs
 
     # software and hardware virtualisation
     qemu
