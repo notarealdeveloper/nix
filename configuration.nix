@@ -104,7 +104,7 @@ in
 
     # unix
     vim_configurable
-    nvim
+    neovim
     file
     wget
     tree
