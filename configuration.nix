@@ -165,6 +165,8 @@ in
     obsidian
     gimp
     gparted
+    baobab
+    ghex
 
     # video
     vlc
