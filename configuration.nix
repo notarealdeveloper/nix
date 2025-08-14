@@ -125,14 +125,16 @@ in
     adbfs-rootless
     android-udev-rules
 
-    # debugging
+    # tracing, debugging, profiling
     gdb
     strace
     ltrace
     patchelf
     inotify-tools
     pkg-config
+
     bpftrace
+    bpftools
     bcc
 
     # mid-level
@@ -368,6 +370,11 @@ in
     LD-mkdir
     LD-rmdir
   ];
+
+  boot.kernel.sysctl = {
+    "net.core.bpf_jit_enable" = 1;
+    "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
+  };
 
   # android debug bridge
   programs.adb.enable = true;
