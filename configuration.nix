@@ -132,6 +132,8 @@ in
     patchelf
     inotify-tools
     pkg-config
+    bpftrace
+    bcc
 
     # mid-level
     xorg.xinit
