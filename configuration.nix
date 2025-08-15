@@ -109,6 +109,7 @@ in
     wget
     tree
     unzip
+    cpio
     plocate
     git
     gh
