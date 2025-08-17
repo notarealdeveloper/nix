@@ -272,6 +272,10 @@ in
       LWP
     ]))
 
+    # autotools
+    autoconf
+    automake
+
     # rust
     rustc
     cargo
