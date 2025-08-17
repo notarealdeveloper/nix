@@ -275,6 +275,8 @@ in
     # autotools
     autoconf
     automake
+    man-pages
+    man-pages-posix
 
     # rust
     rustc
