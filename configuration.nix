@@ -275,6 +275,7 @@ in
     # autotools
     autoconf
     automake
+    gnum4
     man-pages
     man-pages-posix
 
