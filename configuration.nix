@@ -223,6 +223,7 @@ in
       matplotlib
       seaborn
       torch
+      editdistance
 
       # ~/bin depends
       google-auth-oauthlib      # gmail
