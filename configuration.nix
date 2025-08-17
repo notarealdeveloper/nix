@@ -278,6 +278,7 @@ in
     gnum4
     man-pages
     man-pages-posix
+    pcre
 
     # rust
     rustc
