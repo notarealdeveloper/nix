@@ -250,6 +250,7 @@ in
     openvpn
     networkmanager-openvpn
     bazel
+    clang
     (aws-cvpn-client.packages.${system}.default)
 
     # software and hardware virtualisation
