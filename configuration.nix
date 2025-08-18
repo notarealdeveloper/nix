@@ -249,6 +249,7 @@ in
     git-lfs
     openvpn
     networkmanager-openvpn
+    bazel
     (aws-cvpn-client.packages.${system}.default)
 
     # software and hardware virtualisation
