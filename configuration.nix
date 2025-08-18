@@ -222,7 +222,6 @@ in
       scikit-learn
       matplotlib
       seaborn
-      tensorflow
       torch
       editdistance
 
