@@ -25,9 +25,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    aws-cvpn-client = {
+      url = "github:sirn/aws-cvpn-client";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, nix-LD, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, nix-LD, aws-cvpn-client, ... }:
 
   let
 
@@ -66,6 +71,7 @@
           { networking.hostName = name; }
           home-manager.nixosModules.home-manager
         ];
+        specialArgs = { inherit aws-cvpn-client; };
       };
   in {
 

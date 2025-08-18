@@ -1,6 +1,6 @@
 # for help, see nixos-help or man nix.conf
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, aws-cvpn-client, ... }:
 
 let
 
@@ -249,6 +249,7 @@ in
     git-lfs
     openvpn
     networkmanager-openvpn
+    (aws-cvpn-client.packages.${system}.default)
 
     # software and hardware virtualisation
     qemu
