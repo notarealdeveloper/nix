@@ -2,27 +2,6 @@
 
 { config, lib, pkgs, aws-cvpn-client, ... }:
 
-let
-
-  python311submissive = pkgs.python311.overrideAttrs (pkg: {
-    postInstall = (pkg.postInstall or "") + ''
-      ${pkgs.cowsay}/bin/cowsay "Here we go!"
-      for file in $(ls "$out/bin"); do
-        if [[ "$file" == python3.11 ]]; then
-          continue
-        fi
-        rm -v "$out/bin/$file"
-      done
-      rm -rv $out/share
-      echo "$out now contains:"
-      for f in $(find $out/ -type f); do echo " * $f"; done
-      ${pkgs.cowsay}/bin/cowsay \
-        "Nothing beside remains... " \
-        "The lone and level s&&s stretch far away."
-    '';
-  });
-
-in
 {
 
   nix.settings = {
@@ -180,12 +159,6 @@ in
     kdePackages.kdenlive
     simplescreenrecorder
 
-    # net
-    dropbox
-    openvpn3
-    openssh
-    nmap
-
     # social
     wechat
     whatsapp-for-linux
@@ -242,16 +215,17 @@ in
     ]))
 
     # work
-    (python311.withPackages (ps: with ps; [ pip ]))
+    #(python311.withPackages (ps: with ps; [ pip ]))
     awscli2
     gitlab-ci-local
     gitlab-container-registry
     git-lfs
-    openvpn
-    networkmanager-openvpn
-    bazel
-    clang
     (aws-cvpn-client.packages.${system}.default)
+
+    # net
+    dropbox
+    openssh
+    nmap
 
     # software and hardware virtualisation
     qemu
