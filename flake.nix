@@ -20,8 +20,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-LD = {
-      url = "github:doubleunix/nix-LD";
+    noelf = {
+      url = "github:doubleunix/noelf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,7 +32,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, nix-LD, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-python, noelf, aws-cvpn-client, ... }:
 
   let
 
@@ -44,8 +44,9 @@
       inherit system;
       overlays = [
         overlay
+        # todo: doubleunix/wnixpkgs overlay that contains both of these
         nix-python.overlays.default
-        nix-LD.overlays.default
+        noelf.overlays.default
       ];
       config.allowUnfree = true;
     };
