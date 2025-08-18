@@ -247,6 +247,8 @@ in
     gitlab-ci-local
     gitlab-container-registry
     git-lfs
+    openvpn
+    networkmanager-openvpn
 
     # software and hardware virtualisation
     qemu
