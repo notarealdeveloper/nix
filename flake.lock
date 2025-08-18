@@ -1,53 +1,5 @@
 {
   "nodes": {
-    "LD-mkdir-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1754939135,
-        "narHash": "sha256-clep5U5swfPrfpexlZcdvFvVh9SE6++J8NjYZ8L31B8=",
-        "owner": "hello-corporation",
-        "repo": "LD-mkdir",
-        "rev": "4de0a982ae480031171459a2b75d1bddf8030c65",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hello-corporation",
-        "repo": "LD-mkdir",
-        "type": "github"
-      }
-    },
-    "LD-rmdir-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1754947427,
-        "narHash": "sha256-HEsoJW/gqap2UCYbJP3f/DUYUBGC49yClYqzAdtnDSU=",
-        "owner": "hello-corporation",
-        "repo": "LD-rmdir",
-        "rev": "c2444f509db4be0f7f35a2f7a452298587487af2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hello-corporation",
-        "repo": "LD-rmdir",
-        "type": "github"
-      }
-    },
-    "LD-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1754938258,
-        "narHash": "sha256-/a4E/kJVd87PfTTaEwE7r3nUrzGGnEwdZroN2CzLXTk=",
-        "owner": "hello-corporation",
-        "repo": "LD",
-        "rev": "52998e392b2983a9597413159404969870a32fd5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hello-corporation",
-        "repo": "LD",
-        "type": "github"
-      }
-    },
     "aws-cvpn-client": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -123,49 +75,6 @@
         "type": "github"
       }
     },
-    "nix-LD": {
-      "inputs": {
-        "LD-mkdir-src": "LD-mkdir-src",
-        "LD-rmdir-src": "LD-rmdir-src",
-        "LD-src": "LD-src",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1754947203,
-        "narHash": "sha256-oIQJ0B8hq1hsCjvm63xSHbVXQpGqR3E6OsJInIeJ9F8=",
-        "owner": "doubleunix",
-        "repo": "nix-LD",
-        "rev": "678991dac3de48711eca578e0dc3d93ed0314556",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "repo": "nix-LD",
-        "type": "github"
-      }
-    },
-    "nix-python": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1754907807,
-        "narHash": "sha256-eyE6ecGnAbgSPaOIwyQArANR3T3AccG73jJA0TcGBrY=",
-        "owner": "doubleunix",
-        "repo": "nix-python",
-        "rev": "e7c910991af3206a8fe28f5d115f0eba540d2179",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "repo": "nix-python",
-        "type": "github"
-      }
-    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -203,14 +112,30 @@
         "type": "github"
       }
     },
+    "noelf-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755529459,
+        "narHash": "sha256-JrMa5kKPZvzlAsXP4X9eb52VYUNYTIT3BjStPIP3Oog=",
+        "owner": "hello-corporation",
+        "repo": "noelf",
+        "rev": "42d3b79ca9d97904410226eae31ca511178b337b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hello-corporation",
+        "repo": "noelf",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "aws-cvpn-client": "aws-cvpn-client",
         "home-manager": "home-manager",
-        "nix-LD": "nix-LD",
-        "nix-python": "nix-python",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "wnix-noelf": "wnix-noelf",
+        "wnix-python-packages": "wnix-python-packages"
       }
     },
     "systems": {
@@ -225,6 +150,47 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "wnix-noelf": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "noelf-src": "noelf-src"
+      },
+      "locked": {
+        "lastModified": 1755529952,
+        "narHash": "sha256-fd0hKBUFvxtipXKCuSVy8lBn6obQkZQKeS8wIt0aEU4=",
+        "owner": "doubleunix",
+        "repo": "noelf",
+        "rev": "d7bf6f093dcf85450be61633bf66496ab56f87d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "repo": "noelf",
+        "type": "github"
+      }
+    },
+    "wnix-python-packages": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755530737,
+        "narHash": "sha256-eyE6ecGnAbgSPaOIwyQArANR3T3AccG73jJA0TcGBrY=",
+        "owner": "doubleunix",
+        "repo": "python-packages",
+        "rev": "72a64f3ce87d1db76a6d572a98bf2b059f9dfa51",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "repo": "python-packages",
         "type": "github"
       }
     }
