@@ -181,11 +181,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755629113,
+        "lastModified": 1755634331,
         "narHash": "sha256-GWFaeqLYgD3wOJcksNhFzqiOJXzy6MkNjKq1FNRglTI=",
         "owner": "doubleunix",
         "repo": "python-packages",
-        "rev": "d3385bb74f6766308e763baaae3790e3b792bd24",
+        "rev": "b9a2cef44cb56b883ef3e4db2b4d435430cc7cb2",
         "type": "github"
       },
       "original": {
