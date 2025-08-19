@@ -7,7 +7,7 @@ final: prev: with prev; rec {
 
   sl2 = import ./bin/sl2.nix final prev;
 
-  weatherspect = import ./ports/weatherspect.nix { inherit (prev) lib stdenv fetchFromGitHub perl; };
+  weatherspect = prev.callPackage ./ports/weatherspect.nix { };
 
   python-head = prev.callPackage ./ports/python-head.nix { };
 
@@ -15,7 +15,7 @@ final: prev: with prev; rec {
   ### Local Executables ###
   #########################
 
-  hello = import ./bin/hello.nix { inherit (prev) stdenv fetchFromGitHub; };
+  hello = prev.callPackage ./bin/hello.nix { };
 
   yello = import ./bin/yello.nix prev python3;
 
@@ -23,7 +23,7 @@ final: prev: with prev; rec {
   ### Python Overlay ###
   ######################
 
-  # pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
+  pythonPackagesExtensions = [ (prev.callPackage ./python/jello.nix) ];
 
   #######################
   ### Raw derivations ###
