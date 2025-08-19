@@ -19,7 +19,7 @@ buildPythonPackage rec {
   pyproject = true;
 
   src = fetchFromGitHub {
-    owner = "notarealdeveloper";
+    owner = "doubleunix";
     repo = "jello";
     rev = "0.0.3";
     sha256 = "sha256-O19WSAnCtISHOSd5P+b6j//fSoKiiXnNwLbuZ2m2tNs=";
