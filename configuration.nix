@@ -377,7 +377,6 @@
     libuuid
     libuuid.dev
     tcl
-    tcl.dev
     tk
     tk.dev
 
