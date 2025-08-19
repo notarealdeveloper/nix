@@ -100,6 +100,7 @@
 
     # dev
     gcc
+    cmake
     gnumake
     ranger
     adbfs-rootless
