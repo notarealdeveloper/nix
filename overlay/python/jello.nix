@@ -9,7 +9,7 @@
 
 let
 
-  hello = import ../hello.nix { inherit stdenv fetchFromGitHub; };
+  hello = import ../bin/hello.nix { inherit stdenv fetchFromGitHub; };
 
 in
 
