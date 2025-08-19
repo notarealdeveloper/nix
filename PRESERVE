@@ -1,5 +1,0 @@
-If we make the python part of the overlay a separate flake repo,
-remember to preserve the following things that we deleted:
-
-python/jello
-python/python-head
