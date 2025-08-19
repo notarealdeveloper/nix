@@ -226,6 +226,7 @@
     # net
     dropbox
     openssh
+    openssl
     nmap
 
     # software and hardware virtualisation
