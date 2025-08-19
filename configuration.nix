@@ -84,6 +84,7 @@
     # unix
     vim_configurable
     neovim
+    pcre
     file
     wget
     tree
@@ -256,9 +257,11 @@
     autoconf
     automake
     gnum4
+
+    # doc
     man-pages
     man-pages-posix
-    pcre
+    linux-manual
 
     # rust
     rustc
