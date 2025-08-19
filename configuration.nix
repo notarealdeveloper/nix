@@ -352,22 +352,34 @@
     # python-head
 
     # compiling python upstream
+    pkg-config
+    gcc.cc.lib
     zlib
     zlib.dev
     openssl
     openssl.dev
-    pkg-config
-    gcc.cc.lib
     bzip2
+    bzip2.dev
     xz
+    xz.dev
     zstd
+    zstd.dev
     libffi
+    libffi.dev
     readline
+    readline.dev
     ncurses
+    ncurses.dev
     gdbm
+    gdbm.dev
     sqlite
+    sqlite.dev
     libuuid
+    libuuid.dev
     tcl
+    tcl.dev
+    tk
+    tk.dev
 
     # raw derivations
     sayhi   # stdenv.mkDerivation, depends on hi
