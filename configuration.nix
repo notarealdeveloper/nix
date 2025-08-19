@@ -93,7 +93,6 @@
     plocate
     git
     gh
-    zlib
     glab
     jq
     acpi
@@ -352,6 +351,12 @@
     python314FreeThreading
     # python311submissive
     # python-head
+
+    # compiling python upstream
+    zlib
+    zlib.dev
+    pkg-config
+    gcc.cc.lib
 
     # raw derivations
     sayhi   # stdenv.mkDerivation, depends on hi
