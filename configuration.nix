@@ -355,6 +355,8 @@
     # compiling python upstream
     zlib
     zlib.dev
+    openssl
+    openssl.dev
     pkg-config
     gcc.cc.lib
 
