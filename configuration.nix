@@ -347,7 +347,7 @@
     # </ABOMINATIONS>
 
     # experiments
-    python314FreeThreading
+    # python314FreeThreading
     # python311submissive
     # python-head
 
