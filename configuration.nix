@@ -225,7 +225,6 @@
     # net
     dropbox
     openssh
-    openssl
     nmap
 
     # software and hardware virtualisation
@@ -359,6 +358,16 @@
     openssl.dev
     pkg-config
     gcc.cc.lib
+    bzip2
+    xz
+    zstd
+    libffi
+    readline
+    ncurses
+    gdbm
+    sqlite
+    libuuid
+    tcl
 
     # raw derivations
     sayhi   # stdenv.mkDerivation, depends on hi
