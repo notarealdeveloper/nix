@@ -23,7 +23,7 @@ final: prev: with prev; rec {
   ### Python Overlay ###
   ######################
 
-  pythonPackagesExtensions = [ (final.callPackage ./python/jello.nix { }) ];
+  pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
 
   #######################
   ### Raw derivations ###

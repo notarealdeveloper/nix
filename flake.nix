@@ -43,10 +43,10 @@
     pkgs = import nixpkgs {
       inherit system;
       overlays = [
-        overlay
         # todo: doubleunix/wnixpkgs overlay that contains both of these
         wnix-python-packages.overlays.default
         wnix-noelf.overlays.default
+        overlay
       ];
       config.allowUnfree = true;
     };
