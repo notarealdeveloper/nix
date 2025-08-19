@@ -5,7 +5,7 @@ final: prev: with prev; rec {
   ### Existing Executables ###
   ############################
 
-  sl2 = import ./bin/sl2.nix final prev;
+  sl2 = prev.callPackage ./bin/sl2.nix { };
 
   weatherspect = prev.callPackage ./ports/weatherspect.nix { };
 
@@ -17,13 +17,7 @@ final: prev: with prev; rec {
 
   hello = prev.callPackage ./bin/hello.nix { };
 
-  yello = import ./bin/yello.nix prev python3;
-
-  ######################
-  ### Python Overlay ###
-  ######################
-
-  pythonPackagesExtensions = [ (import ./python/extend.nix prev ) ];
+  yello = prev.callPackage ./bin/yello.nix { };
 
   #######################
   ### Raw derivations ###

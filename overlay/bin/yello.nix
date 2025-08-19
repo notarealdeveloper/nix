@@ -1,14 +1,16 @@
-pkgs: python:
-
-  with pkgs;
+{ lib
+, stdenv
+, fetchFromGitHub
+, python3
+}:
 
   let
 
     hello = import ./hello.nix { inherit stdenv fetchFromGitHub; };
 
     jello = import ../python/jello.nix {
-      inherit (pkgs) lib stdenv fetchFromGitHub;
-      inherit (python.pkgs) buildPythonPackage setuptools wheel pip;
+      inherit lib stdenv fetchFromGitHub;
+      inherit (python3.pkgs) buildPythonPackage setuptools wheel pip;
     };
 
   in
