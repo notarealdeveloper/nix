@@ -380,6 +380,8 @@
     tk.dev
     tcl
 
+    python-head
+
     # raw derivations
     sayhi   # stdenv.mkDerivation, depends on hi
     saybye  # builtins.derivation, depends on raw bye
