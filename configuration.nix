@@ -376,9 +376,9 @@
     sqlite.dev
     libuuid
     libuuid.dev
-    tcl
     tk
     tk.dev
+    tcl
 
     # raw derivations
     sayhi   # stdenv.mkDerivation, depends on hi
