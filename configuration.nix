@@ -75,48 +75,83 @@
 
     with pkgs; [
 
-    # nix
-    nix-bash-completions
-    nix-prefetch-github
-    home-manager
-    dconf2nix
-
     # unix
-    vim_configurable
-    neovim
-    pcre
-    file
+    gh
+    git
     wget
     tree
-    unzip
-    cpio
-    plocate
-    git
-    gh
-    glab
-    jq
+    pcre
     acpi
-    tmux
+    plocate
 
-    # dev
+    # formats
+    jq
+    file
+    cpio
+    unzip
+
+    # build
     gcc
-    cmake
+    nasm
+    clang
     gnumake
-    ranger
-    adbfs-rootless
-    android-udev-rules
+    gnum4
+    autoconf
+    automake
+    cmake
 
-    # tracing, debugging, profiling
+    # debug
     gdb
     strace
     ltrace
     patchelf
     inotify-tools
-    pkg-config
 
     bpftrace
     bpftools
     bcc
+
+    # doc
+    man-pages
+    man-pages-posix
+    linux-manual
+
+    # sec
+    gnupg
+    cryptsetup
+    thc-secure-delete
+
+    # net
+    nmap
+    sshfs
+    openssh
+
+    # tor
+    tor
+    torsocks
+    tor-browser
+
+    # virt
+    qemu
+    docker
+    docker-buildx
+    docker-client
+
+    # ascii
+    sl
+    sl2
+    figlet
+    toilet
+    cowsay
+    xcowsay
+    cmatrix
+    neofetch
+    asciiquarium
+
+    # tty
+    vim_configurable
+    ranger
+    tmux
 
     # mid-level
     xorg.xinit
@@ -125,34 +160,31 @@
     xclip
     xdotool
     imagemagick
-    sshfs
-    nasm
 
-    # sec
-    gnupg
-    tor
-    torsocks
-    tor-browser
-    cryptsetup
-    thc-secure-delete
+    # phone
+    adbfs-rootless
+    android-udev-rules
 
     # desktop
-    conky
     eog
     meld
+    gimp
+    ghex
     gedit
+    conky
     evince
+    vscode
+    baobab
+    dropbox
+    gparted
+    obsidian
     google-chrome
     gnome-terminal
+    ffmpegthumbnailer
+
+    # themes
     numix-gtk-theme
     numix-icon-theme-circle
-    ffmpegthumbnailer
-    vscode
-    obsidian
-    gimp
-    gparted
-    baobab
-    ghex
 
     # video
     vlc
@@ -163,7 +195,6 @@
     # social
     wechat
     whatsapp-for-linux
-    teams-for-linux
 
     # games
     stepmania
@@ -171,76 +202,19 @@
     # mathematics
     lean4
 
-    (python.withPackages (ps: with ps; [
-
-      # packaging
-      pip
-      build
-      twine
-      pytest
-      setuptools
-      cython
-
-      # basics
-      ipython
-
-      # net
-      requests
-      beautifulsoup4
-      yt-dlp
-
-      # numerical
-      numpy
-      scipy
-      pandas
-      scikit-learn
-      matplotlib
-      seaborn
-      torch
-      editdistance
-
-      # ~/bin depends
-      google-auth-oauthlib      # gmail
-      google-api-python-client  # getbtcprice
-      geoip2                    # getbtcprice
-
-      # overlay
-      is_instance
-      python-bin
-      embd
-      wnix
-
-    ]))
+    # nix
+    nix-bash-completions
+    nix-prefetch-github
+    home-manager
+    dconf2nix
 
     # work
-    #(python311.withPackages (ps: with ps; [ pip ]))
+    glab
     awscli2
+    teams-for-linux
     gitlab-ci-local
     gitlab-container-registry
-    git-lfs
     (aws-cvpn-client.packages.${system}.default)
-
-    # net
-    dropbox
-    openssh
-    nmap
-
-    # software and hardware virtualisation
-    qemu
-    docker
-    docker-buildx
-    docker-client
-
-    # ascii
-    cowsay
-    xcowsay
-    asciiquarium
-    cmatrix
-    neofetch
-    figlet
-    toilet
-    sl
-    sl2
 
     # ports
     weatherspect
@@ -249,105 +223,6 @@
       JSON
       LWP
     ]))
-
-    # autotools
-    autoconf
-    automake
-    gnum4
-
-    # doc
-    man-pages
-    man-pages-posix
-    linux-manual
-
-    # rust
-    rustc
-    cargo
-
-    # haskell
-    ghc
-    cabal-install
-
-    # window managers
-    awesome
-    xmonad-with-packages
-
-    # <ABOMINATIONS>
-    ##
-    ## Hi there!
-    ##
-    ## Welcome to the abominations section.
-    ##
-    ## In this section we install packages
-    ## that happen also to be crimes against
-    ## humanity, morality, and whatever set
-    ## of gods (possibly empty) might happen
-    ## to exist. First abomination on the list...
-    ##
-    ## conda!
-    ##
-    ## Ok this one's actually kinda cute,
-    ## despite also being a total abortion.
-    ##
-    ## This little guy (1) installs X11 when
-    ## you install numpy, (2) downgrades
-    ## your python version in non-commutative
-    ## ways, and (3) modifies /proc/self/root
-    ## such that you see a different set of
-    ## directories when you `ls /`, and does
-    ## so without requiring root! The final
-    ## part isn't necessarily mysterious or
-    ## whatever. It's clearly just some simple
-    ## call to `unshare` or something, but in
-    ## practice it's equivalent to a sizable
-    ## subset of docker, and it got there by
-    ## wanting to install numpy and other stuff
-    ## in a way that's consistent with whatever
-    ## silly overfit shit is hard-coded in your
-    ## company's 79 year old requirements.txt
-    ## Ladies and gentlemen give a big round of
-    ## applause to...
-    conda
-    ## Haha what a weird little guy conda is...
-    ## Almost cute though, if you squint.
-    ## Ok what's next?
-    ## (Narrator: The host's eyes widen in terror)
-    ## Oh jesus
-    ## Oh fuck
-    ## Um wow ok.
-    ## Holy my beer
-    ## 
-    ##  ☢️  ☢️  ☢️  ☢️
-    ## <QUARANTINE>
-    ### > But He turned and said unto Ptr
-    ### > "Get thee behind Me, Satan!
-    ### > Thou art an offense unto Me;
-    ### > for thou savorest not the things
-    ### > that be of /bin, but those that be of
-    ### > /home/user/.cache/pypoetry/virtualenvs/repo-UJ6YPHE3-py3.13/bin
-    ### > -Jesus fucking Christ
-    ### >  Matthew 16:23
-    ### >  Paraphrased
-    #############
-    ###############                   # (Narrator: The inverse funnel on the left is
-    #################                 #  a common mechanism found in devices like crab
-                        poetry        #  traps to make sure the little bastard can't
-    #################                 #  figure out how to escape out into the
-    ###############     # ^ ew gross  #  rest of the package list.)
-    #############
-    ### Don't touch me poetry.
-    ### I'm just using you in a
-    ### book as part of a joke.
-    ##
-    ## </QUARANTINE>
-    ##  ☢️  ☢️  ☢️  ☢️
-    ##
-    # </ABOMINATIONS>
-
-    # experiments
-    # python314FreeThreading
-    # python311submissive
-    # python-head
 
     # compiling python upstream
     pkg-config
@@ -378,6 +253,7 @@
     tk.dev
     tcl
 
+    # cpython HEAD!
     python-head
 
     # raw derivations
@@ -386,6 +262,47 @@
 
     # raw binary machine code overlay ftw
     noelf
+
+    (python.withPackages (ps: with ps; [
+
+      # packaging
+      pip
+      build
+      twine
+      pytest
+      cython
+      setuptools
+
+      # basics
+      ipython
+
+      # net
+      yt-dlp
+      requests
+      beautifulsoup4
+
+      # numerical
+      numpy
+      scipy
+      pandas
+      matplotlib
+      seaborn
+      scikit-learn
+      torch
+
+      # ~/bin depends
+      google-auth-oauthlib      # gmail
+      google-api-python-client  # getbtcprice
+      geoip2                    # getbtcprice
+
+      # overlay
+      is_instance
+      python-bin
+      embd
+      wnix
+
+    ]))
+
   ];
 
   boot.kernel.sysctl = {
