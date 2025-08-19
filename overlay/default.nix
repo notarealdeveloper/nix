@@ -11,14 +11,6 @@ final: prev: with prev; rec {
 
   python-head = prev.callPackage ./ports/python-head.nix { };
 
-  #########################
-  ### Local Executables ###
-  #########################
-
-  hello = prev.callPackage ./bin/hello.nix { };
-
-  yello = prev.callPackage ./bin/yello.nix { };
-
   #######################
   ### Raw derivations ###
   #######################
