@@ -45,7 +45,7 @@
       overlays = [
         overlay
         # todo: doubleunix/wnixpkgs overlay that contains both of these
-        wnix-python-packages.overlays.default
+        wnix-python-packages
         wnix-noelf.overlays.default
       ];
       config.allowUnfree = true;
