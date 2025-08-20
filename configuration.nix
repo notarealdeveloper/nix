@@ -314,6 +314,7 @@
     #]))
 
     (wpkgs.python315.withPackages (ps: with ps; [
+      ipython
       is_instance
       python-bin
     ]))
