@@ -69,7 +69,7 @@
 
     mkSystem = { hw, os, name }:
       nixpkgs.lib.nixosSystem {
-        inherit system pkgs wpkgs;
+        inherit system pkgs;
         modules = [
           hw
           os
@@ -78,7 +78,7 @@
           { networking.hostName = name; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit aws-cvpn-client; };
+        specialArgs = { inherit aws-cvpn-client wpkgs; };
       };
   in {
 
