@@ -65,6 +65,17 @@ let
     };
   };
 
+  # >>> Force mypy to skip mypyc (pure-Python build)
+  mypy = superP.mypy.overridePythonAttrs (old: {
+    env = (old.env or {}) // {
+      MYPY_USE_MYPYC = "0";   # mypy’s build script honors this
+    };
+    # (Optional) also ensure nothing sneaks in from env
+    preBuild = (old.preBuild or "") + ''
+      export MYPY_USE_MYPYC=0
+    '';
+  });
+
 in {
   python315 = python315;
   python315Packages = python315.pkgs;
