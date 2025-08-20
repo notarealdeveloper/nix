@@ -7,6 +7,9 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     download-buffer-size = 64*(1024*1024);
+    max-jobs = "auto";
+    cores = 0; # 0 = give each build all cores (build systems may or may not use them)
+    http-connections = 50;  # faster parallel downloads
   };
 
   # time
