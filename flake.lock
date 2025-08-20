@@ -197,11 +197,11 @@
     },
     "wnixpkgs": {
       "locked": {
-        "lastModified": 1755712691,
-        "narHash": "sha256-t4zrf+o4XobRAJyKzCBEMRKdWz/FYA3SOJKDPLYInjw=",
+        "lastModified": 1755712903,
+        "narHash": "sha256-F6sZ3yudrYKH46V/jtKfuwQ5xRke4cufZFA7rTbjcoM=",
         "owner": "doubleunix",
         "repo": "wnixpkgs",
-        "rev": "b717244e074a0f0d4d90334a0ce44cbd236cc100",
+        "rev": "dc5b13f4b412d31d8668a299eef06bf48d30bc05",
         "type": "github"
       },
       "original": {
