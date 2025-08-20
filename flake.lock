@@ -98,11 +98,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755704913,
-        "narHash": "sha256-3gIJd14oLUl46hgoW5CDh4EKU5ych2rKybukNxsUT+k=",
+        "lastModified": 1755705232,
+        "narHash": "sha256-TTLdokXRSLXDK6ZVyulb7JlCjP0bDAa94m/1PZaursU=",
         "owner": "doubleunix",
         "repo": "wnixpkgs",
-        "rev": "d618731318a944e780e750546073b3a98900fe3f",
+        "rev": "aebb5f9e30d0c6a75eb0c6a19ccd9da1524d5326",
         "type": "github"
       },
       "original": {
