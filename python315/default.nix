@@ -35,8 +35,11 @@ let
 
     src = src315;
 
-    # Avoid auto-selecting a 3.15 patch set (e.g. no-ldconfig.patch)
+    # nixpkgs 3.1x patchset doesn’t apply cleanly to this 3.15 commit
     patches = [];
+
+    # >>> Skip the mime-types placeholder substitution and any other old postPatch bits
+    postPatch = "";
 
     # Remove the EXTERNALLY-MANAGED marker in either minor-dir shape
     postInstall = (old.postInstall or "") + ''
