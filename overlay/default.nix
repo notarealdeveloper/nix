@@ -11,6 +11,12 @@ final: prev: with prev; rec {
 
   python-head = prev.callPackage ./ports/python-head.nix { };
 
+  # disable cuda deprecation warning during nix search
+  cudaPackages = prev.cudaPackages // {
+    cudaFlags = prev.cudaPackages.flags;
+    cudaVersion = prev.cudaPackages.cudaMajorMinorVersion;
+  };
+
   #######################
   ### Raw derivations ###
   #######################
