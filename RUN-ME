@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# This should let us prove to ourselves that the python315 overlay method
+# DOESN'T cause a force rebuild of the entire universe (e.g., GHC) like the
+# wnixpkgs fork method did. Now just have to get it working and build it into
+# a workable python ecosystem running off cpython HEAD!
+
+diff -u \
+    <(nix-store -qR $(nix path-info --derivation nixpkgs#python313Packages.ipython)) \
+    <(nix-store -qR $(nix path-info --derivation       .#python315Packages.ipython)) \
+    | grep ghc
