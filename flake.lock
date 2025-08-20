@@ -98,11 +98,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755701296,
-        "narHash": "sha256-j+xtPWHrGv63i1VeG9KzDtTJQE+tYFWVmyGgF6PIemY=",
+        "lastModified": 1755701725,
+        "narHash": "sha256-r/n7KkhqbYjo4o5JlptHWgu24ZSdKnW0qhUaM9fiMr0=",
         "owner": "doubleunix",
         "repo": "wnixpkgs",
-        "rev": "87d8d213a505799fb7f8f8d69d8c28afc9d929d9",
+        "rev": "cbb01f386b1909196fede40f77d1849b85a2f718",
         "type": "github"
       },
       "original": {
@@ -181,11 +181,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755701611,
-        "narHash": "sha256-aA/MKheISYRusekSMLNGHF/3oGmegoSkBMoaowBNZm8=",
+        "lastModified": 1755701762,
+        "narHash": "sha256-GWFaeqLYgD3wOJcksNhFzqiOJXzy6MkNjKq1FNRglTI=",
         "owner": "doubleunix",
         "repo": "python-packages",
-        "rev": "c3bbcd8ca36bb7201362b2c8dd8ba3e327c031f8",
+        "rev": "82ecc8945af4d4fdaee043c2ce44065a384460c6",
         "type": "github"
       },
       "original": {
