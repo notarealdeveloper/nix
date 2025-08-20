@@ -180,6 +180,7 @@
     obsidian
     google-chrome
     gnome-terminal
+    github-desktop
     ffmpegthumbnailer
 
     # themes
