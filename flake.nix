@@ -41,10 +41,13 @@
 
     overlay = import ./overlay;
 
+    overlay2 = import ./python315;
+
     pkgs = import nixpkgs {
       inherit system;
       overlays = [
         overlay
+        overlay2
         # todo: doubleunix/wnixpkgs overlay that contains both of these
         wnix-python-packages.overlays.default
         wnix-noelf.overlays.default
