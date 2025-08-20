@@ -98,17 +98,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755708502,
-        "narHash": "sha256-0wEwtOGq2E3bxJnq0OLCrmt1zHPo1s463D9g1G3X3wc=",
-        "owner": "doubleunix",
-        "repo": "wnixpkgs",
-        "rev": "ee990af59f4bd0e23dc00452a30fd02ff5a34206",
+        "lastModified": 1755615617,
+        "narHash": "sha256-HMwfAJBdrr8wXAkbGhtcby1zGFvs+StOp19xNsbqdOg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "20075955deac2583bb12f07151c2df830ef346b4",
         "type": "github"
       },
       "original": {
-        "owner": "doubleunix",
-        "ref": "wnixos-unstable",
-        "repo": "wnixpkgs",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -135,7 +135,8 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "wnix-noelf": "wnix-noelf",
-        "wnix-python-packages": "wnix-python-packages"
+        "wnix-python-packages": "wnix-python-packages",
+        "wnixpkgs": "wnixpkgs"
       }
     },
     "systems": {
@@ -191,6 +192,22 @@
       "original": {
         "owner": "doubleunix",
         "repo": "python-packages",
+        "type": "github"
+      }
+    },
+    "wnixpkgs": {
+      "locked": {
+        "lastModified": 1755708502,
+        "narHash": "sha256-0wEwtOGq2E3bxJnq0OLCrmt1zHPo1s463D9g1G3X3wc=",
+        "owner": "doubleunix",
+        "repo": "wnixpkgs",
+        "rev": "ee990af59f4bd0e23dc00452a30fd02ff5a34206",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "ref": "wnixos-unstable",
+        "repo": "wnixpkgs",
         "type": "github"
       }
     }

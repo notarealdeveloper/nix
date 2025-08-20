@@ -1,6 +1,6 @@
 # for help, see nixos-help or man nix.conf
 
-{ config, lib, pkgs, aws-cvpn-client, ... }:
+{ config, lib, wpkgs, pkgs, aws-cvpn-client, ... }:
 
 {
 
@@ -309,7 +309,7 @@
     #  python-bin
     #]))
 
-    (python315.withPackages (ps: with ps; [
+    (wpkgs.python315.withPackages (ps: with ps; [
       is_instance
       python-bin
     ]))

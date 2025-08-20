@@ -3,7 +3,8 @@
 
   inputs = {
 
-    nixpkgs.url = "github:doubleunix/wnixpkgs/wnixos-unstable";
+    nixpkgs.url  = "github:NixOS/nixpkgs/nixos-unstable";
+    wnixpkgs.url = "github:doubleunix/wnixpkgs/wnixos-unstable";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -32,7 +33,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, wnix-python-packages, wnix-noelf, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, wnixpkgs, home-manager, nixos-wsl, wnix-python-packages, wnix-noelf, aws-cvpn-client, ... }:
 
   let
 
@@ -51,6 +52,11 @@
       config.allowUnfree = true;
     };
 
+    wpkgs = import wnixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
     mkHome = { user, desktop ? true }:
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -63,7 +69,7 @@
 
     mkSystem = { hw, os, name }:
       nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
+        inherit system pkgs wpkgs;
         modules = [
           hw
           os
