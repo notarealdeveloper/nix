@@ -288,7 +288,6 @@
       matplotlib
       seaborn
       scikit-learn
-      tensorflow
       torch
 
       # ~/bin depends
