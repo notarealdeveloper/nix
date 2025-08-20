@@ -105,11 +105,11 @@
 
     # debug
     gdb
-    ctags
     strace
     ltrace
     patchelf
     inotify-tools
+    universal-ctags
 
     bpftrace
     bpftools
