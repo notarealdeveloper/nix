@@ -128,12 +128,12 @@
     # packages.${system} = pkgs;
 
     packages.${system} = {
-      inherit (pkgs)
+      inherit (wpkgs)
         weatherspect
       ;
     };
 
-    legacyPackages.${system} = pkgs;
+    legacyPackages.${system} = wpkgs;
 
   };
 }
