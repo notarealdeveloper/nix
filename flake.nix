@@ -54,6 +54,11 @@
 
     wpkgs = import wnixpkgs {
       inherit system;
+      overlays = [
+        overlay
+        wnix-python-packages.overlays.default
+        wnix-noelf.overlays.default
+      ];
       config.allowUnfree = true;
     };
 
