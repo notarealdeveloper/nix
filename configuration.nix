@@ -255,7 +255,7 @@
     tcl
 
     # cpython HEAD!
-    python-head
+    # python-head
 
     # raw derivations
     sayhi   # stdenv.mkDerivation, depends on hi
@@ -302,6 +302,12 @@
       embd
       wnix
 
+    ]))
+
+    (python315.withPackages (ps: with ps; [
+      ipython
+      is_instance
+      python-bin
     ]))
 
   ];
