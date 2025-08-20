@@ -105,6 +105,7 @@
 
     # debug
     gdb
+    ctags
     strace
     ltrace
     patchelf
