@@ -313,11 +313,11 @@
     #  python-bin
     #]))
 
-    #(wpkgs.python315.withPackages (ps: with ps; [
+    (wpkgs.python315.withPackages (ps: with ps; [
     #  #ipython
-    #  is_instance
-    #  python-bin
-    #]))
+      is_instance
+      python-bin
+    ]))
   ];
 
   boot.kernel.sysctl = {
