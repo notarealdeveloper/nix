@@ -1,8 +1,8 @@
-# overlays/python315.nix
 # overlay: self = final, prev = super
 self: prev:
 
 let
+  # CPython 3.15 source you pinned
   src315 = prev.fetchFromGitHub {
     owner = "python";
     repo  = "cpython";
@@ -10,26 +10,35 @@ let
     hash  = "sha256-lNrDERJPfoo/a5629/fS0RbBYdh3CtXrbA0rFKw+eAQ=";
   };
 
-  # Start from python314 wiring, but:
-  # - rename to python3.15 (so logs show python3.15> …)
-  # - point src/doc at src315
-  # - force patches = [] (avoids missing no-ldconfig.patch)
-  # - remove EXTERNALLY-MANAGED marker
-  # - drop passthru.doc entirely to avoid building docs indirectly
-  python315' = prev.python314.overrideAttrs (old: let
-    oldPT = old.passthru or {};
-  in {
+  # cpython helper expected by the builder (note: passthrufun.nix)
+  passthruFun = prev.callPackage
+    (prev.path + "/pkgs/development/interpreters/python/passthrufun.nix")
+    { };
+
+  # Instantiate CPython for 3.15 (so the derivation name/labels are 3.15)
+  python315-base = prev.callPackage
+    (prev.path + "/pkgs/development/interpreters/python/cpython")
+    {
+      self = self.python315;  # standard threading used by nixpkgs
+      sourceVersion = { major = "3"; minor = "15"; patch = "0"; suffix = "a0"; };
+      # only used if a release tarball is auto-fetched
+      hash = "sha256-lNrDERJPfoo/a5629/fS0RbBYdh3CtXrbA0rFKw+eAQ=";
+      inherit passthruFun;
+    };
+
+  # Finalize: set src, kill patches, remove EXTERNALLY-MANAGED, drop doc passthru
+  python315' = python315-base.overrideAttrs (old: {
     pname = "python3.15";
     version = "3.15.0a0";
-    # Inform some helpers in the python infra:
+    # some infra also consults this var:
     pythonVersion = "3.15";
 
     src = src315;
 
-    # Make sure no 3.14/3.15 patch set is pulled in implicitly.
+    # Avoid auto-selecting a 3.15 patch set (e.g. no-ldconfig.patch)
     patches = [];
 
-    # Remove the EXTERNALLY-MANAGED marker whether it lands in 3.15 or computed dir.
+    # Remove the EXTERNALLY-MANAGED marker in either minor-dir shape
     postInstall = (old.postInstall or "") + ''
       rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED" 2>/dev/null || true
       rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
@@ -39,12 +48,11 @@ let
       rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
     '';
 
-    # Don’t expose a doc passthru to avoid accidental doc builds.
-    passthru = builtins.removeAttrs oldPT [ "doc" ];
+    # Drop doc passthru so nothing drags Sphinx/docs
+    passthru = builtins.removeAttrs (old.passthru or {}) [ "doc" ];
   });
 
-  # Inside the python315 package set, disable tests globally for libs & apps.
-  # NOTE: buildPythonPackage/buildPythonApplication are *functions*, so wrap them.
+  # Inside the 3.15 package set, disable tests globally (functions are wrapped)
   python315 = python315'.override {
     packageOverrides = selfP: superP: {
       buildPythonPackage = args:
@@ -58,7 +66,7 @@ in {
   python315 = python315;
   python315Packages = python315.pkgs;
 
-  # Optional free-threaded variant; keep if you actually use it.
+  # Optional: free-threaded variant (only if you actually need it)
   python315FreeThreading = python315.override {
     self = self.python315FreeThreading;
     pythonAttr = "python315FreeThreading";
