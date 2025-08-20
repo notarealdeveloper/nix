@@ -3,7 +3,7 @@
 
   inputs = {
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:doubleunix/wnixpkgs";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
