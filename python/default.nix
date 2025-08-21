@@ -2,7 +2,7 @@
 final: prev:
 
 let
-  # ---- common packageOverrides used by both 3.14 and 3.15 ----
+  # ---- common packageOverrides shared by both Python sets (except parso) ----
   commonOverrides = selfP: superP: {
     buildPythonPackage = args:
       superP.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
@@ -16,16 +16,6 @@ let
 
     charset-normalizer = superP.charset-normalizer.overridePythonAttrs (old: {
       env = (old.env or {}) // { CHARSET_NORMALIZER_USE_MYPYC = "0"; };
-    });
-
-    parso = superP.parso.overridePythonAttrs (_old: {
-      src = prev.fetchFromGitHub {
-        owner = "davidhalter";
-        repo = "parso";
-        rev = "a73af5c709a292cbb789bf6cab38b20559f166c0";
-        hash = "sha256-NNP/gKBA2tvCTV53k8VrnGEYruEsDSVqWVa7uU8Wznc=";
-      };
-      # no postPatch here; 3.15 adds grammar copy below
     });
 
     jeepney = superP.jeepney.overridePythonAttrs (_old: {
@@ -44,15 +34,27 @@ let
     });
   };
 
+  # Shared newer parso source (used by BOTH 3.14 and 3.15)
+  parsoSrc = prev.fetchFromGitHub {
+    owner = "davidhalter";
+    repo  = "parso";
+    rev   = "a73af5c709a292cbb789bf6cab38b20559f166c0";
+    hash  = "sha256-NNP/gKBA2tvCTV53k8VrnGEYruEsDSVqWVa7uU8Wznc=";
+  };
+
   # ======================= Python 3.14 =======================
   python314 =
     prev.python314.override {
       packageOverrides = selfP: superP:
-        (commonOverrides selfP superP);
+        (commonOverrides selfP superP) // {
+          parso = superP.parso.overridePythonAttrs (_old: {
+            src = parsoSrc;           # newer parso for 3.14
+            # no grammar copy needed on 3.14
+          });
+        };
     };
 
   # ======================= Python 3.15 (HEAD-ish) =======================
-  # cpython upstream HEAD (or close to it)
   cpython315Src = prev.fetchFromGitHub {
     owner = "python";
     repo  = "cpython";
@@ -67,7 +69,7 @@ let
   python315-base = prev.callPackage
     (prev.path + "/pkgs/development/interpreters/python/cpython")
     {
-      self = final.python315;  # standard threading used by nixpkgs
+      self = final.python315;  # standard threading package set
       sourceVersion = { major = "3"; minor = "15"; patch = "0"; suffix = "a0"; };
       hash = "sha256-lNrDERJPfoo/a5629/fS0RbBYdh3CtXrbA0rFKw+eAQ=";
       inherit passthruFun;
@@ -77,13 +79,12 @@ let
     pname = "python3.15";
     version = "3.15.0a0";
     pythonVersion = "3.15";
-
     src = cpython315Src;
 
     patches = [];
     postPatch = "";
 
-    # Remove the EXTERNALLY-MANAGED file that breaks pip (defensive)
+    # Remove the EXTERNALLY-MANAGED file (defensive)
     postInstall = (old.postInstall or "") + ''
       rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED" 2>/dev/null || true
       rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
@@ -93,7 +94,7 @@ let
       rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
     '';
 
-    # Don't let the docs drag us down
+    # Avoid building docs
     passthru = builtins.removeAttrs (old.passthru or {}) [ "doc" ];
   });
 
@@ -101,9 +102,8 @@ let
     (python315'.override {
       packageOverrides = selfP: superP:
         (commonOverrides selfP superP) // {
-          # Only for 3.15: make a grammar315.txt until upstream releases it
           parso = superP.parso.overridePythonAttrs (old: {
-            inherit (old) src;
+            src = parsoSrc;           # newer parso for 3.15
             postPatch = (old.postPatch or "") + ''
               cp parso/python/grammar314.txt parso/python/grammar315.txt
             '';
@@ -112,7 +112,7 @@ let
     });
 
 in {
-  # 3.14
+  # 3.14 exports
   python314 = python314;
   python314Packages = python314.pkgs;
   python314FreeThreading = python314.override {
@@ -121,7 +121,7 @@ in {
     enableGIL = false;
   };
 
-  # 3.15
+  # 3.15 exports
   python315 = python315;
   python315Packages = python315.pkgs;
   python315FreeThreading = python315.override {
