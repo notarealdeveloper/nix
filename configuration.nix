@@ -310,6 +310,7 @@
 
     (python315.withPackages (ps: with ps; [
 
+      build
       ipython
 
       mmry
