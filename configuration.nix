@@ -311,9 +311,14 @@
 
     (python315.withPackages (ps: with ps; [
 
-      pip
+      # packaging
       build
+      twine
+      pytest
+      #cython
+      setuptools
 
+      # basics
       ipython
 
       # net
