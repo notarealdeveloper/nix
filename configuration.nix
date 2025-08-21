@@ -310,13 +310,6 @@
 
     (python315.withPackages (ps: with ps; [
 
-      pip
-      build
-      twine
-      pytest
-      cython
-      setuptools
-
       ipython
 
       mmry
