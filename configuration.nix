@@ -111,7 +111,6 @@
       ];
 
       python_small = ps: with ps; [
-        ipython
       ];
 
     in
@@ -319,19 +318,24 @@
 
     ]))
 
-    #(python313FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
-    #]))
+    (python313FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
+      ipython
+    ]))
 
     (python314.withPackages (ps: with ps; (python_small ps) ++ [
+      ipython
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
+      ipython
     ]))
 
     (python315.withPackages (ps: with ps; (python_large ps) ++ [
+      ipython
     ]))
 
     (python315FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
+      ipython
     ]))
 
   ];
