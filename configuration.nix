@@ -69,10 +69,46 @@
 
   # system
   environment.systemPackages =
-  
+
     let
 
-      python = pkgs.python313;
+      python_common = [
+          # packaging
+          pip
+          build
+          twine
+          pytest
+          cython
+          setuptools
+
+          # basics
+          ipython
+
+          # net
+          yt-dlp
+          requests
+          beautifulsoup4
+
+          # numerical
+          numpy
+          scipy
+          pandas
+          matplotlib
+          seaborn
+          #scikit-learn
+
+          # ~/bin depends
+          google-auth-oauthlib      # gmail
+          google-api-python-client  # getbtcprice
+          geoip2                    # getbtcprice
+
+          # overlay
+          mmry
+          assure
+          is_instance
+          python-bin
+
+      ];
 
     in
 
@@ -269,41 +305,11 @@
     # raw binary machine code overlay ftw
     noelf
 
-    (python.withPackages (ps: with ps; [
+    (python313.withPackages (ps: with ps; python_common ++ [
 
-      # packaging
-      pip
-      build
-      twine
-      pytest
-      cython
-      setuptools
-
-      # basics
-      ipython
-
-      # net
-      yt-dlp
-      requests
-      beautifulsoup4
-
-      # numerical
-      numpy
-      scipy
-      pandas
-      matplotlib
-      seaborn
       scikit-learn
       torch
 
-      # ~/bin depends
-      google-auth-oauthlib      # gmail
-      google-api-python-client  # getbtcprice
-      geoip2                    # getbtcprice
-
-      # overlay
-      is_instance
-      python-bin
       embd
       wnix
 
@@ -315,47 +321,10 @@
     (python314FreeThreading.withPackages (ps: with ps; [
     ]))
 
-    (python315.withPackages (ps: with ps; [
-
-      # packaging
-      pip
-      build
-      twine
-      pytest
-      cython
-      setuptools
-
-      # basics
-      ipython
-
-      # net
-      yt-dlp
-      requests
-      beautifulsoup4
-
-      # numerical
-      numpy
-      scipy
-      pandas
-      matplotlib
-      seaborn
-      #scikit-learn
-
-      # ~/bin depends
-      google-auth-oauthlib      # gmail
-      google-api-python-client  # getbtcprice
-      geoip2                    # getbtcprice
-
-      # overlay
-      mmry
-      assure
-      is_instance
-      python-bin
-
+    (python315.withPackages (ps: with ps; python_common ++ [
     ]))
 
-    (python315FreeThreading.withPackages (ps: with ps; [
-      ipython
+    (python315FreeThreading.withPackages (ps: with ps; python_common ++ [
     ]))
 
   ];
