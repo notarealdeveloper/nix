@@ -316,9 +316,11 @@
     ]))
 
     (python314.withPackages (ps: with ps; [
+      ipython
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; [
+      ipython
     ]))
 
     (python315.withPackages (ps: with ps; (python_common ps) ++ [
