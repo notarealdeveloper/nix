@@ -321,7 +321,7 @@
     #]))
 
     (python315.withPackages (ps: with ps; [
-      #ipython
+      ipython
       is_instance
       python-bin
     ]))
