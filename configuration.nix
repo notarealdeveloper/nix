@@ -315,7 +315,7 @@
       build
       twine
       pytest
-      #cython
+      cython
       setuptools
 
       # basics
@@ -332,6 +332,11 @@
       pandas
       matplotlib
       seaborn
+
+      # ~/bin depends
+      google-auth-oauthlib      # gmail
+      google-api-python-client  # getbtcprice
+      geoip2                    # getbtcprice
 
       # overlay
       mmry
