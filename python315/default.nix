@@ -86,6 +86,11 @@ let
         env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
       });
 
+      lz4 = superP.lz4.overridePythonAttrs (old: {
+        postPatch = ''
+          sed -i "s@import _compression@import compression@g" frame/__init__.py
+        '';
+      });
     };
   };
 
