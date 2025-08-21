@@ -1,6 +1,7 @@
 # overlay: self = final, prev = super
 self: prev:
 
+let
 
   python314 = prev.python314.override {
 
