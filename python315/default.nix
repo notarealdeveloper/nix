@@ -66,12 +66,14 @@ let
       # >>> Force mypy to skip mypyc (pure-Python build)
       mypy = superP.mypy.overridePythonAttrs (old: {
         env = (old.env or {}) // {
-          MYPY_USE_MYPYC = "0";   # mypy’s build script honors this
+          MYPY_USE_MYPYC = "0";   # mypy's build script honors this
         };
-        # (Optional) also ensure nothing sneaks in from env
-        preBuild = (old.preBuild or "") + ''
-          export MYPY_USE_MYPYC=0
-        '';
+      });
+
+      charset-normalizer = superP.charset-normalizer.overridePythonAttrs (old: {
+        env = (old.env or {}) // {
+          CHARSET_NORMALIZER_USE_MYPYC = "0";
+        };
       });
 
     };
