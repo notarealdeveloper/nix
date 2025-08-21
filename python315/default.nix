@@ -4,45 +4,37 @@ self: prev:
 let
 
   # cpython upstream HEAD (or close to it)
-  src315 = prev.fetchFromGitHub {
+  src = prev.fetchFromGitHub {
     owner = "python";
     repo  = "cpython";
     rev   = "7fda8b66debb24e0520b94c3769b648c7305f84e";
     hash  = "sha256-lNrDERJPfoo/a5629/fS0RbBYdh3CtXrbA0rFKw+eAQ=";
   };
 
-  # cpython helper expected by the builder (note: passthrufun.nix)
   passthruFun = prev.callPackage
     (prev.path + "/pkgs/development/interpreters/python/passthrufun.nix")
     { };
 
-  # Instantiate CPython for 3.15 (so the derivation name/labels are 3.15)
   python315-base = prev.callPackage
     (prev.path + "/pkgs/development/interpreters/python/cpython")
     {
       self = self.python315;  # standard threading used by nixpkgs
       sourceVersion = { major = "3"; minor = "15"; patch = "0"; suffix = "a0"; };
-      # only used if a release tarball is auto-fetched
       hash = "sha256-lNrDERJPfoo/a5629/fS0RbBYdh3CtXrbA0rFKw+eAQ=";
       inherit passthruFun;
     };
 
-  # Finalize: set src, kill patches, remove EXTERNALLY-MANAGED, drop doc passthru
   python315' = python315-base.overrideAttrs (old: {
     pname = "python3.15";
     version = "3.15.0a0";
-    # some infra also consults this var:
     pythonVersion = "3.15";
 
-    src = src315;
+    src = src;
 
-    # nixpkgs 3.1x patchset doesn’t apply cleanly to this 3.15 commit
     patches = [];
-
-    # >>> Skip the mime-types placeholder substitution and any other old postPatch bits
     postPatch = "";
 
-    # Remove the EXTERNALLY-MANAGED marker in either minor-dir shape
+    # Remove the EXTERNALLY-MANAGED file that breaks pip (it's still broken though)
     postInstall = (old.postInstall or "") + ''
       rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED" 2>/dev/null || true
       rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
@@ -52,51 +44,46 @@ let
       rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
     '';
 
-    # Drop doc passthru so nothing drags Sphinx/docs
+    # Don't let the docs drag us down
     passthru = builtins.removeAttrs (old.passthru or {}) [ "doc" ];
   });
 
-  # Inside the 3.15 package set, disable tests globally (functions are wrapped)
   python315 = python315'.override {
+
     packageOverrides = selfP: superP: {
+
       buildPythonPackage = args:
         superP.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
+
       buildPythonApplication = args:
         superP.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
-      # >>> Force mypy to skip mypyc (pure-Python build)
       mypy = superP.mypy.overridePythonAttrs (old: {
-        env = (old.env or {}) // {
-          MYPY_USE_MYPYC = "0";   # mypy's build script honors this
-        };
+        env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
       });
 
       charset-normalizer = superP.charset-normalizer.overridePythonAttrs (old: {
-        env = (old.env or {}) // {
-          CHARSET_NORMALIZER_USE_MYPYC = "0";
-        };
+        env = (old.env or {}) // { CHARSET_NORMALIZER_USE_MYPYC = "0"; };
       });
 
       parso = superP.parso.overridePythonAttrs (old: {
+        src = prev.fetchFromGitHub {
+          owner = "davidhalter";
+          repo = "parso";
+          rev = "a73af5c709a292cbb789bf6cab38b20559f166c0";
+          hash = "sha256-NNP/gKBA2tvCTV53k8VrnGEYruEsDSVqWVa7uU8Wznc=";
+        };
         postPatch = ''
-          cp parso/python/grammar313.txt parso/python/grammar315.txt
+          cp parso/python/grammar314.txt parso/python/grammar315.txt
         '';
       });
 
       jeepney = superP.jeepney.overridePythonAttrs (old: {
-        #src = prev.fetchFromGitHub {
-        #  owner = "doubleunix";
-        #  repo = "jeepney";
-        #  rev = "8d94070fde06cfcd29b8d7ae84cafb1fc42d34a0";
-        #  hash = "sha256-WQ28+IC1aWu0qKLGfjs3SldgkyUwBNSldLZkMSfORNo=";
-        #};
         propagatedBuildInputs = with superP; [ trio outcome ];
       });
 
       cryptography = superP.cryptography.overridePythonAttrs (old: {
-        env = (old.env or {}) // {
-          PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-        };
+        env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
       });
 
     };
@@ -105,8 +92,6 @@ let
 in {
   python315 = python315;
   python315Packages = python315.pkgs;
-
-  # Optional: free-threaded variant (only if you actually need it)
   python315FreeThreading = python315.override {
     self = self.python315FreeThreading;
     pythonAttr = "python315FreeThreading";
