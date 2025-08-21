@@ -314,6 +314,8 @@
 
       ipython
 
+      requests
+
       pandas
       matplotlib
 
