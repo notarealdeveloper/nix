@@ -312,6 +312,7 @@
     (python315.withPackages (ps: with ps; [
 
       # packaging
+      pip
       build
       twine
       pytest
@@ -332,6 +333,7 @@
       pandas
       matplotlib
       seaborn
+      scikit-learn
 
       # ~/bin depends
       google-auth-oauthlib      # gmail
