@@ -2,7 +2,7 @@
 final: prev:
 
 let
-  # ---- common packageOverrides shared by both Python sets (except parso) ----
+
   commonOverrides = selfP: superP: {
     buildPythonPackage = args:
       superP.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
@@ -28,8 +28,7 @@ let
 
     lz4 = superP.lz4.overridePythonAttrs (_old: {
       postPatch = ''
-        sed -Ei "s@import _compression@import compression@g" lz4/frame/__init__.py
-        sed -Ei "s@_(compression[.])@\1@g" lz4/frame/__init__.py
+        sed -Ei "s@import _compression@import compression._common._streams as _compression@g" lz4/frame/__init__.py
       '';
     });
   };
@@ -86,12 +85,10 @@ let
 
     # Remove the EXTERNALLY-MANAGED file (defensive)
     postInstall = (old.postInstall or "") + ''
-      rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED" 2>/dev/null || true
-      rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
+      rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED
     '';
     postFixup = (old.postFixup or "") + ''
-      rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED" 2>/dev/null || true
-      rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
+      rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED
     '';
 
     # Avoid building docs
