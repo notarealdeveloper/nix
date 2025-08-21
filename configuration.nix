@@ -72,7 +72,7 @@
 
     let
 
-      python_common = [
+      python_common = ps: with ps; [
           # packaging
           pip
           build
@@ -305,7 +305,7 @@
     # raw binary machine code overlay ftw
     noelf
 
-    (python313.withPackages (ps: with ps; python_common ++ [
+    (python313.withPackages (ps: with ps; (python_common ps) ++ [
 
       scikit-learn
       torch
@@ -321,10 +321,12 @@
     (python314FreeThreading.withPackages (ps: with ps; [
     ]))
 
-    (python315.withPackages (ps: with ps; python_common ++ [
+    (python315.withPackages (ps: with ps; (python_common ps) ++ [
     ]))
 
-    (python315FreeThreading.withPackages (ps: with ps; python_common ++ [
+    (python315FreeThreading.withPackages (ps: with ps; [
+      pip
+      ipython
     ]))
 
   ];
