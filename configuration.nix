@@ -311,18 +311,24 @@
 
     (python315.withPackages (ps: with ps; [
 
+      pip
       build
 
       ipython
 
+      # net
       yt-dlp
       requests
       beautifulsoup4
 
+      # numerical
       numpy
+      scipy
       pandas
       matplotlib
+      seaborn
 
+      # overlay
       mmry
       assure
       is_instance
