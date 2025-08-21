@@ -88,7 +88,7 @@ let
 
       lz4 = superP.lz4.overridePythonAttrs (old: {
         postPatch = ''
-          sed -i "s@import _compression@import compression@g" frame/__init__.py
+          sed -i "s@import _compression@import compression@g" lz4/frame/__init__.py
         '';
       });
     };
