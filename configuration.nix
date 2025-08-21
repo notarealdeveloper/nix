@@ -323,7 +323,7 @@
 
     ]))
 
-    (python313t.withPackages (ps: with ps; (python_small ps) ++ [
+    (python313FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
     ]))
 
     (python314.withPackages (ps: with ps; (python_small ps) ++ [
