@@ -317,6 +317,7 @@
 
       requests
 
+      numpy
       pandas
       matplotlib
 
