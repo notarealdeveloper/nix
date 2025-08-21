@@ -129,6 +129,7 @@
     nmap
     sshfs
     openssh
+    tcpdump
 
     # tor
     tor
