@@ -308,22 +308,22 @@
 
     ]))
 
-    #(python314.withPackages (ps: with ps; [
-    #  is_instance
-    #  python-bin
-    #]))
-
-    #(wpkgs.python315.withPackages (ps: with ps; [
-    #  #ipython
-    #  assure
-    #  is_instance
-    #  python-bin
-    #]))
-
     (python315.withPackages (ps: with ps; [
+
+      pip
+      build
+      twine
+      pytest
+      cython
+      setuptools
+
       ipython
+
+      mmry
+      assure
       is_instance
       python-bin
+
     ]))
   ];
 
