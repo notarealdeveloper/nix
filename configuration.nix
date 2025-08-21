@@ -311,7 +311,11 @@
     (python315.withPackages (ps: with ps; [
 
       build
+
       ipython
+
+      pandas
+      matplotlib
 
       mmry
       assure
