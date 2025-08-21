@@ -83,6 +83,22 @@ let
         '';
       });
 
+      jeepney = superP.jeepney.overridePythonAttrs (old: {
+        #src = prev.fetchFromGitHub {
+        #  owner = "doubleunix";
+        #  repo = "jeepney";
+        #  rev = "8d94070fde06cfcd29b8d7ae84cafb1fc42d34a0";
+        #  hash = "sha256-WQ28+IC1aWu0qKLGfjs3SldgkyUwBNSldLZkMSfORNo=";
+        #};
+        propagatedBuildInputs = with superP; [ trio outcome ];
+      });
+
+      cryptography = superP.cryptography.overridePythonAttrs (old: {
+        env = (old.env or {}) // {
+          PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+        };
+      });
+
     };
   };
 
