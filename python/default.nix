@@ -57,8 +57,8 @@ let
   cpython315Src = prev.fetchFromGitHub {
     owner = "python";
     repo  = "cpython";
-    rev   = "7fda8b66debb24e0520b94c3769b648c7305f84e";
-    hash  = "sha256-lNrDERJPfoo/a5629/fS0RbBYdh3CtXrbA0rFKw+eAQ=";
+    rev = "bb8791c0b75b5970d109e5557bfcca8a578a02af";
+    hash = "sha256-ZRgkLnH8VUjqnYp1228QmudMNuKEQgGfK+FbB+H2xT0=";
   };
 
   passthruFun = prev.callPackage
