@@ -312,6 +312,9 @@
     (python314.withPackages (ps: with ps; [
     ]))
 
+    (python314FreeThreading.withPackages (ps: with ps; [
+    ]))
+
     (python315.withPackages (ps: with ps; [
 
       # packaging
@@ -336,7 +339,7 @@
       pandas
       matplotlib
       seaborn
-      scikit-learn
+      #scikit-learn
 
       # ~/bin depends
       google-auth-oauthlib      # gmail
@@ -350,6 +353,10 @@
       python-bin
 
     ]))
+
+    #(python315FreeThreading.withPackages (ps: with ps; [
+    #]))
+
   ];
 
   boot.kernel.sysctl = {
