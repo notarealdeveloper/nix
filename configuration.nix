@@ -318,24 +318,19 @@
 
     ]))
 
-    (python313FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
-      ipython
+    (python313FreeThreading.withPackages (ps: with ps; [
     ]))
 
-    (python314.withPackages (ps: with ps; (python_small ps) ++ [
-      ipython
+    (python314.withPackages (ps: with ps; [
     ]))
 
-    (python314FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
-      ipython
+    (python314FreeThreading.withPackages (ps: with ps; [
     ]))
 
-    (python315.withPackages (ps: with ps; (python_large ps) ++ [
-      ipython
+    (python315.withPackages (ps: with ps; [
     ]))
 
-    (python315FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
-      ipython
+    (python315FreeThreading.withPackages (ps: with ps; [
     ]))
 
   ];
