@@ -315,7 +315,9 @@
 
       ipython
 
+      yt-dlp
       requests
+      beautifulsoup4
 
       numpy
       pandas
