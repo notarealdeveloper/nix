@@ -2,7 +2,8 @@
 self: prev:
 
 let
-  # CPython 3.15 source you pinned
+
+  # cpython upstream HEAD (or close to it)
   src315 = prev.fetchFromGitHub {
     owner = "python";
     repo  = "cpython";
