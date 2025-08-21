@@ -4,7 +4,7 @@ self: prev:
 let
 
   # cpython upstream HEAD (or close to it)
-  src = prev.fetchFromGitHub {
+  src315 = prev.fetchFromGitHub {
     owner = "python";
     repo  = "cpython";
     rev   = "7fda8b66debb24e0520b94c3769b648c7305f84e";
@@ -16,50 +16,59 @@ let
     (prev.path + "/pkgs/development/interpreters/python/passthrufun.nix")
     { };
 
-  python315-src = prev.callPackage
+  # Instantiate CPython for 3.15 (so the derivation name/labels are 3.15)
+  python315-base = prev.callPackage
     (prev.path + "/pkgs/development/interpreters/python/cpython")
     {
-      self = self.python315;
+      self = self.python315;  # standard threading used by nixpkgs
       sourceVersion = { major = "3"; minor = "15"; patch = "0"; suffix = "a0"; };
+      # only used if a release tarball is auto-fetched
       hash = "sha256-lNrDERJPfoo/a5629/fS0RbBYdh3CtXrbA0rFKw+eAQ=";
       inherit passthruFun;
     };
 
-  python315-build = python315-src.overrideAttrs (old: {
+  # Finalize: set src, kill patches, remove EXTERNALLY-MANAGED, drop doc passthru
+  python315' = python315-base.overrideAttrs (old: {
     pname = "python3.15";
     version = "3.15.0a0";
+    # some infra also consults this var:
     pythonVersion = "3.15";
 
-    src = src;
+    src = src315;
 
-    # The cpython patches don't apply cleanly on HEAD, skip 'em
+    # nixpkgs 3.1x patchset doesn’t apply cleanly to this 3.15 commit
     patches = [];
+
+    # >>> Skip the mime-types placeholder substitution and any other old postPatch bits
     postPatch = "";
 
-    # Remove the EXTERNALLY-MANAGED file
+    # Remove the EXTERNALLY-MANAGED marker in either minor-dir shape
     postInstall = (old.postInstall or "") + ''
-      rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED"
+      rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED" 2>/dev/null || true
+      rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
     '';
     postFixup = (old.postFixup or "") + ''
-      rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED"
+      rm -f "$out/lib/python3.15/EXTERNALLY-MANAGED" 2>/dev/null || true
+      rm -f "$out/lib/python3."*/EXTERNALLY-MANAGED 2>/dev/null || true
     '';
 
     # Drop doc passthru so nothing drags Sphinx/docs
     passthru = builtins.removeAttrs (old.passthru or {}) [ "doc" ];
   });
 
-  python315 = python315-build.override {
+  # Inside the 3.15 package set, disable tests globally (functions are wrapped)
+  python315 = python315'.override {
     packageOverrides = selfP: superP: {
-      # Inside the 3.15 package set, disable tests globally
       buildPythonPackage = args:
         superP.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
       buildPythonApplication = args:
         superP.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
-      # Force mypy to skip mypyc, it takes infinity time to build
-      # and the goddamn types aren't even real anyway.
+      # >>> Force mypy to skip mypyc (pure-Python build)
       mypy = superP.mypy.overridePythonAttrs (old: {
-        env = { MYPY_USE_MYPYC = "0"; };
+        env = (old.env or {}) // {
+          MYPY_USE_MYPYC = "0";   # mypy's build script honors this
+        };
       });
 
       charset-normalizer = superP.charset-normalizer.overridePythonAttrs (old: {
@@ -69,6 +78,12 @@ let
       });
 
       parso = superP.parso.overridePythonAttrs (old: {
+        src = prev.fetchFromGitHub {
+          owner = "davidhalter";
+          repo = "parso";
+          rev = "a73af5c709a292cbb789bf6cab38b20559f166c0";
+          hash = "sha256-NNP/gKBA2tvCTV53k8VrnGEYruEsDSVqWVa7uU8Wznc=";
+        };
         postPatch = ''
           cp parso/python/grammar314.txt parso/python/grammar315.txt
         '';
@@ -78,14 +93,14 @@ let
   };
 
 in {
-
   python315 = python315;
   python315Packages = python315.pkgs;
+
+  # Optional: free-threaded variant (only if you actually need it)
   python315FreeThreading = python315.override {
     self = self.python315FreeThreading;
     pythonAttr = "python315FreeThreading";
     enableGIL = false;
   };
-
 }
 
