@@ -72,7 +72,7 @@
 
     let
 
-      python_common = ps: with ps; [
+      python_large = ps: with ps; [
           # packaging
           pip
           build
@@ -108,6 +108,14 @@
           is_instance
           python-bin
 
+      ];
+
+      python_small = ps: with ps; [
+        ipython
+        mmry
+        assure
+        is_instance
+        python-bin
       ];
 
     in
@@ -305,7 +313,7 @@
     # raw binary machine code overlay ftw
     noelf
 
-    (python313.withPackages (ps: with ps; (python_common ps) ++ [
+    (python313.withPackages (ps: with ps; (python_large ps) ++ [
 
       scikit-learn
       torch
@@ -315,19 +323,19 @@
 
     ]))
 
-    (python314.withPackages (ps: with ps; [
-      ipython
+    (python313t.withPackages (ps: with ps; (python_small ps) ++ [
     ]))
 
-    (python314FreeThreading.withPackages (ps: with ps; [
-      ipython
+    (python314.withPackages (ps: with ps; (python_small ps) ++ [
     ]))
 
-    (python315.withPackages (ps: with ps; (python_common ps) ++ [
+    (python314FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
     ]))
 
-    (python315FreeThreading.withPackages (ps: with ps; [
-      ipython
+    (python315.withPackages (ps: with ps; (python_large ps) ++ [
+    ]))
+
+    (python315FreeThreading.withPackages (ps: with ps; (python_small ps) ++ [
     ]))
 
   ];
