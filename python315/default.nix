@@ -78,14 +78,8 @@ let
       });
 
       parso = superP.parso.overridePythonAttrs (old: {
-        src = prev.fetchFromGitHub {
-          owner = "davidhalter";
-          repo = "parso";
-          rev = "a73af5c709a292cbb789bf6cab38b20559f166c0";
-          hash = "sha256-NNP/gKBA2tvCTV53k8VrnGEYruEsDSVqWVa7uU8Wznc=";
-        };
         postPatch = ''
-          cp parso/python/grammar314.txt parso/python/grammar315.txt
+          cp parso/python/grammar313.txt parso/python/grammar315.txt
         '';
       });
 
