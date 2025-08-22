@@ -4,16 +4,18 @@ let
 
   # for help, see nixos-help or man nix.conf
 
-  python_packages_common_ft = ps: (with ps; [
-      is-instance
-      python-bin
-      mmry
+  python_packages_common = ps: (with ps; [
       build
       pytest
       requests
+
+      is-instance
+      python-bin
+      mmry
   ]);
 
-  python_packages_common = ps: (python_packages_common_ft ps) ++ (with ps; [
+  python_packages_common_noft = ps: (python_packages_common ps) ++ (with ps; [
+
       # packaging
       pip
       build
@@ -44,39 +46,34 @@ let
       google-api-python-client  # getbtcprice
       geoip2                    # getbtcprice
 
-      # overlay
-      mmry
+      # mine
       assure
-      is-instance
-      python-bin
-
   ]);
 
   python_interpreters = with pkgs; [
 
-    (python313.withPackages (ps: with ps; [
+    (python313.withPackages (ps: with ps; (python_packages_common_noft ps) ++ [
 
-      # difficult on HEAD interpreters
       torch
       embd
       wnix
 
     ]))
 
-    (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
+    (python314.withPackages (ps: with ps; (python_packages_common_noft ps) ++ [
     ]))
 
-    (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
+    (python315.withPackages (ps: with ps; (python_packages_common_noft ps) ++ [
     ]))
 
     ### Free Threaded Interpreters
-    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common_ft ps) ++ [
+    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
     ]))
 
-    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common_ft ps) ++ [
+    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
     ]))
 
-    (python315FreeThreading.withPackages (ps: with ps; (python_packages_common_ft ps) ++ [
+    (python315FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
     ]))
 
   ];
