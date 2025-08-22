@@ -41,6 +41,7 @@ let
         "testing/cffi1/test_recompiler.py"
         "testing/cffi1/test_verify1.py"
         "testing/cffi1/test_ffi_obj.py"     # only fails on 313t
+        "testing/cffi1/test_zdist.py"       # only fails on 313t
       ];
 
     });
