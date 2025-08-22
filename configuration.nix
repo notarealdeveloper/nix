@@ -4,7 +4,7 @@
 
 let
 
-  python_interpreters = [
+  python_interpreters = with pkgs; [
 
     (python313.withPackages (ps: with ps; [
 
