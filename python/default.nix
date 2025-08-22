@@ -2,7 +2,7 @@ final: prev:
 
 let
 
-  pythonFreeThreadingOverrides = pyfinal: pyprev: {
+  freeThreadingOverrides = pyfinal: pyprev: {
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "Cython";
       version = "3.1.3";
@@ -22,7 +22,7 @@ let
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
-      #env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
+      env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
       doCheck = false;
     });
 
@@ -156,7 +156,7 @@ let
   python313 =
     prev.python313.override {
       packageOverrides = pyfinal: pyprev:
-        (commonOverrides pyfinal pyprev) // (pythonFreeThreadingOverrides pyfinal pyprev) // {
+        (commonOverrides pyfinal pyprev) // {
           # put python313-specific attrset of packageOverrides here
         };
 
@@ -223,14 +223,14 @@ let
 
 in {
 
-  # 3.13t exports
+  # 3.13 exports
   python313FreeThreading = python313.override {
     self = final.python313FreeThreading;
     pythonAttr = "python313FreeThreading";
     enableGIL = false;
     packageOverrides = pyfinal: pyprev:
-      (commonOverrides pyfinal pyprev) // {
-      };
+      (freeThreadingOverrides pyfinal pyprev) //
+      { };
   };
 
   # 3.14 exports
@@ -240,6 +240,9 @@ in {
     self = final.python314FreeThreading;
     pythonAttr = "python314FreeThreading";
     enableGIL = false;
+    packageOverrides = pyfinal: pyprev:
+      (freeThreadingOverrides pyfinal pyprev) //
+      { };
   };
 
   # 3.15 exports
@@ -249,6 +252,9 @@ in {
     self = final.python315FreeThreading;
     pythonAttr = "python315FreeThreading";
     enableGIL = false;
+    packageOverrides = pyfinal: pyprev:
+      (freeThreadingOverrides pyfinal pyprev) //
+      { };
   };
 }
 
