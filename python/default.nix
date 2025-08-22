@@ -140,6 +140,16 @@ let
     });
   };
 
+  # ======================= Python 3.13 =======================
+  python313 =
+    prev.python313.override {
+      packageOverrides = pyfinal: pyprev:
+        (commonOverrides pyfinal pyprev) // {
+          # put python313-specific attrset of packageOverrides here
+        };
+
+    };
+
   # ======================= Python 3.14 =======================
   python314 =
     prev.python314.override {
@@ -200,6 +210,16 @@ let
     });
 
 in {
+
+  # 3.13t exports
+  python313FreeThreading = python313.override {
+    self = final.python313FreeThreading;
+    pythonAttr = "python313FreeThreading";
+    enableGIL = false;
+    packageOverrides = pyfinal: pyprev:
+      (commonOverrides pyfinal pyprev) // {
+      };
+  };
 
   # 3.14 exports
   python314 = python314;
