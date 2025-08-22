@@ -329,8 +329,6 @@
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; [
-      is_instance
-      python-bin
     ]))
 
     (python315.withPackages (ps: with ps; [
