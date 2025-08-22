@@ -19,6 +19,15 @@ let
       doCheck = false;
     });
 
+
+    gevent = pyprev.gevent.overridePythonAttrs (old: {
+      env = (old.env or {}) // {
+        NIX_CFLAGS_COMPILE =
+          ((old.env.NIX_CFLAGS_COMPILE or "")
+            + " -UPy_LIMITED_API -DPy_GIL_DISABLED=1");
+      };
+    });
+
     cffi = pyprev.cffi.overridePythonAttrs (old: {
       # make the build clearly t-aware
       env = (old.env or {}) // {
