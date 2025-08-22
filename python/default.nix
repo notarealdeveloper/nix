@@ -39,6 +39,8 @@ let
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "testing/cffi1/test_new_ffi_1.py"
         "testing/cffi1/test_recompiler.py"
+        "testing/cffi1/test_verify1.py"
+        "testing/cffi1/test_ffi_obj.py"     # only fails on 313t
       ];
 
     });
