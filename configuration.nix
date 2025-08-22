@@ -105,7 +105,7 @@
           # overlay
           mmry
           assure
-          is_instance
+          is-instance
           python-bin
 
       ];
@@ -319,12 +319,12 @@
     ]))
 
     #(python313FreeThreading.withPackages (ps: with ps; [
-    #  is_instance
+    #  is-instance
     #  python-bin
     #]))
 
     (python314.withPackages (ps: with ps; [
-      #is_instance
+      #is-instance
       #python-bin
     ]))
 
@@ -333,12 +333,12 @@
 
     (python315.withPackages (ps: with ps; [
       #ipython
-      #is_instance
+      #is-instance
       #python-bin
     ]))
 
     (python315FreeThreading.withPackages (ps: with ps; [
-      #is_instance
+      #is-instance
       #python-bin
     ]))
 
