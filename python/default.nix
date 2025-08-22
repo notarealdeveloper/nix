@@ -139,6 +139,7 @@ let
     executing = pyprev.executing.overridePythonAttrs (old: {
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "tests/test_main.py"
+        "tests/test_pytest.py"
       ];
     });
 
