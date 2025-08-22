@@ -8,7 +8,8 @@ let
       is-instance
       python-bin
       mmry
-      requests
+      build
+      #pytest
   ]);
 
   python_interpreters = with pkgs; [
