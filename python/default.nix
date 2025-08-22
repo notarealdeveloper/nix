@@ -20,12 +20,20 @@ let
     });
 
     gevent = pyprev.gevent.overridePythonAttrs (old: {
+
+      env = (old.env or {}) // {
+        CFFI_NO_LIMITED_API = "1";  # cffi: disable py_limited_api=True
+      };
+
+      #NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
+
       postPatch = (old.postPatch or "") + ''
       for f in $(grep -RIl "py_limited_api\s*=" src || true); do
         echo "Patching $f"
         substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
       done
       '';
+
     });
 
     cffi = pyprev.cffi.overridePythonAttrs (old: {
