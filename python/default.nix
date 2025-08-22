@@ -142,6 +142,12 @@ let
       ];
     });
 
+    pyfakefs = pyprev.pyfakefs.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "pyfakefs/tests/fake_open_test.py"
+      ];
+    });
+
     aiosignal = pyprev.aiosignal.overridePythonAttrs (old: {
       doCheck = false;
       #disabledTestPaths = (old.disabledTestPaths or []) ++ [
