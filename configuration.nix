@@ -7,7 +7,6 @@ let
   python_packages_common = ps: (with ps; [
       is-instance
       python-bin
-      assure
       mmry
   ]);
 
