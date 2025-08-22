@@ -9,6 +9,10 @@ let
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
+    fastapi = pyprev.fastapi.overrideAttrs (old: {
+      propagatedBuildInputs = lib.remove prev.mercurial old.propagatedBuildInputs;
+    });
+
     mypy = pyprev.mypy.overridePythonAttrs (old: {
       env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
       doCheck = false;
@@ -417,15 +421,15 @@ let
     });
 
   # ======================= Um... why? =======================
-  mercurial = prev.mercurial.overrideAttrs (old: {
-    buildFlags = (old.buildFlags or []) ++ [ "HGDEMANDIMPORT=disable" ];
-    env = (old.env or {}) // { HGDEMANDIMPORT = "disable"; };
-  });
+  #mercurial = prev.mercurial.overrideAttrs (old: {
+  #  buildFlags = (old.buildFlags or []) ++ [ "HGDEMANDIMPORT=disable" ];
+  #  env = (old.env or {}) // { HGDEMANDIMPORT = "disable"; };
+  #});
 
 
 in {
 
-  mercurial = mercurial;
+  #mercurial = mercurial;
 
   # 3.13 exports
   python313FreeThreading = python313.override {
