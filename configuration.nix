@@ -38,7 +38,7 @@ let
 
       # numerical
       numpy
-      #scipy
+      scipy
       #pandas
       #scipy
       #pandas
