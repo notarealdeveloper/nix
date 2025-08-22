@@ -483,4 +483,12 @@ in
   ### </cachix> ###
   #################
 
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "no";
+    passwordAuthentication = true;
+  };
+
+  networking.firewall.allowedTCPPorts = [ 22 ];
+
 }
