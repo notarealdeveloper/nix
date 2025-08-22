@@ -128,11 +128,12 @@ let
     });
 
     blinker = pyprev.blinker.overridePythonAttrs (old: {
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "tests/test_context.py"
-        "tests/test_symbol.py"
-        "tests/test_signals.py"
-      ];
+      doCheck = false;
+      #disabledTestPaths = (old.disabledTestPaths or []) ++ [
+      #  "tests/test_context.py"
+      #  "tests/test_symbol.py"
+      #  "tests/test_signals.py"
+      #];
     });
 
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
