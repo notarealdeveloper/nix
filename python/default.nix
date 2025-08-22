@@ -169,6 +169,10 @@ let
         "tests/test_completer.py"
         "tests/test_debugger.py"
         "tests/test_pycolorize.py"
+        "tests/test_oinspect.py"
+        "tests/test_pretty.py"
+        "tests/test_text.py"
+        "IPython/extensions/tests/test_deduperreload.py"
       ];
     });
 
