@@ -417,7 +417,7 @@ let
     });
 
   # ======================= Um... why? =======================
-  mercurial = super.mercurial.overrideAttrs (old: {
+  mercurial = prev.mercurial.overrideAttrs (old: {
     buildFlags = (old.buildFlags or []) ++ [ "HGDEMANDIMPORT=disable" ];
     env = (old.env or {}) // { HGDEMANDIMPORT = "disable"; };
   });
