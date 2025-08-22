@@ -4,6 +4,13 @@
 
 let
 
+  python_packages_common = ps: (with ps; [
+      is-instance
+      python-bin
+      assure
+      mmry
+  ]);
+
   python_interpreters = with pkgs; [
 
     (python313.withPackages (ps: with ps; [
@@ -50,29 +57,24 @@ let
 
     ]))
 
-    (python313FreeThreading.withPackages (ps: with ps; [
-      is-instance
-      python-bin
+    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
+
     ]))
 
-    (python314.withPackages (ps: with ps; [
-      is-instance
-      python-bin
+    (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
+
     ]))
 
-    (python314FreeThreading.withPackages (ps: with ps; [
-      is-instance
-      python-bin
+    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
+
     ]))
 
-    (python315.withPackages (ps: with ps; [
-      is-instance
-      python-bin
+    (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
+
     ]))
 
-    (python315FreeThreading.withPackages (ps: with ps; [
-      is-instance
-      python-bin
+    (python315FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
+
     ]))
 
   ];
