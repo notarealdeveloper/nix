@@ -477,10 +477,7 @@ in
         EnvironmentFile = "/etc/cachix/${cacheName}.env";
         ExecStart = "${pkgs.cachix}/bin/cachix daemon run ${cacheName}";
         Restart = "on-failure";
-      };
-
-      nix-daemon = {
-        serviceConfig.Environment = "NIX_SHOW_STATS=1";
+        Environment = "NIX_SHOW_STATS=1";
       };
 
     };
