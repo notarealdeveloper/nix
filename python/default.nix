@@ -98,6 +98,10 @@ let
       doCheck = false;
     });
 
+    pybind11 = pyprev.pybind11.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
     virtualenv = pyprev.virtualenv.overridePythonAttrs (old: {
       doCheck = false;
     });
