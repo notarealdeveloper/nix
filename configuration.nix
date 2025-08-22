@@ -9,7 +9,7 @@ let
       python-bin
       mmry
       build
-      #pytest
+      pytest
   ]);
 
   python_interpreters = with pkgs; [
