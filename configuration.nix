@@ -83,6 +83,8 @@ let
 
   ];
 
+  cacheName = "notarealdeveloper";
+
 in
 {
 
@@ -92,15 +94,6 @@ in
     max-jobs = "auto";
     cores = 0; # 0 = give each build all cores (build systems may or may not use them)
     http-connections = 50;  # faster parallel downloads
-    trusted-users = [ "root" "jason" ];
-    substituters = [
-      "https://cache.nixos.org"
-      "https://notarealdeveloper.cachix.org"
-    ];
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "notarealdeveloper.cachix.org-1:lTWU+5FB7gvLg39/9EY1GDE3JV4HkRtprgxuKmkm/7g="
-    ];
   };
 
   # time
@@ -440,4 +433,58 @@ in
       verbose = true
   '';
 
+
+  ################
+  ### <cachix> ###
+  ################
+
+  nix.settings = {
+
+    trusted-users = [ "root" "jason" ];
+
+    substituters = [
+      "https://cache.nixos.org"
+      "https://${cacheName}.cachix.org"
+    ];
+
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "${cacheName}.cachix.org-1:lTWU+5FB7gvLg39/9EY1GDE3JV4HkRtprgxuKmkm/7g="
+    ];
+
+    post-build-hook = pkgs.writeShellScript "post-build-cachix.sh" ''
+      set -euo pipefail
+      # Nix sets OUT_PATHS as a space-separated list.
+      # Send them to the daemon (fast, non-blocking wrt builds).
+      if [ -n "''${OUT_PATHS-}" ]; then
+        ${pkgs.cachix}/bin/cachix daemon push $OUT_PATHS || true
+      fi
+    '';
+
+  };
+
+  systemd.tmpfiles.rules = [ "d /etc/cachix 0750 root root -" ];
+
+  systemd.services = {
+
+    "cachix-daemon@${cacheName}" = {
+      description = "Cachix daemon for ${cacheName}";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "simple";
+        # Reads env file with CACHIX_AUTH_TOKEN
+        EnvironmentFile = "/etc/cachix/${cacheName}.env";
+        ExecStart = "${pkgs.cachix}/bin/cachix daemon run ${cacheName}";
+        Restart = "on-failure";
+      };
+
+      nix-daemon = {
+        serviceConfig.Environment = "NIX_SHOW_STATS=1";
+      }
+
+  };
+
+  #################
+  ### </cachix> ###
+  #################
 }
