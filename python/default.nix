@@ -2,74 +2,6 @@ final: prev:
 
 let
 
-  freeThreadingOverrides = pyfinal: pyprev: {
-
-    cython = pyprev.cython.overrideAttrs (old: rec {
-      pname = "cython";
-      version = "3.1.3";
-      pyproject = true;
-
-      src = prev.fetchFromGitHub {
-        owner = "cython";
-        repo = "cython";
-        tag = version;
-        hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
-      };
-
-      doCheck = false;
-    });
-
-    gevent = pyprev.gevent.overridePythonAttrs (old: {
-
-      env = (old.env or {}) // {
-        CFFI_NO_LIMITED_API = "1";  # cffi: disable py_limited_api=True
-      };
-
-      #NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
-
-      postPatch = (old.postPatch or "") + ''
-      for f in $(grep -RIl "py_limited_api\s*=" src || true); do
-        echo "Patching $f"
-        substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
-      done
-      '';
-
-    });
-
-    cffi = pyprev.cffi.overridePythonAttrs (old: {
-      # make the build clearly t-aware
-      env = (old.env or {}) // {
-        NIX_CFLAGS_COMPILE =
-          ((old.env.NIX_CFLAGS_COMPILE or "")
-            + " -UPy_LIMITED_API -DPy_GIL_DISABLED=1");
-      };
-
-      # make the per-test mini-compiles less brittle on t headers
-      postPatch = (old.postPatch or "") + ''
-        # cffi's ffiplatform adds -Werror to all test compiles; drop it for t-builds
-        substituteInPlace src/cffi/ffiplatform.py \
-          --replace "'-Werror', " "" \
-          --replace ", '-Werror'" ""
-      '';
-
-      # skip the parts that still rely on GIL-era assumptions
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "testing/cffi1/test_new_ffi_1.py"
-        "testing/cffi1/test_recompiler.py"
-        "testing/cffi1/test_verify1.py"
-        "testing/cffi1/test_ffi_obj.py"     # only fails on 313t
-        "testing/cffi1/test_zdist.py"       # only fails on 313t
-      ];
-
-      # this is PROBABLY working without doCheck = false here,
-      # but need to wait until overnight or something to try
-      # building it this way on all interpreters. get that
-      # binary cache set up soon!
-      doCheck = false;
-    });
-
-  };
-
   commonOverrides = pyfinal: pyprev: {
     #buildPythonPackage = args:
     #  pyprev.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
@@ -231,6 +163,74 @@ let
         cp parso/python/grammar314.txt parso/python/grammar315.txt
       '';
     });
+  };
+
+  freeThreadingOverrides = pyfinal: pyprev: {
+
+    cython = pyprev.cython.overrideAttrs (old: rec {
+      pname = "cython";
+      version = "3.1.3";
+      pyproject = true;
+
+      src = prev.fetchFromGitHub {
+        owner = "cython";
+        repo = "cython";
+        tag = version;
+        hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
+      };
+
+      doCheck = false;
+    });
+
+    gevent = pyprev.gevent.overridePythonAttrs (old: {
+
+      env = (old.env or {}) // {
+        CFFI_NO_LIMITED_API = "1";  # cffi: disable py_limited_api=True
+      };
+
+      #NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
+
+      postPatch = (old.postPatch or "") + ''
+      for f in $(grep -RIl "py_limited_api\s*=" src || true); do
+        echo "Patching $f"
+        substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
+      done
+      '';
+
+    });
+
+    cffi = pyprev.cffi.overridePythonAttrs (old: {
+      # make the build clearly t-aware
+      env = (old.env or {}) // {
+        NIX_CFLAGS_COMPILE =
+          ((old.env.NIX_CFLAGS_COMPILE or "")
+            + " -UPy_LIMITED_API -DPy_GIL_DISABLED=1");
+      };
+
+      # make the per-test mini-compiles less brittle on t headers
+      postPatch = (old.postPatch or "") + ''
+        # cffi's ffiplatform adds -Werror to all test compiles; drop it for t-builds
+        substituteInPlace src/cffi/ffiplatform.py \
+          --replace "'-Werror', " "" \
+          --replace ", '-Werror'" ""
+      '';
+
+      # skip the parts that still rely on GIL-era assumptions
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "testing/cffi1/test_new_ffi_1.py"
+        "testing/cffi1/test_recompiler.py"
+        "testing/cffi1/test_verify1.py"
+        "testing/cffi1/test_ffi_obj.py"     # only fails on 313t
+        "testing/cffi1/test_zdist.py"       # only fails on 313t
+      ];
+
+      # this is PROBABLY working without doCheck = false here,
+      # but need to wait until overnight or something to try
+      # building it this way on all interpreters. get that
+      # binary cache set up soon!
+      doCheck = false;
+    });
+
   };
 
   # ======================= Python 3.13 =======================
