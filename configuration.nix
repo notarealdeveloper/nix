@@ -37,6 +37,7 @@ let
       pandas
       matplotlib
       seaborn
+      #scikit-learn
 
       # ~/bin depends
       google-auth-oauthlib      # gmail
@@ -56,7 +57,6 @@ let
     (python313.withPackages (ps: with ps; [
 
       # difficult on HEAD interpreters
-      scikit-learn
       torch
       embd
       wnix
