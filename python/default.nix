@@ -12,7 +12,7 @@ let
         owner = "cython";
         repo = "cython";
         tag = version;
-        hash = "";
+        hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
       };
 
       doCheck = false;
@@ -234,6 +234,7 @@ in {
     pythonAttr = "python313FreeThreading";
     enableGIL = false;
     packageOverrides = pyfinal: pyprev:
+      (commonOverrides pyfinal pyprev) //
       (freeThreadingOverrides pyfinal pyprev) //
       { };
   };
@@ -246,6 +247,7 @@ in {
     pythonAttr = "python314FreeThreading";
     enableGIL = false;
     packageOverrides = pyfinal: pyprev:
+      (commonOverrides pyfinal pyprev) //
       (freeThreadingOverrides pyfinal pyprev) //
       { };
   };
@@ -258,6 +260,7 @@ in {
     pythonAttr = "python315FreeThreading";
     enableGIL = false;
     packageOverrides = pyfinal: pyprev:
+      (commonOverrides pyfinal pyprev) //
       (freeThreadingOverrides pyfinal pyprev) //
       { };
   };
