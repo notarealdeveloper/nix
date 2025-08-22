@@ -176,6 +176,32 @@ let
       ];
     });
 
+    matplotlib = pyprev.matplotlib.overridePythonAttrs (old: {
+      preCheck = (old.preCheck or "") + ''
+        export MPLCONFIGDIR="$TMPDIR/mpl"
+        mkdir -p "$MPLCONFIGDIR"
+      '';
+    });
+
+    seaborn = pyprev.seaborn.overridePythonAttrs (old: {
+      # keep existing deps and add pytz (see #2 below)
+      propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.pytz ];
+
+      # Matplotlib wants a writable config/cache dir; make one.
+      preCheck = (old.preCheck or "") + ''
+        export MPLCONFIGDIR="$TMPDIR/mpl"
+        mkdir -p "$MPLCONFIGDIR"
+      '';
+      preBuild = (old.preBuild or "") + ''
+        export MPLCONFIGDIR="$TMPDIR/mpl"
+        mkdir -p "$MPLCONFIGDIR"
+      '';
+      preInstallCheck = (old.preInstallCheck or "") + ''
+        export MPLCONFIGDIR="$TMPDIR/mpl"
+        mkdir -p "$MPLCONFIGDIR"
+      '';
+    });
+
   };
 
   freeThreadingOverrides = pyfinal: pyprev: {
