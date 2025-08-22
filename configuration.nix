@@ -1,8 +1,8 @@
-# for help, see nixos-help or man nix.conf
-
 { config, lib, wpkgs, pkgs, aws-cvpn-client, ... }:
 
 let
+
+  # for help, see nixos-help or man nix.conf
 
   python_packages_common = ps: (with ps; [
       is-instance
@@ -86,6 +86,7 @@ let
   cacheName = "notarealdeveloper";
 
 in
+
 {
 
   nix.settings = {
@@ -482,9 +483,12 @@ in
         serviceConfig.Environment = "NIX_SHOW_STATS=1";
       };
 
+    };
+
   };
 
   #################
   ### </cachix> ###
   #################
+
 }
