@@ -84,6 +84,7 @@
           os
           ./users.nix
           ./configuration.nix
+          ./ccache.nix
           { networking.hostName = name; }
           home-manager.nixosModules.home-manager
         ];
