@@ -10,6 +10,7 @@ let
       mmry
       build
       pytest
+      requests
   ]);
 
   python_interpreters = with pkgs; [
@@ -59,26 +60,23 @@ let
     ]))
 
     (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
       ipython
+      cython
     ]))
 
     (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
       ipython
+      cython
     ]))
 
     ### Free Threaded Interpreters
     (python313FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
     ]))
 
     (python315FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
     ]))
 
   ];
