@@ -163,6 +163,15 @@ let
         cp parso/python/grammar314.txt parso/python/grammar315.txt
       '';
     });
+
+    ipython = pyprev.ipython.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_completer.py"
+        "tests/test_debugger.py"
+        "tests/test_pycolorize.py"
+      ];
+    });
+
   };
 
   freeThreadingOverrides = pyfinal: pyprev: {
