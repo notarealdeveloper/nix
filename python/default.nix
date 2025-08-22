@@ -10,7 +10,7 @@ let
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
     fastapi = pyprev.fastapi.overrideAttrs (old: {
-      propagatedBuildInputs = lib.remove prev.mercurial old.propagatedBuildInputs;
+      propagatedBuildInputs = prev.lib.remove prev.mercurial old.propagatedBuildInputs;
     });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
