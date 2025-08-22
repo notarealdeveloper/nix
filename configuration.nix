@@ -324,21 +324,22 @@
     #]))
 
     (python314.withPackages (ps: with ps; [
-      #is-instance
+      is-instance
       #python-bin
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; [
+      is-instance
     ]))
 
     (python315.withPackages (ps: with ps; [
       #ipython
-      #is-instance
+      is-instance
       #python-bin
     ]))
 
     (python315FreeThreading.withPackages (ps: with ps; [
-      #is-instance
+      is-instance
       #python-bin
     ]))
 
