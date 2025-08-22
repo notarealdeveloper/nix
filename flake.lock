@@ -128,15 +128,34 @@
         "type": "github"
       }
     },
+    "python-packages": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755876203,
+        "narHash": "sha256-0GrbfIRK0lJ0gW9sj70CTYFVsNk0PriPO/ODK8alW50=",
+        "owner": "doubleunix",
+        "repo": "python-packages",
+        "rev": "785f50cb669e5d1d8cbe9f1f9b0c3c6f27b476d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "repo": "python-packages",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "aws-cvpn-client": "aws-cvpn-client",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
-        "wnix-noelf": "wnix-noelf",
-        "wnix-python-packages": "wnix-python-packages",
-        "wnixpkgs": "wnixpkgs"
+        "python-packages": "python-packages",
+        "wnix-noelf": "wnix-noelf"
       }
     },
     "systems": {
@@ -172,42 +191,6 @@
       "original": {
         "owner": "doubleunix",
         "repo": "noelf",
-        "type": "github"
-      }
-    },
-    "wnix-python-packages": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1755874711,
-        "narHash": "sha256-1YYyoZkePnlTSoFUeA0n714OCK+Kd3vwdMRVeVp0JEk=",
-        "owner": "doubleunix",
-        "repo": "python-packages",
-        "rev": "323d2f8b5ea254086cafb4f5c1c5161b74942ace",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "repo": "python-packages",
-        "type": "github"
-      }
-    },
-    "wnixpkgs": {
-      "locked": {
-        "lastModified": 1755722004,
-        "narHash": "sha256-p+ArZbgZXlWTLSp6YjU5xUuZI1aj1+jKQJ7ILumh6ek=",
-        "owner": "doubleunix",
-        "repo": "wnixpkgs",
-        "rev": "cfdef9d04b09819519df8b1fc3ccb79f38e31c93",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "ref": "wnixos-unstable",
-        "repo": "wnixpkgs",
         "type": "github"
       }
     }
