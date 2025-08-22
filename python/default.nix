@@ -17,14 +17,21 @@ let
       env = (old.env or {}) // { CHARSET_NORMALIZER_USE_MYPYC = "0"; };
     });
 
-    jeepney = pyprev.jeepney.overridePythonAttrs (_old: {
-      propagatedBuildInputs = with pyprev; [ trio outcome ];
-    });
-
     cryptography = pyprev.cryptography.overridePythonAttrs (old: {
       env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
     });
 
+    # pr: jeepney seems not to declare their dependency on trio and outcome in their
+    # top-level pyproject.toml, though they do declare the deps in the docs subdir.
+    # subdirectory. upstream seems to be here.
+    # upstream: https://gitlab.com/takluyver/jeepney
+    jeepney = pyprev.jeepney.overridePythonAttrs (_old: {
+      propagatedBuildInputs = with pyprev; [ trio outcome ];
+    });
+
+    # pr: lz4 uses the now removed _compression module in various places.
+    # in python>=3.14, this has been moved to compression._common._streams
+    # upstream: https://github.com/python-lz4/python-lz4
     lz4 = pyprev.lz4.overridePythonAttrs (old: {
       postPatch = ''
         sed -Ei "s@import _compression@import compression._common._streams as _compression@g" lz4/frame/__init__.py

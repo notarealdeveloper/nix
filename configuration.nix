@@ -328,6 +328,7 @@
     ]))
 
     (python315.withPackages (ps: with ps; [
+      ipython
     ]))
 
     (python315FreeThreading.withPackages (ps: with ps; [
