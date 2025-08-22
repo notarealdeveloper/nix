@@ -2,6 +2,82 @@
 
 { config, lib, wpkgs, pkgs, aws-cvpn-client, ... }:
 
+let
+
+  python_interpreters = [
+
+    (python313.withPackages (ps: with ps; [
+
+      # packaging
+      pip
+      build
+      twine
+      pytest
+      cython
+      setuptools
+
+      # basics
+      ipython
+
+      # net
+      yt-dlp
+      requests
+      beautifulsoup4
+
+      # numerical
+      numpy
+      scipy
+      pandas
+      matplotlib
+      seaborn
+
+      # ~/bin depends
+      google-auth-oauthlib      # gmail
+      google-api-python-client  # getbtcprice
+      geoip2                    # getbtcprice
+
+      # overlay
+      mmry
+      assure
+      is-instance
+      python-bin
+
+      # difficult on HEAD interpreters
+      scikit-learn
+      torch
+      embd
+      wnix
+
+    ]))
+
+    (python313FreeThreading.withPackages (ps: with ps; [
+      is-instance
+      python-bin
+    ]))
+
+    (python314.withPackages (ps: with ps; [
+      is-instance
+      python-bin
+    ]))
+
+    (python314FreeThreading.withPackages (ps: with ps; [
+      is-instance
+      python-bin
+    ]))
+
+    (python315.withPackages (ps: with ps; [
+      is-instance
+      python-bin
+    ]))
+
+    (python315FreeThreading.withPackages (ps: with ps; [
+      is-instance
+      python-bin
+    ]))
+
+  ];
+
+in
 {
 
   nix.settings = {
@@ -69,51 +145,6 @@
 
   # system
   environment.systemPackages =
-
-    let
-
-      python_large = ps: with ps; [
-          # packaging
-          pip
-          build
-          twine
-          pytest
-          cython
-          setuptools
-
-          # basics
-          ipython
-
-          # net
-          yt-dlp
-          requests
-          beautifulsoup4
-
-          # numerical
-          numpy
-          scipy
-          pandas
-          matplotlib
-          seaborn
-          #scikit-learn
-
-          # ~/bin depends
-          google-auth-oauthlib      # gmail
-          google-api-python-client  # getbtcprice
-          geoip2                    # getbtcprice
-
-          # overlay
-          mmry
-          assure
-          is-instance
-          python-bin
-
-      ];
-
-      python_small = ps: with ps; [
-      ];
-
-    in
 
     with pkgs; [
 
@@ -308,42 +339,7 @@
     # raw binary machine code overlay ftw
     noelf
 
-    (python313.withPackages (ps: with ps; (python_large ps) ++ [
-
-      scikit-learn
-      torch
-
-      embd
-      wnix
-
-    ]))
-
-    #(python313FreeThreading.withPackages (ps: with ps; [
-    #  is-instance
-    #  python-bin
-    #]))
-
-    (python314.withPackages (ps: with ps; [
-      is-instance
-      #python-bin
-    ]))
-
-    (python314FreeThreading.withPackages (ps: with ps; [
-      is-instance
-    ]))
-
-    (python315.withPackages (ps: with ps; [
-      #ipython
-      is-instance
-      #python-bin
-    ]))
-
-    (python315FreeThreading.withPackages (ps: with ps; [
-      is-instance
-      #python-bin
-    ]))
-
-  ];
+  ] ++ python_interpreters;
 
   boot.kernel.sysctl = {
     "net.core.bpf_jit_enable" = 1;
