@@ -19,13 +19,13 @@ let
       doCheck = false;
     });
 
-
     gevent = pyprev.gevent.overridePythonAttrs (old: {
-      env = (old.env or {}) // {
-        NIX_CFLAGS_COMPILE =
-          ((old.env.NIX_CFLAGS_COMPILE or "")
-            + " -UPy_LIMITED_API -DPy_GIL_DISABLED=1");
-      };
+      postPatch = (old.postPatch or "") + ''
+      for f in $(grep -RIl "py_limited_api\s*=" src || true); do
+        echo "Patching $f"
+        substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
+      done
+      '';
     });
 
     cffi = pyprev.cffi.overridePythonAttrs (old: {
