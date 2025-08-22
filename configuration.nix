@@ -27,17 +27,17 @@ let
       ipython
 
       # one step at a time
-      #gevent
+      gevent
       grpcio
       watchdog
 
       # net
       #yt-dlp
-      #requests
-      #beautifulsoup4
+      requests
+      beautifulsoup4
 
       # numerical
-      #numpy
+      numpy
       #scipy
       #pandas
       #matplotlib
@@ -60,10 +60,10 @@ let
       ++ [ torch embd wnix ]
     ))
 
-    #(python314.withPackages (ps: with ps;
-    #  (python_packages_noft ps)
-    #  ++ [ ]
-    #))
+    (python314.withPackages (ps: with ps;
+      (python_packages_noft ps)
+      ++ [ ]
+    ))
 
     (python315.withPackages (ps: with ps;
       (python_packages_noft ps)
