@@ -27,32 +27,37 @@ let
       ipython
       cython
 
+      # one step at a time
+      gevent
+      grpcio
+      watchdog
+
       # net
-      yt-dlp
-      requests
-      beautifulsoup4
+      #yt-dlp
+      #requests
+      #beautifulsoup4
 
       # numerical
-      numpy
-      scipy
-      pandas
-      matplotlib
-      seaborn
+      #numpy
+      #scipy
+      #pandas
+      #matplotlib
+      #seaborn
       #scikit-learn
 
       # ~/bin depends
-      google-auth-oauthlib      # gmail
-      google-api-python-client  # getbtcprice
-      geoip2                    # getbtcprice
+      #google-auth-oauthlib      # gmail
+      #google-api-python-client  # getbtcprice
+      #geoip2                    # getbtcprice
 
       # mine
-      assure
+      #assure
   ]);
 
   python_interpreters = with pkgs; [
 
     (python313.withPackages (ps: with ps;
-      (python_packages_common_noft ps)
+      (python_packages_noft ps)
       ++ [ torch embd wnix ]
     ))
 

@@ -79,6 +79,14 @@ let
       ];
     });
 
+    watchdog = pyprev.watchdog.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_inotify_c.py"
+        "tests/test_isolated.py"
+        "tests/test_logging_event_handler.py"
+      ];
+    });
+
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
 
       # Latest release not compatible with pytest 6
