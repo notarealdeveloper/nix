@@ -4,7 +4,7 @@
   inputs = {
 
     nixpkgs.url  = "github:NixOS/nixpkgs/nixos-unstable";
-    wnixpkgs.url = "github:doubleunix/wnixpkgs/wnixos-unstable";
+    #wnixpkgs.url = "github:doubleunix/wnixpkgs/wnixos-unstable";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wnix-python-packages = {
+    python-packages = {
       url = "github:doubleunix/python-packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -33,7 +33,7 @@
 
   };
 
-  outputs = { self, nixpkgs, wnixpkgs, home-manager, nixos-wsl, wnix-python-packages, wnix-noelf, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, python-packages, wnix-noelf, aws-cvpn-client, ... }:
 
   let
 
@@ -49,18 +49,7 @@
         overlay
         overlay-python
         # todo: doubleunix/wnixpkgs overlay that contains both of these
-        wnix-python-packages.overlays.default
-        wnix-noelf.overlays.default
-      ];
-      config.allowUnfree = true;
-    };
-
-    wpkgs = import wnixpkgs {
-      inherit system;
-      overlays = [
-        overlay
-        overlay-python
-        wnix-python-packages.overlays.default
+        python-packages.overlays.default
         wnix-noelf.overlays.default
       ];
       config.allowUnfree = true;
@@ -86,7 +75,7 @@
           { networking.hostName = name; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit aws-cvpn-client wpkgs; };
+        specialArgs = { inherit aws-cvpn-client; };
       };
   in {
 
@@ -130,11 +119,7 @@
     # For now, nix flake check seems not to like it.
     # packages.${system} = pkgs;
 
-    packages.${system} = {
-      inherit (pkgs)
-        weatherspect
-      ;
-    };
+    packages.${system} = pkgs;
 
     legacyPackages.${system} = pkgs;
 

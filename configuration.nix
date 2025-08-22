@@ -1,4 +1,4 @@
-{ config, lib, wpkgs, pkgs, aws-cvpn-client, ... }:
+{ config, lib, pkgs, aws-cvpn-client, ... }:
 
 let
 
