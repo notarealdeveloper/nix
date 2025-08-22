@@ -45,6 +45,24 @@ let
       doCheck = false;
     });
 
+    pytest-mock = pyprev.pytest-mock.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    html5lib = pyprev.html5lib.overridePythonAttrs (old: {
+
+      # Latest release not compatible with pytest 6
+      doCheck = false;
+
+      # Make setup.py Python 3.15 AST-compatible
+      postPatch = ''
+        # In Python 3.15, ast.Str is gone; string literals are ast.Constant with .value
+        substituteInPlace setup.py \
+          --replace-warn "isinstance(a.value, ast.Str)" "isinstance(a.value, ast.Constant)" \
+          --replace-warn "a.value.s" "a.value.value"
+      '';
+    });
+
     pure-eval = pyprev.pure-eval.overridePythonAttrs (old: {
       doCheck = false;
       postPatch = ''
