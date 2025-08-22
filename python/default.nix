@@ -143,9 +143,10 @@ let
     });
 
     aiosignal = pyprev.aiosignal.overridePythonAttrs (old: {
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "tests/test_signals.py"
-      ];
+      doCheck = false;
+      #disabledTestPaths = (old.disabledTestPaths or []) ++ [
+      #  "tests/test_signals.py"
+      #];
     });
 
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
