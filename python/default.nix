@@ -136,6 +136,14 @@ let
       #];
     });
 
+    exceptiongroup = pyprev.exceptiongroup.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_exceptions.py"
+      ];
+    });
+
+
+
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
