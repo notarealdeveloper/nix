@@ -36,9 +36,9 @@ let
       '';
 
       # skip the parts that still rely on GIL-era assumptions
-      pytestFlagsArray = (old.pytestFlagsArray or []) ++ [
-        "-k"
-        "not test_new_ffi_1 and not test_recompiler"
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "testing/cffi1/test_new_ffi_1.py"
+        "testing/cffi1/test_recompiler.py"
       ];
 
     });
