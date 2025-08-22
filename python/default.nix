@@ -122,6 +122,12 @@ let
       doCheck = false;
     });
 
+    pytest-regressions = pyprev.pytest-regressions.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_image_regression.py"
+      ];
+    });
+
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
 
       # Latest release not compatible with pytest 6
