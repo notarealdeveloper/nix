@@ -25,12 +25,11 @@ let
 
       # basics
       ipython
-      cython
 
       # one step at a time
-      gevent
-      grpcio
-      watchdog
+      #gevent
+      #grpcio
+      #watchdog
 
       # net
       #yt-dlp
