@@ -28,8 +28,8 @@ let
 
       # one step at a time
       #gevent
-      #grpcio
-      #watchdog
+      grpcio
+      watchdog
 
       # net
       #yt-dlp
@@ -60,10 +60,10 @@ let
       ++ [ torch embd wnix ]
     ))
 
-    (python314.withPackages (ps: with ps;
-      (python_packages_noft ps)
-      ++ [ ]
-    ))
+    #(python314.withPackages (ps: with ps;
+    #  (python_packages_noft ps)
+    #  ++ [ ]
+    #))
 
     (python315.withPackages (ps: with ps;
       (python_packages_noft ps)
