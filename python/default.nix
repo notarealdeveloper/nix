@@ -416,7 +416,16 @@ let
         };
     });
 
+  # ======================= Um... why? =======================
+  mercurial = super.mercurial.overrideAttrs (old: {
+    buildFlags = (old.buildFlags or []) ++ [ "HGDEMANDIMPORT=disable" ];
+    env = (old.env or {}) // { HGDEMANDIMPORT = "disable"; };
+  });
+
+
 in {
+
+  mercurial = mercurial;
 
   # 3.13 exports
   python313FreeThreading = python313.override {
