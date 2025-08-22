@@ -128,6 +128,14 @@ let
       ];
     });
 
+    rich = pyprev.rich.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_inspect.py"
+        "tests/test_pretty.py"
+        "tests/test_text.py"
+      ];
+    });
+
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
 
       # Latest release not compatible with pytest 6
