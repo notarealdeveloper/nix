@@ -480,7 +480,7 @@ in
 
       nix-daemon = {
         serviceConfig.Environment = "NIX_SHOW_STATS=1";
-      }
+      };
 
   };
 
