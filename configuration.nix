@@ -63,14 +63,14 @@ let
     ]))
 
     (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
-
-    ]))
-
-    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-
+      requests
     ]))
 
     (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
+      requests
+    ]))
+
+    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
 
     ]))
 

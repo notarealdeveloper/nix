@@ -4,12 +4,17 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
     cython = pyprev.cython.overrideAttrs (old: rec {
-      pname = "Cython";
+      pname = "cython";
       version = "3.1.3";
-      src = pyprev.fetchPypi {
-        inherit pname version;
-        sha256 = "d13025b34f72f77bf7f65c1cd628914763e6c285f4deb934314c922b91e6be5a";
+      pyproject = true;
+
+      src = prev.fetchFromGitHub {
+        owner = "cython";
+        repo = "cython";
+        tag = version;
+        hash = "";
       };
+
       doCheck = false;
     });
   };
