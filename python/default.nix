@@ -102,6 +102,26 @@ let
     });
 
     pynacl = pyprev.pynacl.overridePythonAttrs (old: {
+
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_aead.py"
+        "tests/test_bindings.py"
+        "tests/test_box.py"
+        "tests/test_encoding.py"
+        "tests/test_generichash.py"
+        "tests/test_hash.py"
+        "tests/test_hashlib_scrypt.py"
+        "tests/test_kx.py"
+        "tests/test_public.py"
+        "tests/test_pwhash.py"
+        "tests/test_sealed_box.py"
+        "tests/test_secret.py"
+        "tests/test_secretstream.py"
+        "tests/test_shorthash.py"
+        "tests/test_signing.py"
+        "tests/test_utils.py"
+      ];
+
       postPatch = (old.postPatch or "") + ''
       sed -i 's/^from typing import ByteString, Optional, Tuple, cast$/from typing import Optional, Tuple, cast\
       try:\
@@ -209,27 +229,6 @@ let
     pydantic-core = pyprev.pydantic-core.overridePythonAttrs (old: {
       #env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
       doCheck = false;
-    });
-
-    pynacl = pyprev.pynacl.overridePythonAttrs (old: {
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "tests/test_aead.py"
-        "tests/test_bindings.py"
-        "tests/test_box.py"
-        "tests/test_encoding.py"
-        "tests/test_generichash.py"
-        "tests/test_hash.py"
-        "tests/test_hashlib_scrypt.py"
-        "tests/test_kx.py"
-        "tests/test_public.py"
-        "tests/test_pwhash.py"
-        "tests/test_sealed_box.py"
-        "tests/test_secret.py"
-        "tests/test_secretstream.py"
-        "tests/test_shorthash.py"
-        "tests/test_signing.py"
-        "tests/test_utils.py"
-      ];
     });
 
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
