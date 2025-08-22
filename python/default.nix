@@ -120,6 +120,21 @@ let
       '';
     });
 
+    # pr: ast.Str no longer exists in python>=3.14
+    astor = pyprev.astor.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_code_gen.py"
+      ];
+    });
+
+    blinker = pyprev.blinker.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_context.py"
+        "tests/test_signal.py"
+        "tests/test_symbol.py"
+      ];
+    });
+
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
