@@ -60,12 +60,12 @@ let
 
     (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
       requests
-      #ipython
+      ipython
     ]))
 
     (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
       requests
-      #ipython
+      ipython
     ]))
 
     ### Free Threaded Interpreters
