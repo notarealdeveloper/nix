@@ -484,9 +484,9 @@ in
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
     settings = {
       PasswordAuthentication = true;
+      PermitRootLogin = "no";
     };
   };
 
