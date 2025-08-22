@@ -38,8 +38,13 @@ let
 
       # numerical
       numpy
+<<<<<<< HEAD
       #scipy
       #pandas
+=======
+      scipy
+      pandas
+>>>>>>> 30f97ee (WHY ARENT YOU USING THE CACHE)
       #matplotlib
       #seaborn
       #scikit-learn
