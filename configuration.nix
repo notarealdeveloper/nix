@@ -277,7 +277,7 @@ in
     simplescreenrecorder
 
     # social
-    wechat
+    # wechat
     whatsapp-for-linux
 
     # games
