@@ -50,10 +50,6 @@ let
       doCheck = false;
     });
 
-    requests = pyprev.requests.overridePythonAttrs (old: {
-      doCheck = false;
-    });
-
     pytest-mock = pyprev.pytest-mock.overridePythonAttrs (old: {
       doCheck = false;
     });
@@ -214,6 +210,10 @@ let
       done
       '';
 
+    });
+
+    requests = pyprev.requests.overridePythonAttrs (old: {
+      doCheck = false;
     });
 
     cffi = pyprev.cffi.overridePythonAttrs (old: {
