@@ -21,6 +21,60 @@ let
       env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
     });
 
+    sphinx = pyprev.sphinx.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    hypothesis = pyprev.hypothesis.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    jedi = pyprev.jedi.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    fs = pyprev.fs.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    virtualenv = pyprev.virtualenv.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    typeguard = pyprev.typeguard.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    pure-eval = pyprev.pure-eval.overridePythonAttrs (old: {
+      doCheck = false;
+      postPatch = ''
+				cat > pure_eval/my_getattr_static.py <<- 'EOF'
+				from inspect import getattr_static  # use the stdlib implementation
+				__all__ = ["getattr_static"]
+				EOF
+			'';
+    });
+
+    asttokens = pyprev.asttokens.overridePythonAttrs (old: {
+      doCheck = false;
+      # Make setup.py Python 3.15 AST-compatible
+      postPatch = ''
+        # In Python 3.15, ast.Str is gone; string literals are ast.Constant with .value
+        substituteInPlace tests/test_asttokens.py \
+          --replace-warn "isinstance(n, ast.Str)" "isinstance(n, ast.Constant)"
+      '';
+    });
+
+    traitlets = pyprev.traitlets.overridePythonAttrs (old: {
+      doCheck = false;
+      postPatch = ''
+        # Escape % in trait.help so argparse doesn't choke
+        sed -i \
+          -e 's/help=trait.help/help=(trait.help or "").replace("%","%%")/' \
+          -e 's/help_text=trait.help/help_text=(trait.help or "").replace("%","%%")/' \
+          traitlets/config/argcomplete_config.py
+      '';
+    });
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
@@ -31,6 +85,18 @@ let
 
     # pr: lz4 uses the now removed _compression module in various places.
     # in python>=3.14, this has been moved to compression._common._streams
+    # the required patch should be something like this
+    #
+    # +++ lz4/frame/__init__.py
+    # @@ -27,7 +27,10 @@ __doc__ = _doc
+    #  try:
+    #      import _compression   # Python 3.6 and later
+    #  except ImportError:
+    # -    from . import _compression
+    # +    if sys.version_info >= (3, 14)
+    # +        import compression._common._streams as _compression
+    # +    else:
+    # +        from . import _compression
     # upstream: https://github.com/python-lz4/python-lz4
     lz4 = pyprev.lz4.overridePythonAttrs (old: {
       postPatch = ''
