@@ -38,14 +38,14 @@ let
 
       # numerical
       numpy
-      scipy
+      #scipy
       #pandas
       #matplotlib
       #seaborn
       #scikit-learn
 
       # ~/bin depends
-      #google-auth-oauthlib      # gmail
+      google-auth-oauthlib      # gmail
       #google-api-python-client  # getbtcprice
       #geoip2                    # getbtcprice
 

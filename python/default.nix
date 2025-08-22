@@ -91,6 +91,40 @@ let
       ];
     });
 
+    distutils = pyprev.distutils.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "distutils/tests/test_filelist.py"
+      ];
+    });
+
+    paramiko = pyprev.paramiko.overridePythonAttrs (old: {
+      pythonImportsCheckPhase = "";
+    });
+
+    pynacl = pyprev.pynacl.overridePythonAttrs (old: {
+      postPatch = (old.postPatch or "") + ''
+      sed -i 's/^from typing import ByteString, Optional, Tuple, cast$/from typing import Optional, Tuple, cast\
+      try:\
+          from typing import ByteString \
+      except Exception:\
+          try:\
+              from collections.abc import Buffer as ByteString\
+          except Exception:\
+              from typing_extensions import Buffer as ByteString/' \
+        nacl/bindings/crypto_secretstream.py
+      '';
+    });
+
+    ruamel-yaml-clib = pyprev.ruamel-yaml-clib.overridePythonAttrs (old: {
+      postPatch = (old.postPatch or "") + ''
+        sed -i -E \
+          -e 's/\bfrom ast import (Str|Num|Bytes|NameConstant).*//g' \
+          -e 's/\bast\.(Str|Num|Bytes|NameConstant)\b/ast.Constant/g' \
+          -e 's/(\.s|\.n)\b/.value/g' \
+          setup.py || true
+      '';
+    });
+
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
 
       # Latest release not compatible with pytest 6
