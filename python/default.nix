@@ -2,6 +2,18 @@ final: prev:
 
 let
 
+  pythonFreeThreadingOverrides = pyfinal: pyprev: {
+    cython = pyprev.cython.overrideAttrs (old: rec {
+      pname = "Cython";
+      version = "3.1.3";
+      src = pyprev.fetchPypi {
+        inherit pname version;
+        sha256 = "d13025b34f72f77bf7f65c1cd628914763e6c285f4deb934314c922b91e6be5a";
+      };
+      doCheck = false;
+    });
+  };
+
   commonOverrides = pyfinal: pyprev: {
     #buildPythonPackage = args:
     #  pyprev.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
@@ -144,7 +156,7 @@ let
   python313 =
     prev.python313.override {
       packageOverrides = pyfinal: pyprev:
-        (commonOverrides pyfinal pyprev) // {
+        (commonOverrides pyfinal pyprev) // (pythonFreeThreadingOverrides pyfinal pyprev) // {
           # put python313-specific attrset of packageOverrides here
         };
 
