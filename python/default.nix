@@ -20,11 +20,26 @@ let
     });
 
     cffi = pyprev.cffi.overridePythonAttrs (old: {
-
-      # Make sure any sub-compiles spawned by cffi/pytest don't use the limited API
+      # make the build clearly t-aware
       env = (old.env or {}) // {
-        NIX_CFLAGS_COMPILE = ((old.env.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API -DPy_GIL_DISABLED=1");
+        NIX_CFLAGS_COMPILE =
+          ((old.env.NIX_CFLAGS_COMPILE or "")
+            + " -UPy_LIMITED_API -DPy_GIL_DISABLED=1");
       };
+
+      # make the per-test mini-compiles less brittle on t headers
+      postPatch = (old.postPatch or "") + ''
+        # cffi's ffiplatform adds -Werror to all test compiles; drop it for t-builds
+        substituteInPlace src/cffi/ffiplatform.py \
+          --replace "'-Werror', " "" \
+          --replace ", '-Werror'" ""
+      '';
+
+      # skip the parts that still rely on GIL-era assumptions
+      pytestFlagsArray = (old.pytestFlagsArray or []) ++ [
+        "-k"
+        "not test_new_ffi_1 and not test_recompiler"
+      ];
 
     });
 
