@@ -1,5 +1,6 @@
 # ccache-global.nix
 { config, lib, pkgs, ... }:
+
 {
   #### ccache package available on the host
   environment.systemPackages = [ pkgs.ccache ];
@@ -8,6 +9,7 @@
   systemd.tmpfiles.rules = [
     "d /var/cache/ccache 0777 root root -"
   ];
+
   nix.settings.extra-sandbox-paths = [ "/var/cache/ccache" ];
 
   #### Wire nixpkgs to favor ccache when possible
