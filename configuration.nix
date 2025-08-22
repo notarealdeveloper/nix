@@ -40,8 +40,6 @@ let
       numpy
       scipy
       #pandas
-      #scipy
-      #pandas
       #matplotlib
       #seaborn
       #scikit-learn
