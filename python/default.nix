@@ -142,8 +142,11 @@ let
       ];
     });
 
-
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    seaborn = pyprev.eventlet.overridePythonAttrs (old: {
       doCheck = false;
     });
 
