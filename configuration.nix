@@ -13,7 +13,7 @@ let
       mmry
   ]);
 
-  python_packages_common_noft = ps: (python_packages_common ps) ++ (with ps; [
+  python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
       # packaging
       pip
@@ -51,29 +51,36 @@ let
 
   python_interpreters = with pkgs; [
 
-    (python313.withPackages (ps: with ps; (python_packages_common_noft ps) ++ [
+    (python313.withPackages (ps: with ps;
+      (python_packages_common_noft ps)
+      ++ [ torch embd wnix ]
+    ))
 
-      torch
-      embd
-      wnix
+    (python314.withPackages (ps: with ps;
+      (python_packages_noft ps)
+      ++ [ ]
+    ))
 
-    ]))
-
-    (python314.withPackages (ps: with ps; (python_packages_common_noft ps) ++ [
-    ]))
-
-    (python315.withPackages (ps: with ps; (python_packages_common_noft ps) ++ [
-    ]))
+    (python315.withPackages (ps: with ps;
+      (python_packages_noft ps)
+      ++ [ ]
+    ))
 
     ### Free Threaded Interpreters
-    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-    ]))
+    (python313FreeThreading.withPackages (ps: with ps;
+      (python_packages_common ps)
+      ++ [ ]
+    ))
 
-    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-    ]))
+    (python314FreeThreading.withPackages (ps: with ps;
+      (python_packages_common ps)
+      ++ [ ]
+    ))
 
-    (python315FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-    ]))
+    (python315FreeThreading.withPackages (ps: with ps;
+      (python_packages_common ps)
+      ++ [ ]
+    ))
 
   ];
 
