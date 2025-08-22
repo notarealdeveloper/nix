@@ -58,10 +58,6 @@ let
 
     ]))
 
-    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
-    ]))
-
     (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
       requests
       #ipython
@@ -70,6 +66,11 @@ let
     (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
       requests
       #ipython
+    ]))
+
+    ### Free Threaded Interpreters
+    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
+      #requests
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
