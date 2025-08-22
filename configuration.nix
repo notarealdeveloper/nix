@@ -318,10 +318,10 @@
 
     ]))
 
-    (python313FreeThreading.withPackages (ps: with ps; [
-      is_instance
-      python-bin
-    ]))
+    #(python313FreeThreading.withPackages (ps: with ps; [
+    #  is_instance
+    #  python-bin
+    #]))
 
     (python314.withPackages (ps: with ps; [
       is_instance
