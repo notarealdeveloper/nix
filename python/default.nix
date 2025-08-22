@@ -74,16 +74,6 @@ let
 			'';
     });
 
-    asttokens = pyprev.asttokens.overridePythonAttrs (old: {
-      doCheck = false;
-      # Make setup.py Python 3.15 AST-compatible
-      postPatch = ''
-        # In Python 3.15, ast.Str is gone; string literals are ast.Constant with .value
-        substituteInPlace tests/test_asttokens.py \
-          --replace-warn "isinstance(n, ast.Str)" "isinstance(n, ast.Constant)"
-      '';
-    });
-
     traitlets = pyprev.traitlets.overridePythonAttrs (old: {
       doCheck = false;
       postPatch = ''
@@ -94,6 +84,17 @@ let
           traitlets/config/argcomplete_config.py
       '';
     });
+
+    # pr: ast.Str no longer exists in python>=3.14
+    asttokens = pyprev.asttokens.overridePythonAttrs (old: {
+      doCheck = false;
+      postPatch = ''
+        # In Python 3.15, ast.Str is gone; string literals are ast.Constant with .value
+        substituteInPlace tests/test_asttokens.py \
+          --replace-warn "isinstance(n, ast.Str)" "isinstance(n, ast.Constant)"
+      '';
+    });
+
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
@@ -123,6 +124,9 @@ let
       '';
     });
 
+    # pr: if sys.version_info > anything we currently recognize,
+    # then use a file called grammarlatest.txt
+    # upstream: https://github.com/davidhalter/parso
     parso = pyprev.parso.overridePythonAttrs (old: {
       src = prev.fetchFromGitHub {
         owner = "davidhalter";
