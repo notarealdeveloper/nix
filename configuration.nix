@@ -4,13 +4,18 @@ let
 
   # for help, see nixos-help or man nix.conf
 
-  python_packages_common = ps: (with ps; [
+  python_packages_common_ft = ps: (with ps; [
       is-instance
       python-bin
       mmry
       build
       pytest
       requests
+  ]);
+
+  python_packages_common = ps: (python_packages_common_ft ps) ++ (with ps; [
+      ipython
+      cython
   ]);
 
   python_interpreters = with pkgs; [
@@ -60,23 +65,19 @@ let
     ]))
 
     (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      ipython
-      cython
     ]))
 
     (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      ipython
-      cython
     ]))
 
     ### Free Threaded Interpreters
-    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
+    (python313FreeThreading.withPackages (ps: with ps; (python_packages_common_ft ps) ++ [
     ]))
 
-    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
+    (python314FreeThreading.withPackages (ps: with ps; (python_packages_common_ft ps) ++ [
     ]))
 
-    (python315FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
+    (python315FreeThreading.withPackages (ps: with ps; (python_packages_common_ft ps) ++ [
     ]))
 
   ];
