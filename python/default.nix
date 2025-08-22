@@ -26,6 +26,10 @@ let
       env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
     });
 
+    bcrypt = pyprev.bcrypt.overridePythonAttrs (old: {
+      env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
+    });
+
     sphinx = pyprev.sphinx.overridePythonAttrs (old: {
       doCheck = false;
     });
