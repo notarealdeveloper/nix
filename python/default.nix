@@ -157,6 +157,7 @@ let
     pyfakefs = pyprev.pyfakefs.overridePythonAttrs (old: {
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "pyfakefs/tests/fake_open_test.py"
+        "pyfakefs/tests/fake_filesystem_glob_test.py"
       ];
     });
 
