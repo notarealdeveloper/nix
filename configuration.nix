@@ -7,7 +7,6 @@ let
   python_packages_common = ps: (with ps; [
       build
       pytest
-      requests
 
       is-instance
       python-bin
@@ -485,7 +484,7 @@ in
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
+    PermitRootLogin = "no";
     passwordAuthentication = true;
   };
 
