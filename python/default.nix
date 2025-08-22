@@ -3,11 +3,11 @@ final: prev:
 let
 
   commonOverrides = pyfinal: pyprev: {
-    buildPythonPackage = args:
-      pyprev.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
+    #buildPythonPackage = args:
+    #  pyprev.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
 
-    buildPythonApplication = args:
-      pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
+    #buildPythonApplication = args:
+    #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
       env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
