@@ -143,6 +143,27 @@ let
     });
 
 
+    eventlet = pyprev.eventlet.overridePythonAttrs (old: {
+      patches = (old.patches or []) ++ [
+        (builtins.toFile "eventlet-urllib-request-urlopener-optional.patch" ''
+          diff --git a/eventlet/green/urllib/request.py b/eventlet/green/urllib/request.py
+          --- a/eventlet/green/urllib/request.py
+          +++ b/eventlet/green/urllib/request.py
+          @@
+          -from urllib.request import URLopener
+          +try:
+          +    from urllib.request import URLopener  # removed in Python 3.14
+          +except Exception:
+          +    URLopener = None
+          @@
+          -URLopener.open_ftp = patcher.patch_function(URLopener.open_ftp, *to_patch_in_functions)
+          +if URLopener is not None:
+          +    URLopener.open_ftp = patcher.patch_function(
+          +        URLopener.open_ftp, *to_patch_in_functions
+          +    )
+        '')
+      ];
+    });
 
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
