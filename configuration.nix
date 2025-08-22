@@ -485,7 +485,9 @@ in
   services.openssh = {
     enable = true;
     permitRootLogin = "no";
-    passwordAuthentication = true;
+    settings = {
+      PasswordAuthentication = true;
+    };
   };
 
   networking.firewall.allowedTCPPorts = [ 22 ];
