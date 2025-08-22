@@ -93,6 +93,14 @@ in
     cores = 0; # 0 = give each build all cores (build systems may or may not use them)
     http-connections = 50;  # faster parallel downloads
     trusted-users = [ "root" "jason" ];
+    substituters = [
+      "https://cache.nixos.org"
+      "https://notarealdeveloper.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "notarealdeveloper.cachix.org-1:lTWU+5FB7gvLg39/9EY1GDE3JV4HkRtprgxuKmkm/7g="
+    ];
   };
 
   # time
