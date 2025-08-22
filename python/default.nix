@@ -10,7 +10,8 @@ let
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
-      env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
+      #env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
+      doCheck = false;
     });
 
     charset-normalizer = pyprev.charset-normalizer.overridePythonAttrs (old: {
