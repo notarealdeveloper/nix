@@ -161,6 +161,19 @@ let
           +    URLopener.open_ftp = patcher.patch_function(
           +        URLopener.open_ftp, *to_patch_in_functions
           +    )
+          diff --git a/eventlet/greenpool.py b/eventlet/greenpool.py
+          --- a/eventlet/greenpool.py
+          +++ b/eventlet/greenpool.py
+          @@ def some_function(...):
+          -    try:
+          -        ...
+          -    finally:
+          -        return
+          +    try:
+          +        ...
+          +    finally:
+          +        pass
+          +    return
         '')
       ];
     });
