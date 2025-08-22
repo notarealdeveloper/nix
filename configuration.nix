@@ -71,11 +71,11 @@ let
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-
+      requests
     ]))
 
     (python315FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-
+      requests
     ]))
 
   ];
