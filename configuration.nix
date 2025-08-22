@@ -64,18 +64,20 @@ let
 
     (python314.withPackages (ps: with ps; (python_packages_common ps) ++ [
       requests
+      ipython
     ]))
 
     (python315.withPackages (ps: with ps; (python_packages_common ps) ++ [
       requests
+      ipython
     ]))
 
     (python314FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
+      #requests
     ]))
 
     (python315FreeThreading.withPackages (ps: with ps; (python_packages_common ps) ++ [
-      requests
+      #requests
     ]))
 
   ];
