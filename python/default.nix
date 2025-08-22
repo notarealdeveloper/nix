@@ -130,8 +130,8 @@ let
     blinker = pyprev.blinker.overridePythonAttrs (old: {
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "tests/test_context.py"
-        "tests/test_signal.py"
         "tests/test_symbol.py"
+        "tests/test_signals.py"
       ];
     });
 
