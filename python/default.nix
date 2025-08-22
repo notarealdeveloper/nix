@@ -176,6 +176,7 @@ let
       ];
     });
 
+    /*
     matplotlib = pyprev.matplotlib.overridePythonAttrs (old: {
       preCheck = (old.preCheck or "") + ''
         export MPLCONFIGDIR="$TMPDIR/mpl"
@@ -201,6 +202,7 @@ let
         mkdir -p "$MPLCONFIGDIR"
       '';
     });
+    */
 
   };
 

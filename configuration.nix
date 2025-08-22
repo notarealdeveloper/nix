@@ -14,14 +14,6 @@ let
   ]);
 
   python_packages_common = ps: (python_packages_common_ft ps) ++ (with ps; [
-      ipython
-      cython
-  ]);
-
-  python_interpreters = with pkgs; [
-
-    (python313.withPackages (ps: with ps; [
-
       # packaging
       pip
       build
@@ -32,6 +24,7 @@ let
 
       # basics
       ipython
+      cython
 
       # net
       yt-dlp
@@ -55,6 +48,12 @@ let
       assure
       is-instance
       python-bin
+
+  ]);
+
+  python_interpreters = with pkgs; [
+
+    (python313.withPackages (ps: with ps; [
 
       # difficult on HEAD interpreters
       scikit-learn
