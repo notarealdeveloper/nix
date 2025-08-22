@@ -157,6 +157,7 @@ let
 
     pydantic-core = pyprev.pydantic-core.overridePythonAttrs (old: {
       env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+      doCheck = false;
     });
 
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
