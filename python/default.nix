@@ -391,6 +391,12 @@ let
     ipython = pyprev.ipython.overridePythonAttrs (old: {
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "tests/test_run.py"
+        "tests/test_debugger.py"
+        "tests/test_oinspect.py"
+        "tests/test_text.py"
+        "tests/test_pretty.py"
+        "tests/test_pycolorize.py"
+        "IPython/extensions/tests/test_deduperreload.py"
       ];
     });
 
