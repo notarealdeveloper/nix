@@ -11,6 +11,7 @@ let
       build
       pytest
       setuptools
+      cython
 
       is-instance
       python-bin
@@ -21,7 +22,6 @@ let
 
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
-      #cython
       #twine
 
       # basics
