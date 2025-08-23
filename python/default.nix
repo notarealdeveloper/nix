@@ -21,14 +21,17 @@ let
       };
     });
 
-    pandas = pyprev.pandas.overrideAttrs (old: rec {
+    pandas = pyprev.pandas.overridePythonAttrs (old: {
       version = "head";
+      pyproject = true;
       src = prev.fetchFromGitHub {
         owner = "pandas-dev";
         repo = "pandas";
         rev = "188b2dae7df85a9c9945db39c5a23d23b1d4ce2e";
         hash = "sha256-Q18XQjpK1O0DpKfrNxbd0iikWl2eIQdW/b+VNIXxlKE=";
       };
+      patchPhase = "";
+      doPatch = false;
     });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
