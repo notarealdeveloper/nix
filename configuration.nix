@@ -13,19 +13,19 @@ let
       setuptools
       cython
 
+      ipython
+      requests
+
       is-instance
       python-bin
       mmry
-
-      ipython
   ]);
 
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
-      #twine
+      #twine    # not ready
 
-      # basics
-      #ipython
+      #assure   # TODOL remove numpy dependency
 
       # one step at a time
       #gevent
@@ -34,7 +34,6 @@ let
       #tqdm
 
       # net
-      #requests
       #beautifulsoup4
 
       # numerical
@@ -43,9 +42,6 @@ let
       #pandas
       #matplotlib
       #seaborn
-
-      # mine
-      #assure
   ]);
 
   python_interpreters = with pkgs; [

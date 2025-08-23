@@ -102,6 +102,15 @@ let
       ];
     });
 
+    cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
+      env = (old.env or {}) // {
+        CFLAGS = prev.lib.concatStringsSep " " [
+          (old.env.CFLAGS or "")
+          "-U Py_LIMITED_API"
+        ];
+      };
+    });
+
     pytest-regressions = pyprev.pytest-regressions.overridePythonAttrs (old: {
       doCheck = false;
       disabledtestpaths = (old.disabledtestpaths or []) ++ [
