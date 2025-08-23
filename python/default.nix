@@ -25,12 +25,31 @@ let
       });
     */
 
+    cython = pyprev.cython.overrideAttrs (old: rec {
+      pname = "cython";
+      version = "3.1.3";
+      pyproject = true;
+
+      src = prev.fetchFromGitHub {
+        owner = "cython";
+        repo = "cython";
+        tag = version;
+        hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
+      };
+
+      doCheck = false;
+    });
+
     fastapi = pyprev.fastapi.overrideAttrs (old: {
       propagatedBuildInputs = prev.lib.remove prev.mercurial old.propagatedBuildInputs;
     });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
       env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
+      doCheck = false;
+    });
+
+    poetry-core = pyprev.poetry-core.overridePythonAttrs (old: {
       doCheck = false;
     });
 
@@ -161,6 +180,15 @@ let
       ];
       */
 
+    });
+
+    lxml = pyprev.lxml.overridePythonAttrs (old: {
+      src = prev.fetchFromGitHub {
+        owner = "lxml";
+        repo = "lxml";
+        rev = "7809707d0b28b2b147450835067ac444071182ab";
+        hash = "sha256-dfIxIcWbBoOjvxkDRQm5asYsqjsQ4kvDv5AUyFILmIQ=";
+      };
     });
 
     ruamel-yaml-clib = pyprev.ruamel-yaml-clib.overridePythonAttrs (old: {
@@ -371,21 +399,6 @@ let
   };
 
   freeThreadingOverrides = pyfinal: pyprev: {
-
-    cython = pyprev.cython.overrideAttrs (old: rec {
-      pname = "cython";
-      version = "3.1.3";
-      pyproject = true;
-
-      src = prev.fetchFromGitHub {
-        owner = "cython";
-        repo = "cython";
-        tag = version;
-        hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
-      };
-
-      doCheck = false;
-    });
 
     gevent = pyprev.gevent.overridePythonAttrs (old: {
 
