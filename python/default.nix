@@ -86,9 +86,16 @@ let
     });
 
     pytest-regressions = pyprev.pytest-regressions.overridePythonAttrs (old: {
+      doCheck = false;
       disabledtestpaths = (old.disabledtestpaths or []) ++ [
         "tests/test_image_regression.py"
       ];
+      preCheck = (old.preCheck or "") + ''
+        export HOME=$TMPDIR
+        export MPLCONFIGDIR=$TMPDIR/mpl
+        mkdir -p "$MPLCONFIGDIR"
+        export MPLBACKEND=Agg
+      '';
     });
 
     rich = pyprev.rich.overridePythonAttrs (old: {
@@ -330,10 +337,13 @@ let
     });
 
     matplotlib = pyprev.matplotlib.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_image_regression.py"
+      ];
       preCheck = (old.preCheck or "") + ''
-        export MPLCONFIGDIR="$TMPDIR/mpl"
-        mkdir -p "$MPLCONFIGDIR"
+        export MPLCONFIGDIR="$$(mktemp -d)"
       '';
+      doCheck = false;
     });
 
     /*

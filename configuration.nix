@@ -33,7 +33,7 @@ let
       tqdm
 
       # net
-      yt-dlp
+      #yt-dlp
       requests
       beautifulsoup4
 
@@ -41,8 +41,8 @@ let
       numpy
       scipy
       pandas
-      #matplotlib
-      #seaborn
+      matplotlib
+      seaborn
       #scikit-learn
 
       # ~/bin depends
