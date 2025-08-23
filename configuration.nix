@@ -17,6 +17,7 @@ let
       requests
       beautifulsoup4
       sly
+      curio
 
       is-instance
       python-bin
