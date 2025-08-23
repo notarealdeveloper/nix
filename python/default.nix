@@ -123,15 +123,17 @@ let
       # prevent meson hooks from taking over:
       dontUseMesonConfigure = true;
       dontUseMesonInstall = true;
-      nativeBuildInputs =
-        builtins.filter (p:
-          let n = (p.pname or p.name or ""); in
-          n != "meson" && n != "meson-wrap" && n != "mesonWrapHook"
-        ) (old.nativeBuildInputs or []);
+      #nativeBuildInputs =
+      #  builtins.filter (p:
+      #    let n = (p.pname or p.name or ""); in
+      #    n != "meson" && n != "meson-wrap" && n != "mesonWrapHook"
+      #  ) (old.nativeBuildInputs or []);
       # make phases explicit (from source root):
       configurePhase = ":";
       buildPhase = "pypaBuildPhase";
       installPhase = "pypaInstallPhase";
+      nativeBuildInputs     = (old.nativeBuildInputs or []) ++ [ pyprev.meson ];
+      propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.meson ];
     });
 
     cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
