@@ -334,7 +334,7 @@ let
     # upstream: https://github.com/python-lz4/python-lz4
     lz4 = pyprev.lz4.overridePythonAttrs (old: {
       postPatch = ''
-        sed -Ei "s@import _compression@import compression._common._streams as _compression@g" lz4/frame/__init__.py
+        sed -Ei "s@(\s+)(import _compression)@\1import compression._common._streams as _compression@g" lz4/frame/__init__.py
       '';
     });
 
