@@ -9,21 +9,19 @@ let
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
-    /*
-    buildPythonPackage = args:
-      pyprev.buildPythonPackage (args // {
-        env = (args.env or {}) // {
-          PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-        };
-      });
-
-    buildPythonApplication = args:
-      pyprev.buildPythonApplication (args // {
-        env = (args.env or {}) // {
-          PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-        };
-      });
-    */
+    #buildPythonPackage = args:
+    #  pyprev.buildPythonPackage (args // {
+    #    env = (args.env or {}) // {
+    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+    #    };
+    #  });
+    #
+    #buildPythonApplication = args:
+    #  pyprev.buildPythonApplication (args // {
+    #    env = (args.env or {}) // {
+    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+    #    };
+    #  });
 
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "cython";
@@ -159,26 +157,25 @@ let
       };
 
       patchPhase = "";
-      /*
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "tests/test_aead.py"
-        "tests/test_bindings.py"
-        "tests/test_box.py"
-        "tests/test_encoding.py"
-        "tests/test_generichash.py"
-        "tests/test_hash.py"
-        "tests/test_hashlib_scrypt.py"
-        "tests/test_kx.py"
-        "tests/test_public.py"
-        "tests/test_pwhash.py"
-        "tests/test_sealed_box.py"
-        "tests/test_secret.py"
-        "tests/test_secretstream.py"
-        "tests/test_shorthash.py"
-        "tests/test_signing.py"
-        "tests/test_utils.py"
-      ];
-      */
+
+    #  disabledTestPaths = (old.disabledTestPaths or []) ++ [
+    #    "tests/test_aead.py"
+    #    "tests/test_bindings.py"
+    #    "tests/test_box.py"
+    #    "tests/test_encoding.py"
+    #    "tests/test_generichash.py"
+    #    "tests/test_hash.py"
+    #    "tests/test_hashlib_scrypt.py"
+    #    "tests/test_kx.py"
+    #    "tests/test_public.py"
+    #    "tests/test_pwhash.py"
+    #    "tests/test_sealed_box.py"
+    #    "tests/test_secret.py"
+    #    "tests/test_secretstream.py"
+    #    "tests/test_shorthash.py"
+    #    "tests/test_signing.py"
+    #    "tests/test_utils.py"
+    #  ];
 
     });
 
@@ -320,17 +317,6 @@ let
     # pr: lz4 uses the now removed _compression module in various places.
     # in python>=3.14, this has been moved to compression._common._streams
     # the required patch should be something like this
-    #
-    # +++ lz4/frame/__init__.py
-    # @@ -27,7 +27,10 @@ __doc__ = _doc
-    #  try:
-    #      import _compression   # Python 3.6 and later
-    #  except ImportError:
-    # -    from . import _compression
-    # +    if sys.version_info >= (3, 14)
-    # +        import compression._common._streams as _compression
-    # +    else:
-    # +        from . import _compression
     # upstream: https://github.com/python-lz4/python-lz4
     lz4 = pyprev.lz4.overridePythonAttrs (old: {
       postPatch = ''
@@ -375,26 +361,24 @@ let
       doCheck = false;
     });
 
-    /*
-    seaborn = pyprev.seaborn.overridePythonAttrs (old: {
-      # keep existing deps and add pytz (see #2 below)
-      propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.pytz ];
-
-      # Matplotlib wants a writable config/cache dir; make one.
-      preCheck = (old.preCheck or "") + ''
-        export MPLCONFIGDIR="$TMPDIR/mpl"
-        mkdir -p "$MPLCONFIGDIR"
-      '';
-      preBuild = (old.preBuild or "") + ''
-        export MPLCONFIGDIR="$TMPDIR/mpl"
-        mkdir -p "$MPLCONFIGDIR"
-      '';
-      preInstallCheck = (old.preInstallCheck or "") + ''
-        export MPLCONFIGDIR="$TMPDIR/mpl"
-        mkdir -p "$MPLCONFIGDIR"
-      '';
-    });
-    */
+    #seaborn = pyprev.seaborn.overridePythonAttrs (old: {
+    #  # keep existing deps and add pytz (see #2 below)
+    #  propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.pytz ];
+    #
+    #  # Matplotlib wants a writable config/cache dir; make one.
+    #  preCheck = (old.preCheck or "") + ''
+    #    export MPLCONFIGDIR="$TMPDIR/mpl"
+    #    mkdir -p "$MPLCONFIGDIR"
+    #  '';
+    #  preBuild = (old.preBuild or "") + ''
+    #    export MPLCONFIGDIR="$TMPDIR/mpl"
+    #    mkdir -p "$MPLCONFIGDIR"
+    #  '';
+    #  preInstallCheck = (old.preInstallCheck or "") + ''
+    #    export MPLCONFIGDIR="$TMPDIR/mpl"
+    #    mkdir -p "$MPLCONFIGDIR"
+    #  '';
+    #});
 
   };
 
@@ -524,16 +508,8 @@ let
         };
     });
 
-  # ======================= Um... why? =======================
-  #mercurial = prev.mercurial.overrideAttrs (old: {
-  #  buildFlags = (old.buildFlags or []) ++ [ "HGDEMANDIMPORT=disable" ];
-  #  env = (old.env or {}) // { HGDEMANDIMPORT = "disable"; };
-  #});
-
 
 in {
-
-  #mercurial = mercurial;
 
   # 3.13 exports
   python313FreeThreading = python313.override {
