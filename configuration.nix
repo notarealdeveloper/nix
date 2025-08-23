@@ -15,6 +15,7 @@ let
 
       ipython
       requests
+      beautifulsoup4
 
       is-instance
       python-bin
@@ -32,9 +33,6 @@ let
       #grpcio
       #watchdog
       #tqdm
-
-      # net
-      #beautifulsoup4
 
       # numerical
       #numpy
