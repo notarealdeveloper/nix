@@ -233,7 +233,7 @@ let
       };
 
       env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-      #doCheck = false;
+      doCheck = false;
     });
 
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
