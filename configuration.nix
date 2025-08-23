@@ -51,7 +51,7 @@ let
       #geoip2                    # getbtcprice
 
       # mine
-      #assure
+      assure
   ]);
 
   python_interpreters = with pkgs; [
