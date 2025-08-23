@@ -90,7 +90,6 @@ let
     });
 
 
-    /*
     cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
       env = (old.env or {}) // {
         CFLAGS = prev.lib.concatStringsSep " " [
@@ -112,7 +111,6 @@ let
         export MPLBACKEND=Agg
       '';
     });
-    */
 
     rich = pyprev.rich.overridePythonAttrs (old: {
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
