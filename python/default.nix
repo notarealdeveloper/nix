@@ -369,28 +369,22 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
+    # requests: tests pull in gevent, which isn't freethread safe yet
+    requests = pyprev.requests.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
     /*
     gevent = pyprev.gevent.overridePythonAttrs (old: {
-
-      env = (old.env or {}) // {
-        CFFI_NO_LIMITED_API = "1";  # cffi: disable py_limited_api=True
-      };
-
-      #NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
-
+      env = (old.env or {}) // { CFFI_NO_LIMITED_API = "1"; };
       postPatch = (old.postPatch or "") + ''
       for f in $(grep -RIl "py_limited_api\s*=" src || true); do
         echo "Patching $f"
         substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
       done
       '';
-
     });
     */
-
-    requests = pyprev.requests.overridePythonAttrs (old: {
-      doCheck = false;
-    });
 
     cffi = pyprev.cffi.overridePythonAttrs (old: {
       # make the build clearly t-aware
