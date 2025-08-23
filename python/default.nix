@@ -414,6 +414,14 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
+    greenlet = pyprev.greenlet.overridePythonAttrs (old: {
+
+      env = (old.env or {}) // {
+        NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
+      };
+
+    });
+
     gevent = pyprev.gevent.overridePythonAttrs (old: {
 
       src = prev.fetchFromGitHub {
@@ -424,17 +432,15 @@ let
       };
 
       env = (old.env or {}) // {
-        CFFI_NO_LIMITED_API = "1";  # cffi: disable py_limited_api=True
+        NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
       };
 
-      #NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
-
-      postPatch = (old.postPatch or "") + ''
-      for f in $(grep -RIl "py_limited_api\s*=" src || true); do
-        echo "Patching $f"
-        substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
-      done
-      '';
+      #postPatch = (old.postPatch or "") + ''
+      #for f in $(grep -RIl "py_limited_api\s*=" src || true); do
+      #  echo "Patching $f"
+      #  substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
+      #done
+      #'';
 
     });
 
