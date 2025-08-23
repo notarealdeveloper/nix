@@ -418,6 +418,10 @@ let
       doCheck = false;
     });
 
+    meson = prev.meson.overrideAttrs (old: {
+      doCheck = false;
+    });
+
     greenlet = pyprev.greenlet.overridePythonAttrs (old: {
 
       env = (old.env or {}) // {
