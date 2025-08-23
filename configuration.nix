@@ -33,7 +33,7 @@ let
       tqdm
 
       # net
-      #yt-dlp
+      yt-dlp
       requests
       beautifulsoup4
 

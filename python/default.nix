@@ -9,6 +9,20 @@ let
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
+    buildPythonPackage = args:
+      pyprev.buildPythonPackage (args // {
+        env = (args.env or {}) // {
+          PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+        };
+      });
+
+    buildPythonApplication = args:
+      pyprev.buildPythonApplication (args // {
+        env = (args.env or {}) // {
+          PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+        };
+      });
+
     fastapi = pyprev.fastapi.overrideAttrs (old: {
       propagatedBuildInputs = prev.lib.remove prev.mercurial old.propagatedBuildInputs;
     });
@@ -62,8 +76,15 @@ let
       doCheck = false;
     });
 
+    websockets = pyprev.websockets.overridePythonAttrs (old: {
+      disabledtestpaths = (old.disabledtestpaths or []) ++ [
+        "tests/sync/test_connection.py"
+        "tests/legacy/test_client_server.py"
+      ];
+    });
+
     pytest-regressions = pyprev.pytest-regressions.overridePythonAttrs (old: {
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+      disabledtestpaths = (old.disabledtestpaths or []) ++ [
         "tests/test_image_regression.py"
       ];
     });
@@ -222,6 +243,10 @@ let
       #disabledTestPaths = (old.disabledTestPaths or []) ++ [
       #  "tests/test_signals.py"
       #];
+    });
+
+    pendulum = pyprev.pendulum.overridePythonAttrs (old: {
+      env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
     });
 
     pydantic-core = pyprev.pydantic-core.overridePythonAttrs (old: {
