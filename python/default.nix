@@ -416,6 +416,13 @@ let
 
     gevent = pyprev.gevent.overridePythonAttrs (old: {
 
+      src = prev.fetchFromGitHub {
+        owner = "gevent";
+        repo = "gevent";
+        rev = "4cc824f7d84d87b9ec836997004c4a94a3d3a9a8";
+        hash = "sha256-BkgXo7RoDY86IeJBkCPUbdpJ612jTarWc5vsS1HVUoY=";
+      };
+
       env = (old.env or {}) // {
         CFFI_NO_LIMITED_API = "1";  # cffi: disable py_limited_api=True
       };
