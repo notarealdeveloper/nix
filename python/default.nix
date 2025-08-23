@@ -104,20 +104,20 @@ let
 
     # for getting numpy quick. delete this soon though.
     meson-python = pyprev.meson-python.overridePythonAttrs (old: {
-      src = prev.fetchFromGitHub {
-        owner = "mesonbuild";
-        repo = "meson-python";
-        rev = "8d50078e2c6134c058169b4df692e990174b8553";
-        hash = "sha256-3GhG2zQg2ZkmF2PUJKZ8Fo6T3dsErhXQN3P+gspx3og=";
-      };
-      buildPhase = ''
-        cd "$src"
-        ${old.buildPhase or "pypaBuildPhase"}
-      '';
-      installPhase = ''
-        cd "$src"
-        ${old.installPhase or "pypaInstallPhase"}
-      '';
+      #src = prev.fetchFromGitHub {
+      #  owner = "mesonbuild";
+      #  repo = "meson-python";
+      #  rev = "8d50078e2c6134c058169b4df692e990174b8553";
+      #  hash = "sha256-3GhG2zQg2ZkmF2PUJKZ8Fo6T3dsErhXQN3P+gspx3og=";
+      #};
+      #buildPhase = ''
+      #  cd "$src"
+      #  ${old.buildPhase or "pypaBuildPhase"}
+      #'';
+      #installPhase = ''
+      #  cd "$src"
+      #  ${old.installPhase or "pypaInstallPhase"}
+      #'';
       doCheck = false;
     });
 
