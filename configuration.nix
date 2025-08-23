@@ -47,8 +47,8 @@ let
 
       # ~/bin depends
       #google-auth-oauthlib      # gmail
-      google-api-python-client  # getbtcprice
-      geoip2                    # getbtcprice
+      #google-api-python-client  # getbtcprice
+      #geoip2                    # getbtcprice
 
       # mine
       assure
