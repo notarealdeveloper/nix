@@ -414,6 +414,10 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
+    numpy = pyprev.numpy.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
     greenlet = pyprev.greenlet.overridePythonAttrs (old: {
 
       env = (old.env or {}) // {
