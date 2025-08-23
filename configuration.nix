@@ -40,7 +40,7 @@ let
       numpy
       scipy
       #pandas
-      #matplotlib
+      matplotlib
       #seaborn
 
       yt-dlp
@@ -55,7 +55,6 @@ let
         torch
 
         # ~/bin depends
-        yt-dlp
         google-auth-oauthlib      # gmail
         google-api-python-client  # getbtcprice
         geoip2                    # getbtcprice
