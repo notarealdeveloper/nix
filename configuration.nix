@@ -43,7 +43,7 @@ let
       pandas
       matplotlib
       seaborn
-      #scikit-learn
+      scikit-learn
 
       # ~/bin depends
       #google-auth-oauthlib      # gmail

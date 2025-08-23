@@ -164,13 +164,14 @@ let
     });
 
     ruamel-yaml-clib = pyprev.ruamel-yaml-clib.overridePythonAttrs (old: {
-      postPatch = (old.postPatch or "") + ''
-        sed -i -E \
-          -e 's/\bfrom ast import (Str|Num|Bytes|NameConstant).*//g' \
-          -e 's/\bast\.(Str|Num|Bytes|NameConstant)\b/ast.Constant/g' \
-          -e 's/(\.s|\.n)\b/.value/g' \
-          setup.py || true
-      '';
+      doCheck = false;
+      #postPatch = (old.postPatch or "") + ''
+      #  sed -i -E \
+      #    -e 's/\bfrom ast import (Str|Num|Bytes|NameConstant).*//g' \
+      #    -e 's/\bast\.(Str|Num|Bytes|NameConstant)\b/ast.Constant/g' \
+      #    -e 's/(\.s|\.n)\b/.value/g' \
+      #    setup.py || true
+      #'';
     });
 
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
