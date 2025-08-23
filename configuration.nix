@@ -58,7 +58,7 @@ let
 
     (python313.withPackages (ps: with ps;
       (python_packages_noft ps)
-      ++ [ torch embd wnix ]
+      ++ [ torch embd wnix yt-dlp ]
     ))
 
     (python314.withPackages (ps: with ps;
