@@ -9,6 +9,7 @@ let
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
+    /*
     buildPythonPackage = args:
       pyprev.buildPythonPackage (args // {
         env = (args.env or {}) // {
@@ -22,6 +23,7 @@ let
           PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
         };
       });
+    */
 
     fastapi = pyprev.fastapi.overrideAttrs (old: {
       propagatedBuildInputs = prev.lib.remove prev.mercurial old.propagatedBuildInputs;
@@ -37,6 +39,10 @@ let
     });
 
     cryptography = pyprev.cryptography.overridePythonAttrs (old: {
+      env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
+    });
+
+    orjson = pyprev.orjson.overridePythonAttrs (old: {
       env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
     });
 
@@ -327,7 +333,6 @@ let
       ];
     });
 
-    /*
     matplotlib = pyprev.matplotlib.overridePythonAttrs (old: {
       preCheck = (old.preCheck or "") + ''
         export MPLCONFIGDIR="$TMPDIR/mpl"
@@ -335,6 +340,7 @@ let
       '';
     });
 
+    /*
     seaborn = pyprev.seaborn.overridePythonAttrs (old: {
       # keep existing deps and add pytz (see #2 below)
       propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.pytz ];
