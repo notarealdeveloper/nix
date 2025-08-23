@@ -5,6 +5,8 @@ let
   # for help, see nixos-help or man nix.conf
 
   python_packages_common = ps: (with ps; [
+
+      pip
       build
       pytest
 
@@ -18,7 +20,6 @@ let
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
       # packaging
-      #pip
       #build
       #twine
       #pytest
@@ -26,7 +27,7 @@ let
       #setuptools
 
       # basics
-      ipython
+      #ipython
 
       # one step at a time
       #gevent
