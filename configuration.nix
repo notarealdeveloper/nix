@@ -184,6 +184,7 @@ in
     gcc
     nasm
     clang
+    meson
     ccache
     cachix
     gnumake
