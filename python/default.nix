@@ -30,8 +30,14 @@ let
         rev = "188b2dae7df85a9c9945db39c5a23d23b1d4ce2e";
         hash = "sha256-Q18XQjpK1O0DpKfrNxbd0iikWl2eIQdW/b+VNIXxlKE=";
       };
-      patchPhase = "";
-      doPatch = false;
+      patches = [];
+      postPatch = ''
+        substituteInPlace pyproject.toml \
+          --replace-fail "==" ">=" \
+      '';
+
+      #patchPhase = "";
+      #doPatch = false;
     });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
