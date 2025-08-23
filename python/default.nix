@@ -22,7 +22,7 @@ let
     });
 
     pandas = pyprev.pandas.overridePythonAttrs (old: {
-      version = "head";
+      version = "2.3.2";
       pyproject = true;
       src = prev.fetchFromGitHub {
         owner = "pandas-dev";
@@ -35,9 +35,6 @@ let
         substituteInPlace pyproject.toml \
           --replace-fail "==" ">=" \
       '';
-
-      #patchPhase = "";
-      #doPatch = false;
     });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {

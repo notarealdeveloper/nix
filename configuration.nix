@@ -41,7 +41,7 @@ let
       scipy
       pandas
       matplotlib
-      #seaborn
+      seaborn
 
       yt-dlp
   ]);
