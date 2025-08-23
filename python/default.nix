@@ -339,18 +339,6 @@ let
       '';
     });
 
-    ipython = pyprev.ipython.overridePythonAttrs (old: {
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "tests/test_completer.py"
-        "tests/test_debugger.py"
-        "tests/test_pycolorize.py"
-        "tests/test_oinspect.py"
-        "tests/test_pretty.py"
-        "tests/test_text.py"
-        "IPython/extensions/tests/test_deduperreload.py"
-      ];
-    });
-
     matplotlib = pyprev.matplotlib.overridePythonAttrs (old: {
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "tests/test_image_regression.py"
@@ -384,22 +372,30 @@ let
       doCheck = false;
     });
     
+    ipython = pyprev.ipython.overridePythonAttrs (old: {
+
+      src = prev.fetchFromGitHub {
+        owner = "ipython";
+        repo = "ipython";
+        rev = "ad948680afaefee8cf530052807e2367db3826b3";
+        hash = "sha256-ywi9dUDLikxPkBqYefslsEqJMK0/T5WxP6xycm7QXxg=";
+      };
+
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+      #  "tests/test_run.py" # only fails on free threading?
+      #  "tests/test_debugger.py"
+      #  "tests/test_oinspect.py"
+      #  "tests/test_text.py"
+      #  "tests/test_pretty.py"
+      #  "tests/test_pycolorize.py"
+      #  "tests/test_completer.py"
+      #  "IPython/extensions/tests/test_deduperreload.py"
+      ];
+    });
+
   };
 
   freeThreadingOverrides = pyfinal: pyprev: {
-
-    ipython = pyprev.ipython.overridePythonAttrs (old: {
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "tests/test_run.py"
-        "tests/test_debugger.py"
-        "tests/test_oinspect.py"
-        "tests/test_text.py"
-        "tests/test_pretty.py"
-        "tests/test_pycolorize.py"
-        "tests/test_completer.py"
-        "IPython/extensions/tests/test_deduperreload.py"
-      ];
-    });
 
     gevent = pyprev.gevent.overridePythonAttrs (old: {
 
