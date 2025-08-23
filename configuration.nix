@@ -41,8 +41,8 @@ let
       numpy
       scipy
       pandas
-      #matplotlib
-      #seaborn
+      matplotlib
+      seaborn
       #scikit-learn
 
       # ~/bin depends
