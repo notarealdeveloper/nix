@@ -108,6 +108,8 @@ let
         rev = "b712d60990092eaf58f3b5ff5858f904dd8159f4";
         hash = "sha256-UQHHVfGcgfr7nrqZ2o60bTs4BDAlSxEy6/9tNpkeHoY=";
       };
+
+      patchPhase = "";
       /*
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "tests/test_aead.py"
@@ -223,8 +225,15 @@ let
     });
 
     pydantic-core = pyprev.pydantic-core.overridePythonAttrs (old: {
-      #env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-      doCheck = false;
+      src = fetchFromGitHub {
+        owner = "pydantic";
+        repo = "pydantic-core";
+        rev = "e0bc980764ec5d5f59c7d451948df937b5a1921f";
+        hash = "sha256-pBds7mCRoz5T6pI2V99qaXByEzwGqnBfzSEpGXjurqM=";
+      }
+
+      env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+      #doCheck = false;
     });
 
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
