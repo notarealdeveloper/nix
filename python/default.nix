@@ -9,6 +9,20 @@ let
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
+    #buildPythonPackage = args:
+    #  pyprev.buildPythonPackage (args // {
+    #    env = (args.env or {}) // {
+    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+    #    };
+    #  });
+    #
+    #buildPythonApplication = args:
+    #  pyprev.buildPythonApplication (args // {
+    #    env = (args.env or {}) // {
+    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
+    #    };
+    #  });
+
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "cython";
       version = "3.1.3";
@@ -21,14 +35,6 @@ let
         hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
       };
 
-      doCheck = false;
-    });
-
-    numpy = pyprev.numpy.overridePythonAttrs (old: {
-      doCheck = false;
-    });
-
-    meson = prev.meson.overrideAttrs (old: {
       doCheck = false;
     });
 
@@ -96,20 +102,6 @@ let
       ];
     });
 
-    # for getting numpy quick. delete this soon though.
-    meson-python = pyprev.meson-python.overridePythonAttrs (old: {
-      pyproject = true;
-      doCheck = false;
-      dontUseMesonConfigure = true;
-      dontUseMesonInstall = true;
-      configurePhase = ":";
-      buildPhase = "pypaBuildPhase";
-      installPhase = "pypaInstallPhase";
-      nativeBuildInputs     = (old.nativeBuildInputs or []) ++ [ pyprev.meson ];
-      propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.meson ];
-    });
-
-    /*
     cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
       env = (old.env or {}) // {
         CFLAGS = prev.lib.concatStringsSep " " [
@@ -118,7 +110,6 @@ let
         ];
       };
     });
-    */
 
     pytest-regressions = pyprev.pytest-regressions.overridePythonAttrs (old: {
       doCheck = false;
@@ -208,10 +199,21 @@ let
 
     ruamel-yaml-clib = pyprev.ruamel-yaml-clib.overridePythonAttrs (old: {
       doCheck = false;
+      #postPatch = (old.postPatch or "") + ''
+      #  sed -i -E \
+      #    -e 's/\bfrom ast import (Str|Num|Bytes|NameConstant).*//g' \
+      #    -e 's/\bast\.(Str|Num|Bytes|NameConstant)\b/ast.Constant/g' \
+      #    -e 's/(\.s|\.n)\b/.value/g' \
+      #    setup.py || true
+      #'';
     });
 
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
+
+      # Latest release not compatible with pytest 6
       doCheck = false;
+
+      # Make setup.py Python 3.15 AST-compatible
       postPatch = ''
         # In Python 3.15, ast.Str is gone; string literals are ast.Constant with .value
         substituteInPlace setup.py \
@@ -260,6 +262,11 @@ let
 
     blinker = pyprev.blinker.overridePythonAttrs (old: {
       doCheck = false;
+      #disabledTestPaths = (old.disabledTestPaths or []) ++ [
+      #  "tests/test_context.py"
+      #  "tests/test_symbol.py"
+      #  "tests/test_signals.py"
+      #];
     });
 
     exceptiongroup = pyprev.exceptiongroup.overridePythonAttrs (old: {
@@ -277,13 +284,15 @@ let
 
     aiosignal = pyprev.aiosignal.overridePythonAttrs (old: {
       doCheck = false;
+      #disabledTestPaths = (old.disabledTestPaths or []) ++ [
+      #  "tests/test_signals.py"
+      #];
     });
 
     pendulum = pyprev.pendulum.overridePythonAttrs (old: {
       env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
     });
 
-    /*
     pydantic-core = pyprev.pydantic-core.overridePythonAttrs (old: {
       src = prev.fetchFromGitHub {
         owner = "pydantic";
@@ -297,7 +306,6 @@ let
       env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
       doCheck = false;
     });
-    */
 
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
       doCheck = false;
@@ -350,6 +358,25 @@ let
       doCheck = false;
     });
 
+    #seaborn = pyprev.seaborn.overridePythonAttrs (old: {
+    #  # keep existing deps and add pytz (see #2 below)
+    #  propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.pytz ];
+    #
+    #  # Matplotlib wants a writable config/cache dir; make one.
+    #  preCheck = (old.preCheck or "") + ''
+    #    export MPLCONFIGDIR="$TMPDIR/mpl"
+    #    mkdir -p "$MPLCONFIGDIR"
+    #  '';
+    #  preBuild = (old.preBuild or "") + ''
+    #    export MPLCONFIGDIR="$TMPDIR/mpl"
+    #    mkdir -p "$MPLCONFIGDIR"
+    #  '';
+    #  preInstallCheck = (old.preInstallCheck or "") + ''
+    #    export MPLCONFIGDIR="$TMPDIR/mpl"
+    #    mkdir -p "$MPLCONFIGDIR"
+    #  '';
+    #});
+
     defusedxml = pyprev.defusedxml.overridePythonAttrs (old: {
       doCheck = false;
     });
@@ -382,30 +409,22 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
-    /*
-    greenlet = pyprev.greenlet.overridePythonAttrs (old: {
-
-      env = (old.env or {}) // {
-        NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
-      };
-
-    });
-
     gevent = pyprev.gevent.overridePythonAttrs (old: {
 
-      src = prev.fetchFromGitHub {
-        owner = "gevent";
-        repo = "gevent";
-        rev = "4cc824f7d84d87b9ec836997004c4a94a3d3a9a8";
-        hash = "sha256-BkgXo7RoDY86IeJBkCPUbdpJ612jTarWc5vsS1HVUoY=";
+      env = (old.env or {}) // {
+        CFFI_NO_LIMITED_API = "1";  # cffi: disable py_limited_api=True
       };
 
-      env = (old.env or {}) // {
-        NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
-      };
+      #NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
+
+      postPatch = (old.postPatch or "") + ''
+      for f in $(grep -RIl "py_limited_api\s*=" src || true); do
+        echo "Patching $f"
+        substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
+      done
+      '';
 
     });
-    */
 
     requests = pyprev.requests.overridePythonAttrs (old: {
       doCheck = false;
