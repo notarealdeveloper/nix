@@ -11,55 +11,62 @@ let
       is-instance
       python-bin
       mmry
+
+      ipython
   ]);
 
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
       # packaging
-      pip
-      build
-      twine
-      pytest
-      cython
-      setuptools
+      #pip
+      #build
+      #twine
+      #pytest
+      #cython
+      #setuptools
 
       # basics
       ipython
 
       # one step at a time
-      gevent
-      grpcio
-      watchdog
-      tqdm
+      #gevent
+      #grpcio
+      #watchdog
+      #tqdm
 
       # net
-      #yt-dlp
-      requests
-      beautifulsoup4
+      #requests
+      #beautifulsoup4
 
       # numerical
-      numpy
-      scipy
-      pandas
-      matplotlib
-      seaborn
-      scikit-learn
-
-      # ~/bin depends
-      #google-auth-oauthlib      # gmail
-      #google-api-python-client  # getbtcprice
-      #geoip2                    # getbtcprice
+      #numpy
+      #scipy
+      #pandas
+      #matplotlib
+      #seaborn
 
       # mine
-      assure
+      #assure
   ]);
 
   python_interpreters = with pkgs; [
 
     (python313.withPackages (ps: with ps;
-      (python_packages_noft ps)
-      ++ [ torch embd wnix yt-dlp ]
-    ))
+      (python_packages_noft ps) ++ [
+
+        scikit-learn
+        torch
+
+        # ~/bin depends
+        yt-dlp
+        google-auth-oauthlib      # gmail
+        google-api-python-client  # getbtcprice
+        geoip2                    # getbtcprice
+
+        embd
+        wnix
+
+    ]))
 
     (python314.withPackages (ps: with ps;
       (python_packages_noft ps)
@@ -84,11 +91,7 @@ let
 
     (python315FreeThreading.withPackages (ps: with ps;
       (python_packages_common ps)
-      ++
-      [
-        cython
-        ipython
-      ]
+      ++ [ ]
     ))
 
   ];
