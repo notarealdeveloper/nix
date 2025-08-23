@@ -302,13 +302,13 @@ let
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
       env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
-      doCheck = false;
     });
 
     charset-normalizer = pyprev.charset-normalizer.overridePythonAttrs (old: {
       env = (old.env or {}) // { CHARSET_NORMALIZER_USE_MYPYC = "0"; };
     });
 
+    /*
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
@@ -326,6 +326,7 @@ let
         sed -Ei "s@(    )(import _compression)@\1import compression._common._streams as _compression@g" lz4/frame/__init__.py
       '';
     });
+    */
 
     # pr: if sys.version_info > anything we currently recognize,
     # then use a file called grammarlatest.txt
