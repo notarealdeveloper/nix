@@ -3,25 +3,12 @@ final: prev:
 let
 
   commonOverrides = pyfinal: pyprev: {
+
     #buildPythonPackage = args:
     #  pyprev.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
 
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
-
-    #buildPythonPackage = args:
-    #  pyprev.buildPythonPackage (args // {
-    #    env = (args.env or {}) // {
-    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-    #    };
-    #  });
-    #
-    #buildPythonApplication = args:
-    #  pyprev.buildPythonApplication (args // {
-    #    env = (args.env or {}) // {
-    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-    #    };
-    #  });
 
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "cython";
@@ -102,6 +89,8 @@ let
       ];
     });
 
+
+    /*
     cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
       env = (old.env or {}) // {
         CFLAGS = prev.lib.concatStringsSep " " [
@@ -123,6 +112,7 @@ let
         export MPLBACKEND=Agg
       '';
     });
+    */
 
     rich = pyprev.rich.overridePythonAttrs (old: {
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
@@ -199,21 +189,10 @@ let
 
     ruamel-yaml-clib = pyprev.ruamel-yaml-clib.overridePythonAttrs (old: {
       doCheck = false;
-      #postPatch = (old.postPatch or "") + ''
-      #  sed -i -E \
-      #    -e 's/\bfrom ast import (Str|Num|Bytes|NameConstant).*//g' \
-      #    -e 's/\bast\.(Str|Num|Bytes|NameConstant)\b/ast.Constant/g' \
-      #    -e 's/(\.s|\.n)\b/.value/g' \
-      #    setup.py || true
-      #'';
     });
 
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
-
-      # Latest release not compatible with pytest 6
       doCheck = false;
-
-      # Make setup.py Python 3.15 AST-compatible
       postPatch = ''
         # In Python 3.15, ast.Str is gone; string literals are ast.Constant with .value
         substituteInPlace setup.py \
@@ -358,25 +337,6 @@ let
       doCheck = false;
     });
 
-    #seaborn = pyprev.seaborn.overridePythonAttrs (old: {
-    #  # keep existing deps and add pytz (see #2 below)
-    #  propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.pytz ];
-    #
-    #  # Matplotlib wants a writable config/cache dir; make one.
-    #  preCheck = (old.preCheck or "") + ''
-    #    export MPLCONFIGDIR="$TMPDIR/mpl"
-    #    mkdir -p "$MPLCONFIGDIR"
-    #  '';
-    #  preBuild = (old.preBuild or "") + ''
-    #    export MPLCONFIGDIR="$TMPDIR/mpl"
-    #    mkdir -p "$MPLCONFIGDIR"
-    #  '';
-    #  preInstallCheck = (old.preInstallCheck or "") + ''
-    #    export MPLCONFIGDIR="$TMPDIR/mpl"
-    #    mkdir -p "$MPLCONFIGDIR"
-    #  '';
-    #});
-
     defusedxml = pyprev.defusedxml.overridePythonAttrs (old: {
       doCheck = false;
     });
@@ -409,6 +369,7 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
+    /*
     gevent = pyprev.gevent.overridePythonAttrs (old: {
 
       env = (old.env or {}) // {
@@ -425,6 +386,7 @@ let
       '';
 
     });
+    */
 
     requests = pyprev.requests.overridePythonAttrs (old: {
       doCheck = false;
