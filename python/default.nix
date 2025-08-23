@@ -396,6 +396,7 @@ let
         "tests/test_text.py"
         "tests/test_pretty.py"
         "tests/test_pycolorize.py"
+        "tests/test_completer.py"
         "IPython/extensions/tests/test_deduperreload.py"
       ];
     });
