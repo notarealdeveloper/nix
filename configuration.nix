@@ -6,9 +6,11 @@ let
 
   python_packages_common = ps: (with ps; [
 
+      # packaging
       pip
       build
       pytest
+      setuptools
 
       is-instance
       python-bin
@@ -19,12 +21,8 @@ let
 
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
-      # packaging
-      #build
-      #twine
-      #pytest
       #cython
-      #setuptools
+      #twine
 
       # basics
       #ipython
