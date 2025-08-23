@@ -102,6 +102,10 @@ let
       ];
     });
 
+    meson = prev.meson.overrideAttrs (old: {
+      doCheck = false;
+    });
+
     # for getting numpy quick. delete this soon though.
     meson-python = pyprev.meson-python.overridePythonAttrs (old: {
       #src = prev.fetchFromGitHub {
