@@ -11,18 +11,14 @@ let
       pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
     cython = pyprev.cython.overrideAttrs (old: rec {
-      pname = "cython";
       version = "3.1.3";
       pyproject = true;
-
       src = prev.fetchFromGitHub {
         owner = "cython";
         repo = "cython";
         tag = version;
         hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
       };
-
-      doCheck = false;
     });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
