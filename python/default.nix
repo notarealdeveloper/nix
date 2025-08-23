@@ -77,6 +77,7 @@ let
         hash = "sha256-ywi9dUDLikxPkBqYefslsEqJMK0/T5WxP6xycm7QXxg=";
       };
 
+      /*
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "tests/test_run.py" # only fails on free threading?
         "tests/test_oinspect.py"
@@ -90,6 +91,7 @@ let
         "IPython/utils/sysinfo.py"
         "IPython/extensions/tests/test_deduperreload.py"
       ];
+    */
     });
 
   };
