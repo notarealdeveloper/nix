@@ -380,6 +380,10 @@ let
     #  '';
     #});
 
+    defusedxml = pyprev.defusedxml.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+    
   };
 
   freeThreadingOverrides = pyfinal: pyprev: {
