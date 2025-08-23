@@ -225,7 +225,7 @@ let
     });
 
     pydantic-core = pyprev.pydantic-core.overridePythonAttrs (old: {
-      src = fetchFromGitHub {
+      src = pyprev.fetchFromGitHub {
         owner = "pydantic";
         repo = "pydantic-core";
         rev = "e0bc980764ec5d5f59c7d451948df937b5a1921f";
