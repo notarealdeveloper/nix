@@ -102,7 +102,13 @@ let
     });
 
     pynacl = pyprev.pynacl.overridePythonAttrs (old: {
-
+      src = prev.fetchFromGitHub {
+        owner = "pyca";
+        repo = "pynacl";
+        rev = "b712d60990092eaf58f3b5ff5858f904dd8159f4";
+        hash = "sha256-UQHHVfGcgfr7nrqZ2o60bTs4BDAlSxEy6/9tNpkeHoY=";
+      };
+      /*
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
         "tests/test_aead.py"
         "tests/test_bindings.py"
@@ -121,18 +127,8 @@ let
         "tests/test_signing.py"
         "tests/test_utils.py"
       ];
+      */
 
-      postPatch = (old.postPatch or "") + ''
-      sed -i 's/^from typing import ByteString, Optional, Tuple, cast$/from typing import Optional, Tuple, cast\
-      try:\
-          from typing import ByteString \
-      except Exception:\
-          try:\
-              from collections.abc import Buffer as ByteString\
-          except Exception:\
-              from typing_extensions import Buffer as ByteString/' \
-        nacl/bindings/crypto_secretstream.py
-      '';
     });
 
     ruamel-yaml-clib = pyprev.ruamel-yaml-clib.overridePythonAttrs (old: {
