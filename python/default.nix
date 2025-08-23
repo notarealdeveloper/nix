@@ -102,6 +102,11 @@ let
       ];
     });
 
+    # for getting numpy quick. delete this soon though.
+    meson-python = pyprev.meson-python.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
     cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
       env = (old.env or {}) // {
         CFLAGS = prev.lib.concatStringsSep " " [
