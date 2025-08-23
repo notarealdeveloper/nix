@@ -16,6 +16,7 @@ let
       ipython
       requests
       beautifulsoup4
+      sly
 
       is-instance
       python-bin
