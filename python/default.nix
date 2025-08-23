@@ -309,7 +309,6 @@ let
     
     */
 
-    /*
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
@@ -366,8 +365,6 @@ let
         "IPython/extensions/tests/test_deduperreload.py"
       ];
     });
-
-    */
 
   };
 
