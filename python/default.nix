@@ -4,11 +4,11 @@ let
 
   commonOverrides = pyfinal: pyprev: {
 
-    #buildPythonPackage = args:
-    #  pyprev.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
+    buildPythonPackage = args:
+      pyprev.buildPythonPackage (args // { doCheck = false; doInstallCheck = false; });
 
-    #buildPythonApplication = args:
-    #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
+    buildPythonApplication = args:
+      pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "cython";
