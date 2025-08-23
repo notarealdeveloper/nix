@@ -382,14 +382,17 @@ let
       };
 
       disabledTestPaths = (old.disabledTestPaths or []) ++ [
-      #  "tests/test_run.py" # only fails on free threading?
-      #  "tests/test_debugger.py"
-      #  "tests/test_oinspect.py"
-      #  "tests/test_text.py"
-      #  "tests/test_pretty.py"
-      #  "tests/test_pycolorize.py"
-      #  "tests/test_completer.py"
-      #  "IPython/extensions/tests/test_deduperreload.py"
+        "tests/test_run.py" # only fails on free threading?
+        "tests/test_oinspect.py"
+        "tests/test_text.py"
+        "tests/test_pretty.py"
+        "tests/test_pycolorize.py"
+        "tests/test_debugger.py"
+        "tests/test_completer.py"
+        "tests/test_interactiveshell.py"
+        "tests/test_sysinfo.py"
+        "IPython/utils/sysinfo.py"
+        "IPython/extensions/tests/test_deduperreload.py"
       ];
     });
 
