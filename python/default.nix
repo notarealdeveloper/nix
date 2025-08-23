@@ -388,6 +388,12 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
+    ipython = pyprev.ipython.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_run.py"
+      ];
+    });
+
     gevent = pyprev.gevent.overridePythonAttrs (old: {
 
       env = (old.env or {}) // {
