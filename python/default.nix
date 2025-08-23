@@ -10,7 +10,6 @@ let
     buildPythonApplication = args:
       pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
-    /*
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "cython";
       version = "3.1.3";
@@ -26,13 +25,14 @@ let
       doCheck = false;
     });
 
-    fastapi = pyprev.fastapi.overrideAttrs (old: {
-      propagatedBuildInputs = prev.lib.remove prev.mercurial old.propagatedBuildInputs;
-    });
-
     mypy = pyprev.mypy.overridePythonAttrs (old: {
       env = (old.env or {}) // { MYPY_USE_MYPYC = "0"; };
       doCheck = false;
+    });
+
+    /*
+    fastapi = pyprev.fastapi.overrideAttrs (old: {
+      propagatedBuildInputs = prev.lib.remove prev.mercurial old.propagatedBuildInputs;
     });
 
     poetry-core = pyprev.poetry-core.overridePythonAttrs (old: {
@@ -89,7 +89,6 @@ let
         "tests/legacy/test_client_server.py"
       ];
     });
-
 
     cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
       env = (old.env or {}) // {
