@@ -40,7 +40,7 @@ let
       # numerical
       numpy
       scipy
-      #pandas
+      pandas
       #matplotlib
       #seaborn
       #scikit-learn
