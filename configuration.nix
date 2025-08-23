@@ -42,6 +42,8 @@ let
       #pandas
       #matplotlib
       #seaborn
+
+      yt-dlp
   ]);
 
   python_interpreters = with pkgs; [

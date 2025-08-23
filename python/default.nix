@@ -29,7 +29,17 @@ let
       env = (old.env or {}) // { CHARSET_NORMALIZER_USE_MYPYC = "0"; };
     });
 
-    /*
+    # required by yt-dlp, even with tests disabled.
+    cryptography = pyprev.cryptography.overridePythonAttrs (old: {
+      env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
+    });
+
+    #bcrypt = pyprev.bcrypt.overridePythonAttrs (old: {
+    #  env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
+    #});
+
+    # required by yt-dlp, even with tests disabled.
+    #
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
@@ -38,6 +48,7 @@ let
       propagatedBuildInputs = with pyprev; [ trio outcome ];
     });
 
+    /*
     # pr: lz4 uses the now removed _compression module in various places.
     # in python>=3.14, this has been moved to compression._common._streams
     # the required patch should be something like this
