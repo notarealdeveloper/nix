@@ -232,6 +232,8 @@ let
         hash = "sha256-pBds7mCRoz5T6pI2V99qaXByEzwGqnBfzSEpGXjurqM=";
       };
 
+      cargoSha256 = "";
+
       env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
       doCheck = false;
     });

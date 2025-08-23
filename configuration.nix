@@ -30,7 +30,6 @@ let
       gevent
       grpcio
       watchdog
-      pydantic-core
       tqdm
 
       # net
