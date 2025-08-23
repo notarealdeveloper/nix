@@ -37,7 +37,7 @@ let
       #tqdm
 
       # numerical
-      numpy
+      #numpy
       #scipy
       #pandas
       #matplotlib

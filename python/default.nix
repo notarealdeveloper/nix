@@ -9,20 +9,6 @@ let
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
-    #buildPythonPackage = args:
-    #  pyprev.buildPythonPackage (args // {
-    #    env = (args.env or {}) // {
-    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-    #    };
-    #  });
-    #
-    #buildPythonApplication = args:
-    #  pyprev.buildPythonApplication (args // {
-    #    env = (args.env or {}) // {
-    #      PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
-    #    };
-    #  });
-
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "cython";
       version = "3.1.3";
@@ -35,6 +21,14 @@ let
         hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
       };
 
+      doCheck = false;
+    });
+
+    numpy = pyprev.numpy.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
+    meson = prev.meson.overrideAttrs (old: {
       doCheck = false;
     });
 
@@ -102,37 +96,12 @@ let
       ];
     });
 
-    meson = prev.meson.overrideAttrs (old: {
-      doCheck = false;
-    });
-
     # for getting numpy quick. delete this soon though.
     meson-python = pyprev.meson-python.overridePythonAttrs (old: {
-      #src = prev.fetchFromGitHub {
-      #  owner = "mesonbuild";
-      #  repo = "meson-python";
-      #  rev = "8d50078e2c6134c058169b4df692e990174b8553";
-      #  hash = "sha256-3GhG2zQg2ZkmF2PUJKZ8Fo6T3dsErhXQN3P+gspx3og=";
-      #};
-      #buildPhase = ''
-      #  cd "$src"
-      #  ${old.buildPhase or "pypaBuildPhase"}
-      #'';
-      #installPhase = ''
-      #  cd "$src"
-      #  ${old.installPhase or "pypaInstallPhase"}
-      #'';
       pyproject = true;
       doCheck = false;
-      # prevent meson hooks from taking over:
       dontUseMesonConfigure = true;
       dontUseMesonInstall = true;
-      #nativeBuildInputs =
-      #  builtins.filter (p:
-      #    let n = (p.pname or p.name or ""); in
-      #    n != "meson" && n != "meson-wrap" && n != "mesonWrapHook"
-      #  ) (old.nativeBuildInputs or []);
-      # make phases explicit (from source root):
       configurePhase = ":";
       buildPhase = "pypaBuildPhase";
       installPhase = "pypaInstallPhase";
@@ -140,6 +109,7 @@ let
       propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.meson ];
     });
 
+    /*
     cmarkgfm = pyprev.cmarkgfm.overridePythonAttrs (old: {
       env = (old.env or {}) // {
         CFLAGS = prev.lib.concatStringsSep " " [
@@ -148,6 +118,7 @@ let
         ];
       };
     });
+    */
 
     pytest-regressions = pyprev.pytest-regressions.overridePythonAttrs (old: {
       doCheck = false;
@@ -237,21 +208,10 @@ let
 
     ruamel-yaml-clib = pyprev.ruamel-yaml-clib.overridePythonAttrs (old: {
       doCheck = false;
-      #postPatch = (old.postPatch or "") + ''
-      #  sed -i -E \
-      #    -e 's/\bfrom ast import (Str|Num|Bytes|NameConstant).*//g' \
-      #    -e 's/\bast\.(Str|Num|Bytes|NameConstant)\b/ast.Constant/g' \
-      #    -e 's/(\.s|\.n)\b/.value/g' \
-      #    setup.py || true
-      #'';
     });
 
     html5lib = pyprev.html5lib.overridePythonAttrs (old: {
-
-      # Latest release not compatible with pytest 6
       doCheck = false;
-
-      # Make setup.py Python 3.15 AST-compatible
       postPatch = ''
         # In Python 3.15, ast.Str is gone; string literals are ast.Constant with .value
         substituteInPlace setup.py \
@@ -300,11 +260,6 @@ let
 
     blinker = pyprev.blinker.overridePythonAttrs (old: {
       doCheck = false;
-      #disabledTestPaths = (old.disabledTestPaths or []) ++ [
-      #  "tests/test_context.py"
-      #  "tests/test_symbol.py"
-      #  "tests/test_signals.py"
-      #];
     });
 
     exceptiongroup = pyprev.exceptiongroup.overridePythonAttrs (old: {
@@ -322,15 +277,13 @@ let
 
     aiosignal = pyprev.aiosignal.overridePythonAttrs (old: {
       doCheck = false;
-      #disabledTestPaths = (old.disabledTestPaths or []) ++ [
-      #  "tests/test_signals.py"
-      #];
     });
 
     pendulum = pyprev.pendulum.overridePythonAttrs (old: {
       env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
     });
 
+    /*
     pydantic-core = pyprev.pydantic-core.overridePythonAttrs (old: {
       src = prev.fetchFromGitHub {
         owner = "pydantic";
@@ -344,6 +297,7 @@ let
       env.PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true;
       doCheck = false;
     });
+    */
 
     eventlet = pyprev.eventlet.overridePythonAttrs (old: {
       doCheck = false;
@@ -396,25 +350,6 @@ let
       doCheck = false;
     });
 
-    #seaborn = pyprev.seaborn.overridePythonAttrs (old: {
-    #  # keep existing deps and add pytz (see #2 below)
-    #  propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [ pyprev.pytz ];
-    #
-    #  # Matplotlib wants a writable config/cache dir; make one.
-    #  preCheck = (old.preCheck or "") + ''
-    #    export MPLCONFIGDIR="$TMPDIR/mpl"
-    #    mkdir -p "$MPLCONFIGDIR"
-    #  '';
-    #  preBuild = (old.preBuild or "") + ''
-    #    export MPLCONFIGDIR="$TMPDIR/mpl"
-    #    mkdir -p "$MPLCONFIGDIR"
-    #  '';
-    #  preInstallCheck = (old.preInstallCheck or "") + ''
-    #    export MPLCONFIGDIR="$TMPDIR/mpl"
-    #    mkdir -p "$MPLCONFIGDIR"
-    #  '';
-    #});
-
     defusedxml = pyprev.defusedxml.overridePythonAttrs (old: {
       doCheck = false;
     });
@@ -447,14 +382,7 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
-    numpy = pyprev.numpy.overridePythonAttrs (old: {
-      doCheck = false;
-    });
-
-    meson = prev.meson.overrideAttrs (old: {
-      doCheck = false;
-    });
-
+    /*
     greenlet = pyprev.greenlet.overridePythonAttrs (old: {
 
       env = (old.env or {}) // {
@@ -476,14 +404,8 @@ let
         NIX_CFLAGS_COMPILE = (old.env.NIX_CFLAGS_COMPILE or "") + " -UPy_LIMITED_API";
       };
 
-      #postPatch = (old.postPatch or "") + ''
-      #for f in $(grep -RIl "py_limited_api\s*=" src || true); do
-      #  echo "Patching $f"
-      #  substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
-      #done
-      #'';
-
     });
+    */
 
     requests = pyprev.requests.overridePythonAttrs (old: {
       doCheck = false;
