@@ -10,6 +10,7 @@ let
     buildPythonApplication = args:
       pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
+    /*
     cython = pyprev.cython.overrideAttrs (old: rec {
       pname = "cython";
       version = "3.1.3";
@@ -292,6 +293,22 @@ let
       doCheck = false;
     });
 
+    matplotlib = pyprev.matplotlib.overridePythonAttrs (old: {
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_image_regression.py"
+      ];
+      preCheck = (old.preCheck or "") + ''
+        export MPLCONFIGDIR="$$(mktemp -d)"
+      '';
+      doCheck = false;
+    });
+
+    defusedxml = pyprev.defusedxml.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+    
+    */
+
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
     # subdirectory. upstream seems to be here.
@@ -325,20 +342,6 @@ let
       '';
     });
 
-    matplotlib = pyprev.matplotlib.overridePythonAttrs (old: {
-      disabledTestPaths = (old.disabledTestPaths or []) ++ [
-        "tests/test_image_regression.py"
-      ];
-      preCheck = (old.preCheck or "") + ''
-        export MPLCONFIGDIR="$$(mktemp -d)"
-      '';
-      doCheck = false;
-    });
-
-    defusedxml = pyprev.defusedxml.overridePythonAttrs (old: {
-      doCheck = false;
-    });
-    
     ipython = pyprev.ipython.overridePythonAttrs (old: {
 
       src = prev.fetchFromGitHub {
@@ -367,22 +370,12 @@ let
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
+    /*
+
     # requests: tests pull in gevent, which isn't freethread safe yet
     requests = pyprev.requests.overridePythonAttrs (old: {
       doCheck = false;
     });
-
-    /*
-    gevent = pyprev.gevent.overridePythonAttrs (old: {
-      env = (old.env or {}) // { CFFI_NO_LIMITED_API = "1"; };
-      postPatch = (old.postPatch or "") + ''
-      for f in $(grep -RIl "py_limited_api\s*=" src || true); do
-        echo "Patching $f"
-        substituteInPlace "$f" --replace "py_limited_api=True" "py_limited_api=False"
-      done
-      '';
-    });
-    */
 
     cffi = pyprev.cffi.overridePythonAttrs (old: {
       # make the build clearly t-aware
@@ -415,6 +408,8 @@ let
       # binary cache set up soon!
       doCheck = false;
     });
+
+    */
 
   };
 
