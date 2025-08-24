@@ -23,7 +23,12 @@ in
       vendorHash = lib.fakeHash;
       fetchAttrs = {
         hash = lib.fakeHash;
-        dontConfigure = true;
+        #dontConfigure = true;
+        #dontBuild = true;
+        #dontInstall = true;
+        #dontPatch = true;
+        #outputHashMode = "recursive";
+        #outputHashAlgo = "sha256";
       };
 
       nativeBuildInputs = [
@@ -38,6 +43,23 @@ in
         final.gawk
       ];
 
+      configurePhase = ''
+
+        ${prev.cowsay}/bin/cowsay 'Pre Configure!'
+        pwd
+        ls -l --color=always
+
+        runHook preConfigure
+
+        ${prev.cowsay}/bin/cowsay 'Configure!'
+        patchShebangs configure
+        ./configure
+
+        ${prev.cowsay}/bin/cowsay 'Post Configure!'
+        runHook postConfigure
+
+      '';
+
       buildInputs = [ final.zlib ];
 
       buildAttrs = {
@@ -50,9 +72,6 @@ in
 
         installPhase = ''
           mkdir -p "$out"
-
-          ${prev.cowsay}/bin/cowsay "HERE WE GO BITCHES"
-          find .
 
           WHEEL="$(find bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
           [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
