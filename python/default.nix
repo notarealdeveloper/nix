@@ -94,7 +94,7 @@ let
     #  env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
     #});
 
-    # required by yt-dlp, even with tests disabled.
+    # required by yt-dlp, even with tests disabled
     #
     # pr: jeepney seems not to declare their dependency on trio and outcome in their
     # top-level pyproject.toml, though they do declare the deps in the docs subdir.
@@ -104,7 +104,8 @@ let
       propagatedBuildInputs = with pyprev; [ trio outcome ];
     });
 
-    /*
+    # required by scikit-learn, even with tests disabled
+    #
     # pr: lz4 uses the now removed _compression module in various places.
     # in python>=3.14, this has been moved to compression._common._streams
     # the required patch should be something like this
@@ -114,8 +115,9 @@ let
         sed -Ei "s@(    )(import _compression)@\1import compression._common._streams as _compression@g" lz4/frame/__init__.py
       '';
     });
-    */
 
+    # required by ipython, even with tests disabled
+    #
     # pr: if sys.version_info > anything we currently recognize,
     # then use a file called grammarlatest.txt
     # upstream: https://github.com/davidhalter/parso
@@ -131,6 +133,7 @@ let
       '';
     });
     
+
     ipython = pyprev.ipython.overridePythonAttrs (old: {
 
       src = prev.fetchFromGitHub {

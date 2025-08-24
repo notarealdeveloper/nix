@@ -30,7 +30,7 @@ let
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
       # packaging
-      #twine
+      twine
 
       # numerical
       scipy
@@ -66,7 +66,7 @@ let
 
     (python315.withPackages (ps: with ps;
       (python_packages_noft ps)
-      ++ [ numpy ]
+      ++ [ ]
     ))
 
     ### Free Threaded Interpreters
