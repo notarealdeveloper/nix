@@ -21,7 +21,7 @@ let
       };
     });
 
-    pandas = pyprev.pandas.overridePythonAttrs (old: {
+    pandas = pyprev.pandas.overridePythonAttrs (old: rec {
       version = "2.3.2";
       pyproject = true;
       src = prev.fetchFromGitHub {
@@ -30,10 +30,20 @@ let
         rev = "188b2dae7df85a9c9945db39c5a23d23b1d4ce2e";
         hash = "sha256-Q18XQjpK1O0DpKfrNxbd0iikWl2eIQdW/b+VNIXxlKE=";
       };
+      env = (old.env or {}) // { VERSIONEER_OVERRIDE = version; };
       patches = [];
       postPatch = ''
         substituteInPlace pyproject.toml \
           --replace-fail "==" ">=" \
+      '';
+    });
+
+    seaborn = pyprev.seaborn.overridePythonAttrs (old: {
+      postPatch = ''
+        substituteInPlace pyproject.toml \
+          --replace-fail "numpy>=1.20,!=1.24.0" "numpy" \
+          --replace-fail "pandas>=1.2" "pandas" \
+          --replace-fail "matplotlib>=3.4,!=3.6.1" "matplotlib" \
       '';
     });
 
