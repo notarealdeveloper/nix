@@ -13,14 +13,19 @@ let
       setuptools
       cython
 
+      # basics
       ipython
-      requests
-      beautifulsoup4
       sly
       curio
 
+      # net
+      requests
+      beautifulsoup4
+
+      # numerical
       numpy
 
+      # ours
       assure
       is-instance
       python-bin
@@ -32,13 +37,17 @@ let
       # packaging
       twine
 
+      # net
+      yt-dlp
+
       # numerical
       scipy
       pandas
       matplotlib
       seaborn
 
-      yt-dlp
+      # for sklearn
+      lz4
   ]);
 
   python_interpreters = with pkgs; [
