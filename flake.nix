@@ -34,12 +34,12 @@
 
     system = "x86_64-linux";
 
-    overlay-python-head = import ./python;
+    #overlay-python-head = import ./python;
 
     pkgs = import nixpkgs {
       inherit system;
       overlays = [
-        overlay-python-head
+        #overlay-python-head
         overlay.overlays.default
       ];
       config.allowUnfree = true;
