@@ -173,7 +173,8 @@ let
           else if pyprev ? python then pyprev.python
           else final.python315;  # safe fallback; overridden per-scope anyway
       in
-      pyfinal.toPythonModule (final.buildBazelPackage {
+
+      pyfinal.toPythonModule (final.buildBazelPackage rec {
         pname = "tensorflow";
         version = "git-f39ff4e";
 
@@ -190,6 +191,34 @@ let
         # First run will print a "wanted" hash; paste it into both of these.
         vendorHash = final.lib.fakeHash;
 
+        configurePhase = ''
+          ${prev.cowsay}/bin/cowsay "PRE-CONFAGURE TIME BITCHES"
+          pwd
+          ls -l --color=always
+
+          mkdir -pv /build/output/external
+          echo 'bazel-6.5.0' > "/build/output/external/.nix-bazel-version"
+
+          patchShebangs configure
+
+          # dummy ldconfig
+          mkdir dummy-ldconfig
+          echo "#!${prev.stdenv.shell}" > dummy-ldconfig/ldconfig
+          chmod +x dummy-ldconfig/ldconfig
+          export PATH="$PWD/dummy-ldconfig:$PATH"
+
+          export PYTHON_LIB_PATH="$NIX_BUILD_TOP/site-packages"
+          mkdir -p "$PYTHON_LIB_PATH"
+
+          # To avoid mixing Python 2 and Python 3
+          unset PYTHONPATH
+
+          ${prev.cowsay}/bin/cowsay "CONFAGURE TIME BITCHES"
+          runHook preConfigure
+          ./configure
+          runHook postConfigure
+        '';
+
         fetchAttrs = {
           # FOD fields
           outputHashMode = "recursive";
@@ -197,8 +226,8 @@ let
           outputHash = "sha256-SKSfciHCDU4qZ2GvT9Zrs0Rfd8zF10SNkiLoSBbsh5I=";
 
           # kill default phases that poke at configure.py / external outputs
-          dontConfigure = true;
-          dontBuild = true;
+          #dontConfigure = true;
+          #dontBuild = true;
 
           # produce a trivial tarball so $out exists; Nix will immediately
           # tell you the correct hash to paste back into outputHash.
@@ -208,12 +237,17 @@ let
             tar -czf "$out" -C "$TMPDIR" empty --owner=0 --group=0 --mtime=@0
           '';
         };
+
         nativeBuildInputs = [
           final.llvmPackages.clang
           pyfinal.wheel
           pyfinal.setuptools
           pyfinal.pip
-          final.which final.coreutils final.gnugrep final.gnused final.gawk
+          final.which
+          final.coreutils
+          final.gnugrep
+          final.gnused
+          final.gawk
         ];
 
         buildInputs = [ final.zlib ];
@@ -226,8 +260,32 @@ let
             "--repo_env=CC=${final.llvmPackages.clang}/bin/clang"
           ];
 
+          nativeBuildInputs = [
+            final.llvmPackages.clang
+            pyfinal.wheel
+            pyfinal.setuptools
+            pyfinal.pip
+            final.which
+            final.coreutils
+            final.gnugrep
+            final.gnused
+            final.gawk
+          ];
+
+          propagatedBuildInputs = [
+            final.llvmPackages.clang
+            pyfinal.wheel
+            pyfinal.setuptools
+            pyfinal.pip
+            final.which
+            final.coreutils
+            final.gnugrep
+            final.gnused
+            final.gawk
+          ];
+
           installPhase = ''
-            mkdir -p "$out"
+            mkdir -pv "$out" 'bazel-bin' 'bazel-out'
             WHEEL="$(find bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
             [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
             ${pyDrv.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
