@@ -28,6 +28,11 @@ in
         finalPy.wheel
         finalPy.setuptools
         finalPy.pip
+        final.which
+        final.coreutils
+        final.gnugrep
+        final.gnused
+        final.gawk
       ];
 
       buildInputs = [ final.zlib ];
