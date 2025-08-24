@@ -35,14 +35,22 @@ let
       postPatch = ''
         substituteInPlace pyproject.toml \
           --replace-fail "==" ">="
-        # sed -i '/dynamic/{N;N; s/.*\n.*\n.*/version = "2.3.2"/; }' pyproject.toml
-        sed -i "/^dynamic.*/,/]/c\version = '${version}'" pyproject.toml
+        #sed -i "/^dynamic.*/,/]/c\version = '${version}'" pyproject.toml
 
-        cat > pandas/_version.py << 'EOF'
-        def get_versions():
-            return {"version": "${version}", "full-revisionid": "", "dirty": False, "error": None, "date": None}
-        __version__ = get_versions()["version"]
-        EOF
+        # As soon as they mention this "versioneer" bullshit,
+        # delete everything else in their pyproject.toml
+        #sed -i "/tool.versioneer/,/\$\$/c/" pyproject.toml
+        #cat pyproject.toml
+
+        # Create generate_version.py because their meson wants to call it
+        #sed -i "s@^main[(][)]@@" generate_version.py
+        #printf '\ndef main():\n    print("${version}")\n\nmain()\n' >> generate_version.py
+        printf '#!/bin/sh\necho ${version}\n' > generate_version.py
+        chmod +x generate_version.py
+        cat generate_version.py
+        echo "HERE WE GO"
+        ./generate_version.py
+        echo "THERE WE WENT"
       '';
     });
 
