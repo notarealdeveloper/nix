@@ -43,11 +43,14 @@
 
     overlay-python = import ./python;
 
+    overlay-tensorflow = import ./python/tensorflow.nix;
+
     pkgs = import nixpkgs {
       inherit system;
       overlays = [
         overlay
         overlay-python
+        overlay-tensorflow
         # todo: doubleunix/wnixpkgs overlay that contains both of these
         python-packages.overlays.default
         wnix-noelf.overlays.default
