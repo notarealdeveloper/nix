@@ -43,7 +43,7 @@
 
     overlay-python = import ./python;
 
-    overlay-tensorflow = import ./python/tensorflow.nix;
+    overlay-tensorflow = import ./tensorflow.nix;
 
     pkgs = import nixpkgs {
       inherit system;

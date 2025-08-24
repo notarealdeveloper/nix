@@ -10,7 +10,7 @@ let
   interpreter = (pyset.interpreter or pyset.python);    # python executable (handles both shapes)
 in
 {
-  python315Packages = prev.python315Packages.overrideScope' (finalPy: prevPy: {
+  python315Packages = prev.python315Packages.overrideScope (finalPy: prevPy: {
     # Replace the wheel-based tensorflow with a Bazel-from-source build
     tensorflow = finalPy.toPythonModule (final.buildBazelPackage {
       pname = "tensorflow";

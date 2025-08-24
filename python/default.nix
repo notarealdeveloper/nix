@@ -137,6 +137,7 @@ let
       '';
     });
     
+
     ipython = pyprev.ipython.overridePythonAttrs (old: {
 
       src = prev.fetchFromGitHub {
@@ -163,6 +164,7 @@ let
     */
     });
 
+  };
 
   freeThreadingOverrides = pyfinal: pyprev: {
 
