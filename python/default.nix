@@ -35,22 +35,29 @@ let
       postPatch = ''
         substituteInPlace pyproject.toml \
           --replace-fail "==" ">="
-        #sed -i "/^dynamic.*/,/]/c\version = '${version}'" pyproject.toml
+
+        # You don't need a dynamic version, asshole
+        sed -i "/^dynamic.*/,/]/c\version = '${version}'" pyproject.toml
 
         # As soon as they mention this "versioneer" bullshit,
-        # delete everything else in their pyproject.toml
-        #sed -i "/tool.versioneer/,/\$\$/c/" pyproject.toml
-        #cat pyproject.toml
+        # delete everything else in their pyproject.toml out of spite
+        sed -i "/tool.versioneer/,/\$\$/c/" pyproject.toml
+        cat pyproject.toml
 
-        # Create generate_version.py because their meson wants to call it
-        #sed -i "s@^main[(][)]@@" generate_version.py
-        #printf '\ndef main():\n    print("${version}")\n\nmain()\n' >> generate_version.py
+        # Create a simpler generate_version.py, because their
+        # dumb meson shit wants to call it
+        #
+        # This doesn't work for some reason
+        # sed -i "s@^main[(][)]@@" generate_version.py
+        # printf '\ndef main():\n    print("${version}")\n\nmain()\n' >> generate_version.py
+        #
+        # Ah, much better.
         printf '#!/bin/sh\necho ${version}\n' > generate_version.py
         chmod +x generate_version.py
         cat generate_version.py
         echo "HERE WE GO"
         ./generate_version.py
-        echo "THERE WE WENT"
+        echo "LOOKS GOOD, BUILDING PANDAS"
       '';
     });
 
