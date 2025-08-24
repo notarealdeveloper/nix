@@ -30,6 +30,7 @@ let
       is-instance
       python-bin
       mmry
+      webfs
   ]);
 
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
