@@ -270,18 +270,6 @@ let
             "--repo_env=CC=${final.llvmPackages.clang}/bin/clang"
           ];
 
-         nativeBuildInputs = [
-            final.llvmPackages.clang
-            pyfinal.wheel
-            pyfinal.setuptools
-            pyfinal.pip
-            final.which
-            final.coreutils
-            final.gnugrep
-            final.gnused
-            final.gawk
-          ];
-
           propagatedBuildInputs = [
             final.llvmPackages.clang
             pyfinal.wheel
@@ -296,15 +284,26 @@ let
 
           installPhase = ''
             mkdir -p "$out" bazel-bin bazel-out
+
             # Preferred path: use the build_pip_package runner to emit a wheel
             OUTDIR="$(mktemp -d)"
+
             if [ -x bazel-bin/tensorflow/tools/pip_package/build_pip_package ]; then
               bazel-bin/tensorflow/tools/pip_package/build_pip_package "$OUTDIR"
             fi
+
             # Fallbacks: sometimes the wheel lands under bazel-* trees
+
             WHEEL="$(find "$OUTDIR" bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
-            [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
-            ${pyDrv.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
+
+            ${prev.cowsay}/bin/cowsay "THE COW HAS PROVED WE GET TO installPhase"
+
+            #[ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
+
+            #${pyDrv.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
+            ${pyDrv.interpreter} -m venv cake
+            source cake/bin/activate
+            pip install --no-deps --prefix "$out" .
             mkdir -p "$out/nix-support"
             echo tensorflow > "$out/nix-support/python-imports"
           '';
