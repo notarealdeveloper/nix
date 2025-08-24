@@ -39,10 +39,13 @@ let
         # You don't need a dynamic version, asshole
         sed -i "/^dynamic.*/,/]/c\version = '${version}'" pyproject.toml
 
+        ${prev.git}/bin/git tag "${version}"
+        printf "__version__ = '%s'\n" "${old.version}" > _version_meson.py
+
         # As soon as they mention this "versioneer" bullshit,
         # delete everything else in their pyproject.toml out of spite
-        sed -i "/tool.versioneer/,/\$\$/c/" pyproject.toml
-        cat pyproject.toml
+        #sed -i "/tool.versioneer/,/\$\$/c/" pyproject.toml
+        #cat pyproject.toml
 
         # Create a simpler generate_version.py, because their
         # dumb meson shit wants to call it
@@ -52,12 +55,12 @@ let
         # printf '\ndef main():\n    print("${version}")\n\nmain()\n' >> generate_version.py
         #
         # Ah, much better.
-        printf '#!${prev.python3}/bin/python\nprint("${version}")\n' > generate_version.py
-        chmod +x generate_version.py
-        cat generate_version.py
-        echo "HERE WE GO"
-        ./generate_version.py
-        echo "LOOKS GOOD, BUILDING PANDAS"
+        #printf '#!${prev.python3}/bin/python\nprint("${version}")\n' > generate_version.py
+        #chmod +x generate_version.py
+        #cat generate_version.py
+        #echo "HERE WE GO"
+        #./generate_version.py
+        #echo "LOOKS GOOD, BUILDING PANDAS"
       '';
     });
 

@@ -87,7 +87,7 @@ let
 
     (python315FreeThreading.withPackages (ps: with ps;
       (python_packages_common ps)
-      ++ [ ]
+      ++ [ numpy ]
     ))
 
   ];
