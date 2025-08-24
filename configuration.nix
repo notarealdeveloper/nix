@@ -19,6 +19,9 @@ let
       sly
       curio
 
+      numpy
+
+      #assure
       is-instance
       python-bin
       mmry
@@ -26,18 +29,10 @@ let
 
   python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
 
-      #twine    # not ready
-
-      #assure   # TODOL remove numpy dependency
-
-      # one step at a time
-      #gevent
-      #grpcio
-      #watchdog
-      #tqdm
+      # packaging
+      #twine
 
       # numerical
-      numpy
       scipy
       pandas
       matplotlib
@@ -87,7 +82,7 @@ let
 
     (python315FreeThreading.withPackages (ps: with ps;
       (python_packages_common ps)
-      ++ [ numpy ]
+      ++ [ ]
     ))
 
   ];
