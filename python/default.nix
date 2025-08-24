@@ -213,9 +213,18 @@ let
           # To avoid mixing Python 2 and Python 3
           unset PYTHONPATH
 
-          ${prev.cowsay}/bin/cowsay "CONFAGURE TIME BITCHES"
           runHook preConfigure
+
+          ${prev.cowsay}/bin/cowsay "CONFAGURE TIME BITCHES"
+          export PYTHON_BIN_PATH=${pyDrv.interpreter}
+          export CC=${final.llvmPackages.clang}/bin/clang
+          export TF_NEED_CUDA=0
+          export TF_NEED_ROCM=0
+          export TF_ENABLE_XLA=0
+          export TF_SET_ANDROID_WORKSPACE=0
           ./configure
+
+          ${prev.cowsay}/bin/cowsay "POSTCONFAGURE TIME BITCHES"
           runHook postConfigure
         '';
 
@@ -253,14 +262,15 @@ let
         buildInputs = [ final.zlib ];
 
         buildAttrs = {
-          targets = [ "//tensorflow/tools/pip_package:wheel" ];
+          #targets = [ "//tensorflow/tools/pip_package:wheel" ];
+          targets = [ "//tensorflow/tools/pip_package:build_pip_package" ];
           buildFlags = [
             "--config=opt"
             "--repo_env=PYTHON_BIN_PATH=${pyDrv.interpreter}"
             "--repo_env=CC=${final.llvmPackages.clang}/bin/clang"
           ];
 
-          nativeBuildInputs = [
+         nativeBuildInputs = [
             final.llvmPackages.clang
             pyfinal.wheel
             pyfinal.setuptools
@@ -285,13 +295,28 @@ let
           ];
 
           installPhase = ''
-            mkdir -pv "$out" 'bazel-bin' 'bazel-out'
-            WHEEL="$(find bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
+            mkdir -p "$out" bazel-bin bazel-out
+            # Preferred path: use the build_pip_package runner to emit a wheel
+            OUTDIR="$(mktemp -d)"
+            if [ -x bazel-bin/tensorflow/tools/pip_package/build_pip_package ]; then
+              bazel-bin/tensorflow/tools/pip_package/build_pip_package "$OUTDIR"
+            fi
+            # Fallbacks: sometimes the wheel lands under bazel-* trees
+            WHEEL="$(find "$OUTDIR" bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
             [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
             ${pyDrv.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
             mkdir -p "$out/nix-support"
             echo tensorflow > "$out/nix-support/python-imports"
           '';
+
+          #installPhase = ''
+          #  mkdir -pv "$out" 'bazel-bin' 'bazel-out'
+          #  WHEEL="$(find bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
+          #  [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
+          #  ${pyDrv.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
+          #  mkdir -p "$out/nix-support"
+          #  echo tensorflow > "$out/nix-support/python-imports"
+          #'';
         };
 
         pythonImportsCheck = [ "tensorflow" ];
