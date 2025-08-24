@@ -30,7 +30,7 @@ let
         rev = "188b2dae7df85a9c9945db39c5a23d23b1d4ce2e";
         hash = "sha256-Q18XQjpK1O0DpKfrNxbd0iikWl2eIQdW/b+VNIXxlKE=";
       };
-      #env = (old.env or {}) // { VERSIONEER_OVERRIDE = version; };
+      env = (old.env or {}) // { VERSIONEER_OVERRIDE = version; };
       patches = [];
       postPatch = ''
         substituteInPlace pyproject.toml \
@@ -39,8 +39,7 @@ let
         # You don't need a dynamic version, asshole
         sed -i "/^dynamic.*/,/]/c\version = '${version}'" pyproject.toml
 
-        ${prev.git}/bin/git tag "${version}"
-        printf "__version__ = '%s'\n" "${old.version}" > _version_meson.py
+        echo "__version__ = '${version}'" > _version_meson.py
 
         # As soon as they mention this "versioneer" bullshit,
         # delete everything else in their pyproject.toml out of spite
