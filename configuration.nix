@@ -76,7 +76,7 @@ let
 
     (python315.withPackages (ps: with ps;
       (python_packages_noft ps)
-      ++ [ ]
+      ++ [ scikit-learn ]
     ))
 
     ### Free Threaded Interpreters

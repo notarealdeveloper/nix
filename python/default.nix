@@ -10,6 +10,7 @@ let
     buildPythonApplication = args:
       pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
+    # cython (almost) HEAD: this fixes a lot of problems
     cython = pyprev.cython.overrideAttrs (old: rec {
       version = "3.1.3";
       pyproject = true;
@@ -21,6 +22,7 @@ let
       };
     });
 
+    # pandas HEAD
     pandas = pyprev.pandas.overridePythonAttrs (old: rec {
       version = "2.3.2";
       pyproject = true;
@@ -63,6 +65,8 @@ let
       '';
     });
 
+    # seaborn just needs the pandas version to be present,
+    # which requires a bit of work in pandas HEAD above
     seaborn = pyprev.seaborn.overridePythonAttrs (old: {
       #postPatch = ''
       #  substituteInPlace pyproject.toml \
