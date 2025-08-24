@@ -21,7 +21,7 @@ let
 
       numpy
 
-      #assure
+      assure
       is-instance
       python-bin
       mmry
