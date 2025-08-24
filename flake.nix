@@ -39,8 +39,8 @@
     pkgs = import nixpkgs {
       inherit system;
       overlays = [
-        overlay.overlays.default
         overlay-python-head
+        overlay.overlays.default
       ];
       config.allowUnfree = true;
     };
