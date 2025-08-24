@@ -30,11 +30,19 @@ let
         rev = "188b2dae7df85a9c9945db39c5a23d23b1d4ce2e";
         hash = "sha256-Q18XQjpK1O0DpKfrNxbd0iikWl2eIQdW/b+VNIXxlKE=";
       };
-      env = (old.env or {}) // { VERSIONEER_OVERRIDE = version; };
+      #env = (old.env or {}) // { VERSIONEER_OVERRIDE = version; };
       patches = [];
       postPatch = ''
         substituteInPlace pyproject.toml \
-          --replace-fail "==" ">=" \
+          --replace-fail "==" ">="
+        # sed -i '/dynamic/{N;N; s/.*\n.*\n.*/version = "2.3.2"/; }' pyproject.toml
+        sed -i "/^dynamic.*/,/]/c\version = '${version}'" pyproject.toml
+
+        cat > pandas/_version.py << 'EOF'
+        def get_versions():
+            return {"version": "${version}", "full-revisionid": "", "dirty": False, "error": None, "date": None}
+        __version__ = get_versions()["version"]
+        EOF
       '';
     });
 
