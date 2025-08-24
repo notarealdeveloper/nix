@@ -46,6 +46,9 @@ let
       pandas
       matplotlib
       seaborn
+      scikit-learn
+      lambda-multiprocessing
+      #lightgbm
 
       # for sklearn
       lz4
@@ -76,7 +79,7 @@ let
 
     (python315.withPackages (ps: with ps;
       (python_packages_noft ps)
-      ++ [ scikit-learn ]
+      ++ [ ]
     ))
 
     ### Free Threaded Interpreters
