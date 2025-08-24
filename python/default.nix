@@ -52,7 +52,7 @@ let
         # printf '\ndef main():\n    print("${version}")\n\nmain()\n' >> generate_version.py
         #
         # Ah, much better.
-        printf '#!/bin/sh\necho ${version}\n' > generate_version.py
+        printf '#!${prev.python3}/bin/python\nprint("${version}")\n' > generate_version.py
         chmod +x generate_version.py
         cat generate_version.py
         echo "HERE WE GO"
