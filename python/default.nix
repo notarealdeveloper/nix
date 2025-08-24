@@ -64,12 +64,12 @@ let
     });
 
     seaborn = pyprev.seaborn.overridePythonAttrs (old: {
-      postPatch = ''
-        substituteInPlace pyproject.toml \
-          --replace-fail "numpy>=1.20,!=1.24.0" "numpy" \
-          --replace-fail "pandas>=1.2" "pandas" \
-          --replace-fail "matplotlib>=3.4,!=3.6.1" "matplotlib" \
-      '';
+      #postPatch = ''
+      #  substituteInPlace pyproject.toml \
+      #    --replace-fail "numpy>=1.20,!=1.24.0" "numpy" \
+      #    --replace-fail "pandas>=1.2" "pandas" \
+      #    --replace-fail "matplotlib>=3.4,!=3.6.1" "matplotlib" \
+      #'';
     });
 
     mypy = pyprev.mypy.overridePythonAttrs (old: {
