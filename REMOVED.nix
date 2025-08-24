@@ -267,6 +267,82 @@
     });
     */
 
+    /*
+
+    # Just the diabled tests part is removed here
+
+    ipython = pyprev.ipython.overridePythonAttrs (old: {
+
+      src = prev.fetchFromGitHub {
+        owner = "ipython";
+        repo = "ipython";
+        rev = "ad948680afaefee8cf530052807e2367db3826b3";
+        hash = "sha256-ywi9dUDLikxPkBqYefslsEqJMK0/T5WxP6xycm7QXxg=";
+      };
+
+      disabledTestPaths = (old.disabledTestPaths or []) ++ [
+        "tests/test_run.py" # only fails on free threading?
+        "tests/test_oinspect.py"
+        "tests/test_text.py"
+        "tests/test_pretty.py"
+        "tests/test_pycolorize.py"
+        "tests/test_debugger.py"
+        "tests/test_completer.py"
+        "tests/test_interactiveshell.py"
+        "tests/test_sysinfo.py"
+        "IPython/utils/sysinfo.py"
+        "IPython/extensions/tests/test_deduperreload.py"
+      ];
+    });
+    */
+
+    /*
+
+    # Only the commented out bits are removed here
+    pandas = pyprev.pandas.overridePythonAttrs (old: rec {
+      version = "2.3.2";
+      pyproject = true;
+      src = prev.fetchFromGitHub {
+        owner = "pandas-dev";
+        repo = "pandas";
+        rev = "188b2dae7df85a9c9945db39c5a23d23b1d4ce2e";
+        hash = "sha256-Q18XQjpK1O0DpKfrNxbd0iikWl2eIQdW/b+VNIXxlKE=";
+      };
+      env = (old.env or {}) // { VERSIONEER_OVERRIDE = version; };
+      patches = [];
+      postPatch = ''
+        substituteInPlace pyproject.toml \
+          --replace-fail "==" ">="
+
+        # You don't need a dynamic version, asshole
+        sed -i "/^dynamic.*$/,/]/c\version = '${version}'" pyproject.toml
+
+        echo "__version__ = '${version}'" > _version_meson.py
+
+        # As soon as they mention this "versioneer" bullshit,
+        # delete everything else in their pyproject.toml out of spite
+        #sed -i "/tool.versioneer/,/\$\$/c/" pyproject.toml
+        #cat pyproject.toml
+
+        # Create a simpler generate_version.py, because their
+        # dumb meson shit wants to call it
+        #
+        # This doesn't work for some reason
+        # sed -i "s@^main[(][)]@@" generate_version.py
+        # printf '\ndef main():\n    print("${version}")\n\nmain()\n' >> generate_version.py
+        #
+        # Ah, much better.
+        #printf '#!${prev.python3}/bin/python\nprint("${version}")\n' > generate_version.py
+        #chmod +x generate_version.py
+        #cat generate_version.py
+        #echo "HERE WE GO"
+        #./generate_version.py
+        #echo "LOOKS GOOD, BUILDING PANDAS"
+      '';
+    });
+
+  */
+
 ### FREETHREADING ONLY
 
     /*
