@@ -21,7 +21,10 @@ in
       bazel = final.bazel_6;
 
       vendorHash = lib.fakeHash;
-      fetchAttrs = { hash = lib.fakeHash; };
+      fetchAttrs = {
+        hash = lib.fakeHash;
+        dontConfigure = true;
+      };
 
       nativeBuildInputs = [
         llvm.clang
