@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755914636,
-        "narHash": "sha256-VJ+Gm6YsHlPfUCpmRQxvdiZW7H3YPSrdVOewQHAhZN8=",
+        "lastModified": 1756022458,
+        "narHash": "sha256-J1i35r4HfNDdPpwL0vOBaZopQudAUVtartEerc1Jryc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8b55a6ac58b678199e5bba701aaff69e2b3281c0",
+        "rev": "9e3a33c0bcbc25619e540b9dfea372282f8a9740",
         "type": "github"
       },
       "original": {
@@ -112,39 +112,23 @@
         "type": "github"
       }
     },
-    "noelf-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1755529459,
-        "narHash": "sha256-JrMa5kKPZvzlAsXP4X9eb52VYUNYTIT3BjStPIP3Oog=",
-        "owner": "hello-corporation",
-        "repo": "noelf",
-        "rev": "42d3b79ca9d97904410226eae31ca511178b337b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hello-corporation",
-        "repo": "noelf",
-        "type": "github"
-      }
-    },
-    "python-packages": {
+    "overlay": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1755876203,
-        "narHash": "sha256-0GrbfIRK0lJ0gW9sj70CTYFVsNk0PriPO/ODK8alW50=",
+        "lastModified": 1756071685,
+        "narHash": "sha256-XcV8LjXUIqSvlvzWrRTzQNY490YiYyxAUjMyQjhyUuU=",
         "owner": "doubleunix",
-        "repo": "python-packages",
-        "rev": "785f50cb669e5d1d8cbe9f1f9b0c3c6f27b476d7",
+        "repo": "overlay",
+        "rev": "4ca9abc936cea56ba17258932609f8f222168ce8",
         "type": "github"
       },
       "original": {
         "owner": "doubleunix",
-        "repo": "python-packages",
+        "repo": "overlay",
         "type": "github"
       }
     },
@@ -154,8 +138,7 @@
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
-        "python-packages": "python-packages",
-        "wnix-noelf": "wnix-noelf"
+        "overlay": "overlay"
       }
     },
     "systems": {
@@ -170,27 +153,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "wnix-noelf": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "noelf-src": "noelf-src"
-      },
-      "locked": {
-        "lastModified": 1755532270,
-        "narHash": "sha256-giZDvSv08hd3Ao0Kqf4XbuzgQYhgipQC+GEKvSDtppc=",
-        "owner": "doubleunix",
-        "repo": "noelf",
-        "rev": "5ac3d08ad3893304dc18f14baaca9cce4e3a61f5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "repo": "noelf",
         "type": "github"
       }
     }
