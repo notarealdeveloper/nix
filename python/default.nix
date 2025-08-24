@@ -137,6 +137,16 @@ let
       '';
     });
     
+    tensorflow = pyprev.tensorflow.overridePythonAttrs (old: {
+
+      src = prev.fetchFromGitHub {
+        owner = "tensorflow";
+        repo = "tensorflow";
+        rev = "f39ff4efaac6c84ec5ae2698ecfdd2d4a099f0f1";
+        hash = "sha256-g+RnrMOkN6sWOtCh0tBULz40+VNVHFjgr45+Qq+nBH4=";
+      };
+
+    });
 
     ipython = pyprev.ipython.overridePythonAttrs (old: {
 
