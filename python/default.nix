@@ -80,8 +80,13 @@ let
       env = (old.env or {}) // { CHARSET_NORMALIZER_USE_MYPYC = "0"; };
     });
 
-    # required by yt-dlp, even with tests disabled.
+    # required by yt-dlp, even with tests disabled
     cryptography = pyprev.cryptography.overridePythonAttrs (old: {
+      env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
+    });
+
+    # required by twine, even with tests disabled
+    nh3 = pyprev.nh3.overridePythonAttrs (old: {
       env = (old.env or {}) // { PYO3_USE_ABI3_FORWARD_COMPATIBILITY = true; };
     });
 
