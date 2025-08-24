@@ -50,6 +50,10 @@ in
 
         installPhase = ''
           mkdir -p "$out"
+
+          ${prev.cowsay}/bin/cowsay "HERE WE GO BITCHES"
+          find .
+
           WHEEL="$(find bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
           [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
           ${pyDrv.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
