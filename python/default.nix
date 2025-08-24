@@ -164,61 +164,67 @@ let
     */
     });
 
-    tensorflow = pyfinal.toPythonModule (final.buildBazelPackage {
-      pname = "tensorflow";
-      version = "git-f39ff4e";
+    tensorflow =
+      let
+        # Get the real interpreter derivation for this pythonPackages scope.
+        # pythonPackages normally exposes `python` -> the interpreter.
+        pyDrv =
+          if pyfinal ? python then pyfinal.python
+          else if pyprev ? python then pyprev.python
+          else final.python315;  # safe fallback; overridden per-scope anyway
+      in
+      pyfinal.toPythonModule (final.buildBazelPackage {
+        pname = "tensorflow";
+        version = "git-f39ff4e";
 
-      src = final.fetchFromGitHub {
-        owner = "tensorflow";
-        repo  = "tensorflow";
-        rev   = "f39ff4efaac6c84ec5ae2698ecfdd2d4a099f0f1";
-        hash  = "sha256-g+RnrMOkN6sWOtCh0tBULz40+VNVHFjgr45+Qq+nBH4=";
-      };
+        src = final.fetchFromGitHub {
+          owner = "tensorflow";
+          repo  = "tensorflow";
+          rev   = "f39ff4efaac6c84ec5ae2698ecfdd2d4a099f0f1";
+          hash  = "sha256-g+RnrMOkN6sWOtCh0tBULz40+VNVHFjgr45+Qq+nBH4=";
+        };
 
-      bazel = final.bazel_6;
+        # Try bazel_6 first; bump to bazel_7 if TF complains.
+        bazel = final.bazel_6;
 
-      # You’ll need to iterate this once or twice: Nix will print a “got: … wanted: …”
-      vendorHash = final.lib.fakeHash;
+        # First run will print a "wanted" hash; paste it into both of these.
+        vendorHash = final.lib.fakeHash;
+        fetchAttrs = {
+          hash = final.lib.fakeHash;
+          dontConfigure = true;  # avoid running ./configure on vendored repos
+        };
 
-      fetchAttrs = {
-        hash = final.lib.fakeHash;
-        dontConfigure = true;
-      };
-
-      nativeBuildInputs = [
-        final.llvmPackages.clang
-        pyfinal.wheel
-        pyfinal.setuptools
-        pyfinal.pip
-        final.which
-        final.coreutils
-        final.gnugrep
-        final.gnused
-        final.gawk
-      ];
-
-      buildInputs = [ final.zlib ];
-
-      buildAttrs = {
-        targets = [ "//tensorflow/tools/pip_package:wheel" ];
-        buildFlags = [
-          "--config=opt"
-          "--repo_env=PYTHON_BIN_PATH=${pyfinal.interpreter}"
-          "--repo_env=CC=${final.llvmPackages.clang}/bin/clang"
+        nativeBuildInputs = [
+          final.llvmPackages.clang
+          pyfinal.wheel
+          pyfinal.setuptools
+          pyfinal.pip
+          final.which final.coreutils final.gnugrep final.gnused final.gawk
         ];
 
-        installPhase = ''
-          mkdir -p "$out"
-          WHEEL="$(find bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
-          [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
-          ${pyfinal.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
-          mkdir -p "$out/nix-support"
-          echo tensorflow > "$out/nix-support/python-imports"
-        '';
-      };
+        buildInputs = [ final.zlib ];
 
-      pythonImportsCheck = [ "tensorflow" ];
-    });
+        buildAttrs = {
+          targets = [ "//tensorflow/tools/pip_package:wheel" ];
+          buildFlags = [
+            "--config=opt"
+            "--repo_env=PYTHON_BIN_PATH=${pyDrv.interpreter}"
+            "--repo_env=CC=${final.llvmPackages.clang}/bin/clang"
+          ];
+
+          installPhase = ''
+            mkdir -p "$out"
+            WHEEL="$(find bazel-bin bazel-out -type f -name 'tensorflow-*.whl' -print -quit || true)"
+            [ -n "$WHEEL" ] || { echo "wheel not found"; exit 1; }
+            ${pyDrv.interpreter} -m pip install --no-deps --prefix "$out" "$WHEEL"
+            mkdir -p "$out/nix-support"
+            echo tensorflow > "$out/nix-support/python-imports"
+          '';
+        };
+
+        pythonImportsCheck = [ "tensorflow" ];
+      });
+
 
   };
 
