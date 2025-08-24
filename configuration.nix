@@ -48,7 +48,7 @@ let
       seaborn
       scikit-learn
       lambda-multiprocessing
-      #lightgbm
+      lightgbm
 
       # for sklearn
       lz4
