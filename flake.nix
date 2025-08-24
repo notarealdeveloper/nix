@@ -4,7 +4,6 @@
   inputs = {
 
     nixpkgs.url  = "github:NixOS/nixpkgs/nixos-unstable";
-    #wnixpkgs.url = "github:doubleunix/wnixpkgs/wnixos-unstable";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -16,45 +15,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    python-packages = {
-      url = "github:doubleunix/python-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    wnix-noelf = {
-      url = "github:doubleunix/noelf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     aws-cvpn-client = {
       url = "github:sirn/aws-cvpn-client";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    overlay = {
+      url = "github:doubleunix/overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, python-packages, wnix-noelf, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, aws-cvpn-client, overlay, ... }:
 
   let
 
     system = "x86_64-linux";
 
-    overlay = import ./overlay;
-
-    overlay-python = import ./python;
-
-    #overlay-tensorflow = import ./tensorflow.nix;
-
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [
-        overlay
-        overlay-python
-        #overlay-tensorflow
-        # todo: doubleunix/wnixpkgs overlay that contains both of these
-        python-packages.overlays.default
-        wnix-noelf.overlays.default
-      ];
+      overlays = [ overlay ];
       config.allowUnfree = true;
     };
 
