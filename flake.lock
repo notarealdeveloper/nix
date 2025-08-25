@@ -21,6 +21,26 @@
         "type": "github"
       }
     },
+    "doubleunix-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756081922,
+        "narHash": "sha256-Q4vVxaBoVfGsE5GGvY7Cuvq4ul4Gdf/uTdUd0u/+dIs=",
+        "owner": "doubleunix",
+        "repo": "overlay",
+        "rev": "3311318f00829e6bf159f55a96d0760db3890cea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doubleunix",
+        "repo": "overlay",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -112,33 +132,13 @@
         "type": "github"
       }
     },
-    "overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1756074494,
-        "narHash": "sha256-7u3htrGW4p3GNIgG9aNpr7AbklmdbQJGzdFCPVsGfYU=",
-        "owner": "doubleunix",
-        "repo": "overlay",
-        "rev": "bb043ed63098a300a114178b16f9f64f44cc8aea",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doubleunix",
-        "repo": "overlay",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "aws-cvpn-client": "aws-cvpn-client",
+        "doubleunix-overlay": "doubleunix-overlay",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs",
-        "overlay": "overlay"
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {
