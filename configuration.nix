@@ -13,7 +13,8 @@ in
 {
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [ "nix-command" "flakes" "no-flake-warning" ];
+    warn-dirty = false;
     download-buffer-size = 64*(1024*1024);
     max-jobs = "auto";
     cores = 0; # 0 = give each build all cores (build systems may or may not use them)

@@ -118,9 +118,9 @@
       default = phone;
     };
 
-    packages.${system} = pkgs;
+    #packages.${system} = pkgs;
 
-    legacyPackages.${system} = pkgs;
+    #legacyPackages.${system} = pkgs;
 
   };
 }
