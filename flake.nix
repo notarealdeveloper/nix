@@ -111,7 +111,7 @@
     nixOnDroidConfigurations = rec {
       phone = nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs { system = "aarch64-linux"; };
-        modules = [ ./hardware/android.nix ];
+        modules = [ ./os/android-nixos.nix ];
       };
       default = phone;
     };
