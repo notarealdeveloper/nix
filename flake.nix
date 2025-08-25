@@ -52,7 +52,7 @@
           { networking.hostName = "turing"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit doubleunix-overlay; };
+        specialArgs = { inherit doubleunix; };
       };
 
       kleene = nixpkgs.lib.nixosSystem {
@@ -64,7 +64,7 @@
           { networking.hostName = "kleene"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit doubleunix-overlay; };
+        specialArgs = { inherit doubleunix; };
       };
 
       gates = nixpkgs.lib.nixosSystem {
@@ -76,7 +76,7 @@
           { networking.hostName = "gates"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit doubleunix-overlay; };
+        specialArgs = { inherit doubleunix; };
       };
 
     };
