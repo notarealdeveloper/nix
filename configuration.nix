@@ -6,103 +6,6 @@ let
 
   all-that-shit = builtins.attrValues doubleunix-overlay.packages.${pkgs.stdenv.hostPlatform.system};
 
-  python_packages_common = ps: (with ps; [
-
-      # packaging
-      pip
-      build
-      pytest
-      setuptools
-      cython
-
-      # basics
-      ipython
-      sly
-      curio
-
-      # net
-      requests
-      beautifulsoup4
-
-      # numerical
-      numpy
-      sympy
-
-      # ours
-      assure
-      is-instance
-      python-bin
-      mmry
-      webfs
-  ]);
-
-  python_packages_noft = ps: (python_packages_common ps) ++ (with ps; [
-
-      # packaging
-      twine
-
-      # net
-      yt-dlp
-
-      # numerical
-      scipy
-      pandas
-      matplotlib
-      seaborn
-      scikit-learn
-      lambda-multiprocessing
-      lightgbm
-
-      # for sklearn
-      lz4
-  ]);
-
-  python_interpreters = with pkgs; [
-
-    (python313.withPackages (ps: with ps;
-      (python_packages_noft ps) ++ [
-
-        scikit-learn
-        torch
-
-        # ~/bin depends
-        google-auth-oauthlib      # gmail
-        google-api-python-client  # getbtcprice
-        geoip2                    # getbtcprice
-
-        embd
-        wnix
-
-    ]))
-
-    (python314.withPackages (ps: with ps;
-      (python_packages_noft ps)
-      ++ [ ]
-    ))
-
-    (python315.withPackages (ps: with ps;
-      (python_packages_noft ps)
-      ++ [ ]
-    ))
-
-    ### Free Threaded Interpreters
-    (python313FreeThreading.withPackages (ps: with ps;
-      (python_packages_common ps)
-      ++ [ ]
-    ))
-
-    (python314FreeThreading.withPackages (ps: with ps;
-      (python_packages_common ps)
-      ++ [ ]
-    ))
-
-    (python315FreeThreading.withPackages (ps: with ps;
-      (python_packages_common ps)
-      ++ [ ]
-    ))
-
-  ];
-
   cacheName = "notarealdeveloper";
 
 in
@@ -370,6 +273,21 @@ in
 
     # raw binary machine code overlay ftw
     noelf
+
+    #(python313.withPackages (ps: with ps; [
+    #
+    #    scikit-learn
+    #    torch
+    #
+    #    # ~/bin depends
+    #    google-auth-oauthlib      # gmail
+    #    google-api-python-client  # getbtcprice
+    #    geoip2                    # getbtcprice
+    #
+    #    embd
+    #    wnix
+    #
+    #]))
 
   ] ++ all-that-shit;
   #] ++ python_interpreters;
