@@ -14,8 +14,8 @@ let
 
 in {
 
-  home.username = lib.mkDefault (builtins.getEnv "USER");
-  home.homeDirectory = lib.mkDefault (builtins.getEnv "HOME");
+  home.username = user;
+  home.homeDirectory = builtins.getEnv("HOME");
   news.display = "silent";
 
   # ~/.config/git
@@ -139,7 +139,7 @@ in {
       ".local/share/applications/obsidian.desktop".text =
           let
             src = builtins.readFile "${pkgs.obsidian}/share/applications/obsidian.desktop";
-            icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
+            icon = ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
           in
             builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
     })
