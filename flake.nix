@@ -85,21 +85,43 @@
 
       let
 
-        self = "jason";
+        user = "jason";
 
-        mkhome = { desktop ? true, private ? true }:
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ ./home/${user}.nix ];
-            extraSpecialArgs = { inherit pkgs desktop private; };
-          };
+        linux = {
+          home.username = user;
+          home.homeDirectory = "/home/${user}";
+        };
+
+        android = {
+          home.username = "nix-on-droid";
+          home.homeDirectory = "/data/data/com.termux.nix/files/home";
+        };
 
       in {
 
-        turing = mkhome { user = self; };
-        kleene = mkhome { user = self; };
-        gates  = mkhome { user = self; desktop = false; };
-        phone  = mkhome { user = self; desktop = false; private = false; };
+        turing = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ linux ./home/${self}.nix ];
+          extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
+        };
+
+        kleene = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ linux ./home/${self}.nix ];
+          extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
+        };
+
+        gates = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ linux ./home/${self}.nix ];
+          extraSpecialArgs = { inherit pkgs; desktop = false; private = true; };
+        };
+
+        phone = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ android ./home/${self}.nix ];
+          extraSpecialArgs = { inherit pkgs; desktop = false; private = false; };
+        };
 
         luna = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -113,15 +135,11 @@
         pkgs = import nixpkgs { system = "aarch64-linux"; };
         modules = [
           ./os/android-nixos.nix
-          #home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
         ];
       };
       default = phone;
     };
-
-    #packages.${system} = pkgs;
-
-    #legacyPackages.${system} = pkgs;
 
   };
 }
