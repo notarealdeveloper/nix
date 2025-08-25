@@ -22,7 +22,13 @@
 # etc, we're referring to a repo with the
 # scope described in the list above.
 
-{ lib, config, src, ... }:
+{ lib, config, ... }:
+
+let
+
+  src = "/home/${user}/src";
+
+in
 
 {
 

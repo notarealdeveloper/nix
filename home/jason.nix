@@ -6,19 +6,12 @@ let
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
-  home = "/home/${user}";
-
-  src = pkgs.callPackage ./src.nix { src = "${home}/src"; };
-  inherit (src) nix exec personal;
+  common = (pkgs.callPackage ./common.nix { inherit user; });
 
 in {
 
-  home.username = "${user}";
-  home.homeDirectory = home;
-  news.display = "silent";
-
   imports =
-    [ ./public.nix ./private.nix ]
+    [ common ./public.nix ./private.nix ]
     ++
     (if desktop then [ ./desktop.nix ] else [])
   ;
