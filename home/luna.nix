@@ -1,4 +1,4 @@
-{ pkgs, lib, config, desktop ? true, ... }:
+{ pkgs, lib, config, ... }:
 
 let
 
