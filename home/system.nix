@@ -22,7 +22,7 @@
 # etc, we're referring to a repo with the
 # scope described in the list above.
 
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
 {
 

@@ -6,7 +6,7 @@ let
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
-  system = import ./system.nix { inherit pkgs lib config; };
+  src = pkgs.callPackage ./src.nix { };
   inherit (system) nix exec personal;
 
 in {
@@ -15,11 +15,12 @@ in {
   home.homeDirectory = "/home/${user}";
   news.display = "silent";
 
-  imports = [
-    ./public.nix
-    ./private.nix
-    (if desktop then ./lib/desktop.nix else ./lib/none.nix)
-  ];
+  imports =
+    [ ./public.nix ./private.nix ]
+    ++
+    (if desktop then [ ./desktop.nix ] else [])
+  ;
+
 
   # ~/.config/git
   programs.git = {

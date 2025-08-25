@@ -4,7 +4,7 @@
 
 let
 
-  system = import ./system.nix { inherit pkgs lib config; };
+  system = pkgs.callPackage ./system.nix { };
   inherit (system) nix exec personal;
 
   link = config.lib.file.mkOutOfStoreSymlink;

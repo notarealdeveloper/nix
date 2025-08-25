@@ -2,23 +2,20 @@
 
 let
 
-    system = import ./system.nix { inherit pkgs lib config; };
-    inherit (system) personal;
-
-    icons = pkgs.numix-icon-theme-circle;
-    theme = pkgs.numix-gtk-theme;
+    src = pkgs.callPackage ./src.nix { };
+    inherit (src) personal;
 
 in {
 
   home.packages = with pkgs; [
-    theme
-    icons
+    numix-gtk-theme
+    numix-icon-theme-circle
   ];
 
   gtk = {
     enable = true;
-    theme = { name = "Numix"; package = theme; };
-    iconTheme = { name = "Numix-Circle"; package = icons; };
+    theme = { name = "Numix"; package = numix-gtk-theme; };
+    iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
   };
 
   home.file = lib.mkMerge [{
