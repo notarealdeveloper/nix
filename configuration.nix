@@ -24,6 +24,7 @@ let
 
       # numerical
       numpy
+      sympy
 
       # ours
       assure
