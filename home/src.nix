@@ -1,3 +1,4 @@
+{ config }:
 # ------------------------------------------
 # all content can be divided into six types.
 # ------------------------------------------
@@ -24,9 +25,7 @@
 
 let
 
-  HOME = builtins.getEnv("HOME");
-
-  dst = "${HOME}/src";
+  dst = "${config.home.homeDirectory}/src";
 
   url = {
 

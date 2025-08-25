@@ -5,8 +5,9 @@ let
   user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
+  home = "/home/${user}";
 
-  src = import ./src.nix;
+  src = import ./src.nix { inherit config; };
   inherit (src) nix exec personal;
   inherit (src) secret legacy;
 
@@ -15,7 +16,7 @@ let
 in {
 
   home.username = user;
-  home.homeDirectory = "/home/${user}";
+  home.homeDirectory = home;
   news.display = "silent";
 
   # ~/.config/git
