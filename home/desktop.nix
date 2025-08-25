@@ -1,6 +1,11 @@
-{ pkgs, lib, config, repos, ... }:
+{ pkgs, lib, config, ... }:
 
-{
+let
+
+    src = pkgs.callPackage ./src.nix { };
+    inherit (src) personal;
+
+in {
 
   home.packages = with pkgs; [
     numix-gtk-theme
@@ -29,7 +34,7 @@
 
   home.activation.setupDconf = lib.hm.dag.entryAfter ["installPackages"] ''
     export PATH="${config.home.path}/bin:$PATH"
-    "${repos.personal.path}/bin/setup-dconf"
+    "${personal.dst}/bin/setup-dconf"
   '';
 
   home.activation.setupCinnamon = lib.hm.dag.entryAfter ["setupDconf"] ''
@@ -43,13 +48,13 @@
       inotifywait -qr -t 5 "$dir" || { echo Waiting for cinnamon timed out; } &&
       echo "Panel launchers created, setting up cinnamon."
     fi
-    "${repos.personal.path}/bin/setup-cinnamon"
+    "${personal.dst}/bin/setup-cinnamon"
   '';
 
   home.activation.setupGnomeTerminal = lib.hm.dag.entryAfter ["installPackages"] ''
     # we need gsettings and dconf for setup-gnome-terminal
     export PATH="${config.home.path}/bin:${pkgs.glib}/bin:$PATH"
-    "${repos.personal.path}/bin/setup-gnome-terminal"
+    "${personal.dst}/bin/setup-gnome-terminal"
   '';
 
 }
