@@ -1,6 +1,6 @@
 {
   config
-, dst ? "src"
+, dst ? "${config.home.homeDirectory}/src"
 }:
 # ------------------------------------------
 # all content can be divided into six types.
