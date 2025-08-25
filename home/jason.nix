@@ -5,7 +5,6 @@ let
   user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
-  home = "/home/${user}";
 
   src = import ./src.nix { inherit config; };
   inherit (src) nix exec personal overlay;
@@ -16,7 +15,7 @@ let
 in {
 
   home.username = user;
-  home.homeDirectory = home;
+  home.homeDirectory = "${config.home.homeDirectory}";
   news.display = "silent";
 
   # ~/.config/git
