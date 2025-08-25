@@ -15,7 +15,6 @@ let
 in {
 
   home.username = user;
-  home.homeDirectory = "${config.home.homeDirectory}";
   news.display = "silent";
 
   # ~/.config/git
