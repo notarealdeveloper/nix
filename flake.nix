@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     aws-cvpn-client = {
       url = "github:sirn/aws-cvpn-client";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,7 +32,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, doubleunix-overlay, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, doubleunix-overlay, nix-on-droid, aws-cvpn-client, ... }:
 
   let
 
@@ -103,10 +108,13 @@
 
     };
 
-    # Make sure this doesn't break the cool remote
-    # searchability thing before removing it.
-    # For now, nix flake check seems not to like it.
-    # packages.${system} = pkgs;
+    nixOnDroidConfigurations = rec {
+      phone = nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        modules = [ ./hardware/android.nix ];
+      };
+      default = phone;
+    };
 
     packages.${system} = pkgs;
 
