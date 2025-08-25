@@ -14,7 +14,8 @@ let
 
 in {
 
-  home.username = user;
+  home.username = lib.mkDefault (builtins.getEnv "USER");
+  home.homeDirectory = lib.mkDefault (builtins.getEnv "HOME");
   news.display = "silent";
 
   # ~/.config/git
