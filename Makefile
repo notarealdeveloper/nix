@@ -23,6 +23,9 @@ system-%:
 home-%:
 	home-manager switch -b backup --flake .#$*
 
+phone:
+	nix-on-droid switch --flake .#default
+
 arch:
 	sudo pacman -S nix
 	nix profile add home-manager
