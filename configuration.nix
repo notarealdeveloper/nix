@@ -13,7 +13,7 @@ in
 {
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" "no-flake-warning" ];
+    experimental-features = [ "nix-command" "flakes" ];
     warn-dirty = false;
     download-buffer-size = 64*(1024*1024);
     max-jobs = "auto";
