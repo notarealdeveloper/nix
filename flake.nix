@@ -97,6 +97,8 @@
           home.homeDirectory = "/data/data/com.termux.nix/files/home";
         };
 
+        armpkgs = import nixpkgs { system = "aarch64-linux"; };
+
       in {
 
         turing = home-manager.lib.homeManagerConfiguration {
@@ -118,9 +120,9 @@
         };
 
         localhost = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "aarch64-linux"; };
+          pkgs = armpkgs;
           modules = [ android ./home/jason.nix ];
-          extraSpecialArgs = { inherit pkgs; desktop = false; private = false; };
+          extraSpecialArgs = { pkgs = armpkgs; desktop = false; private = false; };
         };
 
         luna = home-manager.lib.homeManagerConfiguration {
