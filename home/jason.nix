@@ -15,7 +15,6 @@ let
 in {
 
   home.username = user;
-  home.homeDirectory = builtins.getEnv("HOME");
   news.display = "silent";
 
   # ~/.config/git
