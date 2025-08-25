@@ -72,7 +72,7 @@ in {
 
     setupDconf = lib.hm.dag.entryAfter ["installPackages"] ''
       export PATH="${config.home.path}/bin:${pkgs.glib}/bin:$PATH"
-      "${src.personal}/bin/setup-dconf"
+      "${personal.dst}/bin/setup-dconf"
     '';
 
     setupCinnamon = lib.hm.dag.entryAfter ["setupDconf"] ''
