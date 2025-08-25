@@ -4,8 +4,8 @@
 
 let
 
-  system = pkgs.callPackage ./system.nix { };
-  inherit (system) nix exec personal;
+  src = pkgs.callPackage ./src.nix { };
+  inherit (src) nix exec personal;
 
   link = config.lib.file.mkOutOfStoreSymlink;
 

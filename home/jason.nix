@@ -7,7 +7,7 @@ let
   email = "notarealdeveloper@gmail.com";
 
   src = pkgs.callPackage ./src.nix { };
-  inherit (system) nix exec personal;
+  inherit (src) nix exec personal;
 
 in {
 

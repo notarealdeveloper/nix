@@ -43,8 +43,8 @@
 
 let
 
-  system = import ./system.nix { inherit pkgs lib config; };
-  inherit (system) secret legacy;
+  src = import ./src.nix { inherit pkgs lib config; };
+  inherit (src) secret legacy;
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
