@@ -1,4 +1,7 @@
-{ config }:
+{
+  config
+, dst ? "${config.home.homeDirectory}/src"
+}:
 # ------------------------------------------
 # all content can be divided into six types.
 # ------------------------------------------
@@ -24,8 +27,6 @@
 # scope described in the list above.
 
 let
-
-  dst = "${config.home.homeDirectory}/src";
 
   url = {
 
