@@ -26,7 +26,7 @@ let
 
   HOME = builtins.getEnv("HOME");
 
-  dst = "${HOME}/src";
+  dst = "$HOME/src";
 
   url = {
 
@@ -67,8 +67,5 @@ let
   src = builtins.mapAttrs (k: v: { src = v; dst = "${dst}/${k}"; }) url;
 
 
-in {
-
-  inherit src;
-
-}
+in
+    src
