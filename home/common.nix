@@ -1,4 +1,4 @@
-{ lib, config, user, ... }:
+user:
 
 {
   home.username = "${user}";

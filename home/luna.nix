@@ -3,17 +3,15 @@
 let
 
   user = "luna";
-  common = (import ./common.nix user);
 
 in
 
 {
 
   imports = [
-    common
+    (import ./common.nix user)
     ./lib/public.nix
-    (if desktop then ./lib/desktop.nix else ./lib/none.nix)
-  ];
+  ] ++ (if desktop then [./lib/desktop.nix] else []);
 
   home.packages = with pkgs; [
     yt-dlp
@@ -50,7 +48,7 @@ in
     mkkan bflylbugbbee  https://www.youtube.com/watch?v=EgiQ6GliTrI
     mkkan abcquack      https://www.youtube.com/watch?v=I_3mbra4dHU
     mkkan abcshark      https://www.youtube.com/watch?v=ccEpTTZW34g
-    #mkkan abchop        https://www.youtube.com/watch?v=w2DZA3mfAUU
+    mkkan abchop        https://www.youtube.com/watch?v=w2DZA3mfAUU
     mkkan rygb          https://www.youtube.com/watch?v=6PyYx255Qcg
     mkkan beddybye      https://www.youtube.com/watch?v=ij_eHTvhIlE
     mkkan monster       https://www.youtube.com/watch?v=JC29ZvTkBT0
