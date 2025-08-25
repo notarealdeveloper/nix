@@ -6,13 +6,15 @@ let
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
-  src = pkgs.callPackage ./src.nix { };
+  home = "/home/${user}";
+
+  src = pkgs.callPackage ./src.nix { src = "${home}/src" };
   inherit (src) nix exec personal;
 
 in {
 
   home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
+  home.homeDirectory = home;
   news.display = "silent";
 
   imports =

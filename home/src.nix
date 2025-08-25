@@ -22,14 +22,14 @@
 # etc, we're referring to a repo with the
 # scope described in the list above.
 
-{ lib, config, ... }:
+{ lib, config, src, ... }:
 
 {
 
   # system
   nix = {
     src = "https://github.com/notarealdeveloper/nix";
-    dst = "${config.home.homeDirectory}/src/nix";
+    dst = "${src}/nix";
   };
 
   # team stuff: the "rw rw r-" parts of life
@@ -40,7 +40,7 @@
   # shared code
   exec = {
     src = "https://github.com/thedynamiclinker/exec";
-    dst = "${config.home.homeDirectory}/src/exec";
+    dst = "${src}/exec";
   };
 
   # personal stuff: the "rw r- r-" parts of life
@@ -52,7 +52,7 @@
   # see the note below, and the file it points to.
   personal = {
     src = "https://github.com/notarealdeveloper/personal";
-    dst = "${config.home.homeDirectory}/src/personal";
+    dst = "${src}/personal";
   };
 
   # secret stuff: the "rw -- --" parts of life
@@ -64,13 +64,13 @@
   # requires auth
   secret = {
     src = "https://github.com/notarealdeveloper/secret";
-    dst = "${config.home.homeDirectory}/src/secret";
+    dst = "${src}/secret";
   };
 
   # requires auth
   legacy = {
     src = "https://github.com/notarealdeveloper/legacy";
-    dst = "${config.home.homeDirectory}/src/legacy";
+    dst = "${src}/legacy";
   };
 
 }
