@@ -36,28 +36,31 @@ in {
   };
 
 
+  # Base packages
   home.packages = with pkgs; [
     git
+  ] ++ lib.optionals desktop [
     dconf
     inotify-tools
     numix-gtk-theme
     numix-icon-theme-circle
   ];
 
-  gtk = with pkgs; {
+  # Desktop theming (conditional)
+  gtk = lib.mkIf desktop (with pkgs; {
     enable = true;
     theme = { name = "Numix"; package = numix-gtk-theme; };
     iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
-  };
+  });
 
   home.activation = {
 
-    setupDconf = lib.hm.dag.entryAfter ["installPackages"] ''
+    setupDconf = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
       export PATH="${config.home.path}/bin:${pkgs.glib}/bin:$PATH"
       "${personal.dst}/bin/setup-dconf"
-    '';
+    '');
 
-    setupCinnamon = lib.hm.dag.entryAfter ["setupDconf"] ''
+    setupCinnamon = lib.mkIf desktop (lib.hm.dag.entryAfter ["setupDconf"] ''
       export PATH="${pkgs.python3}/bin:${pkgs.inotify-tools}/bin:$PATH"
 
       # inotify can't watch paths that don't exist yet, so mkdir this
@@ -69,85 +72,106 @@ in {
         echo "Panel launchers created, setting up cinnamon."
       fi
       "${personal.dst}/bin/setup-cinnamon"
+    '');
+
+    # git clone public repos
+    clonePublic = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
+
+      export PATH="${pkgs.git}/bin:$PATH"
+
+      if [ ! -d "${nix.dst}" ]; then
+        git clone "${nix.src}" "${nix.dst}"
+      fi
+
+      if [ ! -d "${exec.dst}" ]; then
+        git clone "${exec.src}" "${exec.dst}"
+      fi
+
+      if [ ! -d "${personal.dst}" ]; then
+        git clone "${personal.src}" "${personal.dst}"
+      fi
     '';
+
+    # git clone private repos (conditional)
+    clonePrivate = lib.mkIf private (lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
+
+      export PATH="${pkgs.git}/bin:$PATH"
+
+      if [ ! -d "${secret.dst}" ]; then
+        git clone "${secret.src}" "${secret.dst}"
+      fi
+
+      if [ ! -d "${legacy.dst}" ]; then
+        git clone "${legacy.src}" "${legacy.dst}"
+      fi
+
+    '');
 
   };
 
-  # git clone public repos
-  home.activation.clonePublic = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
+  home.file = lib.mkMerge [
+    {
+      # symlinks from exec
+      ".vimrc".source     = link "${exec.dst}/etc/vimrc";
+      ".face".source      = link "${exec.dst}/etc/dot-face";
 
-    export PATH="${pkgs.git}/bin:$PATH"
+      # ipython startup file
+      ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/bin/pyrc";
 
-    if [ ! -d "${nix.dst}" ]; then
-      git clone "${nix.src}" "${nix.dst}"
-    fi
+      # symlinks from personal
+      "Templates".source  = link "${personal.dst}/etc/Templates";
 
-    if [ ! -d "${exec.dst}" ]; then
-      git clone "${exec.src}" "${exec.dst}"
-    fi
+      # auto-generated
+      ".hotdogrc".text    = ''This is not a config file'';
+    }
 
-    if [ ! -d "${personal.dst}" ]; then
-      git clone "${personal.src}" "${personal.dst}"
-    fi
-  '';
+    # Desktop-specific files (conditional)
+    (lib.mkIf desktop {
+      # ~/.local/share/icons
+      ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png".source = ./icons/obsidian.png;
 
-  home.file = lib.mkMerge [{
+      # ~/.local/share/applications
+      ".local/share/applications/obsidian.desktop".text =
+          let
+            src = builtins.readFile "${pkgs.obsidian}/share/applications/obsidian.desktop";
+            icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
+          in
+            builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
+    })
 
-    # ~/.local/share/icons
-    ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png".source = ./icons/obsidian.png;
+    # Private files (conditional)
+    (lib.mkIf private {
+      # sooper serious secrets zomg
+      ".pypirc".source    = link "${secret.dst}/etc/pypirc";
+      ".netrc".source     = link "${secret.dst}/etc/netrc";
+      ".ssh".source       = link "${secret.dst}/etc/ssh";
 
-    # ~/.local/share/applications
-    ".local/share/applications/obsidian.desktop".text =
-        let
-          src = builtins.readFile "${pkgs.obsidian}/share/applications/obsidian.desktop";
-          icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
-        in
-          builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
-  }];
+      # gitlab
+      ".config/glab-cli/config.yml".source = link "${secret.dst}/etc/glab-cli-config.yml";
+    })
+  ];
 
-  home.file = lib.mkMerge [{
-
-    # symlinks from exec
-    ".vimrc".source     = link "${exec.dst}/etc/vimrc";
-    ".face".source      = link "${exec.dst}/etc/dot-face";
-
-    # ipython startup file
-    ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/bin/pyrc";
-
-    # symlinks from personal
-    "Templates".source  = link "${personal.dst}/etc/Templates";
-
-    # auto-generated
-    ".hotdogrc".text    = ''This is not a config file'';
-
-  }];
-
-  # PATH for interactive shells
-  # home.sessionVariables.PATH = lib.mkBefore "${exec.dst}/bin:${personal.dst}/bin";
-
-
-  # PATH for login shells
+  # PATH for login shells (consolidated with conditional private paths)
   home.sessionPath = [
     "${exec.dst}/bin"
     "${personal.dst}/bin"
+  ] ++ lib.optionals private [
+    "${secret.dst}/bin"
   ];
 
+  # Bash configuration (consolidated with conditional private sources)
   programs.bash = {
     enable = true;
     bashrcExtra = ''
       source "${exec.dst}/etc/bashrc"
       source "${personal.dst}/etc/bashrc"
+    '' + lib.optionalString private ''
+      source "${secret.dst}/etc/bashrc"
     '';
   };
 
-  home.packages = with pkgs; [
-    git
-    dconf
-    inotify-tools
-  ];
-
-  xdg.configFile = {
-
+  # Desktop autostart configuration (conditional)
+  xdg.configFile = lib.mkIf desktop {
     # ~/.config/autostart/conky.desktop
     "autostart/conky.desktop" = {
       text = ''
@@ -160,46 +184,6 @@ in {
         Comment=Start Conky at login
       '';
     };
-  };
-
-  # git clone private repos
-  home.activation.clonePrivate = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
-
-    export PATH="${pkgs.git}/bin:$PATH"
-
-    if [ ! -d "${secret.dst}" ]; then
-      git clone "${secret.src}" "${secret.dst}"
-    fi
-
-    if [ ! -d "${legacy.dst}" ]; then
-      git clone "${legacy.src}" "${legacy.dst}"
-    fi
-
-  '';
-
-  home.file = lib.mkMerge [{
-    # sooper serious secrets zomg
-    ".pypirc".source    = link "${secret.dst}/etc/pypirc";
-    ".netrc".source     = link "${secret.dst}/etc/netrc";
-    ".ssh".source       = link "${secret.dst}/etc/ssh";
-
-    # gitlab
-    ".config/glab-cli/config.yml".source = link "${secret.dst}/etc/glab-cli-config.yml";
-  }];
-
-  # PATH for interactive shells
-  # home.sessionVariables.PATH = lib.mkBefore "${secret.dst}/bin";
-
-  # PATH for login shells
-  home.sessionPath = [
-    "${secret.dst}/bin"
-  ];
-
-  programs.bash = {
-    enable = true;
-    bashrcExtra = lib.mkAfter ''
-      source "${secret.dst}/etc/bashrc"
-    '';
   };
   # Let Home Manager install and manage itself.
   # programs.home-manager.enable = true;
