@@ -61,7 +61,10 @@
           { networking.hostName = name; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit aws-cvpn-client; };
+        specialArgs = {
+          inherit aws-cvpn-client;
+          inherit doubleunix-overlay;
+        };
       };
   in {
 

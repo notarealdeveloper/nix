@@ -1,8 +1,10 @@
-{ config, lib, pkgs, aws-cvpn-client, ... }:
+{ pkgs, lib, config, aws-cvpn-client, doubleunix-overlay, ... }:
 
 let
 
   # for help, see nixos-help or man nix.conf
+
+  all-that-shit = builtins.attrValues doubleunix-overlay.packages.${pkgs.stdenv.hostPlatform.system};
 
   python_packages_common = ps: (with ps; [
 
@@ -369,7 +371,8 @@ in
     # raw binary machine code overlay ftw
     noelf
 
-  ] ++ python_interpreters;
+  ] ++ all-that-shit;
+  #] ++ python_interpreters;
 
   boot.kernel.sysctl = {
     "net.core.bpf_jit_enable" = 1;
