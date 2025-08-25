@@ -137,6 +137,7 @@
         pkgs = import nixpkgs { system = "aarch64-linux"; };
         modules = [
           ./os/android-nixos.nix
+          home-manager.nixosModules.home-manager
         ];
       };
       default = phone;
