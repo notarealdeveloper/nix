@@ -5,6 +5,11 @@
 
     nixpkgs.url  = "github:NixOS/nixpkgs/nixos-unstable";
 
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,24 +20,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    doubleunix-overlay = {
+    doubleunix = {
       url = "github:doubleunix/overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    aws-cvpn-client = {
-      url = "github:sirn/aws-cvpn-client";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, doubleunix-overlay, nix-on-droid, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-on-droid, doubleunix, ... }:
 
   let
 
@@ -40,57 +35,59 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [
-        doubleunix-overlay.overlays.default
-      ];
+      overlays = [ doubleunix.overlays.default ];
       config.allowUnfree = true;
     };
 
-    mkSystem = { hw, os, name }:
-      nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          hw
-          os
-          ./configuration.nix
-          { networking.hostName = name; }
-          home-manager.nixosModules.home-manager
-        ];
-        specialArgs = {
-          inherit aws-cvpn-client;
-          inherit doubleunix-overlay;
-        };
-      };
   in {
 
     nixosConfigurations = {
 
-      turing = mkSystem {
-        hw = ./hardware/system76.nix;
-        os = ./os/linux-nixos.nix;
-        name = "turing";
+      turing = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          ./hw/system76.nix
+          ./os/linux-nixos.nix
+          ./configuration.nix
+          { networking.hostName = "turing"; }
+          home-manager.nixosModules.home-manager
+        ];
+        specialArgs = { inherit doubleunix-overlay; };
       };
 
-      kleene = mkSystem {
-        hw = ./hardware/lenovo.nix;
-        os = ./os/linux-nixos.nix;
-        name = "kleene";
+      kleene = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          ./hw/lenovo.nix
+          ./os/linux-nixos.nix
+          ./configuration.nix
+          { networking.hostName = "kleene"; }
+          home-manager.nixosModules.home-manager
+        ];
+        specialArgs = { inherit doubleunix-overlay; };
       };
 
-      gates = mkSystem {
-        hw = nixos-wsl.nixosModules.wsl;
-        os = ./os/windows-nixos.nix;
-        name = "gates";
+      gates = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+        modules = [
+          nixos-wsl.nixosModules.wsl
+          ./os/windows-nixos.nix
+          ./configuration.nix
+          { networking.hostName = "gates"; }
+          home-manager.nixosModules.home-manager
+        ];
+        specialArgs = { inherit doubleunix-overlay; };
       };
 
     };
 
     homeConfigurations =
+
       let
 
         self = "jason";
 
-        mkhome = { user ? self, desktop ? true, private ? true }:
+        mkhome = { user, desktop ? true, private ? true }:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [ ./home/${user}.nix ];
@@ -101,20 +98,26 @@
             };
           };
 
-      in
-        {
+      in {
 
-          turing    = mkhome {};
-          kleene    = mkhome {};
-          gates     = mkhome { desktop = false; };
-          luna      = mkhome { user = "luna";  };
+        turing = mkhome { user = self; };
+        kleene = mkhome { user = self; };
+        gates  = mkhome { user = self; desktop = false; };
 
+        luna = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home/luna.nix ];
         };
+
+      };
 
     nixOnDroidConfigurations = rec {
       phone = nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs { system = "aarch64-linux"; };
-        modules = [ ./os/android-nixos.nix ];
+        modules = [
+          ./os/android-nixos.nix
+          #home-manager.nixosModules.home-manager
+        ];
       };
       default = phone;
     };
