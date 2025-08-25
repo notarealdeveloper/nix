@@ -2,7 +2,7 @@
 
 let
 
-  src = import ./src.nix { };
+  src = import ./src.nix;
   inherit (src) nix exec personal;
 
   link = config.lib.file.mkOutOfStoreSymlink;

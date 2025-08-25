@@ -6,6 +6,9 @@ let
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
+  src = import ./src.nix;
+  inherit (src) personal;
+
 in {
 
   home.username = user;
