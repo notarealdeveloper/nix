@@ -12,7 +12,7 @@ in {
     numix-icon-theme-circle
   ];
 
-  gtk = {
+  gtk = with pkgs; {
     enable = true;
     theme = { name = "Numix"; package = numix-gtk-theme; };
     iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
