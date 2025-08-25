@@ -8,7 +8,7 @@ let
 
   home = "/home/${user}";
 
-  src = pkgs.callPackage ./src.nix { src = "${home}/src" };
+  src = pkgs.callPackage ./src.nix { src = "${home}/src"; };
   inherit (src) nix exec personal;
 
 in {
