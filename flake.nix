@@ -102,9 +102,7 @@
       gates     = mkHome { user = "jason"; desktop = false; };
 
       jason     = mkHome { user = "jason"; };
-      ramya     = mkHome { user = "ramya"; };
       luna      = mkHome { user = "luna";  };
-      mei       = mkHome { user = "mei"; };
 
     };
 

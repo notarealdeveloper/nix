@@ -19,7 +19,7 @@ system:
 	cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$*
 
 home:
-	home-manager switch -b backup --flake .#$*
+	home-manager switch -b backup --flake .#$(HOST)
 
 localhost: phone
 
