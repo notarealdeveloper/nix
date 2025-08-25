@@ -1,8 +1,15 @@
-{ pkgs, lib, config, desktop ? true, private ? true, ... }:
+{ pkgs
+, lib
+, config
+, desktop ? true
+, private ? true
+, user ? "jason"
+, home ? "/home/jason"
+, ...
+}:
 
 let
 
-  user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
@@ -15,6 +22,7 @@ let
 in {
 
   home.username = user;
+  home.homeDirectory = home;
   news.display = "silent";
 
   # ~/.config/git
