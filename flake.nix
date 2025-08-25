@@ -46,16 +46,6 @@
       config.allowUnfree = true;
     };
 
-    mkHome = { user, desktop ? true }:
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home/${user}.nix ];
-        extraSpecialArgs = {
-          inherit pkgs;
-          desktop = desktop;
-        };
-      };
-
     mkSystem = { hw, os, name }:
       nixpkgs.lib.nixosSystem {
         inherit system pkgs;
@@ -95,16 +85,30 @@
 
     };
 
-    homeConfigurations = rec {
+    homeConfigurations =
+      let
 
-      turing    = mkHome { user = "jason"; };
-      kleene    = mkHome { user = "jason"; };
-      gates     = mkHome { user = "jason"; desktop = false; };
+        user = "jason";
 
-      jason     = mkHome { user = "jason"; };
-      luna      = mkHome { user = "luna";  };
+        mkhome = { user ? user; desktop ? true; }:
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ ./home/${user}.nix ];
+            extraSpecialArgs = {
+              inherit pkgs;
+              desktop = desktop;
+            };
+          };
 
-    };
+      in
+        {
+
+          turing    = mkhome {};
+          kleene    = mkhome {};
+          gates     = mkhome { desktop = false; };
+          luna      = mkhome { user = "luna";  };
+
+        };
 
     nixOnDroidConfigurations = rec {
       phone = nix-on-droid.lib.nixOnDroidConfiguration {
