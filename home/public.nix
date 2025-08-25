@@ -5,7 +5,7 @@
 let
 
   system = import ./system.nix { inherit pkgs lib config; };
-  inherit (system) nixos exec personal;
+  inherit (system) nix exec personal;
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
@@ -18,8 +18,8 @@ in
 
     export PATH="${pkgs.git}/bin:$PATH"
 
-    if [ ! -d "${nixos.dst}" ]; then
-      git clone "${nixos.src}" "${nixos.dst}"
+    if [ ! -d "${nix.dst}" ]; then
+      git clone "${nix.src}" "${nix.dst}"
     fi
 
     if [ ! -d "${exec.dst}" ]; then

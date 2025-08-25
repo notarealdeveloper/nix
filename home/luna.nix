@@ -3,21 +3,28 @@
 let
 
   user = "luna";
-  common = (import ./common.nix user);
 
 in
 
 {
 
-  imports = [
-    common
-    ./lib/public.nix
-    (if desktop then ./lib/desktop.nix else ./lib/none.nix)
-  ];
+  home.username = "${user}";
+  home.homeDirectory = "/home/${user}";
+  news.display = "silent";
+
+  imports =
+    [./public.nix]
+    ++
+    (if desktop then [./desktop.nix] else [])
+  ;
 
   home.packages = with pkgs; [
-    yt-dlp
     vlc
+    yt-dlp
+    cowsay
+    figlet
+    toilet
+    asciiquarium
     weatherspect
   ];
 

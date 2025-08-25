@@ -27,9 +27,9 @@
 {
 
   # system
-  nixos = {
-    src = "https://github.com/notarealdeveloper/nixos";
-    dst = "${config.home.homeDirectory}/src/nixos";
+  nix = {
+    src = "https://github.com/notarealdeveloper/nix";
+    dst = "${config.home.homeDirectory}/src/nix";
   };
 
   # team stuff: the "rw rw r-" parts of life

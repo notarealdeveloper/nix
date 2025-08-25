@@ -5,21 +5,38 @@ let
   user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
-  common    = (import ./common.nix user);
-  gitconfig = (import ./lib/git.nix name email);
 
-  system = import ./lib/system.nix { inherit pkgs lib config; };
-  inherit (system) nixos exec personal;
+  system = import ./system.nix { inherit pkgs lib config; };
+  inherit (system) nix exec personal;
 
 in {
 
+  home.username = "${user}";
+  home.homeDirectory = "/home/${user}";
+  news.display = "silent";
+
   imports = [
-    common
-    gitconfig
-    ./lib/public.nix
-    ./lib/private.nix
+    ./public.nix
+    ./private.nix
     (if desktop then ./lib/desktop.nix else ./lib/none.nix)
   ];
+
+  # ~/.config/git
+  programs.git = {
+    enable    = true;
+    userName  = name;
+    userEmail = email;
+    extraConfig = {
+      init.defaultBranch = "master";
+      pull.rebase = true;
+    };
+  };
+
+  # ~/.config/gh
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+  };
 
   # Let Home Manager install and manage itself.
   # programs.home-manager.enable = true;
