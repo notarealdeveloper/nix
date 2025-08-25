@@ -93,7 +93,7 @@
         mkhome = { user ? self, desktop ? true }:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./home/${self}.nix ];
+            modules = [ ./home/${user}.nix ];
             extraSpecialArgs = {
               inherit pkgs;
               desktop = desktop;
