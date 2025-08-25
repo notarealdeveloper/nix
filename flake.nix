@@ -118,7 +118,7 @@
         };
 
         phone = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+          pkgs = import nixpkgs { system = "aarch64-linux"; };
           modules = [ android ./home/jason.nix ];
           extraSpecialArgs = { inherit pkgs; desktop = false; private = false; };
         };
