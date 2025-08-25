@@ -1,26 +1,19 @@
 { pkgs, lib, config, desktop ? true, ... }:
 
 let
-
   user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
-
-  common = (pkgs.callPackage ./common.nix { inherit user; });
-
 in {
+  imports = [
+    (import ./base.nix { inherit lib config pkgs user; })
+    ./repos.nix
+  ] ++ lib.optionals desktop [ ./desktop.nix ];
 
-  imports =
-    [ common ./public.nix ./private.nix ]
-    ++
-    (if desktop then [ ./desktop.nix ] else [])
-  ;
-
-
-  # ~/.config/git
+  # Git configuration
   programs.git = {
-    enable    = true;
-    userName  = name;
+    enable = true;
+    userName = name;
     userEmail = email;
     extraConfig = {
       init.defaultBranch = "master";
@@ -28,15 +21,9 @@ in {
     };
   };
 
-  # ~/.config/gh
+  # GitHub CLI
   programs.gh = {
     enable = true;
     gitCredentialHelper.enable = true;
   };
-
-  # Let Home Manager install and manage itself.
-  # programs.home-manager.enable = true;
-
-  # Keep this line
-  home.stateVersion  = "25.05";
 }

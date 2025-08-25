@@ -1,23 +1,13 @@
 { pkgs, lib, config, desktop ? true, ... }:
 
 let
-
   user = "luna";
+in {
+  imports = [
+    (import ./base.nix { inherit lib config pkgs user; })
+  ] ++ lib.optionals desktop [ ./desktop.nix ];
 
-in
-
-{
-
-  home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
-  news.display = "silent";
-
-  imports =
-    [./public.nix]
-    ++
-    (if desktop then [./desktop.nix] else [])
-  ;
-
+  # Luna-specific packages
   home.packages = with pkgs; [
     vlc
     yt-dlp
@@ -28,8 +18,8 @@ in
     weatherspect
   ];
 
+  # Video downloading and playlist setup
   home.activation.prepareDaXingXing = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
-
     export PATH="${pkgs.yt-dlp}/bin:$PATH"
 
     mkdir -pv "${config.home.homeDirectory}/bin"
@@ -57,7 +47,6 @@ in
     mkkan bflylbugbbee  https://www.youtube.com/watch?v=EgiQ6GliTrI
     mkkan abcquack      https://www.youtube.com/watch?v=I_3mbra4dHU
     mkkan abcshark      https://www.youtube.com/watch?v=ccEpTTZW34g
-    #mkkan abchop        https://www.youtube.com/watch?v=w2DZA3mfAUU
     mkkan rygb          https://www.youtube.com/watch?v=6PyYx255Qcg
     mkkan beddybye      https://www.youtube.com/watch?v=ij_eHTvhIlE
     mkkan monster       https://www.youtube.com/watch?v=JC29ZvTkBT0
@@ -92,6 +81,7 @@ in
     mkkan poohhefwooz   https://www.youtube.com/watch?v=CLnADKgurvc
   '';
 
+  # Video player script
   home.file."bin/kan" = {
     text = ''
       #!/usr/bin/env bash
@@ -101,19 +91,11 @@ in
     executable = true;
   };
 
-  # add ~/bin to PATH persistently
+  # Add ~/bin to PATH
   home.sessionPath = [ "$HOME/bin" ];
-
   home.sessionVariables.PATH = "$HOME/bin:$HOME/.local/bin:$PATH";
 
-  programs.bash = {
-    enable = true;
-    bashrcExtra = ''
-      export PATH="$HOME/bin:$PATH"
-    '';
-  };
-
-  # Keep this line
-  home.stateVersion  = "25.05";
-
+  programs.bash.bashrcExtra = ''
+    export PATH="$HOME/bin:$PATH"
+  '';
 }
