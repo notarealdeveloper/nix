@@ -276,7 +276,6 @@ in
 
     #(python313.withPackages (ps: with ps; [
     #
-    #    scikit-learn
     #    torch
     #
     #    # ~/bin depends
