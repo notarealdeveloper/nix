@@ -13,17 +13,14 @@ default: 	$(HOST)
 turing: 	system
 kleene: 	system
 gates: 		system
-localhost: 	phone
 
 system:
 	sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
 	@#cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
 
-localhost: phone
-
-phone:
+localhost:
 	@if [ "$(USER)" != "nix-on-droid" ]; then echo "This doesn't look like a phone"; exit 1; fi
-	nix-on-droid switch --flake .#default
+	nix-on-droid switch --flake .#$(HOST)
 
 home:
 	home-manager switch -b backup --flake .#$(HOST)

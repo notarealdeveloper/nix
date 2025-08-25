@@ -133,14 +133,11 @@
       };
 
     nixOnDroidConfigurations = rec {
-      phone = nix-on-droid.lib.nixOnDroidConfiguration {
+      localhost = nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs { system = "aarch64-linux"; };
-        modules = [
-          ./os/android-nixos.nix
-          home-manager.nixosModules.home-manager
-        ];
+        modules = [ ./os/android-nixos.nix ];
       };
-      default = phone;
+      default = localhost;
     };
 
   };
