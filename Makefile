@@ -9,24 +9,24 @@ ifeq ($(filter $(HOST),$(HOSTS)),)
 $(error Host "$(HOST)" not recognised; choose one of $(HOSTS))
 endif
 
-default: $(HOST)
-
-turing: system
-
-kleene: system
+default: 	$(HOST)
+turing: 	system
+kleene: 	system
+gates: 		system
+localhost: 	phone
 
 system:
 	sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
 	@#cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
-
-home:
-	home-manager switch -b backup --flake .#$(HOST)
 
 localhost: phone
 
 phone:
 	@if [ "$(USER)" != "nix-on-droid" ]; then echo "This doesn't look like a phone"; exit 1; fi
 	nix-on-droid switch --flake .#default
+
+home:
+	home-manager switch -b backup --flake .#$(HOST)
 
 arch:
 	sudo pacman -S nix

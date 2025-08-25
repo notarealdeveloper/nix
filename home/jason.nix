@@ -3,13 +3,12 @@
 , config
 , desktop ? true
 , private ? true
-, user ? "jason"
-, home ? "/home/jason"
 , ...
 }:
 
 let
 
+  user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
@@ -22,7 +21,8 @@ let
 in {
 
   home.username = user;
-  home.homeDirectory = home;
+  home.homeDirectory = "/home/${user}";
+
   news.display = "silent";
 
   # ~/.config/git

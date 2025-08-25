@@ -87,15 +87,11 @@
 
         self = "jason";
 
-        mkhome = { user, desktop ? true, private ? true }:
+        mkhome = { desktop ? true, private ? true }:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [ ./home/${user}.nix ];
-            extraSpecialArgs = {
-              inherit pkgs;
-              desktop = desktop;
-              private = private;
-            };
+            extraSpecialArgs = { inherit pkgs desktop private; };
           };
 
       in {
@@ -103,6 +99,7 @@
         turing = mkhome { user = self; };
         kleene = mkhome { user = self; };
         gates  = mkhome { user = self; desktop = false; };
+        phone  = mkhome { user = self; desktop = false; private = false; };
 
         luna = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
