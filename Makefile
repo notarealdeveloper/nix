@@ -16,7 +16,8 @@ turing: system
 kleene: system
 
 system:
-	cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$*
+	sudo nixos-rebuild --print-build-logs switch --flake .#$*
+	#cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$*
 
 home:
 	home-manager switch -b backup --flake .#$(HOST)
