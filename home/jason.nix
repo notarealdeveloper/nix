@@ -8,7 +8,7 @@ let
   home = "/home/${user}";
 
   src = import ./src.nix { inherit config; };
-  inherit (src) nix exec personal;
+  inherit (src) nix exec personal overlay;
   inherit (src) secret legacy;
 
   link = config.lib.file.mkOutOfStoreSymlink;
@@ -71,6 +71,10 @@ in {
 
       if [ ! -d "${personal.dst}" ]; then
         git clone "${personal.src}" "${personal.dst}"
+      fi
+
+      if [ ! -d "${overlay.dst}" ]; then
+        git clone "${overlay.src}" "${overlay.dst}"
       fi
     '';
 

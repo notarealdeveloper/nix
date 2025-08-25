@@ -62,6 +62,9 @@ let
     # requires auth
     legacy = "https://github.com/notarealdeveloper/legacy";
 
+    # our overlay
+    overlay = "https://github.com/doubleunix/overlay";
+
   };
 
   src = builtins.mapAttrs (k: v: { src = v; dst = "${dst}/${k}"; }) url;
