@@ -26,7 +26,7 @@ let
 
   HOME = builtins.getEnv("HOME");
 
-  dst = "$HOME/src";
+  dst = "${HOME}/src";
 
   url = {
 
