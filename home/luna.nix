@@ -3,13 +3,13 @@
 let
 
   user = "luna";
-
+  common = (import ./common.nix user);
 in
 
 {
 
   imports = [
-    (import ./common.nix user)
+    common
     ./lib/public.nix
   ] ++ (if desktop then [./lib/desktop.nix] else []);
 
