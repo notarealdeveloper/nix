@@ -5,7 +5,6 @@
   home.homeDirectory = "/home/${user}";
   news.display = "silent";
 
-  # Basic bash configuration
   programs.bash.enable = true;
 
   # Let Home Manager install and manage itself.
