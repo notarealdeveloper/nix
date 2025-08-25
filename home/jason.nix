@@ -1,4 +1,4 @@
-{ pkgs, lib, config, desktop ? true, ... }:
+{ pkgs, lib, config, desktop ? true, private ? true, ... }:
 
 let
 
@@ -50,20 +50,6 @@ in {
     iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
   };
 
-  home.file = lib.mkMerge [{
-
-    # ~/.local/share/icons
-    ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png".source = ./icons/obsidian.png;
-
-    # ~/.local/share/applications
-    ".local/share/applications/obsidian.desktop".text =
-        let
-          src = builtins.readFile "${pkgs.obsidian}/share/applications/obsidian.desktop";
-          icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
-        in
-          builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
-  }];
-
   home.activation = {
 
     setupDconf = lib.hm.dag.entryAfter ["installPackages"] ''
@@ -104,6 +90,20 @@ in {
       git clone "${personal.src}" "${personal.dst}"
     fi
   '';
+
+  home.file = lib.mkMerge [{
+
+    # ~/.local/share/icons
+    ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png".source = ./icons/obsidian.png;
+
+    # ~/.local/share/applications
+    ".local/share/applications/obsidian.desktop".text =
+        let
+          src = builtins.readFile "${pkgs.obsidian}/share/applications/obsidian.desktop";
+          icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
+        in
+          builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
+  }];
 
   home.file = lib.mkMerge [{
 
