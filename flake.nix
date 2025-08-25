@@ -88,12 +88,12 @@
     homeConfigurations =
       let
 
-        user = "jason";
+        self = "jason";
 
-        mkhome = { user ? user, desktop ? true }:
+        mkhome = { user ? self, desktop ? true }:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./home/${user}.nix ];
+            modules = [ ./home/${self}.nix ];
             extraSpecialArgs = {
               inherit pkgs;
               desktop = desktop;
