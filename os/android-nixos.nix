@@ -32,6 +32,7 @@
     sl
     python313
     passwd
+    openssh
     home-manager
   ];
 
@@ -42,10 +43,6 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-
-  services.openssh.enable = true;
-  services.openssh.settings.PasswordAuthentication = true;
-  services.openssh.settings.PermitRootLogin = "no";
 
   # Set your time zone
   time.timeZone = "America/Chicago";
