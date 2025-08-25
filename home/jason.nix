@@ -5,7 +5,7 @@ let
   user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
-  common    = (import ./common.nix user);
+  common    = (pkgs.callPackage ./common.nix { inherit user; });
   gitconfig = (import ./lib/git.nix name email);
 
   system = import ./lib/system.nix { inherit pkgs lib config; };
