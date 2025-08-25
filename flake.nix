@@ -4,7 +4,6 @@
   inputs = {
 
     nixpkgs.url  = "github:NixOS/nixpkgs/nixos-unstable";
-    #wnixpkgs.url = "github:doubleunix/wnixpkgs/wnixos-unstable";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -16,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    overlay = {
+    doubleunix-overlay = {
       url = "github:doubleunix/overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -28,19 +27,16 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, overlay, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, doubleunix-overlay, aws-cvpn-client, ... }:
 
   let
 
     system = "x86_64-linux";
 
-    #overlay-python-head = import ./python;
-
     pkgs = import nixpkgs {
       inherit system;
       overlays = [
-        #overlay-python-head
-        overlay.overlays.default
+        doubleunix-overlay.overlays.default
       ];
       config.allowUnfree = true;
     };
