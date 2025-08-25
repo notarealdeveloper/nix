@@ -6,11 +6,11 @@ let
 
 in {
 
-  imports =
-    [ (import ./base.nix { inherit user; }) ]
-    ++
-    (if desktop then [ ./desktop.nix ] else [])
-  ;
+  home.username = user;
+  home.homeDirectory = "/home/${user}";
+  news.display = "silent";
+
+  programs.bash.enable = true;
 
   # Luna-specific packages
   home.packages = with pkgs; [
@@ -103,4 +103,11 @@ in {
   programs.bash.bashrcExtra = ''
     export PATH="$HOME/bin:$PATH"
   '';
+
+  # Let Home Manager install and manage itself.
+  # programs.home-manager.enable = true;
+
+  # Don't delete this
+  home.stateVersion = "25.05";
+
 }

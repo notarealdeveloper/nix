@@ -2,8 +2,8 @@
 
 let
 
-  src = import ./src.nix { };
-  inherit (src) nix exec personal;
+  sys = import ./sys.nix { };
+  inherit (sys) nix exec personal;
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
@@ -27,7 +27,6 @@ in
     if [ ! -d "${personal.dst}" ]; then
       git clone "${personal.src}" "${personal.dst}"
     fi
-
   '';
 
   home.file = lib.mkMerge [{

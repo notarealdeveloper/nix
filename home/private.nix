@@ -43,8 +43,8 @@
 
 let
 
-  src = import ./src.nix { };
-  inherit (src) secret legacy;
+  sys = import ./sys.nix { };
+  inherit (sys) secret legacy;
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
