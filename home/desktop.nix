@@ -4,15 +4,7 @@
   home.packages = with pkgs; [
     numix-gtk-theme
     numix-icon-theme-circle
-    cinnamon.nemo-fileroller
-    cinnamon.nemo-preview
-    cinnamon.nemo-image-converter
-    cinnamon-common
-    cinnamon-translations
-    gnome.dconf-editor
   ];
-
-  programs.dconf.enable = true;
 
   gtk = with pkgs; {
     enable = true;
