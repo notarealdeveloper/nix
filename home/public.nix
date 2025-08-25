@@ -2,8 +2,8 @@
 
 let
 
-  sys = import ./sys.nix { };
-  inherit (sys) nix exec personal;
+  src = import ./src.nix { };
+  inherit (src) nix exec personal;
 
   link = config.lib.file.mkOutOfStoreSymlink;
 

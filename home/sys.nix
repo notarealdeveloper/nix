@@ -28,7 +28,7 @@ let
 
   dst = "${HOME}/src";
 
-  src = {
+  url = {
 
     # system
     nix = "https://github.com/notarealdeveloper/nix";
@@ -64,11 +64,11 @@ let
 
   };
 
-  sys = builtins.mapAttrs (k: v: { src = v; dst = "${dst}/${k}"; }) src;
+  src = builtins.mapAttrs (k: v: { src = v; dst = "${dst}/${k}"; }) url;
 
 
 in {
 
-  inherit sys;
+  inherit src;
 
 }
