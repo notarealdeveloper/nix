@@ -16,6 +16,7 @@
     procps
     killall
     tzdata
+    which
     hostname
     man
     iproute2
