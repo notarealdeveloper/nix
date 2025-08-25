@@ -8,14 +8,19 @@ let
 
 in {
 
+  home.packages = with pkgs; [
+    git
+    dconf
+    inotify-tools
+  ];
+
   imports =
-    [ (pkgs.callPackage ./base.nix { inherit user; }) ]
+    [ (import ./base.nix { inherit user; }) ]
     ++
     [ ./public.nix ./private.nix ]
     ++
     (if desktop then [ ./desktop.nix ] else [])
   ;
-
 
   # ~/.config/git
   programs.git = {

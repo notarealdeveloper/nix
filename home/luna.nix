@@ -7,7 +7,7 @@ let
 in {
 
   imports =
-    [ (pkgs.callPackage ./base.nix { inherit user; }) ]
+    [ (import ./base.nix { inherit user; }) ]
     ++
     (if desktop then [ ./desktop.nix ] else [])
   ;
