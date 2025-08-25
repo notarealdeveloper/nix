@@ -1,10 +1,10 @@
-{ pkgs, lib, config, aws-cvpn-client, doubleunix-overlay, ... }:
+{ pkgs, lib, config, doubleunix, ... }:
 
 let
 
   # for help, see nixos-help or man nix.conf
 
-  all-that-shit = builtins.attrValues doubleunix-overlay.packages.${pkgs.stdenv.hostPlatform.system};
+  all-that-shit = builtins.attrValues doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
 
   cacheName = "notarealdeveloper";
 
@@ -226,7 +226,6 @@ in
     teams-for-linux
     gitlab-ci-local
     gitlab-container-registry
-    (aws-cvpn-client.packages.${system}.default)
 
     # ports
     weatherspect
