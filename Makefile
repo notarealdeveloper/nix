@@ -31,9 +31,9 @@ phone:
 arch:
 	sudo pacman -S nix
 	nix profile add home-manager
-	home-manager switch -b backup --refresh --flake "github:notarealdeveloper/nix#jason"
+	home-manager switch -b backup --refresh --flake "github:notarealdeveloper/nix#self"
 
 luna:
-	sudo -iu $@ -- home-manager switch -b backup --refresh --flake github:notarealdeveloper/nix#$@
+	sudo -iu $@ -- home-manager switch -b backup --refresh --flake "github:notarealdeveloper/nix#luna"
 
 .PHONY: default system home $(HOSTS)
