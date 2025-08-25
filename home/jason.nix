@@ -6,16 +6,11 @@ let
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
 
-  src = pkgs.callPackage ./src.nix { };
-  inherit (src) nix exec personal;
-
 in {
 
-  home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
-  news.display = "silent";
-
   imports =
+    [ (pkgs.callPackage ./base.nix { inherit user; }) ]
+    ++
     [ ./public.nix ./private.nix ]
     ++
     (if desktop then [ ./desktop.nix ] else [])
@@ -38,10 +33,4 @@ in {
     enable = true;
     gitCredentialHelper.enable = true;
   };
-
-  # Let Home Manager install and manage itself.
-  # programs.home-manager.enable = true;
-
-  # Keep this line
-  home.stateVersion  = "25.05";
 }

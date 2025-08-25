@@ -1,11 +1,16 @@
 { pkgs, lib, config, desktop ? true, ... }:
 
 let
+
   user = "luna";
+
 in {
-  imports = [
-    (import ./base.nix { inherit lib config pkgs user; })
-  ] ++ lib.optionals desktop [ ./desktop.nix ];
+
+  imports =
+    [ (pkgs.callPackage ./base.nix { inherit user; }) ]
+    ++
+    (if desktop then [ ./desktop.nix ] else [])
+  ;
 
   # Luna-specific packages
   home.packages = with pkgs; [

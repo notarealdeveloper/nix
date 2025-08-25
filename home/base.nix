@@ -1,10 +1,8 @@
-# Base configuration shared by all users
-{ lib, config, pkgs, user, ... }:
+{ lib, config, user, ... }:
 
 {
   home.username = user;
   home.homeDirectory = "/home/${user}";
-  home.stateVersion = "25.05";
   news.display = "silent";
 
   # Common packages that all users need
@@ -16,4 +14,10 @@
 
   # Basic bash configuration
   programs.bash.enable = true;
+
+  # Let Home Manager install and manage itself.
+  # programs.home-manager.enable = true;
+
+  # Don't delete this
+  home.stateVersion = "25.05";
 }
