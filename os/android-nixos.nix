@@ -31,7 +31,7 @@
     asciiquarium
     sl
     python313
-    passwd
+    shadow
     openssh
     home-manager
   ];
