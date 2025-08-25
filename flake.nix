@@ -90,13 +90,14 @@
 
         self = "jason";
 
-        mkhome = { user ? self, desktop ? true }:
+        mkhome = { user ? self, desktop ? true, private ? true }:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [ ./home/${user}.nix ];
             extraSpecialArgs = {
               inherit pkgs;
               desktop = desktop;
+              private = private;
             };
           };
 
@@ -124,4 +125,3 @@
 
   };
 }
-
