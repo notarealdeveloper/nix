@@ -98,7 +98,7 @@ in {
 
     # desktop setup
     setupDconf = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
-      export PATH="${pkgs.glib}/bin:$PATH"
+      export PATH="${config.home.path}/bin:${pkgs.glib}/bin:$PATH"
       "${personal.dst}/bin/setup-dconf"
     '');
 

@@ -101,25 +101,25 @@
 
         turing = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ linux ./home/${self}.nix ];
+          modules = [ linux ./home/jason.nix ];
           extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
         };
 
         kleene = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ linux ./home/${self}.nix ];
+          modules = [ linux ./home/jason.nix ];
           extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
         };
 
         gates = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ linux ./home/${self}.nix ];
+          modules = [ linux ./home/jason.nix ];
           extraSpecialArgs = { inherit pkgs; desktop = false; private = true; };
         };
 
         phone = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ android ./home/${self}.nix ];
+          modules = [ android ./home/jason.nix ];
           extraSpecialArgs = { inherit pkgs; desktop = false; private = false; };
         };
 
