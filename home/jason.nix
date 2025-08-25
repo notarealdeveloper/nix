@@ -28,7 +28,7 @@ in {
   # ~/.config/git
   programs.git = {
     enable    = true;
-    userName  = name;
+    userName  = user;
     userEmail = email;
     extraConfig = {
       init.defaultBranch = "master";
