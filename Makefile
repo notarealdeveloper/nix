@@ -1,8 +1,8 @@
 # Makefile for the WNIX Operating System
 
 HOST := $(shell hostname -s)
-HOSTS := turing kleene gates
-USERS := jason ramya mei luna
+HOSTS := turing kleene gates localhost
+USERS := jason luna
 
 # fail fast if we’re on an unknown machine
 ifeq ($(filter $(HOST),$(HOSTS)),)
@@ -23,13 +23,19 @@ system-%:
 home-%:
 	home-manager switch -b backup --flake .#$*
 
+localhost: phone
+
 phone:
+	@if [ "$(USER)" != "nix-on-droid" ]; then \
+		echo "Error: USER must be set to 'nix-on-droid' (got '$(USER)')"; \
+		exit 1; \
+	fi
 	nix-on-droid switch --flake .#default
 
 arch:
 	sudo pacman -S nix
 	nix profile add home-manager
-	home-manager switch -b backup --refresh --flake "github:notarealdeveloper/nixos#jason"
+	home-manager switch -b backup --refresh --flake "github:notarealdeveloper/nix#jason"
 
 gentoo:
 	@echo TODO: Determinate Systems installer.
@@ -37,7 +43,7 @@ gentoo:
 freebsd:
 	@echo TODO: pkg install nix
 
-ramya mei luna:
-	sudo -iu $@ -- home-manager switch -b backup --refresh --flake github:notarealdeveloper/nixos#$@
+luna:
+	sudo -iu $@ -- home-manager switch -b backup --refresh --flake github:notarealdeveloper/nix#$@
 
 .PHONY: default system home $(HOSTS)
