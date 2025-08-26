@@ -193,6 +193,7 @@ in
     gnome-terminal
     github-desktop
     ffmpegthumbnailer
+    libreoffice-fresh
 
     # themes
     numix-gtk-theme
