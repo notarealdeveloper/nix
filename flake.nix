@@ -81,56 +81,37 @@
 
     };
 
-    homeConfigurations =
+    homeConfigurations = {
 
-      let
-
-        user = "jason";
-
-        linux = {
-          home.username = user;
-          home.homeDirectory = "/home/${user}";
-        };
-
-        android = {
-          home.username = "nix-on-droid";
-          home.homeDirectory = "/data/data/com.termux.nix/files/home";
-        };
-
-        armpkgs = import nixpkgs { system = "aarch64-linux"; };
-
-      in {
-
-        turing = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ linux ./home/jason.nix ];
-          extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
-        };
-
-        kleene = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ linux ./home/jason.nix ];
-          extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
-        };
-
-        gates = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ linux ./home/jason.nix ];
-          extraSpecialArgs = { inherit pkgs; desktop = false; private = true; };
-        };
-
-        localhost = home-manager.lib.homeManagerConfiguration {
-          pkgs = armpkgs;
-          modules = [ android ./home/jason.nix ];
-          extraSpecialArgs = { pkgs = armpkgs; desktop = false; private = false; };
-        };
-
-        luna = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home/luna.nix ];
-        };
-
+      turing = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/jason.nix ];
+        extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
       };
+
+      kleene = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/jason.nix ];
+        extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
+      };
+
+      gates = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/jason.nix ];
+        extraSpecialArgs = { inherit pkgs; desktop = false; private = true; };
+      };
+
+      localhost = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        modules = [ ./os/android-nixos.nix ];
+      };
+
+      luna = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/luna.nix ];
+      };
+
+    };
 
     nixOnDroidConfigurations = rec {
       localhost = nix-on-droid.lib.nixOnDroidConfiguration {

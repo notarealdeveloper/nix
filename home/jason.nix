@@ -7,7 +7,6 @@
 }:
 
 let
-
   user = "jason";
   name = "Jason Wilkes";
   email = "notarealdeveloper@gmail.com";
@@ -20,6 +19,8 @@ let
 
 in {
 
+  home.username = user;
+  home.homeDirectory = "/home/${user}";
   news.display = "silent";
 
   # ~/.config/git
