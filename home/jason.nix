@@ -26,7 +26,7 @@ in {
   # ~/.config/git
   programs.git = {
     enable    = true;
-    userName  = user;
+    userName  = name;
     userEmail = email;
     extraConfig = {
       init.defaultBranch = "master";
@@ -144,7 +144,7 @@ in {
       ".local/share/applications/obsidian.desktop".text =
           let
             src = builtins.readFile "${pkgs.obsidian}/share/applications/obsidian.desktop";
-            icon = "${config.home.homeDirectory}.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
+            icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
           in
             builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
     })
