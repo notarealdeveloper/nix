@@ -195,6 +195,11 @@ in
     ffmpegthumbnailer
     libreoffice-fresh
 
+    # ibus
+    ibus-engines.anthy
+    ibus-engines.libpinyin
+    ibus-engines.hangul
+
     # themes
     numix-gtk-theme
     numix-icon-theme-circle
