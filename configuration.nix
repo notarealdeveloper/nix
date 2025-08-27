@@ -376,9 +376,9 @@ in
   programs.openvpn3.enable = true;
 
   # users
-  users.users.jason = {
+  users.users.user = {
     isNormalUser = true;
-    description = "Jason";
+    description = "User";
     extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
     packages = with pkgs; [
     ];
@@ -395,19 +395,19 @@ in
   };
 
   # groups
-  users.extraGroups.plocate.members = [ "jason" ];
+  users.extraGroups.plocate.members = [ "user" ];
 
   security.sudo = {
     enable = true;
     extraRules = [
-      { users = [ "jason" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
+      { users = [ "user" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
     ];
   };
 
   # git (system level)
   environment.etc."gitconfig".text = ''
     [user]
-      name = Jason Wilkes
+      name = root
       email = root@thedynamiclinker.com
     [init]
       defaultBranch = master
@@ -424,7 +424,7 @@ in
 
   nix.settings = {
 
-    trusted-users = [ "root" "jason" ];
+    trusted-users = [ "root" "user" ];
 
     substituters = [
       "https://cache.nixos.org"
