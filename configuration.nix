@@ -308,7 +308,6 @@ in
       matplotlib
       seaborn
       scikit-learn
-      tensorflow
       accelerate
       lightgbm
       lambda-multiprocessing
