@@ -85,19 +85,19 @@
 
       turing = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/user.nix ];
+        modules = [ ./home/jason.nix ];
         extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
       };
 
       kleene = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/user.nix ];
+        modules = [ ./home/jason.nix ];
         extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
       };
 
       gates = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/user.nix ];
+        modules = [ ./home/jason.nix ];
         extraSpecialArgs = { inherit pkgs; desktop = false; private = true; };
       };
 

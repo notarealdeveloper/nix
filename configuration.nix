@@ -383,6 +383,14 @@ in
     ];
   };
 
+  users.users.jason = {
+    isNormalUser = true;
+    description = "Jason";
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
+    packages = with pkgs; [
+    ];
+  };
+
   users.users.luna = {
     isNormalUser = true;
     description = "Luna";
@@ -394,19 +402,19 @@ in
   };
 
   # groups
-  users.extraGroups.plocate.members = [ "user" ];
+  users.extraGroups.plocate.members = [ "user" "jason" ];
 
   security.sudo = {
     enable = true;
     extraRules = [
-      { users = [ "user" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
+      { users = [ "user" "jason" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
     ];
   };
 
   # git (system level)
   environment.etc."gitconfig".text = ''
     [user]
-      name = root
+      name = "Jason Wilkes"
       email = root@thedynamiclinker.com
     [init]
       defaultBranch = master
@@ -423,7 +431,7 @@ in
 
   nix.settings = {
 
-    trusted-users = [ "root" "user" ];
+    trusted-users = [ "root" "user" "jason" ];
 
     substituters = [
       "https://cache.nixos.org"
