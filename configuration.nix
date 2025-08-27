@@ -371,8 +371,8 @@ in
 
   # net
   networking.networkmanager.enable = true;
-  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
-  programs.openvpn3.enable = true;
+  #networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
+  #programs.openvpn3.enable = true;
 
   # users
   users.users.user = {
