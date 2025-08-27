@@ -4,7 +4,7 @@ let
 
   # for help, see nixos-help or man nix.conf
 
-  all-that-shit = builtins.attrValues doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
+  wnixpkgs = builtins.attrValues doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
 
   cacheName = "notarealdeveloper";
 
@@ -280,22 +280,60 @@ in
     # raw binary machine code overlay ftw
     noelf
 
-    #(python313.withPackages (ps: with ps; [
-    #
-    #    torch
-    #
-    #    # ~/bin depends
-    #    google-auth-oauthlib      # gmail
-    #    google-api-python-client  # getbtcprice
-    #    geoip2                    # getbtcprice
-    #
-    #    embd
-    #    wnix
-    #
-    #]))
+    (python313.withPackages (ps: with ps; [
 
-  ] ++ all-that-shit;
-  #] ++ python_interpreters;
+      # packaging
+      pip
+      build
+      pytest
+      setuptools
+      cython
+      twine
+
+      # basics
+      ipython
+      sly
+      curio
+
+      # net
+      yt-dlp
+      requests
+      beautifulsoup4
+
+      # numerical
+      numpy
+      sympy
+      scipy
+      pandas
+      matplotlib
+      seaborn
+      scikit-learn
+      tensorflow
+      accelerate
+      lightgbm
+      lambda-multiprocessing
+
+      # ours
+      python-bin
+      is-instance
+      assure
+      webfs
+      mmry
+      embd
+      kern
+      wnix
+
+      # numerical
+      torch
+
+      # ~/bin depends
+      google-auth-oauthlib      # gmail
+      google-api-python-client  # getbtcprice
+      geoip2                    # getbtcprice
+
+    ]))
+
+  ] ++ wnixpkgs;
 
   boot.kernel.sysctl = {
     "net.core.bpf_jit_enable" = 1;
