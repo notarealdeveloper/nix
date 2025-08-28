@@ -64,12 +64,13 @@ in
   # x11 (todo: wayland)
   services.xserver = {
     enable = true;
-    layout = "us";
-    variant = "";
-    options = "caps:escape";
-    xkb.layout  = "us,ara,il,in,in,ru,gr";
-    xkb.variant = ",mac-phonetic,phonetic,hin-kagapa,tel-kagapa,phonetic,";
-    # xkb.options = "grp:alt_shift_toggle";
+    xkb = {
+      layout = "us";
+      variant = "";
+      options = "caps:escape";
+      layout  = "us,ara,il,in,in,ru,gr";
+      variant = ",mac-phonetic,phonetic,hin-kagapa,tel-kagapa,phonetic,";
+    };
   };
 
   # desktop
