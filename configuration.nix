@@ -301,6 +301,12 @@ in
 
   ] ++ wnixpkgs;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    zlib
+    stdenv.cc.cc.lib
+  ];
+
   boot.kernel.sysctl = {
     "net.core.bpf_jit_enable" = 1;
     "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
