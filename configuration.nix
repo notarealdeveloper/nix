@@ -99,6 +99,7 @@ in
     # build
     gcc
     nasm
+    yacc
     clang
     meson
     ccache
