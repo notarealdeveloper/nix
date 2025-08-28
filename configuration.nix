@@ -186,9 +186,9 @@ in
     imagemagick
 
     # fonts
-    noto-fonts        # hebrew, telugu, devangari, arabic
-    noto-fonts-cjk    # chinese, japanese, korean
-    noto-fonts-extra  # egyptian hieroglyphs, phoenician
+    noto-fonts          # hebrew, telugu, devangari, arabic
+    noto-fonts-cjk-sans # chinese, japanese, korean
+    noto-fonts-extra    # egyptian hieroglyphs, phoenician
 
     # phone
     adbfs-rootless
