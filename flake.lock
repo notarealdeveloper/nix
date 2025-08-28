@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1756424144,
-        "narHash": "sha256-T3UeLuPcZP8pUkExJRG41GmwX1njO+0TsW+y9PWSWXI=",
+        "lastModified": 1756424745,
+        "narHash": "sha256-liwQ9u+i7G9hP5UJ7U2OhSG0R4AzXaSvVosf/1dDiSE=",
         "owner": "doubleunix",
         "repo": "overlay",
-        "rev": "adfc60e893dd38af47c66e7a635f74235c636337",
+        "rev": "4fe7451892ea9e13df30accc6dcb841ca21478d6",
         "type": "github"
       },
       "original": {
