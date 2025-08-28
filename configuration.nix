@@ -65,7 +65,6 @@ in
   services.xserver = {
     enable = true;
     xkb = {
-      layout = "us";
       variant = "";
       options = "caps:escape";
       layout  = "us,ara,il,in,in,ru,gr";
