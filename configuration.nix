@@ -197,6 +197,7 @@ in
     libreoffice-fresh
 
     # ibus
+    ibus
     ibus-engines.anthy
     ibus-engines.libpinyin
     ibus-engines.hangul
