@@ -65,7 +65,6 @@ in
   services.xserver = {
     enable = true;
     xkb = {
-      variant = "";
       options = "caps:escape";
       layout  = "us,ara,il,in,in,ru,gr";
       variant = ",mac-phonetic,phonetic,hin-kagapa,tel-kagapa,phonetic,";
