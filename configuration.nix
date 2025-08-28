@@ -42,6 +42,15 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      anthy          # Japanese
+      libpinyin      # Chinese
+      hangul         # Korean
+    ];
+  };
+
   services.libinput = {
     enable = true;
     touchpad = {
@@ -53,11 +62,14 @@ in
   };
 
   # x11 (todo: wayland)
-  services.xserver.enable = true;
-  services.xserver.xkb = {
+  services.xserver = {
+    enable = true;
     layout = "us";
     variant = "";
     options = "caps:escape";
+    xkb.layout  = "us,ara,il,in,in,ru,gr";
+    xkb.variant = ",mac-phonetic,phonetic,hin-kagapa,tel-kagapa,phonetic,";
+    # xkb.options = "grp:alt_shift_toggle";
   };
 
   # desktop
