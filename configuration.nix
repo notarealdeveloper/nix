@@ -299,58 +299,6 @@ in
     # raw binary machine code overlay ftw
     noelf
 
-    (python313.withPackages (ps: with ps; [
-
-      # packaging
-      pip
-      build
-      pytest
-      setuptools
-      cython
-      twine
-
-      # basics
-      ipython
-      sly
-      curio
-
-      # net
-      yt-dlp
-      requests
-      beautifulsoup4
-
-      # numerical
-      numpy
-      sympy
-      scipy
-      pandas
-      matplotlib
-      seaborn
-      scikit-learn
-      accelerate
-      lightgbm
-      lambda-multiprocessing
-
-      # ours
-      python-bin
-      is-instance
-      assure
-      webfs
-      mmry
-      embd
-      kern
-      wnix
-
-      # numerical
-      torch
-
-      # ~/bin depends
-      google-auth-oauthlib      # gmail
-      google-api-python-client  # getbtcprice
-      geoip2                    # getbtcprice
-
-    ]))
-
   ] ++ wnixpkgs;
 
   boot.kernel.sysctl = {
