@@ -81,12 +81,6 @@ in
   # sound
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # system
   environment.systemPackages =
@@ -455,5 +449,22 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 22 ];
+
+  # bluetooth
+  hardware.bluetooth = {
+    enable = true;  # loads btusb
+    powerOnBoot = true;
+    # Turn off BlueZ privacy if the adapter throws 0x03 errors
+    # settings = { General = { Privacy = "off"; }; };
+  };
+
+  services.blueman.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+  };
 
 }
