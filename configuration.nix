@@ -170,6 +170,8 @@ in
     vim_configurable
     ranger
     tmux
+    espeak
+    espeak-ng
 
     # mid-level
     xorg.xinit
