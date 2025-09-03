@@ -455,7 +455,7 @@ in
     enable = true;  # loads btusb
     powerOnBoot = true;
     # Turn off BlueZ privacy if the adapter throws 0x03 errors
-    settings = { General = { Privacy = "off"; }; };
+    settings.General.Privacy = "off";
   };
 
   services.blueman.enable = true;
@@ -465,6 +465,9 @@ in
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
+    wireplumber.enable = true;
   };
+
+  security.polkit.enable = true;
 
 }
