@@ -221,7 +221,7 @@ in
 
     # video
     vlc
-    ffmpeg
+    ffmpeg-full
     kdePackages.kdenlive
     simplescreenrecorder
 
