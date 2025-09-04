@@ -224,6 +224,7 @@ in
     ffmpeg-full
     kdePackages.kdenlive
     simplescreenrecorder
+    rnnoise-plugin
 
     # social
     # wechat
