@@ -229,7 +229,7 @@ in
     # social
     # wechat
     whatsapp-for-linux
-    zoom
+    zoom-us
 
     # games
     stepmania
