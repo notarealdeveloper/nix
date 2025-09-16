@@ -298,6 +298,9 @@ in
     # raw binary machine code overlay ftw
     noelf
 
+    # for the book
+    pango
+
   ] ++ wnixpkgs;
 
   boot.kernel.sysctl = {
