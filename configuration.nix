@@ -300,6 +300,7 @@ in
 
     # for the book
     pango
+    bc
 
   ] ++ wnixpkgs;
 
