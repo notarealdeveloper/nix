@@ -301,6 +301,7 @@ in
     # for the book
     pango
     bc
+    rustc
 
   ] ++ wnixpkgs;
 
