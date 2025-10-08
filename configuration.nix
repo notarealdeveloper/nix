@@ -183,7 +183,6 @@ in
 
     # fonts
     noto-fonts          # hebrew, telugu, devangari, arabic
-    noto-fonts-cjk
     noto-fonts-cjk-sans # chinese, japanese, korean
     noto-fonts-extra    # egyptian hieroglyphs, phoenician
     hanazono-fonts
