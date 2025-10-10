@@ -185,7 +185,6 @@ in
     noto-fonts          # hebrew, telugu, devangari, arabic
     noto-fonts-cjk-sans # chinese, japanese, korean
     noto-fonts-extra    # egyptian hieroglyphs, phoenician
-    hanazono-fonts
     unifont
     source-han-serif
 
