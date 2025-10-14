@@ -235,7 +235,7 @@ in
     zoom-us
 
     # games
-    stepmania
+    # stepmania
 
     # mathematics
     lean4
