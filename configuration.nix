@@ -295,8 +295,8 @@ in
     bazelisk
 
     # raw derivations
-    sayhi   # stdenv.mkDerivation, depends on hi
-    saybye  # builtins.derivation, depends on raw bye
+    #sayhi   # stdenv.mkDerivation, depends on hi
+    #saybye  # builtins.derivation, depends on raw bye
 
     # raw binary machine code overlay ftw
     noelf
