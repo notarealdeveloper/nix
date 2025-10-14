@@ -82,6 +82,9 @@ in
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
+  # intune for work
+  # services.intune.enable = true;
+
   # system
   environment.systemPackages =
 
@@ -252,6 +255,7 @@ in
     teams-for-linux
     gitlab-ci-local
     gitlab-container-registry
+    # intune-portal
 
     # ports
     weatherspect
