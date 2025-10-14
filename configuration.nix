@@ -124,9 +124,9 @@ in
     inotify-tools
     universal-ctags
 
-    bpftrace
-    bpftools
-    bcc
+    #bpftrace
+    #bpftools
+    #bcc
 
     # doc
     man-pages
@@ -312,10 +312,10 @@ in
 
   ] ++ wnixpkgs;
 
-  boot.kernel.sysctl = {
-    "net.core.bpf_jit_enable" = 1;
-    "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
-  };
+  #boot.kernel.sysctl = {
+  #  "net.core.bpf_jit_enable" = 1;
+  #  "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
+  #};
 
   # android debug bridge
   programs.adb.enable = true;
