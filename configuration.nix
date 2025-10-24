@@ -201,7 +201,7 @@ in
     gimp
     ghex
     gedit
-    conky
+    #conky
     evince
     vscode
     baobab
