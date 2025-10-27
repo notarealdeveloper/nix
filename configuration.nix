@@ -193,7 +193,7 @@ in
 
     # phone
     adbfs-rootless
-    android-udev-rules
+    # android-udev-rules  # "superseded by built-in systemd uaccess rules"
 
     # desktop
     eog
@@ -201,7 +201,7 @@ in
     gimp
     ghex
     gedit
-    #conky
+    conky
     evince
     vscode
     baobab
