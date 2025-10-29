@@ -201,12 +201,15 @@ in
     gimp
     ghex
     gedit
+    pinta
     conky
     evince
     vscode
     baobab
     dropbox
     gparted
+    lazpaint
+    inkscape
     obsidian
     poppler-utils
     google-chrome
