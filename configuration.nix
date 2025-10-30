@@ -237,7 +237,7 @@ in
 
     # social
     wechat
-    whatsapp-for-linux
+    wasistlos
     zoom-us
 
     # games
