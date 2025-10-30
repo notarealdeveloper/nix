@@ -170,7 +170,7 @@ in
     asciiquarium
 
     # tty
-    vim_configurable
+    vim-full
     ranger
     tmux
     espeak
@@ -339,7 +339,7 @@ in
   # vim: clipboard support
   programs.vim = {
     enable = true;
-    package = pkgs.vim_configurable;  # this is the default full-featured vim with +clipboard
+    package = pkgs.vim-full;  # this is the default full-featured vim with +clipboard
   };
 
   # Create autostart .desktop files for programs
