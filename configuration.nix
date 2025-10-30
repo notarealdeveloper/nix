@@ -236,7 +236,7 @@ in
     rnnoise-plugin
 
     # social
-    # wechat
+    wechat
     whatsapp-for-linux
     zoom-us
 
