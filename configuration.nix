@@ -138,6 +138,7 @@ in
 
     # sec
     gnupg
+    foremost
     cryptsetup
     thc-secure-delete
 
