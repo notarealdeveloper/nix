@@ -147,6 +147,7 @@ in
     sshfs
     openssh
     tcpdump
+    net-tools
 
     # tor
     tor
