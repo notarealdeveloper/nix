@@ -4,7 +4,9 @@ let
 
   # for help, see nixos-help or man nix.conf
 
-  wnixpkgs = builtins.attrValues doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
+  # wnixpkgs = builtins.attrValues doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
+
+  wnixpkgs = doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
 
   cacheName = "notarealdeveloper";
 
@@ -320,7 +322,16 @@ in
     rustc     # Rust. (2006 to 2015). Graydon Hoare created Rust in 2006, Mozilla sponsored it in 2009. Released 2012. Stable 2015.
     pandoc
 
-  ] ++ wnixpkgs;
+    # pythons, from the overlay
+    (lib.hiPrio wnixpkgs.py313)
+    wnixpkgs.py313t
+    wnixpkgs.py314
+    wnixpkgs.py314t
+    wnixpkgs.py315
+    wnixpkgs.py315t
+    wnixpkgs.overlay
+
+  ]; # ++ wnixpkgs;
 
   #boot.kernel.sysctl = {
   #  "net.core.bpf_jit_enable" = 1;
