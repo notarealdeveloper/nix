@@ -93,7 +93,7 @@ in
     with pkgs; [
 
     # pythons, from the overlay
-    (lib.hiPrio wnixpkgs.py313)
+    wnixpkgs.py313
     wnixpkgs.py313t
     wnixpkgs.py314
     wnixpkgs.py314t
