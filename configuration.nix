@@ -92,6 +92,15 @@ in
 
     with pkgs; [
 
+    # pythons, from the overlay
+    (lib.hiPrio wnixpkgs.py313)
+    wnixpkgs.py313t
+    wnixpkgs.py314
+    wnixpkgs.py314t
+    wnixpkgs.py315
+    wnixpkgs.py315t
+    wnixpkgs.overlay
+
     # unix
     gh
     git
@@ -321,15 +330,6 @@ in
     guile     # Scheme. (1975). Guy Steele and Gerald Sussman, the "Lambda the Ultimate" papers.
     rustc     # Rust. (2006 to 2015). Graydon Hoare created Rust in 2006, Mozilla sponsored it in 2009. Released 2012. Stable 2015.
     pandoc
-
-    # pythons, from the overlay
-    (lib.hiPrio wnixpkgs.py313)
-    wnixpkgs.py313t
-    wnixpkgs.py314
-    wnixpkgs.py314t
-    wnixpkgs.py315
-    wnixpkgs.py315t
-    wnixpkgs.overlay
 
   ]; # ++ wnixpkgs;
 
