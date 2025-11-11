@@ -199,11 +199,11 @@ in
     imagemagick
 
     # fonts
-    noto-fonts          # hebrew, telugu, devangari, arabic
+    noto-fonts          # hebrew, telugu, devangari, arabic, egyptian hiero, phoenician
     noto-fonts-cjk-sans # chinese, japanese, korean
-    #noto-fonts-extra   # egyptian hieroglyphs, phoenician (was replaced by noto-fonts)
+    source-han-serif    # cjk
+    culmus              # hebrew
     unifont
-    source-han-serif
 
     # phone
     adbfs-rootless
