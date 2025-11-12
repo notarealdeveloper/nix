@@ -324,7 +324,9 @@ in
 
     # tex
     texmaker
-    xetex
+    texliveFull
+    dvipng
+    ghostscript
 
     # for the book
     gfortran  # Fortran. (1957). John Backus and his team at IBM.
