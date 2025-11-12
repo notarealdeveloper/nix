@@ -325,7 +325,6 @@ in
     # tex
     texmaker
     texliveFull
-    dvipng
     ghostscript
 
     # for the book
