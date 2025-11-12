@@ -199,15 +199,15 @@ in
     imagemagick
 
     # fonts
-    noto-fonts          # hebrew, telugu, devangari, arabic, egyptian hiero, phoenician
-    noto-fonts-cjk-sans # chinese, japanese, korean
-    source-han-serif    # cjk
-    culmus              # hebrew
-    unifont
+    noto-fonts            # hebrew, telugu, devangari, arabic, egyptian hiero, phoenician
+    noto-fonts-cjk-sans   # chinese, japanese, korean
+    noto-fonts-cjk-serif  # cjk
+    source-han-serif      # ibid
+    culmus                # hebrew
+    unifont               # i forget
 
     # phone
     adbfs-rootless
-    # android-udev-rules  # "superseded by built-in systemd uaccess rules"
 
     # desktop
     eog

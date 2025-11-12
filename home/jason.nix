@@ -132,6 +132,21 @@ in {
 
       # auto-generated
       ".hotdogrc".text    = ''This is not a config file'';
+
+      ".config/fontconfig/conf.d/60-hebrew.conf".text = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <fontconfig>
+          <match>
+            <test name="lang" compare="contains">
+              <string>he</string>
+            </test>
+            <edit name="family" mode="assign">
+              <string>Noto Sans Hebrew</string>
+            </edit>
+          </match>
+        </fontconfig>
+      '';
     }
 
     # Desktop-specific files (conditional)
