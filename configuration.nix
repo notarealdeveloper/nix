@@ -322,15 +322,19 @@ in
     # raw binary machine code overlay ftw
     noelf
 
+    # tex
+    texmaker
+    xetex
+
     # for the book
-    bc
-    pango
     gfortran  # Fortran. (1957). John Backus and his team at IBM.
     gnucobol  # Cobol. (1959). Designed by the CODASYL committee, partly based on Grace Hopper's FLOW-MATIC language.
     clisp     # Lisp. (1956 to 1960). John McCarthy developed the basics during a summer AI research project.
     guile     # Scheme. (1975). Guy Steele and Gerald Sussman, the "Lambda the Ultimate" papers.
     rustc     # Rust. (2006 to 2015). Graydon Hoare created Rust in 2006, Mozilla sponsored it in 2009. Released 2012. Stable 2015.
     pandoc
+    pango
+    bc
 
   ]; # ++ wnixpkgs;
 
