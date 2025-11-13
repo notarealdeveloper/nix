@@ -485,6 +485,11 @@ in
   ### </cachix> ###
   #################
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = false;
+  };
+
   services.openssh = {
     enable = true;
     settings = {
