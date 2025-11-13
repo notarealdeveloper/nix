@@ -127,7 +127,7 @@ in {
       ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/bin/pyrc";
 
       # symlinks from personal
-      ".profile".source   = lib.mkDefault (link "${personal.dst}/etc/profile");
+      #".profile".source   = lib.mkDefault (link "${personal.dst}/etc/profile");
       "Templates".source  = link "${personal.dst}/etc/Templates";
 
       # auto-generated
@@ -181,6 +181,7 @@ in {
     "${personal.dst}/bin"
   ] ++ lib.optionals private [
     "${secret.dst}/bin"
+    "${secret.dst}/bin/o"
   ];
 
   # Bash configuration (consolidated with conditional private sources)
