@@ -337,8 +337,10 @@ in
     idris     # Dependent types
     idris2    # Dependenter types
     lean4     # The Highest
+    fontforge # Proto-Sinaitic font debugging
     pango     # παν語
     pandoc
+
 
   ]; # ++ wnixpkgs;
 
