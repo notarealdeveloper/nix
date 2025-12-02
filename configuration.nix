@@ -294,6 +294,7 @@ in
     xz.dev
     zstd
     zstd.dev
+    p7zip
     libffi
     libffi.dev
     readline
