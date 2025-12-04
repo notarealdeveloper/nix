@@ -351,7 +351,13 @@ in
   #  "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
   #};
 
-  fonts.fontconfig.enable = true;
+  fonts = {
+    fontconfig.enable = true;
+
+    packages = with pkgs; [
+      fonts.google.great-vibes
+    ];
+  };
 
   # android debug bridge
   programs.adb.enable = true;
