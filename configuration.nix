@@ -205,6 +205,7 @@ in
     source-han-serif      # ibid
     culmus                # hebrew
     unifont               # i forget
+    google-fonts
 
     # phone
     adbfs-rootless
