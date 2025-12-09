@@ -218,6 +218,7 @@ in
     gedit
     pinta
     conky
+    okular
     evince
     vscode
     baobab
@@ -226,6 +227,7 @@ in
     lazpaint
     inkscape
     obsidian
+    xournalpp
     poppler-utils
     google-chrome
     gnome-terminal
