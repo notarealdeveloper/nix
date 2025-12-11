@@ -219,7 +219,6 @@ in
     gedit
     pinta
     conky
-    okular
     evince
     vscode
     baobab
