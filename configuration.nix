@@ -115,6 +115,7 @@ in
     jq
     file
     cpio
+    pigz
     unzip
 
     # build
