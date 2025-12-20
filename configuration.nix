@@ -140,6 +140,10 @@ in
     inotify-tools
     universal-ctags
 
+    pinentry-tty
+    pinentry-curses
+    pinentry-gnome3
+
     #bpftrace
     #bpftools
     #bcc
