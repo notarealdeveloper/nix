@@ -244,6 +244,7 @@ in
     ibus-engines.anthy
     ibus-engines.libpinyin
     ibus-engines.hangul
+    libpinyin
 
     # themes
     numix-gtk-theme
