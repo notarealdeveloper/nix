@@ -364,6 +364,11 @@ in
   # dconf
   programs.dconf.enable = true;
 
+  # attempt to fix the ssh agent
+  programs.ssh.startAgent = true;
+  services.gnome.gnome-keyring.enable = false;
+  services.gnome.gcr-ssh-agent.enable = false;
+
   # this i guess...
   virtualisation.docker.enable = true;
 
