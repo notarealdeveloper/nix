@@ -379,12 +379,6 @@ in
         passwordeval = "cat /root/password.lol";
       };
     };
-
-    defaults = {
-      account = "default";
-      # Nice-to-haves:
-      # logfile = "~/.msmtp.log";
-    };
   };
 
   # android debug bridge
