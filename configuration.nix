@@ -348,6 +348,7 @@ in
     lean4     # The Highest
     fontforge # Proto-Sinaitic font debugging
     pango     # παν語
+    exiftool
     pandoc
 
 
