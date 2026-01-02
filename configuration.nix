@@ -359,6 +359,34 @@ in
   #  "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
   #};
 
+  programs.msmtp = {
+    enable = true;
+
+    # A minimal, practical setup (example uses Gmail SMTP; adjust for your provider)
+    accounts = {
+      default = {
+        auth = true;
+        host = "smtp.gmail.com";
+        port = 587;
+        tls = true;
+        tls_starttls = true;
+
+        # Your email identity
+        from = "root@thedynamiclinker.com";
+        user = "root@thedynamiclinker.com";
+
+        # Prefer using a secret manager; for quick tests you can inline temporarily:
+        passwordeval = "cat /root/password.lol";
+      };
+    };
+
+    defaults = {
+      account = "default";
+      # Nice-to-haves:
+      # logfile = "~/.msmtp.log";
+    };
+  };
+
   # android debug bridge
   programs.adb.enable = true;
 
