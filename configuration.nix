@@ -387,10 +387,10 @@ in
   security.pam.services.lightdm.enableGnomeKeyring = true;  # harmless if you don't use lightdm
 
   # Disable the GNOME/GCR SSH agent that Cinnamon enables by default
-  services.gnome.gcr-ssh-agent.enable = false;
+  services.gnome.gcr-ssh-agent.enable = true;
 
   # Use the normal OpenSSH ssh-agent instead
-  programs.ssh.startAgent = true;
+  # programs.ssh.startAgent = true;
 
   # Keep keyring for browser/passwords (fine)
   services.gnome.gnome-keyring.enable = true;
