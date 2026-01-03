@@ -382,11 +382,18 @@ in
   };
 
   # login keyring
-  programs.ssh.startAgent = false;
-  services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.gdm.enableGnomeKeyring = true;      # harmless if you don't use gdm
   security.pam.services.lightdm.enableGnomeKeyring = true;  # harmless if you don't use lightdm
+
+  ## Disable gcr-ssh-agent so it won't pop GUI passphrase prompts
+  services.gnome.gnome-keyring.enableSSHAgent = false;
+
+  ## Use the normal OpenSSH agent instead
+  programs.ssh.startAgent = true;
+
+  #programs.ssh.startAgent = false;
+  #services.gnome.gnome-keyring.enable = true;
 
   #services.openssh = {
   #  enable = true;
