@@ -386,31 +386,14 @@ in
   security.pam.services.gdm.enableGnomeKeyring = true;      # harmless if you don't use gdm
   security.pam.services.lightdm.enableGnomeKeyring = true;  # harmless if you don't use lightdm
 
-  # keep gnome keyring for secrets/passwords
-  services.gnome.gnome-keyring.enable = true;
+  # Disable the GNOME/GCR SSH agent that Cinnamon enables by default
+  services.gnome.gcr-ssh-agent.enable = false;
 
-  # use the normal OpenSSH agent instead
+  # Use the normal OpenSSH ssh-agent instead
   programs.ssh.startAgent = true;
 
-  # But disable its SSH agent autostart (common file name)
-  environment.etc."xdg/autostart/gnome-keyring-ssh.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Name=GNOME Keyring: SSH Agent (disabled)
-    Hidden=true
-    X-GNOME-Autostart-enabled=false
-    NoDisplay=true
-  '';
-
-  # Also disable the newer name used on some systems (harmless if unused)
-  environment.etc."xdg/autostart/gcr-ssh-agent.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Name=GCR SSH Agent (disabled)
-    Hidden=true
-    X-GNOME-Autostart-enabled=false
-    NoDisplay=true
-  '';
+  # Keep keyring for browser/passwords (fine)
+  services.gnome.gnome-keyring.enable = true;
 
   #services.openssh = {
   #  enable = true;
