@@ -505,17 +505,25 @@ in
   systemd.services = {
 
     "cachix-daemon@${cacheName}" = {
+
       description = "Cachix daemon for ${cacheName}";
+
       wantedBy = [ "multi-user.target" ];
+
+      wants = [ "network-online.target" ];
+      after = [ "network-online.target" ];
+
       serviceConfig = {
         Type = "simple";
-        # Reads env file with CACHIX_AUTH_TOKEN
         EnvironmentFile = "/etc/cachix/${cacheName}.env";
         ExecStart = "${pkgs.cachix}/bin/cachix daemon run ${cacheName}";
-        Restart = "on-failure";
-        Environment = "NIX_SHOW_STATS=1";
+
+        Restart = "always";
+        RestartSec = "10s";
       };
 
+      # prevent "Start request repeated too quickly"
+      startLimitIntervalSec = 0;  # disable rate limiting
     };
 
   };
