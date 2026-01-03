@@ -389,11 +389,28 @@ in
   # keep gnome keyring for secrets/passwords
   services.gnome.gnome-keyring.enable = true;
 
-  # but do NOT run its SSH agent component
-  services.gnome.gnome-keyring.components = [ "pkcs11" "secrets" ];
-
   # use the normal OpenSSH agent instead
   programs.ssh.startAgent = true;
+
+  # But disable its SSH agent autostart (common file name)
+  environment.etc."xdg/autostart/gnome-keyring-ssh.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=GNOME Keyring: SSH Agent (disabled)
+    Hidden=true
+    X-GNOME-Autostart-enabled=false
+    NoDisplay=true
+  '';
+
+  # Also disable the newer name used on some systems (harmless if unused)
+  environment.etc."xdg/autostart/gcr-ssh-agent.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=GCR SSH Agent (disabled)
+    Hidden=true
+    X-GNOME-Autostart-enabled=false
+    NoDisplay=true
+  '';
 
   #services.openssh = {
   #  enable = true;
