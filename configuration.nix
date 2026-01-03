@@ -388,7 +388,7 @@ in
   programs.dconf.enable = true;
 
   # attempt to fix the ssh agent
-  programs.ssh.startAgent = true;
+  programs.ssh.startAgent = false;
   services.gnome.gnome-keyring.enable = true;
 
   #services.openssh = {
