@@ -381,15 +381,12 @@ in
     };
   };
 
-  # android debug bridge
-  programs.adb.enable = true;
-
-  # dconf
-  programs.dconf.enable = true;
-
-  # attempt to fix the ssh agent
+  # login keyring
   programs.ssh.startAgent = false;
   services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;      # harmless if you don't use gdm
+  security.pam.services.lightdm.enableGnomeKeyring = true;  # harmless if you don't use lightdm
 
   #services.openssh = {
   #  enable = true;
@@ -399,9 +396,16 @@ in
   #  };
   #};
 
-  # this i guess...
+  # android debug bridge
+  programs.adb.enable = true;
+
+  # dconf
+  programs.dconf.enable = true;
+
+  # os virtualization
   virtualisation.docker.enable = true;
 
+  # i forget what this is for
   gtk.iconCache.enable = false;
 
   # vim: clipboard support
