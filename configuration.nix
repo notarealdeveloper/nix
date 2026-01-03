@@ -386,14 +386,14 @@ in
   security.pam.services.gdm.enableGnomeKeyring = true;      # harmless if you don't use gdm
   security.pam.services.lightdm.enableGnomeKeyring = true;  # harmless if you don't use lightdm
 
-  ## Disable gcr-ssh-agent so it won't pop GUI passphrase prompts
-  services.gnome.gnome-keyring.enableSSHAgent = false;
+  # keep gnome keyring for secrets/passwords
+  services.gnome.gnome-keyring.enable = true;
 
-  ## Use the normal OpenSSH agent instead
+  # but do NOT run its SSH agent component
+  services.gnome.gnome-keyring.components = [ "pkcs11" "secrets" ];
+
+  # use the normal OpenSSH agent instead
   programs.ssh.startAgent = true;
-
-  #programs.ssh.startAgent = false;
-  #services.gnome.gnome-keyring.enable = true;
 
   #services.openssh = {
   #  enable = true;
