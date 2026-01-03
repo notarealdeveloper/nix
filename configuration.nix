@@ -388,8 +388,16 @@ in
   programs.dconf.enable = true;
 
   # attempt to fix the ssh agent
-  programs.ssh.startAgent = false;
+  programs.ssh.startAgent = true;
   services.gnome.gnome-keyring.enable = true;
+
+  #services.openssh = {
+  #  enable = true;
+  #  settings = {
+  #    PasswordAuthentication = true;
+  #    PermitRootLogin = "no";
+  #  };
+  #};
 
   # this i guess...
   virtualisation.docker.enable = true;
@@ -536,14 +544,6 @@ in
     useGlobalPkgs = true;
     useUserPackages = false;
   };
-
-  #services.openssh = {
-  #  enable = true;
-  #  settings = {
-  #    PasswordAuthentication = true;
-  #    PermitRootLogin = "no";
-  #  };
-  #};
 
   networking.firewall.allowedTCPPorts = [ 22 ];
 
