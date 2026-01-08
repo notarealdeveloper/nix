@@ -223,7 +223,6 @@ in
     gedit
     pinta
     conky
-    guake
     evince
     vscode
     baobab
