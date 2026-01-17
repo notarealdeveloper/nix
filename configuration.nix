@@ -213,6 +213,7 @@ in
     google-fonts
 
     # phone
+    android-tools
     adbfs-rootless
 
     # desktop
@@ -397,9 +398,6 @@ in
   #    PermitRootLogin = "no";
   #  };
   #};
-
-  # android debug bridge
-  programs.adb.enable = true;
 
   # dconf
   programs.dconf.enable = true;
