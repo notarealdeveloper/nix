@@ -117,6 +117,7 @@ in
     cpio
     pigz
     unzip
+    dos2unix
 
     # build
     gcc
@@ -134,6 +135,7 @@ in
 
     # debug
     gdb
+    xev
     strace
     ltrace
     patchelf
@@ -225,6 +227,7 @@ in
     gedit
     pinta
     conky
+    guake
     evince
     vscode
     baobab
