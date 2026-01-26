@@ -139,6 +139,7 @@ in
     patchelf
     inotify-tools
     universal-ctags
+    witr # witr = why is this running
 
     pinentry-tty
     pinentry-curses
