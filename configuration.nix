@@ -147,6 +147,10 @@ in
     pinentry-curses
     pinentry-gnome3
 
+    # matplotlib agg non-interactive bullshit
+    mesa
+    libglvnd
+
     #bpftrace
     #bpftools
     #bcc
@@ -406,6 +410,9 @@ in
   #    PermitRootLogin = "no";
   #  };
   #};
+
+  #hardware.graphics.enable = true;
+  hardware.opengl.enable = true;
 
   # dconf
   programs.dconf.enable = true;
