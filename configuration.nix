@@ -93,14 +93,14 @@ in
     with pkgs; [
 
     # pythons, from the overlay
-    wnixpkgs.py313 # first gets priority
+    wnixpkgs.py314
+    #wnixpkgs.py313 # first gets priority
     wnixpkgs.py311
     #wnixpkgs.py312
     #wnixpkgs.py313t
-    wnixpkgs.py314
     #wnixpkgs.py314t
     #wnixpkgs.py315
-    wnixpkgs.py315t
+    #wnixpkgs.py315t
 
     # unix
     gh
