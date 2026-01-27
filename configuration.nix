@@ -324,6 +324,10 @@ in
     tk.dev
     tcl
 
+    # for fuse google drive mount
+    rclone
+    fuse3
+
     # tensorflow
     bazel
     bazelisk
@@ -554,6 +558,8 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 22 ];
+
+  programs.fuse.userAllowOther = true;
 
   # bluetooth
   hardware.bluetooth = {
