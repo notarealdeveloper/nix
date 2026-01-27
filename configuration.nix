@@ -93,7 +93,7 @@ in
     with pkgs; [
 
     # pythons, from the overlay
-    wnixpkgs.py314
+    wnixpkgs.py313
     #wnixpkgs.py313 # first gets priority
     wnixpkgs.py311
     #wnixpkgs.py312
