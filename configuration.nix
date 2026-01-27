@@ -412,8 +412,7 @@ in
   #  };
   #};
 
-  #hardware.graphics.enable = true;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # dconf
   programs.dconf.enable = true;
