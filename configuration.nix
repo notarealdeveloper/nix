@@ -150,6 +150,7 @@ in
     # matplotlib agg non-interactive bullshit
     mesa
     libglvnd
+    qt6.qtbase
 
     #bpftrace
     #bpftools
