@@ -154,13 +154,12 @@ in
     with pkgs; [
 
 
-    (python313.withPackages (ps: all ps ++ std ps))
-    (python311.withPackages (ps: all ps ++ std ps))
+    #(python313.withPackages (ps: all ps ++ std ps))
+    #(python311.withPackages (ps: all ps ++ std ps))
 
     # pythons, from the overlay
-    #wnixpkgs.py313
-    #wnixpkgs.py313 # first gets priority
-    #wnixpkgs.py311
+    wnixpkgs.py313 # first gets priority
+    wnixpkgs.py311
     #wnixpkgs.py312
     #wnixpkgs.py313t
     #wnixpkgs.py314t
