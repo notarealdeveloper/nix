@@ -174,7 +174,11 @@ in
     pcre
     acpi
     plocate
+
+    # mail
     mailutils
+    msmtp
+    ca-certificates
 
     # formats
     jq
