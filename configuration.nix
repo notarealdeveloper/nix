@@ -154,6 +154,7 @@ in
     pinentry-gnome3
 
     # matplotlib agg non-interactive bullshit
+    cairo
     mesa
     libglvnd
     qt6.qtbase
