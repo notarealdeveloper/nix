@@ -158,6 +158,22 @@ in
     mesa
     libglvnd
     qt6.qtbase
+    # add these
+    xorg.libX11
+    xorg.libXext
+    xorg.libXrender
+    xorg.libXrandr
+    xorg.libxcb
+    xorg.xcbutil
+    xorg.xcbutilimage
+    xorg.xcbutilkeysyms
+    xorg.xcbutilrenderutil
+    xorg.xcbutilwm
+    libxkbcommon
+    fontconfig
+    freetype
+    glib
+    dbus
 
     #bpftrace
     #bpftools
