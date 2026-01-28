@@ -328,7 +328,7 @@ in
     # video
     vlc
     ffmpeg-full
-    kdePackages.kdenlive
+    #kdePackages.kdenlive
     simplescreenrecorder
     rnnoise-plugin
 
