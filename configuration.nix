@@ -174,6 +174,7 @@ in
     pcre
     acpi
     plocate
+    mailutils
 
     # formats
     jq
