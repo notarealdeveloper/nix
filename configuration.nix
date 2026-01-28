@@ -457,7 +457,7 @@ in
         user = "root@thedynamiclinker.com";
 
         # Prefer using a secret manager; for quick tests you can inline temporarily:
-        passwordeval = "cat /root/password.lol";
+        passwordeval = "cat /home/jason/.auth-is-serious-guys-cmon";
       };
     };
   };
