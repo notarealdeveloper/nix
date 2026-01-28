@@ -10,6 +10,67 @@ let
 
   cacheName = "notarealdeveloper";
 
+  all = (ps: with ps; [
+
+    # packaging
+    pip
+    build
+    pytest
+    setuptools
+    cython
+
+    # basics
+    ipython
+    #sly
+    #curio
+
+    # net
+    requests
+    beautifulsoup4
+
+    # numerical
+    numpy
+    sympy
+    editdistance
+
+    # ours
+    #assure
+    #is-instance
+    #python-bin
+    #mmry
+    #webfs
+
+  ]);
+
+  std = (ps: with ps; [
+    # packaging
+    twine
+
+    # net
+    yt-dlp
+
+    # numerical
+    scipy
+    pandas
+    matplotlib
+    pyqt6
+
+    seaborn
+    scikit-learn
+    #lambda-multiprocessing
+    #lightgbm
+    h5py
+    pillow
+
+    # ~/bin depends
+    google-auth-oauthlib      # gmail
+    google-api-python-client  # gmail, getbtcprice
+    geoip2                    # getbtcprice
+
+    # for sklearn
+    lz4
+  ]);
+
 in
 
 {
@@ -92,10 +153,14 @@ in
 
     with pkgs; [
 
+
+    (python313.withPackages (ps: all ps ++ std ps))
+    (python311.withPackages (ps: all ps ++ std ps))
+
     # pythons, from the overlay
-    wnixpkgs.py313
+    #wnixpkgs.py313
     #wnixpkgs.py313 # first gets priority
-    wnixpkgs.py311
+    #wnixpkgs.py311
     #wnixpkgs.py312
     #wnixpkgs.py313t
     #wnixpkgs.py314t
