@@ -441,6 +441,7 @@ in
   #};
 
   programs.msmtp = {
+
     enable = true;
 
     # A minimal, practical setup (example uses Gmail SMTP; adjust for your provider)
@@ -451,6 +452,7 @@ in
         tls_trust_file = "/etc/ssl/certs/ca-bundle.crt";
         auth = true;
       };
+    };
 
     accounts.default = {
       host = "smtp.gmail.com";
