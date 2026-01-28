@@ -445,21 +445,25 @@ in
 
     # A minimal, practical setup (example uses Gmail SMTP; adjust for your provider)
     accounts = {
-      default = {
-        auth = true;
-        host = "smtp.gmail.com";
-        port = 587;
+      defaults = {
         tls = true;
         tls_starttls = true;
-
-        # Your email identity
-        from = "root@thedynamiclinker.com";
-        user = "root@thedynamiclinker.com";
-
-        # Prefer using a secret manager; for quick tests you can inline temporarily:
-        passwordeval = "cat /home/jason/.auth-is-serious-guys-cmon";
+        tls_trust_file = "/etc/ssl/certs/ca-bundle.crt";
+        auth = true;
       };
+
+    accounts.default = {
+      host = "smtp.gmail.com";
+      port = 587;
+
+      # Your email identity
+      from = "root@thedynamiclinker.com";
+      user = "root@thedynamiclinker.com";
+
+      # Prefer using a secret manager; for quick tests you can inline temporarily:
+      passwordeval = "cat /home/jason/.auth-is-serious-guys-cmon";
     };
+
   };
 
   # login keyring
