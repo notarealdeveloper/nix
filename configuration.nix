@@ -104,6 +104,7 @@ in
     #wnixpkgs.py314t
     #wnixpkgs.py315
     #wnixpkgs.py315t
+    uv
 
     # unix
     gh
