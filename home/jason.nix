@@ -127,7 +127,8 @@ in {
       ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/bin/pyrc";
 
       # symlinks from personal
-      ".profile".source   = lib.mkDefault (link "${personal.dst}/etc/profile");
+      # ".profile".source   = lib.mkDefault (link "${personal.dst}/etc/profile");
+      ".profile".source   = link "${personal.dst}/etc/profile";
       "Templates".source  = link "${personal.dst}/etc/Templates";
 
       # auto-generated
