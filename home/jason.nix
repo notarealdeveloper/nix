@@ -127,12 +127,10 @@ in {
       ".ipython/profile_default/startup/00-pyrc.py".source = link "${exec.dst}/bin/pyrc";
 
       # symlinks from personal
+      # ".xprofile".text    = ''setxkbmap -option caps:escape'';
       # ".profile".source   = link "${personal.dst}/etc/profile";
       # ".profile".source   = lib.mkDefault (link "${personal.dst}/etc/profile");
       ".profile".source   = lib.mkForce (link "${personal.dst}/etc/profile");
-      ".xprofile".text    = ''
-        setxkbmap -option caps:escape
-      '';
       "Templates".source  = link "${personal.dst}/etc/Templates";
 
       # auto-generated
