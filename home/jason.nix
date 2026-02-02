@@ -130,6 +130,9 @@ in {
       # ".profile".source   = link "${personal.dst}/etc/profile";
       # ".profile".source   = lib.mkDefault (link "${personal.dst}/etc/profile");
       ".profile".source   = lib.mkForce (link "${personal.dst}/etc/profile");
+      ".xprofile".text    = ''
+        setxkbmap -option caps:escape
+      '';
       "Templates".source  = link "${personal.dst}/etc/Templates";
 
       # auto-generated
