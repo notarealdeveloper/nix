@@ -393,6 +393,9 @@ in
 
   ]; # ++ wnixpkgs;
 
+  services.tor.enable = true;
+  services.tor.client.enable = true;
+
   #boot.kernel.sysctl = {
   #  "net.core.bpf_jit_enable" = 1;
   #  "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
