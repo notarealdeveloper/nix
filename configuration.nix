@@ -189,7 +189,8 @@ in
     gnupg
     foremost
     cryptsetup
-    thc-secure-delete
+    #thc-secure-delete
+    srm
 
     # net
     nmap
