@@ -267,6 +267,7 @@ in
     inkscape
     obsidian
     xournalpp
+    geckodriver
     chromedriver
     poppler-utils
     google-chrome
