@@ -258,6 +258,7 @@ in
     pinta
     conky
     guake
+    mupdf
     evince
     vscode
     baobab
