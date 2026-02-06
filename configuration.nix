@@ -274,7 +274,7 @@ in
     google-chrome
     gnome-terminal
     github-desktop
-    transmission-gtk
+    transmission_4-gtk
     ffmpegthumbnailer
     libreoffice-fresh
 
