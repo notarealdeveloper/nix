@@ -274,6 +274,7 @@ in
     google-chrome
     gnome-terminal
     github-desktop
+    transmission-gtk
     ffmpegthumbnailer
     libreoffice-fresh
 
@@ -403,6 +404,12 @@ in
   #  "net.core.bpf_jit_enable" = 1;
   #  "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
   #};
+
+  xdg = {
+    menus.enable = true;
+    mime.enable = true;
+    icons.enable = true;
+  };
 
   programs.msmtp = {
 
