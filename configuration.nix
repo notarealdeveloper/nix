@@ -264,6 +264,7 @@ in
     baobab
     dropbox
     gparted
+    parallel
     lazpaint
     inkscape
     obsidian
