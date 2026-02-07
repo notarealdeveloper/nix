@@ -231,12 +231,21 @@ in
     xorg.xinit
     xorg.xeyes
     xorg.xhost
+    xorg.libX11
+    xorg.libxcb
+    xorg.libXau
+    xorg.libXdmcp
+    xorg.libXext
+    xorg.libXrender
+    glib
+    zlib
+    stdenv.cc.cc   # provides libstdc++.so.6 which wheels often need
     xclip
     xdotool
     imagemagick
 
     # fonts
-    noto-fonts            # hebrew, telugu, devangari, arabic, egyptian hiero, phoenician
+    noto-fonts            # hebrew, telugu, devangari, arabic, egypt, phoenician
     noto-fonts-cjk-sans   # chinese, japanese, korean
     noto-fonts-cjk-serif  # cjk
     source-han-serif      # ibid
