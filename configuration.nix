@@ -190,7 +190,6 @@ in
     foremost
     cryptsetup
     #thc-secure-delete
-    srm
 
     # net
     nmap
