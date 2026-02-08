@@ -130,6 +130,7 @@ in
     gcc
     glibc.dev
     binutils
+    stdenv.cc
     nasm
     bison
     clang
