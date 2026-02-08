@@ -143,6 +143,8 @@ in
     # debug
     gdb
     xev
+    htop
+    iotop
     strace
     ltrace
     patchelf
