@@ -129,6 +129,7 @@ in
     # build
     gcc
     glibc.dev
+    binutils
     nasm
     bison
     clang
