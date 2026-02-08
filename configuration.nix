@@ -142,8 +142,8 @@ in
     autoconf
     automake
     cmake
-    busybox
-    toybox
+    #busybox
+    #toybox
 
     # debug
     gdb
