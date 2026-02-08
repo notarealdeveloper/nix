@@ -139,6 +139,8 @@ in
     autoconf
     automake
     cmake
+    busybox
+    toybox
 
     # debug
     gdb
