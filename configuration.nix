@@ -250,6 +250,7 @@ in
     xclip
     xdotool
     imagemagick
+    netpbm
 
     # fonts
     noto-fonts            # hebrew, telugu, devangari, arabic, egypt, phoenician
