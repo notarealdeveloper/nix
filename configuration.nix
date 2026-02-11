@@ -154,6 +154,7 @@ in
     ltrace
     binwalk
     patchelf
+    tesseract
     inotify-tools
     universal-ctags
     witr # witr = why is this running
