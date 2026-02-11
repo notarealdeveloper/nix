@@ -152,6 +152,7 @@ in
     iotop
     strace
     ltrace
+    binwalk
     patchelf
     inotify-tools
     universal-ctags
