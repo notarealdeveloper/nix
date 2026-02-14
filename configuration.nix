@@ -116,6 +116,7 @@ in
     plocate
 
     # mail
+    msmtp
     mailutils
 
     # formats
