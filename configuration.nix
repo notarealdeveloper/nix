@@ -435,32 +435,24 @@ in
   environment.variables.SENDMAIL = "${pkgs.msmtp}/bin/msmtp";
 
   programs.msmtp = {
-
     enable = true;
     setSendmail = true;
 
-    # A minimal, practical setup (example uses Gmail SMTP; adjust for your provider)
     accounts = {
-      defaults = {
+      default = {
+        host = "smtp.gmail.com";
+        port = 587;
+
+        auth = true;
         tls = true;
         tls_starttls = true;
         tls_trust_file = "/etc/ssl/certs/ca-bundle.crt";
-        auth = true;
+
+        user = "root@thedynamiclinker.com";
+        from = "root@thedynamiclinker.com";
+        passwordeval = "cat /home/jason/.auth-is-serious-guys-cmon";
       };
     };
-
-    accounts.default = {
-      host = "smtp.gmail.com";
-      port = 587;
-
-      # Your email identity
-      from = "root@thedynamiclinker.com";
-      user = "root@thedynamiclinker.com";
-
-      # Prefer using a secret manager; for quick tests you can inline temporarily:
-      passwordeval = "cat /home/jason/.auth-is-serious-guys-cmon";
-    };
-
   };
 
   # login keyring
