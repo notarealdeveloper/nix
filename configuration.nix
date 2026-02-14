@@ -448,8 +448,8 @@ in
         tls_starttls = true;
         tls_trust_file = "/etc/ssl/certs/ca-bundle.crt";
 
-        user = "root@thedynamiclinker.com";
-        from = "root@thedynamiclinker.com";
+        user = "letshaveanadventure@gmail.com";
+        from = "letshaveanadventure@gmail.com";
         passwordeval = "cat /home/jason/.auth-is-serious-guys-cmon";
       };
     };
