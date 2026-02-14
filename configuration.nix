@@ -433,6 +433,7 @@ in
   programs.msmtp = {
 
     enable = true;
+    setSendmail = true;
 
     # A minimal, practical setup (example uses Gmail SMTP; adjust for your provider)
     accounts = {
