@@ -431,6 +431,9 @@ in
     icons.enable = true;
   };
 
+  environment.etc."sendmail".source = "${pkgs.msmtp}/bin/msmtp";
+  environment.variables.SENDMAIL = "${pkgs.msmtp}/bin/msmtp";
+
   programs.msmtp = {
 
     enable = true;
