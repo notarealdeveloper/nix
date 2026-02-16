@@ -169,7 +169,8 @@ in
     mesa
     libglvnd
     qt6.qtbase
-    # add these
+
+    # x11 libs
     libX11
     libXext
     libXrender
@@ -181,10 +182,15 @@ in
     xcbutilkeysyms
     xcbutilrenderutil
     xcbutilwm
-    fontconfig
-    freetype
-    glib
-    dbus
+    xinit
+    xeyes
+    xhost
+    libX11
+    libxcb
+    libXau
+    libXdmcp
+    libXext
+    libXrender
 
     #bpftrace
     #bpftools
@@ -237,22 +243,17 @@ in
     espeak-ng
 
     # mid-level
-    xorg.xinit
-    xorg.xeyes
-    xorg.xhost
-    xorg.libX11
-    xorg.libxcb
-    xorg.libXau
-    xorg.libXdmcp
-    xorg.libXext
-    xorg.libXrender
+    xclip
+    xdotool
     glib
     zlib
     stdenv.cc.cc   # provides libstdc++.so.6 which wheels often need
-    xclip
-    xdotool
     imagemagick
     netpbm
+    fontconfig
+    freetype
+    glib
+    dbus
 
     # fonts
     noto-fonts            # hebrew, telugu, devangari, arabic, egypt, phoenician
