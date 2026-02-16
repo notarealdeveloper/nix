@@ -159,6 +159,7 @@ in
     nvme-cli
     dmidecode
     tesseract
+    aircrack-ng
     inotify-tools
     universal-ctags
     witr # witr = why is this running
