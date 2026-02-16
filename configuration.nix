@@ -192,7 +192,6 @@ in
     # doc
     man-pages
     man-pages-posix
-    linux-manual
 
     # sec
     gnupg
@@ -487,9 +486,6 @@ in
     enable = true;
     package = pkgs.vim-full;  # this is the default full-featured vim with +clipboard
   };
-
-
-  documentation.enable = false;
 
   # Create autostart .desktop files for programs
   # that should be automatically started by all
