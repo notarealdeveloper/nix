@@ -169,17 +169,17 @@ in
     libglvnd
     qt6.qtbase
     # add these
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXrandr
-    xorg.libxcb
-    xorg.xcbutil
-    xorg.xcbutilimage
-    xorg.xcbutilkeysyms
-    xorg.xcbutilrenderutil
-    xorg.xcbutilwm
+    libX11
+    libXext
+    libXrender
+    libXrandr
+    libxcb
     libxkbcommon
+    xcbutil
+    xcbutilimage
+    xcbutilkeysyms
+    xcbutilrenderutil
+    xcbutilwm
     fontconfig
     freetype
     glib
@@ -487,6 +487,9 @@ in
     enable = true;
     package = pkgs.vim-full;  # this is the default full-featured vim with +clipboard
   };
+
+
+  documentation.enable = false;
 
   # Create autostart .desktop files for programs
   # that should be automatically started by all
