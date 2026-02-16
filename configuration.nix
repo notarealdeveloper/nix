@@ -299,10 +299,12 @@ in
 
     # ibus
     ibus
+    #libpinyin
     ibus-engines.anthy
     ibus-engines.libpinyin
     ibus-engines.hangul
-    libpinyin
+    ibus-engines.pinyin
+    ibus-engines.mozc
 
     # themes
     numix-gtk-theme
