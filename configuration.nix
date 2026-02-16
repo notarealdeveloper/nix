@@ -155,6 +155,7 @@ in
     ltrace
     binwalk
     patchelf
+    nvme-cli
     dmidecode
     tesseract
     inotify-tools
