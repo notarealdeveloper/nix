@@ -147,6 +147,7 @@ in
     #toybox
 
     # debug
+    iw
     gdb
     xev
     htop
