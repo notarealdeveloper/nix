@@ -153,6 +153,7 @@ in
     iotop
     strace
     ltrace
+    ethtool
     binwalk
     patchelf
     nvme-cli
