@@ -155,6 +155,7 @@ in
     ltrace
     binwalk
     patchelf
+    dmidecode
     tesseract
     inotify-tools
     universal-ctags
