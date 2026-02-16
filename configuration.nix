@@ -156,6 +156,7 @@ in
     ltrace
     ethtool
     binwalk
+    pciutils
     patchelf
     nvme-cli
     dmidecode
