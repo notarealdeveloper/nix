@@ -45,12 +45,11 @@ in
   };
 
   i18n.inputMethod = {
-    type = "ibus";
-    enable = true;
+    enabled = "ibus";
     ibus.engines = with pkgs.ibus-engines; [
-      anthy          # Japanese
-      libpinyin      # Chinese
-      hangul         # Korean
+      libpinyin
+      anthy
+      hangul
     ];
   };
 
