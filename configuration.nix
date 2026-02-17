@@ -656,4 +656,8 @@ in
 
   security.polkit.enable = true;
 
+  networking.hosts = {
+    "165.227.186.223" = [ "epstein" ];
+    "167.172.219.109" = [ "fukkot" ];
+  };
 }
