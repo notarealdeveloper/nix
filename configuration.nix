@@ -287,6 +287,7 @@ in
     evince
     vscode
     baobab
+    firefox
     dropbox
     gparted
     parallel
