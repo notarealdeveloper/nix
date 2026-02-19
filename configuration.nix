@@ -287,6 +287,7 @@ in
     evince
     vscode
     baobab
+    nushell
     firefox
     dropbox
     gparted
