@@ -282,7 +282,7 @@ in
     gedit
     pinta
     conky
-    guake
+    #guake
     mupdf
     evince
     vscode
