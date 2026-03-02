@@ -572,6 +572,7 @@ in
   ### <cachix> ###
   ################
 
+  /*
   nix.settings = {
 
     trusted-users = [ "root" "user" "jason" ];
@@ -628,6 +629,8 @@ in
   #################
   ### </cachix> ###
   #################
+
+  */
 
   home-manager = {
     useGlobalPkgs = true;
