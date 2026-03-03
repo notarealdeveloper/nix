@@ -157,6 +157,7 @@ in
     ethtool
     binwalk
     pciutils
+    powertop
     patchelf
     nvme-cli
     dmidecode
