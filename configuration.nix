@@ -240,7 +240,7 @@ in
     cowsay
     xcowsay
     cmatrix
-    neofetch
+    fastfetch
     asciiquarium
 
     # tty
