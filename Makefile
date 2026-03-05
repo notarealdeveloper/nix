@@ -16,7 +16,7 @@ gates: 		system
 
 system:
 	sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
-	@#cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
+	# @cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
 
 localhost:
 	@if [ "$(USER)" != "nix-on-droid" ]; then echo "This doesn't look like a phone"; exit 1; fi
