@@ -137,7 +137,7 @@ in
     clang
     meson
     ccache
-    cachix
+    #cachix
     gnumake
     gnum4
     autoconf
