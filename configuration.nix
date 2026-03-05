@@ -216,6 +216,7 @@ in
     # net
     nmap
     sshfs
+    rclone
     openssh
     tcpdump
     net-tools
