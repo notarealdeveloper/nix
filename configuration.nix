@@ -297,6 +297,7 @@ in
     inkscape
     obsidian
     xournalpp
+    zed-editor
     geckodriver
     chromedriver
     poppler-utils
