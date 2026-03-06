@@ -219,6 +219,7 @@ in
     rclone
     openssh
     tcpdump
+    arp-scan
     net-tools
 
     # tor
