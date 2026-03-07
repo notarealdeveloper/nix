@@ -221,6 +221,7 @@ in
     tcpdump
     arp-scan
     net-tools
+    expressvpn
 
     # tor
     tor
