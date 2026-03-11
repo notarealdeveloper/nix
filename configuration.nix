@@ -438,6 +438,13 @@ in
   services.tor.enable = true;
   services.tor.client.enable = true;
 
+  # for adb over wifi
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   #boot.kernel.sysctl = {
   #  "net.core.bpf_jit_enable" = 1;
   #  "kernel.unprivileged_bpf_disabled" = 0; # set to 0 if you want unprivileged bpf
