@@ -276,8 +276,10 @@ in
     google-fonts
 
     # phone
-    android-tools
+    #android-tools
     adbfs-rootless
+    androidenv.androidPkgs.platform-tools
+    avahi
 
     # desktop
     eog
