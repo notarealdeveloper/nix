@@ -294,6 +294,7 @@ in
     evince
     vscode
     baobab
+    ghostty
     nushell
     firefox
     dropbox
