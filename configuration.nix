@@ -354,7 +354,8 @@ in
     nodePackages.npm
     glab
     awscli2
-    teams-for-linux
+    #teams-for-linux
+    teams
     gitlab-ci-local
     gitlab-container-registry
     # intune-portal
