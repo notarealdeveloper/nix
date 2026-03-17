@@ -231,9 +231,9 @@ in
 
     # virt
     qemu
-    docker
-    docker-buildx
-    docker-client
+    #docker
+    #docker-buildx
+    #docker-client
 
     # ascii
     sl
@@ -504,7 +504,7 @@ in
   programs.dconf.enable = true;
 
   # os virtualization
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
 
   # i forget what this is for
   gtk.iconCache.enable = false;
