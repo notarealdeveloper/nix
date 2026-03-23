@@ -124,6 +124,7 @@ in
     file
     cpio
     pigz
+    zlib
     unzip
     dos2unix
 
