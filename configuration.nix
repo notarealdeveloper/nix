@@ -124,7 +124,7 @@ in
     file
     cpio
     pigz
-    zlib
+    qpdf # for zlib-flate
     unzip
     dos2unix
 
