@@ -492,13 +492,13 @@ in
   services.gnome.gcr-ssh-agent.enable = true;   # keyring for ssh keys
   services.gnome.gnome-keyring.enable = true;   # keyring for browser/passwords
 
-  #services.openssh = {
-  #  enable = true;
-  #  settings = {
-  #    PasswordAuthentication = true;
-  #    PermitRootLogin = "no";
-  #  };
-  #};
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+    };
+  };
 
   hardware.graphics.enable = true;
 
