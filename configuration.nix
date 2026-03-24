@@ -113,6 +113,7 @@ in
     tree
     pcre
     acpi
+    lsof
     plocate
 
     # mail
