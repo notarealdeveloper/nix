@@ -352,8 +352,8 @@ in
     dconf2nix
 
     # work
-    nodePackages.nodejs
-    nodePackages.npm
+    #nodePackages.nodejs
+    #nodePackages.npm
     glab
     awscli2
     #teams-for-linux
