@@ -269,12 +269,13 @@ in
     dbus
 
     # fonts
-    noto-fonts            # hebrew, telugu, devangari, arabic, egypt, phoenician
-    noto-fonts-cjk-sans   # chinese, japanese, korean
-    noto-fonts-cjk-serif  # cjk
-    source-han-serif      # ibid
-    culmus                # hebrew
-    unifont               # i forget
+    noto-fonts              # hebrew, telugu, devangari, arabic, egypt, phoenician
+    noto-fonts-cjk-sans     # chinese, japanese, korean
+    noto-fonts-cjk-serif    # ibid
+    noto-fonts-color-emoji  # obviously
+    source-han-serif        # ibid
+    culmus                  # hebrew
+    unifont                 # i forget
     google-fonts
 
     # phone
