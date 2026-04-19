@@ -341,6 +341,7 @@ in
     wechat
     wasistlos
     zoom-us
+    discord
 
     # games
     # stepmania
