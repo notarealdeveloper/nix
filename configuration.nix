@@ -343,7 +343,7 @@ in
 
     # social
     wechat
-    wasistlos
+    karere # whatsapp client like wasistlos
     zoom-us
     discord
 
