@@ -131,6 +131,7 @@ in {
       # ".profile".source   = link "${personal.dst}/etc/profile";
       # ".profile".source   = lib.mkDefault (link "${personal.dst}/etc/profile");
       ".profile".source         = lib.mkForce (link "${personal.dst}/etc/profile");
+      ".XCompose".source        = lib.mkForce (link "${personal.dst}/etc/XCompose");
       ".tmux.conf".source       = lib.mkForce (link "${personal.dst}/etc/tmux.conf");
       ".tmux.conf.local".source = lib.mkForce (link "${personal.dst}/etc/tmux.conf.local");
       "Templates".source  = link "${personal.dst}/etc/Templates";
