@@ -447,12 +447,11 @@ in
 
   fonts.fontconfig = {
     enable = true;
-
     defaultFonts = {
-      sansSerif = [ "Roboto" "Noto Sans" ];
-      serif     = [ "Noto Serif" ];
-      monospace = [ "Roboto Mono" ];
-      emoji     = [ "Noto Color Emoji" ];
+      serif = [ "DejaVu Serif" ];
+      sansSerif = [ "DejaVu Sans" ];
+      monospace = [ "DejaVu Sans Mono" ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 
