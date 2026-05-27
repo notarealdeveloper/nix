@@ -271,7 +271,6 @@ in
     fontconfig
     fontforge-gtk
 
-    roboto
     noto-fonts                  # hebrew, telugu, devangari, arabic, egypt, phoenician
     noto-fonts-cjk-sans         # chinese, japanese, korean
     noto-fonts-cjk-serif        # ibid
@@ -280,6 +279,9 @@ in
     culmus                      # hebrew
     unifont                     # i forget
     google-fonts                # ibid
+    dejavu_fonts
+    liberation_ttf
+    roboto
 
     # phone
     #android-tools
