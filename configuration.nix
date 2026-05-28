@@ -218,7 +218,7 @@ in
     # net
     nmap
     sshfs
-    rclone
+    #rclone
     openssh
     openvpn
     tcpdump
@@ -303,17 +303,17 @@ in
     vscode
     baobab
     ghostty
-    nushell
-    firefox
+    #nushell
+    #firefox
     dropbox
     gparted
     parallel
     lazpaint
-    inkscape
+    #inkscape
     obsidian
-    xournalpp
-    zed-editor
-    geckodriver
+    #xournalpp
+    #zed-editor
+    #geckodriver
     chromedriver
     poppler-utils
     google-chrome
