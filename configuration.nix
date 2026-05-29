@@ -130,8 +130,10 @@ in
     dos2unix
 
     # build
-    stdenv.cc
     gcc
+    glibc
+    glibc.dev
+    binutils
     nasm
     bison
     clang
