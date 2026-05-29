@@ -284,6 +284,7 @@ in
 
     # codex
     codex
+    ruby
 
     # phone
     #android-tools
