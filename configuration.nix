@@ -130,10 +130,8 @@ in
     dos2unix
 
     # build
-    gcc
-    glibc.dev
-    binutils
     stdenv.cc
+    gcc
     nasm
     bison
     clang
@@ -381,7 +379,6 @@ in
 
     # compiling python upstream
     pkg-config
-    gcc.cc.lib
     zlib
     zlib.dev
     openssl
