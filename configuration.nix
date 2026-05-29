@@ -131,10 +131,10 @@ in
 
     # build
     stdenv.cc
-    gcc
-    glibc
-    glibc.dev
-    binutils
+    #gcc
+    #glibc
+    #glibc.dev
+    #binutils
     nasm
     bison
     clang
