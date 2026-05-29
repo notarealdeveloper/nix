@@ -270,7 +270,6 @@ in
     # fonts
     fontconfig
     fontforge-gtk
-
     noto-fonts                  # hebrew, telugu, devangari, arabic, egypt, phoenician
     noto-fonts-cjk-sans         # chinese, japanese, korean
     noto-fonts-cjk-serif        # ibid
@@ -282,6 +281,9 @@ in
     dejavu_fonts
     liberation_ttf
     roboto
+
+    # codex
+    codex
 
     # phone
     #android-tools
