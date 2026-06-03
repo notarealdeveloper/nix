@@ -255,6 +255,7 @@ in
     tmux
     espeak
     espeak-ng
+    bat
 
     # mid-level
     xclip
