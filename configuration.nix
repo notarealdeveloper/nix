@@ -238,7 +238,7 @@ in
     #docker-buildx
     #docker-client
 
-    # ascii
+    # fun
     sl
     sl2
     figlet
@@ -248,15 +248,16 @@ in
     cmatrix
     fastfetch
     asciiquarium
-
-    # tty
-    vim-full
-    ranger
-    tmux
     espeak
     espeak-ng
+
+    # tty
+    ghostty
+    vim-full
+    ranger
     bat
     highlight
+    glow
 
     # mid-level
     xclip
@@ -308,7 +309,6 @@ in
     evince
     vscode
     baobab
-    ghostty
     #nushell
     #firefox
     dropbox
