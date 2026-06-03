@@ -256,6 +256,7 @@ in
     espeak
     espeak-ng
     bat
+    highlight
 
     # mid-level
     xclip
