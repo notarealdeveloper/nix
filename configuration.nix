@@ -298,6 +298,8 @@ in
 
     # desktop
     eog
+    qview
+    geeqie
     meld
     gimp
     ghex
