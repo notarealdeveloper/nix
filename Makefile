@@ -17,6 +17,9 @@ gates: 		system
 system:
 	sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
 
+x:
+	cat flake.nix configuration.nix home/jason.nix | xc
+
 # old
 # @cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
 
