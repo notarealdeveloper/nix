@@ -619,7 +619,7 @@ in
   environment.etc."gitconfig".text = ''
     [user]
       name = "Jason Wilkes"
-      email = root@thedynamiclinker.com
+      email = notarealdeveloper@gmail.com
     [init]
       defaultBranch = master
     [pull]
