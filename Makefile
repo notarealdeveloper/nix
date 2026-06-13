@@ -20,7 +20,7 @@ system:
 x:
 	cat flake.nix configuration.nix home/jason.nix | xc
 
-# old
+# old cachix
 # @cachix watch-exec notarealdeveloper -- sudo nixos-rebuild --print-build-logs switch --flake .#$(HOST)
 
 localhost:
