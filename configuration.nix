@@ -10,6 +10,14 @@ let
 
   cacheName = "notarealdeveloper";
 
+  numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
+    postPatch = (old.postPatch or "") + ''
+      substituteInPlace src/gtk-3.20/scss/apps/_xfce.scss \
+        --replace-fail "border-top-width: 1;" "border-top-width: 1px;"
+    '';
+  });
+
+
 in
 
 {
@@ -342,7 +350,7 @@ in
     ibus-engines.mozc
 
     # themes
-    numix-gtk-theme
+    numix-gtk-theme-fixed
     numix-icon-theme-circle
 
     # video

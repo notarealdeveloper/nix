@@ -17,6 +17,13 @@ let
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
+  numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
+    postPatch = (old.postPatch or "") + ''
+      substituteInPlace src/gtk-3.20/scss/apps/_xfce.scss \
+        --replace-fail "border-top-width: 1;" "border-top-width: 1px;"
+    '';
+  });
+
 in {
 
   home.username = user;
@@ -45,7 +52,7 @@ in {
   ] ++ lib.optionals desktop [
     dconf
     inotify-tools
-    numix-gtk-theme
+    numix-gtk-theme-fixed
     numix-icon-theme-circle
   ];
 
