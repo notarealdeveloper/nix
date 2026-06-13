@@ -24,22 +24,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    doubleunix = {
-      url = "github:doubleunix/overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-on-droid, doubleunix, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-on-droid, ... }:
 
   let
 
     system = "x86_64-linux";
 
+    overlay = import ./overlay/src;
+
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ doubleunix.overlays.default ];
+      overlays = [ overlay ];
       config.allowUnfree = true;
     };
 
@@ -56,7 +53,7 @@
           { networking.hostName = "turing"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit doubleunix; };
+        specialArgs = { };
       };
 
       kleene = nixpkgs.lib.nixosSystem {
@@ -68,7 +65,7 @@
           { networking.hostName = "kleene"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit doubleunix; };
+        specialArgs = { };
       };
 
       gates = nixpkgs.lib.nixosSystem {
@@ -80,7 +77,7 @@
           { networking.hostName = "gates"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit doubleunix; };
+        specialArgs = { };
       };
 
     };
