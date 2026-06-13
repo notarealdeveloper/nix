@@ -298,6 +298,7 @@ in
 
     # desktop
     eog
+    glib
     qview
     geeqie
     meld
