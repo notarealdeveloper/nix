@@ -72,7 +72,7 @@ in {
   # Desktop theming (conditional)
   gtk = lib.mkIf desktop (with pkgs; {
     enable = true;
-    theme = { name = "Numix"; package = numix-gtk-theme; };
+    theme = { name = "Numix"; package = numix-gtk-theme-fixed; };
     iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
   });
 
