@@ -11,6 +11,7 @@ let
   cacheName = "notarealdeveloper";
 
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.perl ];
     postInstall = (old.postInstall or "") + ''
       perl -0pi -e 's/border-top-width: 1;/border-top-width: 1px;/g' \
         $out/share/themes/Numix/gtk-3.0/gtk.gresource \
