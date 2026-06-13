@@ -140,6 +140,7 @@ in
 
     # build
     stdenv.cc
+    perl
     #gcc
     #glibc
     #glibc.dev
