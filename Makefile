@@ -9,7 +9,7 @@ ifeq ($(filter $(HOST),$(HOSTS)),)
 $(error Host "$(HOST)" not recognised; choose one of $(HOSTS))
 endif
 
-default: 	$(HOST)
+default: 	$(HOST) home
 turing: 	system
 kleene: 	system
 gates: 		system
