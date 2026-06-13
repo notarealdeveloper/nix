@@ -75,7 +75,7 @@
           { networking.hostName = "turing"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { wnixpkgs = packages; };
+        specialArgs = { inherit wnixpkgs; };
       };
 
       kleene = nixpkgs.lib.nixosSystem {
@@ -87,7 +87,7 @@
           { networking.hostName = "kleene"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { wnixpkgs = packages; };
+        specialArgs = { inherit wnixpkgs; };
       };
 
       gates = nixpkgs.lib.nixosSystem {
@@ -99,7 +99,7 @@
           { networking.hostName = "gates"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { wnixpkgs = packages; };
+        specialArgs = { inherit wnixpkgs; };
       };
 
     };
