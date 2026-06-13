@@ -133,7 +133,7 @@ in {
     '');
 
     setupNumix = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
-      export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
+      export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:${pkgs.sudo}/bin:$PATH"
       "${personal.dst}/bin/setup-numix"
     '');
 
