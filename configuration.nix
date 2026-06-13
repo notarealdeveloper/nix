@@ -552,7 +552,6 @@ in
 
   gtk = {
     iconCache.enable = false; # i forget what this is for
-    gtk4.theme = null;
   };
 
   # vim: clipboard support
