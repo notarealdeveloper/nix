@@ -40,10 +40,28 @@
       config.allowUnfree = true;
     };
 
-    packages = import ./overlay {
-      inherit pkgs system;
-    };
+    wnixpkgs = {
+      py313 = pkgs.python313.withPackages (ps: with ps; [
+        pip build pytest setuptools cython
+        ipython sly curio
+        requests beautifulsoup4 selenium
+        numpy sympy editdistance
+        scipy pandas matplotlib pycairo pyqt6
+        seaborn scikit-learn
+        h5py pillow
+        google-auth-oauthlib
+        google-api-python-client
+        geoip2
+        lz4
 
+        assure
+        is-instance
+        python-bin
+        mmry
+        webfs
+        lambda-multiprocessing
+      ]);
+    };
   in {
 
     nixosConfigurations = {
