@@ -2,7 +2,7 @@
 ### configuration.nix ###
 #########################
 
-{ pkgs, lib, config, doubleunix, ... }:
+{ pkgs, lib, config, wnixpkgs, ... }:
 
 let
 
@@ -10,7 +10,7 @@ let
 
   # wnixpkgs = builtins.attrValues doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
 
-  wnixpkgs = doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
+  # wnixpkgs = doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
 
   cacheName = "notarealdeveloper";
 

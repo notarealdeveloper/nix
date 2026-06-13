@@ -40,6 +40,10 @@
       config.allowUnfree = true;
     };
 
+    packages = import ./overlay {
+      inherit pkgs system;
+    };
+
   in {
 
     nixosConfigurations = {
@@ -53,7 +57,7 @@
           { networking.hostName = "turing"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { };
+        specialArgs = { wnixpkgs = packages; };
       };
 
       kleene = nixpkgs.lib.nixosSystem {
@@ -65,7 +69,7 @@
           { networking.hostName = "kleene"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { };
+        specialArgs = { wnixpkgs = packages; };
       };
 
       gates = nixpkgs.lib.nixosSystem {
@@ -77,7 +81,7 @@
           { networking.hostName = "gates"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { };
+        specialArgs = { wnixpkgs = packages; };
       };
 
     };
