@@ -114,7 +114,7 @@ in {
 
     # desktop setup
     setupDconf = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
-      export PATH="${config.home.path}/bin:${pkgs.glib}/bin:$PATH"
+      export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
       "${personal.dst}/bin/setup-dconf"
     '');
 
@@ -130,6 +130,11 @@ in {
         echo "Panel launchers created, setting up cinnamon."
       fi
       "${personal.dst}/bin/setup-cinnamon"
+    '');
+
+    setupNumix = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
+      export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
+      "${personal.dst}/bin/setup-numix"
     '');
 
   };
