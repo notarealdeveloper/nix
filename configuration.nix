@@ -1,3 +1,7 @@
+#########################
+### configuration.nix ###
+#########################
+
 { pkgs, lib, config, doubleunix, ... }:
 
 let

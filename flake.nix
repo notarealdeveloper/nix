@@ -1,3 +1,7 @@
+#################
+### flake.nix ###
+#################
+
 {
   description = "The WNIX Operating System";
 
