@@ -18,22 +18,10 @@ let
   link = config.lib.file.mkOutOfStoreSymlink;
 
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.glib.dev ];
-
     postInstall = (old.postInstall or "") + ''
-      css="$TMPDIR/gtk.css"
-
-      gresource extract \
-        "$out/share/themes/Numix/gtk-3.20/gtk.gresource" \
-        /org/numixproject/gtk-3.20/dist/gtk.css > "$css"
-
-      substituteInPlace "$css" \
-        --replace-fail "border-top-width: 1;" "border-top-width: 1px;"
-
-      glib-compile-resources \
-        --target="$out/share/themes/Numix/gtk-3.20/gtk.gresource" \
-        --sourcedir="$out/share/themes/Numix/gtk-3.20" \
-        "$out/share/themes/Numix/gtk-3.20/gtk.gresource.xml"
+      perl -0pi -e 's/border-top-width: 1;/border-top-width: 1px;/g' \
+        $out/share/themes/Numix/gtk-3.0/gtk.gresource \
+        $out/share/themes/Numix/gtk-3.20/gtk.gresource
     '';
   });
 
