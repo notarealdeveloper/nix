@@ -298,7 +298,7 @@ in
 
     # desktop
     eog
-    glib
+    glib.dev
     qview
     geeqie
     meld
