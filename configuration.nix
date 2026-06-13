@@ -550,8 +550,10 @@ in
   # os virtualization
   #virtualisation.docker.enable = true;
 
-  # i forget what this is for
-  gtk.iconCache.enable = false;
+  gtk = {
+    iconCache.enable = false; # i forget what this is for
+    gtk4.theme = null;
+  };
 
   # vim: clipboard support
   programs.vim = {

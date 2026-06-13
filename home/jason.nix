@@ -70,6 +70,7 @@ in {
     enable = true;
     theme = { name = "Numix"; package = numix-gtk-theme-fixed; };
     iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
+    gtk4.theme = null;
   });
 
   home.activation = {
