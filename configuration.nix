@@ -175,7 +175,7 @@ in
     strace
     ltrace
     ethtool
-    binwalk
+    #binwalk
     pciutils
     powertop
     patchelf
