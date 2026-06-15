@@ -308,11 +308,13 @@ in
     ruby
 
     # phone
-    #android-tools
+    #android-tools is deprecated
     adbfs-rootless
     androidenv.androidPkgs.platform-tools
     avahi
     scrcpy
+    adb-sync
+    better-adb-sync
 
     # desktop
     eog
