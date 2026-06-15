@@ -312,6 +312,7 @@ in
     adbfs-rootless
     androidenv.androidPkgs.platform-tools
     avahi
+    scrcpy
 
     # desktop
     eog
