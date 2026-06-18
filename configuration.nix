@@ -289,9 +289,7 @@ in
     dbus
 
     # fonts
-    fontconfig
-    fontforge-gtk
-    noto-fonts                  # hebrew, telugu, devangari, arabic, egypt, phoenician
+    noto-fonts                  # hebrew, telugu, arabic, egypt, phoenician
     noto-fonts-cjk-sans         # chinese, japanese, korean
     noto-fonts-cjk-serif        # ibid
     noto-fonts-color-emoji      # obviously
@@ -299,9 +297,19 @@ in
     culmus                      # hebrew
     unifont                     # i forget
     google-fonts                # ibid
-    dejavu_fonts
-    liberation_ttf
-    roboto
+    wqy_zenhei                  # cjk
+    kodiPackages.robotocjksc    # cjk
+    arphic-ukai                 # cjk
+    arphic-uming                # cjk
+    babelstone-han              # cjk
+    texlivePackages.garuda-c90  # cjk
+    texlivePackages.lxgw-fonts  # cjk
+    texlivePackages.norasi-c90  # cjk
+    dejavu_fonts                # standard
+    liberation_ttf              # reasonable
+    roboto                      # android style
+    fontconfig
+    fontforge-gtk
 
     # codex
     codex
