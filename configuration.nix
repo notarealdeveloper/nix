@@ -317,7 +317,7 @@ in
     texlab
     texliveFull
     ghostscript
-    xdvik
+    xdvi
 
     # codex
     codex
