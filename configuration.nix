@@ -459,6 +459,7 @@ in
 
     # tex
     texmaker
+    texlab
     texliveFull
     ghostscript
 
