@@ -275,6 +275,7 @@ in
     bat
     highlight
     glow
+    rlwrap
 
     # mid-level
     xclip
