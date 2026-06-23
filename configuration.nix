@@ -312,6 +312,13 @@ in
     fontconfig
     fontforge-gtk
 
+    # tex
+    texmaker
+    texlab
+    texliveFull
+    ghostscript
+    xdvik
+
     # codex
     codex
     ruby
@@ -457,12 +464,6 @@ in
 
     # raw binary machine code overlay ftw
     noelf
-
-    # tex
-    texmaker
-    texlab
-    texliveFull
-    ghostscript
 
     # for the book
     bc        # In the beginning
