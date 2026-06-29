@@ -35,12 +35,14 @@ in {
   news.display = "silent";
 
   # ~/.config/git
-  programs.git.settings = {
-    enable    = true;
-    user.name  = name;
-    user.email = email;
-    init.defaultBranch = "master";
-    pull.rebase = true;
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = name;
+      user.email = email;
+      init.defaultBranch = "master";
+      pull.rebase = true;
+    };
   };
 
   # ~/.config/gh
