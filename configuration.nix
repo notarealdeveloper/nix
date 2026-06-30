@@ -348,7 +348,7 @@ in
     vscode
     baobab
     #nushell
-    #firefox
+    firefox
     dropbox
     gparted
     parallel
