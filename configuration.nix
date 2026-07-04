@@ -492,58 +492,17 @@ in
   #    emoji = [ "Noto Color Emoji" ];
   #  };
   #};
+
   fonts.fontconfig = {
     enable = true;
 
     defaultFonts = {
-      serif = [
-        "Noto Serif"
-        "Noto Serif Hebrew"
-        "Noto Serif CJK TC"
-
-        "Noto Sans Phoenician"
-        "Noto Sans Old Italic"
-        "Noto Sans Old Persian"
-        "Noto Sans Cuneiform"
-        "Noto Sans Egyptian Hieroglyphs"
-        "Noto Sans Ugaritic"
-        "Noto Sans Imperial Aramaic"
-        "Noto Sans Old South Arabian"
-      ];
-
-      sansSerif = [
-        "Noto Sans"
-        "Noto Sans Hebrew"
-        "Noto Sans CJK TC"
-
-        "Noto Sans Phoenician"
-        "Noto Sans Old Italic"
-        "Noto Sans Old Persian"
-        "Noto Sans Cuneiform"
-        "Noto Sans Egyptian Hieroglyphs"
-        "Noto Sans Ugaritic"
-        "Noto Sans Imperial Aramaic"
-        "Noto Sans Old South Arabian"
-      ];
-
-      monospace = [
-        "Noto Sans Mono"
-        "Noto Sans Hebrew"
-
-        "Noto Sans Phoenician"
-        "Noto Sans Old Italic"
-        "Noto Sans Old Persian"
-        "Noto Sans Cuneiform"
-        "Noto Sans Egyptian Hieroglyphs"
-        "Noto Sans Ugaritic"
-        "Noto Sans Imperial Aramaic"
-        "Noto Sans Old South Arabian"
-      ];
-
+      serif = [ "Noto Serif" ];
+      sansSerif = [ "Noto Sans" ];
+      monospace = [ "Noto Sans Mono" ];
       emoji = [ "Noto Color Emoji" ];
     };
   };
-
   services.tor.enable = true;
   services.tor.client.enable = true;
 
