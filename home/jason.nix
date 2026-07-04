@@ -163,7 +163,7 @@ in {
       # auto-generated
       ".hotdogrc".text    = ''This is not a config file'';
 
-      ".config/fontconfig/conf.d/50-noto.conf".text = ''
+      ".config/fontconfig/conf.d/60-noto.conf".text = ''
       <?xml version="1.0"?>
       <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
       <fontconfig>
