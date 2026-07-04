@@ -163,6 +163,35 @@ in {
       # auto-generated
       ".hotdogrc".text    = ''This is not a config file'';
 
+      ".config/fontconfig/conf.d/60-noto.conf".text = ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+      <fontconfig>
+
+        <alias>
+          <family>serif</family>
+          <prefer>
+            <family>Noto Serif</family>
+          </prefer>
+        </alias>
+
+        <alias>
+          <family>sans-serif</family>
+          <prefer>
+            <family>Noto Sans</family>
+          </prefer>
+        </alias>
+
+        <alias>
+          <family>monospace</family>
+          <prefer>
+            <family>Noto Sans Mono</family>
+          </prefer>
+        </alias>
+
+      </fontconfig>
+      '';
+
       #".config/fontconfig/conf.d/60-hebrew.conf".text = ''
       #  <?xml version="1.0"?>
       #  <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
