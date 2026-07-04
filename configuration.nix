@@ -295,20 +295,20 @@ in
     noto-fonts-cjk-serif        # ibid
     noto-fonts-color-emoji      # obviously
     source-han-serif            # ibid
-    culmus                      # hebrew
-    unifont                     # i forget
-    google-fonts                # ibid
-    wqy_zenhei                  # cjk
-    kodiPackages.robotocjksc    # cjk
-    arphic-ukai                 # cjk
-    arphic-uming                # cjk
-    babelstone-han              # cjk
-    texlivePackages.garuda-c90  # cjk
-    texlivePackages.lxgw-fonts  # cjk
-    texlivePackages.norasi-c90  # cjk
-    dejavu_fonts                # standard
-    liberation_ttf              # reasonable
-    roboto                      # android style
+    #culmus                      # hebrew
+    #unifont                     # i forget
+    #google-fonts                # ibid
+    #wqy_zenhei                  # cjk
+    #kodiPackages.robotocjksc    # cjk
+    #arphic-ukai                 # cjk
+    #arphic-uming                # cjk
+    #babelstone-han              # cjk
+    #texlivePackages.garuda-c90  # cjk
+    #texlivePackages.lxgw-fonts  # cjk
+    #texlivePackages.norasi-c90  # cjk
+    #dejavu_fonts                # standard
+    #liberation_ttf              # reasonable
+    #roboto                      # android style
     fontconfig
     fontforge-gtk
 
