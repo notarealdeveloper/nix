@@ -483,13 +483,43 @@ in
 
   ]; # ++ wnixpkgs;
 
+  #fonts.fontconfig = {
+  #  enable = true;
+  #  defaultFonts = {
+  #    serif = [ "DejaVu Serif" ];
+  #    sansSerif = [ "DejaVu Sans" ];
+  #    monospace = [ "DejaVu Sans Mono" ];
+  #    emoji = [ "Noto Color Emoji" ];
+  #  };
+  #};
+
   fonts.fontconfig = {
     enable = true;
+
     defaultFonts = {
-      serif = [ "DejaVu Serif" ];
-      sansSerif = [ "DejaVu Sans" ];
-      monospace = [ "DejaVu Sans Mono" ];
-      emoji = [ "Noto Color Emoji" ];
+      serif = [
+        "Noto Serif"
+        "Noto Serif CJK TC"
+        "Noto Serif Hebrew"
+        "Noto Serif Phoenician"
+      ];
+
+      sansSerif = [
+        "Noto Sans"
+        "Noto Sans CJK TC"
+        "Noto Sans Hebrew"
+        "Noto Sans Phoenician"
+      ];
+
+      monospace = [
+        "Noto Sans Mono"
+        "Noto Sans Mono CJK TC"
+        "Noto Sans Phoenician"
+      ];
+
+      emoji = [
+        "Noto Color Emoji"
+      ];
     };
   };
 
