@@ -289,28 +289,31 @@ in
     glib
     dbus
 
-    # fonts
+    # fonts for the book
     noto-fonts                  # hebrew, telugu, arabic, egypt, phoenician
     noto-fonts-cjk-sans         # chinese, japanese, korean
     noto-fonts-cjk-serif        # ibid
     noto-fonts-color-emoji      # obviously
     source-han-serif            # ibid
-    #culmus                      # hebrew
-    #unifont                     # i forget
-    #google-fonts                # ibid
-    #wqy_zenhei                  # cjk
-    #kodiPackages.robotocjksc    # cjk
-    #arphic-ukai                 # cjk
-    #arphic-uming                # cjk
-    #babelstone-han              # cjk
-    #texlivePackages.garuda-c90  # cjk
-    #texlivePackages.lxgw-fonts  # cjk
-    #texlivePackages.norasi-c90  # cjk
-    #dejavu_fonts                # standard
-    #liberation_ttf              # reasonable
-    #roboto                      # android style
-    fontconfig
-    fontforge-gtk
+    pango                       # παν語
+    pandoc                      # obviously
+    fontconfig                  # ibid
+    fontforge                   # proto-sinaitic font debugging
+    fontforge-gtk               # ibid
+    culmus                      # hebrew
+    unifont                     # i forget
+    google-fonts                # ibid
+    wqy_zenhei                  # cjk
+    kodiPackages.robotocjksc    # cjk
+    arphic-ukai                 # cjk
+    arphic-uming                # cjk
+    babelstone-han              # cjk
+    texlivePackages.garuda-c90  # cjk
+    texlivePackages.lxgw-fonts  # cjk
+    texlivePackages.norasi-c90  # cjk
+    dejavu_fonts                # standard
+    liberation_ttf              # reasonable
+    roboto                      # android style
 
     # tex
     texmaker
@@ -464,7 +467,7 @@ in
     # raw binary machine code overlay ftw
     noelf
 
-    # for the book
+    # for sudocode
     bc        # In the beginning
     gfortran  # Fortran. (1957). John Backus and his team at IBM.
     gnucobol  # Cobol. (1959). Designed by the CODASYL committee, partly based on Grace Hopper's FLOW-MATIC language.
@@ -475,10 +478,7 @@ in
     idris     # Dependent types
     idris2    # Dependenter types
     lean4     # The Highest
-    fontforge # Proto-Sinaitic font debugging
-    pango     # παν語
     exiftool
-    pandoc
 
 
   ]; # ++ wnixpkgs;
@@ -492,34 +492,55 @@ in
   #    emoji = [ "Noto Color Emoji" ];
   #  };
   #};
-
   fonts.fontconfig = {
     enable = true;
 
     defaultFonts = {
       serif = [
         "Noto Serif"
-        "Noto Serif CJK TC"
         "Noto Serif Hebrew"
-        "Noto Serif Phoenician"
+        "Noto Serif CJK TC"
+
+        "Noto Sans Phoenician"
+        "Noto Sans Old Italic"
+        "Noto Sans Old Persian"
+        "Noto Sans Cuneiform"
+        "Noto Sans Egyptian Hieroglyphs"
+        "Noto Sans Ugaritic"
+        "Noto Sans Imperial Aramaic"
+        "Noto Sans Old South Arabian"
       ];
 
       sansSerif = [
         "Noto Sans"
-        "Noto Sans CJK TC"
         "Noto Sans Hebrew"
+        "Noto Sans CJK TC"
+
         "Noto Sans Phoenician"
+        "Noto Sans Old Italic"
+        "Noto Sans Old Persian"
+        "Noto Sans Cuneiform"
+        "Noto Sans Egyptian Hieroglyphs"
+        "Noto Sans Ugaritic"
+        "Noto Sans Imperial Aramaic"
+        "Noto Sans Old South Arabian"
       ];
 
       monospace = [
         "Noto Sans Mono"
-        "Noto Sans Mono CJK TC"
+        "Noto Sans Hebrew"
+
         "Noto Sans Phoenician"
+        "Noto Sans Old Italic"
+        "Noto Sans Old Persian"
+        "Noto Sans Cuneiform"
+        "Noto Sans Egyptian Hieroglyphs"
+        "Noto Sans Ugaritic"
+        "Noto Sans Imperial Aramaic"
+        "Noto Sans Old South Arabian"
       ];
 
-      emoji = [
-        "Noto Color Emoji"
-      ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 

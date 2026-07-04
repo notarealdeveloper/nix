@@ -163,56 +163,56 @@ in {
       # auto-generated
       ".hotdogrc".text    = ''This is not a config file'';
 
-      ".config/fontconfig/conf.d/60-hebrew.conf".text = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-        <fontconfig>
-          <match>
-            <test name="lang" compare="contains">
-              <string>he</string>
-            </test>
-            <edit name="family" mode="assign">
-              <string>Noto Sans Hebrew</string>
-            </edit>
-          </match>
-        </fontconfig>
-      '';
+      #".config/fontconfig/conf.d/60-hebrew.conf".text = ''
+      #  <?xml version="1.0"?>
+      #  <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+      #  <fontconfig>
+      #    <match>
+      #      <test name="lang" compare="contains">
+      #        <string>he</string>
+      #      </test>
+      #      <edit name="family" mode="assign">
+      #        <string>Noto Sans Hebrew</string>
+      #      </edit>
+      #    </match>
+      #  </fontconfig>
+      #'';
 
-      ".config/fontconfig/conf.d/60-phoenician.conf".text = ''
-      <?xml version="1.0"?>
-      <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-      <fontconfig>
-
-        <alias>
-          <family>sans-serif</family>
-          <prefer>
-            <family>Noto Sans Phoenician</family>
-          </prefer>
-        </alias>
-
-        <alias>
-          <family>serif</family>
-          <prefer>
-            <family>Noto Sans Phoenician</family>
-          </prefer>
-        </alias>
-
-        <alias>
-          <family>monospace</family>
-          <prefer>
-            <family>Noto Sans Phoenician</family>
-          </prefer>
-        </alias>
-
-        <alias>
-          <family>system-ui</family>
-          <prefer>
-            <family>Noto Sans Phoenician</family>
-          </prefer>
-        </alias>
-
-      </fontconfig>
-      '';
+      #".config/fontconfig/conf.d/60-phoenician.conf".text = ''
+      #<?xml version="1.0"?>
+      #<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+      #<fontconfig>
+      #
+      #  <alias>
+      #    <family>sans-serif</family>
+      #    <prefer>
+      #      <family>Noto Sans Phoenician</family>
+      #    </prefer>
+      #  </alias>
+      #
+      #  <alias>
+      #    <family>serif</family>
+      #    <prefer>
+      #      <family>Noto Sans Phoenician</family>
+      #    </prefer>
+      #  </alias>
+      #
+      #  <alias>
+      #    <family>monospace</family>
+      #    <prefer>
+      #      <family>Noto Sans Phoenician</family>
+      #    </prefer>
+      #  </alias>
+      #
+      #  <alias>
+      #    <family>system-ui</family>
+      #    <prefer>
+      #      <family>Noto Sans Phoenician</family>
+      #    </prefer>
+      #  </alias>
+      #</fontconfig>
+      #
+      #'';
     }
 
     # Desktop-specific files (conditional)
