@@ -21,6 +21,60 @@ let
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
+  notoSansFallbacks = [
+    "Noto Sans Hebrew"
+    "Noto Sans Arabic"
+    "Noto Sans Syriac"
+    "Noto Sans Samaritan"
+    "Noto Sans Mandaic"
+
+    "Noto Sans Phoenician"
+    "Noto Sans Imperial Aramaic"
+    "Noto Sans Nabataean"
+    "Noto Sans Palmyrene"
+    "Noto Sans Hatran"
+    "Noto Sans Old North Arabian"
+    "Noto Sans Old South Arabian"
+    "Noto Sans Ugaritic"
+
+    "Noto Sans Old Persian"
+    "Noto Sans Avestan"
+    "Noto Sans Inscriptional Pahlavi"
+    "Noto Sans Inscriptional Parthian"
+    "Noto Sans Psalter Pahlavi"
+    "Noto Sans Manichaean"
+
+    "Noto Sans Old Italic"
+    "Noto Sans Gothic"
+    "Noto Sans Runic"
+    "Noto Sans Coptic"
+
+    "Noto Sans Linear A"
+    "Noto Sans Linear B"
+    "Noto Sans Cypriot"
+    "Noto Sans Cypro Minoan"
+
+    "Noto Sans Cuneiform"
+    "Noto Sans Egyptian Hieroglyphs"
+    "Noto Sans Anatolian Hieroglyphs"
+
+    "Noto Sans Symbols"
+    "Noto Sans Symbols 2"
+    "Noto Color Emoji"
+  ];
+
+  notoSerifFallbacks = [
+    "Noto Serif Hebrew"
+    "Noto Serif Georgian"
+    "Noto Serif Tibetan"
+    "Noto Serif Old Uyghur"
+  ] ++ notoSansFallbacks;
+
+  xmlFamilies = families:
+    lib.concatMapStringsSep "\n"
+      (f: "            <family>${f}</family>")
+      families;
+
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
     postBuild = (old.postBuild or "") + ''
       substituteInPlace src/gtk-3.20/dist/gtk.css \
@@ -158,55 +212,45 @@ in {
       ".XCompose".source        = lib.mkForce (link "${personal.dst}/etc/XCompose");
       ".tmux.conf".source       = lib.mkForce (link "${personal.dst}/etc/tmux.conf");
       ".tmux.conf.local".source = lib.mkForce (link "${personal.dst}/etc/tmux.conf.local");
-      "Templates".source  = link "${personal.dst}/etc/Templates";
+      "Templates".source        = link "${personal.dst}/etc/Templates";
 
-      # auto-generated
-      ".hotdogrc".text    = ''This is not a config file'';
+      ".hotdogrc".text = ''This is not a config file'';
 
       ".config/fontconfig/conf.d/50-noto.conf".text = ''
-      <?xml version="1.0"?>
-      <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-      <fontconfig>
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
 
-        <alias>
-          <family>serif</family>
-          <prefer>
-            <family>Noto Serif</family>
-          </prefer>
-        </alias>
+  <alias>
+    <family>serif</family>
+    <prefer>
+${xmlFamilies ([ "Noto Serif" ] ++ notoSerifFallbacks)}
+    </prefer>
+  </alias>
 
-        <alias>
-          <family>sans-serif</family>
-          <prefer>
-            <family>Noto Sans</family>
-          </prefer>
-        </alias>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+${xmlFamilies ([ "Noto Sans" ] ++ notoSansFallbacks)}
+    </prefer>
+  </alias>
 
-        <alias>
-          <family>Monospace</family>
-          <prefer>
-            <family>Noto Sans Mono</family>
-            <family>Noto Sans Hebrew</family>
-            <family>Noto Sans Phoenician</family>
-            <family>Noto Sans Cuneiform</family>
-            <family>Noto Sans Egyptian Hieroglyphs</family>
-          </prefer>
-        </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
+    </prefer>
+  </alias>
 
-        <alias>
-          <family>monospace</family>
-          <prefer>
-            <family>Noto Sans Mono</family>
-            <family>Noto Sans Hebrew</family>
-            <family>Noto Sans Phoenician</family>
-            <family>Noto Sans Cuneiform</family>
-            <family>Noto Sans Egyptian Hieroglyphs</family>
-          </prefer>
-        </alias>
+  <alias>
+    <family>Monospace</family>
+    <prefer>
+${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
+    </prefer>
+  </alias>
 
-      </fontconfig>
+</fontconfig>
       '';
-
     }
 
     # Desktop-specific files (conditional)
