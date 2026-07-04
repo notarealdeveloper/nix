@@ -300,6 +300,7 @@ in
     fontconfig                  # ibid
     fontforge                   # proto-sinaitic font debugging
     fontforge-gtk               # ibid
+    font-manager                # editing fonts
     culmus                      # hebrew
     unifont                     # i forget
     google-fonts                # ibid
