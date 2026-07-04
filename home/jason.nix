@@ -186,6 +186,7 @@ in {
           <family>Monospace</family>
           <prefer>
             <family>Noto Sans Mono</family>
+            <family>Noto Sans Hebrew</family>
             <family>Noto Sans Phoenician</family>
             <family>Noto Sans Cuneiform</family>
             <family>Noto Sans Egyptian Hieroglyphs</family>
@@ -196,6 +197,7 @@ in {
           <family>monospace</family>
           <prefer>
             <family>Noto Sans Mono</family>
+            <family>Noto Sans Hebrew</family>
             <family>Noto Sans Phoenician</family>
             <family>Noto Sans Cuneiform</family>
             <family>Noto Sans Egyptian Hieroglyphs</family>
