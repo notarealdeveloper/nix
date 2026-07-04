@@ -177,6 +177,28 @@ in {
           </match>
         </fontconfig>
       '';
+
+      ".config/fontconfig/conf.d/60-phoenician.conf".text = ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+      <fontconfig>
+        <match>
+          <test name="lang" compare="contains">
+            <string>phnx</string>
+          </test>
+          <edit name="family" mode="prepend">
+            <string>Noto Sans Phoenician</string>
+          </edit>
+        </match>
+
+        <alias>
+          <family>sans-serif</family>
+          <prefer>
+            <family>Noto Sans Phoenician</family>
+          </prefer>
+        </alias>
+      </fontconfig>
+      '';
     }
 
     # Desktop-specific files (conditional)
