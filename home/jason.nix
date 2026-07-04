@@ -182,14 +182,6 @@ in {
       <?xml version="1.0"?>
       <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
       <fontconfig>
-        <match>
-          <test name="lang" compare="contains">
-            <string>phnx</string>
-          </test>
-          <edit name="family" mode="prepend">
-            <string>Noto Sans Phoenician</string>
-          </edit>
-        </match>
 
         <alias>
           <family>sans-serif</family>
@@ -197,6 +189,28 @@ in {
             <family>Noto Sans Phoenician</family>
           </prefer>
         </alias>
+
+        <alias>
+          <family>serif</family>
+          <prefer>
+            <family>Noto Sans Phoenician</family>
+          </prefer>
+        </alias>
+
+        <alias>
+          <family>monospace</family>
+          <prefer>
+            <family>Noto Sans Phoenician</family>
+          </prefer>
+        </alias>
+
+        <alias>
+          <family>system-ui</family>
+          <prefer>
+            <family>Noto Sans Phoenician</family>
+          </prefer>
+        </alias>
+
       </fontconfig>
       '';
     }
