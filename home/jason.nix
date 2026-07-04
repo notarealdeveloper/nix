@@ -163,7 +163,7 @@ in {
       # auto-generated
       ".hotdogrc".text    = ''This is not a config file'';
 
-      ".config/fontconfig/conf.d/60-noto.conf".text = ''
+      ".config/fontconfig/conf.d/50-noto.conf".text = ''
       <?xml version="1.0"?>
       <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
       <fontconfig>
@@ -183,9 +183,22 @@ in {
         </alias>
 
         <alias>
+          <family>Monospace</family>
+          <prefer>
+            <family>Noto Sans Mono</family>
+            <family>Noto Sans Phoenician</family>
+            <family>Noto Sans Cuneiform</family>
+            <family>Noto Sans Egyptian Hieroglyphs</family>
+          </prefer>
+        </alias>
+
+        <alias>
           <family>monospace</family>
           <prefer>
             <family>Noto Sans Mono</family>
+            <family>Noto Sans Phoenician</family>
+            <family>Noto Sans Cuneiform</family>
+            <family>Noto Sans Egyptian Hieroglyphs</family>
           </prefer>
         </alias>
 
