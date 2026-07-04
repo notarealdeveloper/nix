@@ -298,7 +298,7 @@ in
     pango                       # παν語
     pandoc                      # obviously
     fontconfig                  # ibid
-    fontforge                   # proto-sinaitic font debugging
+    #fontforge                   # proto-sinaitic font debugging
     fontforge-gtk               # ibid
     font-manager                # editing fonts
     culmus                      # hebrew
