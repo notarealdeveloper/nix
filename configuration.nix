@@ -288,6 +288,7 @@ in
     freetype
     glib
     dbus
+    sqlcipher
 
     # fonts for the book
     noto-fonts                  # hebrew, telugu, arabic, egypt, phoenician
