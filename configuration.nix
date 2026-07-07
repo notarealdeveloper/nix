@@ -289,7 +289,7 @@ in
     glib
     dbus
     sqlcipher
-    speech-note
+    openai-whisper
 
     # fonts for the book
     noto-fonts                  # hebrew, telugu, arabic, egypt, phoenician
