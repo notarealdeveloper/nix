@@ -289,6 +289,7 @@ in
     glib
     dbus
     sqlcipher
+    speech-note
 
     # fonts for the book
     noto-fonts                  # hebrew, telugu, arabic, egypt, phoenician
