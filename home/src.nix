@@ -63,7 +63,7 @@ let
     legacy = "https://github.com/notarealdeveloper/legacy";
 
     # our overlay
-    overlay = "https://github.com/doubleunix/overlay";
+    # overlay = "https://github.com/doubleunix/overlay";
 
   };
 
