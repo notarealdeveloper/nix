@@ -16,7 +16,7 @@ let
   email = "notarealdeveloper@gmail.com";
 
   src = import ./src.nix { inherit config; };
-  inherit (src) nix exec personal overlay;
+  inherit (src) nix exec personal;
   inherit (src) secret legacy;
 
   link = config.lib.file.mkOutOfStoreSymlink;
