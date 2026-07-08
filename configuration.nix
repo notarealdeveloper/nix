@@ -278,7 +278,7 @@ in
     rlwrap
     w3m         # image previews in ranger
     ueberzug    # image previews in ranger
-    fancy-cat   # image previews in ranger
+    #fancy-cat   # image previews in ranger (broken)
 
     # mid-level
     xclip
