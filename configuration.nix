@@ -276,9 +276,14 @@ in
     highlight
     glow
     rlwrap
-    w3m         # image previews in ranger
-    ueberzug    # image previews in ranger
-    #fancy-cat   # image previews in ranger (broken)
+
+    # tty image previews in ranger
+    ueberzug      # works
+    w3m           # doesn't seem to
+    #fancy-cat    # kitty protocol seems to e (broken)
+    terminology
+    sixel
+    urxvt
 
     # mid-level
     xclip
