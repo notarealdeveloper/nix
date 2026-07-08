@@ -147,10 +147,6 @@ in {
       if [ ! -d "${personal.dst}" ]; then
         git clone "${personal.src}" "${personal.dst}"
       fi
-
-      if [ ! -d "${overlay.dst}" ]; then
-        git clone "${overlay.src}" "${overlay.dst}"
-      fi
     '';
 
     # git clone private repos (conditional)
