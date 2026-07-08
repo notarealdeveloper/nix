@@ -282,7 +282,7 @@ in
     w3m           # doesn't seem to
     #fancy-cat    # kitty protocol seems to e (broken)
     enlightenment.terminology
-    sixel
+    lsix
     urxvt
 
     # mid-level
