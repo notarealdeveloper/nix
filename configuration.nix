@@ -281,7 +281,7 @@ in
     ueberzug      # works
     w3m           # doesn't seem to
     #fancy-cat    # kitty protocol seems to e (broken)
-    terminology
+    enlightenment.terminology
     sixel
     urxvt
 
