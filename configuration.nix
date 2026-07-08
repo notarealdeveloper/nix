@@ -278,7 +278,7 @@ in
     rlwrap
 
     # tty image previews in ranger
-    ueberzug      # works
+    ueberzugpp    # works
     w3m           # doesn't seem to
     #fancy-cat    # kitty protocol seems to e (broken)
     enlightenment.terminology
