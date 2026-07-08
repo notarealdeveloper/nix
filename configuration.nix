@@ -276,6 +276,9 @@ in
     highlight
     glow
     rlwrap
+    w3m         # image previews in ranger
+    ueberzug    # image previews in ranger
+    fancy-cat   # image previews in ranger
 
     # mid-level
     xclip
