@@ -283,7 +283,6 @@ in
     #fancy-cat    # kitty protocol seems to e (broken)
     enlightenment.terminology
     lsix
-    urxvt
 
     # mid-level
     xclip
