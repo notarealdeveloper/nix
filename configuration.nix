@@ -323,7 +323,7 @@ in
     texlivePackages.norasi-c90  # cjk
     dejavu_fonts                # standard
     liberation_ttf              # reasonable
-    roboto                      # android style
+    #roboto                     # DON'T UNCOMMENT THIS, IT FUCKS UP LIGHTDM
 
     # tex
     texmaker
