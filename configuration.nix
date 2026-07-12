@@ -326,6 +326,7 @@ in
     #roboto                     # DON'T UNCOMMENT THIS, IT FUCKS UP LIGHTDM
 
     # tex
+    lua
     texmaker
     texlab
     texliveFull
