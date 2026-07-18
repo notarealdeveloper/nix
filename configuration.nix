@@ -197,6 +197,9 @@ in
     libglvnd
     qt6.qtbase
 
+    # satan
+    system-config-printer
+
     # x11 libs
     libX11
     libXext
