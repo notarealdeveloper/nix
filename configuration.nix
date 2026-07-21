@@ -507,16 +507,64 @@ in
   #  };
   #};
 
-  fonts.fontconfig = {
-    enable = true;
+  #fonts.fontconfig = {
+  #  enable = true;
+  #
+  #  defaultFonts = {
+  #    serif = [ "Noto Serif" ];
+  #    sansSerif = [ "Noto Sans" ];
+  #    monospace = [ "Noto Sans Mono" ];
+  #    emoji = [ "Noto Color Emoji" ];
+  #  };
+  #};
 
-    defaultFonts = {
-      serif = [ "Noto Serif" ];
-      sansSerif = [ "Noto Sans" ];
-      monospace = [ "Noto Sans Mono" ];
-      emoji = [ "Noto Color Emoji" ];
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+
+      source-han-serif
+      culmus
+      unifont
+      babelstone-han
+
+      dejavu_fonts
+      liberation_ttf
+    ];
+
+    fontconfig = {
+      enable = true;
+
+      defaultFonts = {
+        serif = [
+          "Noto Serif"
+          "Noto Serif CJK TC"
+          "Noto Color Emoji"
+        ];
+
+        sansSerif = [
+          "Noto Sans"
+          "Noto Sans CJK TC"
+          "Noto Color Emoji"
+        ];
+
+        monospace = [
+          "Noto Sans Mono"
+          "Noto Sans Mono CJK TC"
+          "Noto Color Emoji"
+        ];
+
+        emoji = [ "Noto Color Emoji" ];
+      };
     };
   };
+
+  services.xserver.displayManager.lightdm.greeters.gtk.extraConfig = ''
+    font-name = Noto Sans 11
+  '';
+
   services.tor.enable = true;
   services.tor.client.enable = true;
 
