@@ -98,21 +98,32 @@
     ]);
 
     py314 = (ps: with ps; [
+      # numerical
+      accelerate
+      torch
+      numba
+
+      # ours
+      embd
+      thnk   # need to port timestring or remove dependency
+      #kern
+      #wnix
+
       #tensorflow-src   # Resume later by uncommenting this
     ]);
 
-    py315 = (ps: with ps; [
-    ]);
+    # py315 = (ps: with ps; [
+    # ]);
 
     pythons = with pkgs; {
       #py311  = python311.withPackages (ps: with ps; [ pip ]);
       py312  = python312.withPackages (ps: with ps; [ pip ]);
-      py313  = python313.withPackages (ps: all ps ++ std ps ++ py313 ps);
+      # py313  = python313.withPackages (ps: all ps ++ std ps ++ py313 ps);
       py314  = python314.withPackages (ps: all ps ++ std ps ++ py314 ps);
-      py315  = python315.withPackages (ps: all ps ++ std ps ++ py315 ps);
-      py313t = python313FreeThreading.withPackages (ps: all ps);
-      py314t = python314FreeThreading.withPackages (ps: all ps);
-      py315t = python315FreeThreading.withPackages (ps: all ps);
+      # py315  = python315.withPackages (ps: all ps ++ std ps ++ py315 ps);
+      # py313t = python313FreeThreading.withPackages (ps: all ps);
+      # py314t = python314FreeThreading.withPackages (ps: all ps);
+      # py315t = python315FreeThreading.withPackages (ps: all ps);
     };
 
     default = with pkgs; buildEnv {
@@ -136,7 +147,7 @@
       import numpy
       import pandas
       import sklearn
-      import lightgbm
+      # import lightgbm
       print(bin.cowsay(f"Python {sys.version} is working"))
       EOF
     '';
@@ -157,17 +168,16 @@
     packages.${system} = packages;
 
     checks.${system} = with pythons; {
-      py313' = pkgs.runCommand "py313"  { } (check-python-std py313);
+      # py313' = pkgs.runCommand "py313"  { } (check-python-std py313);
       py314' = pkgs.runCommand "py314"  { } (check-python-std py314);
-      py315' = pkgs.runCommand "py315"  { } (check-python-std py315);
+      # py315' = pkgs.runCommand "py315"  { } (check-python-std py315);
       py314  = pkgs.runCommand "py314"  { } (check-python-all py314);
-      py315  = pkgs.runCommand "py315"  { } (check-python-all py315);
-      py313t = pkgs.runCommand "py313t" { } (check-python-all py313t);
-      py314t = pkgs.runCommand "py314t" { } (check-python-all py314t);
-      py315t = pkgs.runCommand "py315t" { } (check-python-all py315t);
+      # py315  = pkgs.runCommand "py315"  { } (check-python-all py315);
+      # py313t = pkgs.runCommand "py313t" { } (check-python-all py313t);
+      # py314t = pkgs.runCommand "py314t" { } (check-python-all py314t);
+      # py315t = pkgs.runCommand "py315t" { } (check-python-all py315t);
     };
 
     overlays.default = overlay;
   };
 }
-

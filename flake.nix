@@ -41,7 +41,8 @@
     };
 
     wnixpkgs = {
-      py313 = pkgs.python313.withPackages (ps: with ps; [
+      # py313 = pkgs.python313.withPackages (ps: with ps; [
+      py314 = pkgs.python314.withPackages (ps: with ps; [
         pip build pytest setuptools cython
         ipython sly curio
         requests beautifulsoup4 selenium
