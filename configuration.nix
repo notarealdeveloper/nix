@@ -113,14 +113,7 @@ in
     #(python311.withPackages (ps: all ps ++ std ps))
 
     # pythons, from the overlay
-    #wnixpkgs.py313
-    wnixpkgs.py314 # first gets priority
-    #wnixpkgs.py311
-    #wnixpkgs.py312
-    #wnixpkgs.py313t
-    #wnixpkgs.py314t
-    #wnixpkgs.py315
-    #wnixpkgs.py315t
+    wnixpkgs.py # first gets priority
     uv
 
     # unix
