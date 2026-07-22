@@ -42,18 +42,6 @@ let
     #buildPythonApplication = args:
     #  pyprev.buildPythonApplication (args // { doCheck = false; doInstallCheck = false; });
 
-    # cython (almost) HEAD: this fixes a lot of problems
-    cython = pyprev.cython.overrideAttrs (old: rec {
-      version = "3.1.3";
-      pyproject = true;
-      src = prev.fetchFromGitHub {
-        owner = "cython";
-        repo = "cython";
-        tag = version;
-        hash = "sha256-9pnBkGz/QC8m8uPMziQWAvl9zEzuLn9naNDVFmFbJKA=";
-      };
-    });
-
     # pandas HEAD
     pandas = pyprev.pandas.overridePythonAttrs (old: rec {
       version = "2.3.2";
@@ -277,4 +265,3 @@ in {
       { };
   };
 }
-

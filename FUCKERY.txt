@@ -1,0 +1,5 @@
+- `ERR`'s first real failure is `python3.14-lxml-6.1.1`: its build metadata requires `Cython>=3.2.4`.
+- The overlay was pinning Python 3.14/3.15 package-set `cython` to `3.1.3`, so lxml's build dependency check rejected it before compilation.
+- The later `gtk-doc`, `kmod`, `systemd`, `curl`, `cargo`, `git-minimal`, `nix`, and `nixos-rebuild-ng` failures are dependency fallout from that lxml failure.
+- The `libxml2 ... path must be relative` and missing `doc/*.html` messages look like manifest warnings, not the fatal error.
+- Because the overlay replaces core Python package-set behavior globally, stale pins there can break unrelated system packages that happen to use Python during their builds.
