@@ -40,28 +40,6 @@
       config.allowUnfree = true;
     };
 
-    wnixpkgs = {
-      py313 = pkgs.python313.withPackages (ps: with ps; [
-        pip build pytest setuptools cython
-        ipython sly curio
-        requests beautifulsoup4 selenium
-        numpy sympy editdistance
-        scipy pandas matplotlib pycairo pyqt6
-        seaborn scikit-learn
-        h5py pillow
-        google-auth-oauthlib
-        google-api-python-client
-        geoip2
-        lz4
-
-        assure
-        is-instance
-        python-bin
-        mmry
-        webfs
-        lambda-multiprocessing
-      ]);
-    };
   in {
 
     nixosConfigurations = {
@@ -75,7 +53,6 @@
           { networking.hostName = "turing"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit wnixpkgs; };
       };
 
       kleene = nixpkgs.lib.nixosSystem {
@@ -87,7 +64,6 @@
           { networking.hostName = "kleene"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit wnixpkgs; };
       };
 
       gates = nixpkgs.lib.nixosSystem {
@@ -99,7 +75,6 @@
           { networking.hostName = "gates"; }
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = { inherit wnixpkgs; };
       };
 
     };

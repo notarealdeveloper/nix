@@ -2,17 +2,49 @@
 ### configuration.nix ###
 #########################
 
-{ pkgs, lib, config, wnixpkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 let
 
   # for help, see nixos-help or man nix.conf
 
-  # wnixpkgs = builtins.attrValues doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
-
-  # wnixpkgs = doubleunix.packages.${pkgs.stdenv.hostPlatform.system};
-
   cacheName = "notarealdeveloper";
+
+  python = pkgs.python314.withPackages (ps: with ps; [
+    pip
+    build
+    pytest
+    setuptools
+    cython
+    twine
+
+    ipython
+    sly
+    curio
+
+    requests
+    beautifulsoup4
+    selenium
+    yt-dlp
+
+    numpy
+    sympy
+    editdistance
+    scipy
+    pandas
+    matplotlib
+    pycairo
+    pyqt6
+    seaborn
+    scikit-learn
+    h5py
+    pillow
+    lz4
+
+    google-auth-oauthlib
+    google-api-python-client
+    geoip2
+  ]);
 
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
     postBuild = (old.postBuild or "") + ''
@@ -109,17 +141,8 @@ in
     with pkgs; [
 
 
-    #(python313.withPackages (ps: all ps ++ std ps))
-    #(python311.withPackages (ps: all ps ++ std ps))
-
-    # pythons, from the overlay
-    wnixpkgs.py313 # first gets priority
-    #wnixpkgs.py311
-    #wnixpkgs.py312
-    #wnixpkgs.py313t
-    #wnixpkgs.py314t
-    #wnixpkgs.py315
-    #wnixpkgs.py315t
+    # python
+    python # first gets priority
     uv
 
     # unix
@@ -495,7 +518,7 @@ in
     exiftool
 
 
-  ]; # ++ wnixpkgs;
+  ];
 
   #fonts.fontconfig = {
   #  enable = true;
