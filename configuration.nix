@@ -517,6 +517,8 @@ in
     lean4     # The Highest
     exiftool
 
+    # remote lord access
+    tailscale
 
   ];
 
@@ -542,6 +544,9 @@ in
   };
   services.tor.enable = true;
   services.tor.client.enable = true;
+
+  # for lord access via phone
+  services.tailscale.enable = true;
 
   # for adb over wifi
   services.avahi = {
