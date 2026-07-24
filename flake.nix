@@ -34,6 +34,14 @@
 
     overlay = import ./overlay/src;
 
+    jasonHomeModules = [
+      ./home/jason.nix
+
+      # Avoid pulling sd-switch into the Home Manager activation closure.
+      # The current nixpkgs sd-switch path depends on a broken mes fetch.
+      { systemd.user.startServices = "suggest"; }
+    ];
+
     pkgs = import nixpkgs {
       inherit system;
       overlays = [ overlay ];
@@ -83,19 +91,19 @@
 
       turing = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/jason.nix ];
+        modules = jasonHomeModules;
         extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
       };
 
       kleene = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/jason.nix ];
+        modules = jasonHomeModules;
         extraSpecialArgs = { inherit pkgs; desktop = true; private = true; };
       };
 
       gates = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/jason.nix ];
+        modules = jasonHomeModules;
         extraSpecialArgs = { inherit pkgs; desktop = false; private = true; };
       };
 
