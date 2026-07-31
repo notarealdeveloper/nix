@@ -265,6 +265,7 @@ in
     #rclone
     openssh
     openvpn
+    aws-cvpn
     tcpdump
     arp-scan
     net-tools

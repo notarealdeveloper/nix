@@ -24,15 +24,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    aws-cvpn-client = {
+      url = "github:sirn/aws-cvpn-client";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-on-droid, ... }:
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-on-droid, aws-cvpn-client, ... }:
 
   let
 
     system = "x86_64-linux";
 
-    overlay = import ./overlay/src;
+    overlay = final: prev:
+      (import ./overlay/src final prev)
+      //
+      {
+        aws-cvpn = aws-cvpn-client.packages.${prev.system}.default;
+      };
 
     jasonHomeModules = [
       ./home/jason.nix
