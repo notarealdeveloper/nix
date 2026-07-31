@@ -265,7 +265,7 @@ in
     #rclone
     openssh
     openvpn
-    aws-cvpn
+    #aws-cvpn   # I WANT THIS BUT BUILD NO NOT BROKE
     tcpdump
     arp-scan
     net-tools
