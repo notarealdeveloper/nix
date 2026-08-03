@@ -332,7 +332,7 @@ in
     xdotool
     glib
     zlib
-    stdenv.cc.cc   # provides libstdc++.so.6 which wheels often need
+    stdenv.cc.cc.lib   # provides libstdc++.so.6 which wheels often need
     imagemagick
     netpbm
     freetype
