@@ -10,7 +10,7 @@ let
 
   cacheName = "notarealdeveloper";
 
-  python = pkgs.python314.withPackages (ps: with ps; [
+  pythonWithPackages = python: python.withPackages (ps: with ps; [
     pip
     build
     pytest
@@ -45,6 +45,9 @@ let
     google-api-python-client
     geoip2
   ]);
+
+  python313 = pythonWithPackages pkgs.python313;
+  python314 = pythonWithPackages pkgs.python314;
 
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
     postBuild = (old.postBuild or "") + ''
@@ -142,7 +145,8 @@ in
 
 
     # python
-    python # first gets priority
+    python314 # first gets priority
+    python313
     uv
 
     # unix
