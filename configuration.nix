@@ -48,6 +48,7 @@ let
 
   python313 = pythonWithPackages pkgs.python313;
   python314 = pythonWithPackages pkgs.python314;
+  python315FreeThreading = pythonWithPackages pkgs.python315FreeThreading;
 
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
     postBuild = (old.postBuild or "") + ''
@@ -146,6 +147,7 @@ in
 
     # python
     python314 # first gets priority
+    python315FreeThreading
     python313
     uv
 
