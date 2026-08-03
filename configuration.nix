@@ -360,6 +360,7 @@ in
     ghostscript
 
     # codex
+    chatgpt
     codex
     ruby
 
