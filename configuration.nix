@@ -46,9 +46,19 @@ let
     geoip2
   ]);
 
+  pythonWithoutPackages = python: python.withPackages (ps: with ps; [
+    pip
+    build
+    pytest
+    setuptools
+    requests
+    ipython
+  ]);
+
   python313 = pythonWithPackages pkgs.python313;
   python314 = pythonWithPackages pkgs.python314;
   python315FreeThreading = pythonWithPackages pkgs.python315FreeThreading;
+  # python315FreeThreading = pythonWithoutPackages pkgs.python315FreeThreading;
 
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
     postBuild = (old.postBuild or "") + ''
