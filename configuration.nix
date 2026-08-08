@@ -162,6 +162,7 @@ in
     uv
 
     # unix
+    rg
     gh
     git
     wget
