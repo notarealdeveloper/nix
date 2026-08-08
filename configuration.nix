@@ -162,7 +162,6 @@ in
     uv
 
     # unix
-    rg
     gh
     git
     wget
@@ -171,6 +170,7 @@ in
     acpi
     lsof
     plocate
+    ripgrep
 
     # mail
     msmtp
