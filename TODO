@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+lord --verbose << "EOF"
+Trying to unfuck my nixos build so I can enable tailscale (it's not in the config yet, unfuckery first).
+
+This command:
+
+sudo nixos-rebuild --print-build-logs --show-trace switch --flake .#turing
+
+gives error in the file ./ERR.
+
+I want you to totally nuke my python overlay, and give me a SIMPLE SIMPLE SIMPLE python 314 global environment setup in configuration.nix that tries to generally replicate the packages I seem to want, as far as you can tell from reading the overlay. Keep the overlay directory, and keep the overlay enabled, but totally nuke the python parts of [that] and move them into a SIMPLER SIMPLER SIMPLER thing in configuration.nix.
+
+If you hit errors in running 'make', just keep working until the python overlay is excised from my flake and config. I can verify whether 'make' works or not, so don't go into a loop if you don't have permissions b/c it requires sudo or some such minor nonsense.
+
+Go. Fix until fixed.
+EOF
