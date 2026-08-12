@@ -60,6 +60,23 @@ let
   python314FreeThreading = pythonWithPackages pkgs.python314FreeThreading;
   #python315FreeThreading = pythonWithPackages pkgs.python315FreeThreading;
 
+  noto-sans-imperial-aramaic = pkgs.stdenvNoCC.mkDerivation {
+    pname = "noto-sans-imperial-aramaic";
+    version = "latest";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/notofonts/imperial-aramaic/raw/main/fonts/ttf/NotoSansImperialAramaic-Regular.ttf";
+      hash = lib.fakeHash;
+    };
+
+    dontUnpack = true;
+
+    installPhase = ''
+      mkdir -p $out/share/fonts/truetype
+      cp $src $out/share/fonts/truetype/NotoSansImperialAramaic-Regular.ttf
+    '';
+  };
+
   numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
     postBuild = (old.postBuild or "") + ''
       substituteInPlace src/gtk-3.20/dist/gtk.css \
@@ -347,6 +364,7 @@ in
     noto-fonts-cjk-sans         # chinese, japanese, korean
     noto-fonts-cjk-serif        # ibid
     noto-fonts-color-emoji      # obviously
+    noto-sans-imperial-aramaic  # doesn't come included
     source-han-serif            # ibid
     pango                       # παν語
     pandoc                      # obviously
@@ -551,15 +569,22 @@ in
   #  };
   #};
 
-  fonts.fontconfig = {
-    enable = true;
+  fonts = {
 
-    defaultFonts = {
-      serif = [ "Noto Serif" ];
-      sansSerif = [ "Noto Sans" ];
-      monospace = [ "Noto Sans Mono" ];
-      emoji = [ "Noto Color Emoji" ];
+    packages = [
+      noto-sans-imperial-aramaic
+    ];
+
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
+        monospace = [ "Noto Sans Mono" ];
+        emoji = [ "Noto Color Emoji" ];
+      };
     };
+
   };
   services.tor.enable = true;
   services.tor.client.enable = true;
