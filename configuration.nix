@@ -570,7 +570,7 @@ in
   fonts = {
 
     packages = [
-      noto-sans-imperial-aramaic
+      #noto-sans-imperial-aramaic
     ];
 
     fontconfig = {
