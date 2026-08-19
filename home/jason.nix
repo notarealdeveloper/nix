@@ -75,17 +75,17 @@ let
       (f: "            <family>${f}</family>")
       families;
 
-  numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
-    postBuild = (old.postBuild or "") + ''
-      substituteInPlace src/gtk-3.20/dist/gtk.css \
-        --replace-fail "border-top-width: 1;" "border-top-width: 1px;"
+  #numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
+  #  postBuild = (old.postBuild or "") + ''
+  #    substituteInPlace src/gtk-3.20/dist/gtk.css \
+  #      --replace-fail "border-top-width: 1;" "border-top-width: 1px;"
 
-      substituteInPlace src/gtk-3.20/dist/gtk-dark.css \
-        --replace-warn "border-top-width: 1;" "border-top-width: 1px;"
+  #    substituteInPlace src/gtk-3.20/dist/gtk-dark.css \
+  #      --replace-warn "border-top-width: 1;" "border-top-width: 1px;"
 
-      glib-compile-resources --sourcedir=src/gtk-3.20 src/gtk-3.20/gtk.gresource.xml
-    '';
-  });
+  #    glib-compile-resources --sourcedir=src/gtk-3.20 src/gtk-3.20/gtk.gresource.xml
+  #  '';
+  #});
 
 in {
 
@@ -117,17 +117,17 @@ in {
   ] ++ lib.optionals desktop [
     dconf
     inotify-tools
-    numix-gtk-theme-fixed
+    #numix-gtk-theme-fixed
     numix-icon-theme-circle
   ];
 
   # Desktop theming (conditional)
-  gtk = lib.mkIf desktop (with pkgs; {
-    enable = true;
-    theme = { name = "Numix"; package = numix-gtk-theme-fixed; };
-    iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
-    gtk4.theme = null;
-  });
+  #gtk = lib.mkIf desktop (with pkgs; {
+  #  enable = true;
+  #  theme = { name = "Numix"; package = numix-gtk-theme-fixed; };
+  #  iconTheme = { name = "Numix-Circle"; package = numix-icon-theme-circle; };
+  #  gtk4.theme = null;
+  #});
 
   home.activation = {
 
