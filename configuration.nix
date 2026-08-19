@@ -362,7 +362,7 @@ in
     noto-fonts-cjk-sans         # chinese, japanese, korean
     noto-fonts-cjk-serif        # ibid
     noto-fonts-color-emoji      # obviously
-    noto-sans-imperial-aramaic  # doesn't come included
+    #noto-sans-imperial-aramaic  # doesn't come included
     source-han-serif            # ibid
     pango                       # παν語
     pandoc                      # obviously
