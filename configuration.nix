@@ -77,15 +77,9 @@ let
   #  '';
   #};
 
-  #numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
-  #  postBuild = (old.postBuild or "") + ''
-  #    substituteInPlace src/gtk-3.20/dist/gtk.css \
-  #      --replace-fail "border-top-width: 1;" "border-top-width: 1px;"
-  #    substituteInPlace src/gtk-3.20/dist/gtk-dark.css \
-  #      --replace-warn "border-top-width: 1;" "border-top-width: 1px;"
-  #    glib-compile-resources --sourcedir=src/gtk-3.20 src/gtk-3.20/gtk.gresource.xml
-  #  '';
-  #});
+  graphite-gtk-theme-red = pkgs.graphite-gtk-theme.override {
+    themeVariants = [ "red" ];
+  };
 
 in
 
@@ -452,7 +446,7 @@ in
     ibus-engines.mozc
 
     # themes
-    #numix-gtk-theme-fixed
+    graphite-gtk-theme-red
     numix-icon-theme-circle
 
     # video
