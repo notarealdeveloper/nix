@@ -184,10 +184,10 @@ in {
       "${personal.dst}/bin/setup-cinnamon"
     '');
 
-    setupNumix = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
-      export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
-      "${personal.dst}/bin/setup-numix"
-    '');
+    #setupNumix = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
+    #  export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
+    #  "${personal.dst}/bin/setup-numix"
+    #'');
 
   };
 
