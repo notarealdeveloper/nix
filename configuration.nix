@@ -60,22 +60,22 @@ let
   python314FreeThreading = pythonWithPackages pkgs.python314FreeThreading;
   #python315FreeThreading = pythonWithPackages pkgs.python315FreeThreading;
 
-  noto-sans-imperial-aramaic = pkgs.stdenvNoCC.mkDerivation {
-    pname = "noto-sans-imperial-aramaic";
-    version = "latest";
+  #noto-sans-imperial-aramaic = pkgs.stdenvNoCC.mkDerivation {
+  #  pname = "noto-sans-imperial-aramaic";
+  #  version = "latest";
 
-    src = pkgs.fetchurl {
-      url = "https://github.com/notofonts/imperial-aramaic/raw/main/fonts/ttf/NotoSansImperialAramaic-Regular.ttf";
-      hash = lib.fakeHash;
-    };
+  #  src = pkgs.fetchurl {
+  #    url = "https://github.com/notofonts/imperial-aramaic/raw/main/fonts/ttf/NotoSansImperialAramaic-Regular.ttf";
+  #    hash = lib.fakeHash;
+  #  };
 
-    dontUnpack = true;
+  #  dontUnpack = true;
 
-    installPhase = ''
-      mkdir -p $out/share/fonts/truetype
-      cp $src $out/share/fonts/truetype/NotoSansImperialAramaic-Regular.ttf
-    '';
-  };
+  #  installPhase = ''
+  #    mkdir -p $out/share/fonts/truetype
+  #    cp $src $out/share/fonts/truetype/NotoSansImperialAramaic-Regular.ttf
+  #  '';
+  #};
 
   #numix-gtk-theme-fixed = pkgs.numix-gtk-theme.overrideAttrs (old: {
   #  postBuild = (old.postBuild or "") + ''
