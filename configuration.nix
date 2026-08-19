@@ -77,10 +77,6 @@ let
   #  '';
   #};
 
-  graphite-gtk-theme-red = pkgs.graphite-gtk-theme.override {
-    themeVariants = [ "red" ];
-  };
-
 in
 
 {
@@ -446,7 +442,7 @@ in
     ibus-engines.mozc
 
     # themes
-    graphite-gtk-theme-red
+    mint-themes
     numix-icon-theme-circle
 
     # video

@@ -75,10 +75,6 @@ let
       (f: "            <family>${f}</family>")
       families;
 
-  graphite-gtk-theme-red = pkgs.graphite-gtk-theme.override {
-    themeVariants = [ "red" ];
-  };
-
 in {
 
   home.username = user;
@@ -109,14 +105,14 @@ in {
   ] ++ lib.optionals desktop [
     dconf
     inotify-tools
-    graphite-gtk-theme-red
+    mint-themes
     numix-icon-theme-circle
   ];
 
   # Desktop theming (conditional)
   gtk = lib.mkIf desktop {
     enable = true;
-    theme = { name = "Graphite-red"; package = graphite-gtk-theme-red; };
+    theme = { name = "Mint-Y-Red"; package = pkgs.mint-themes; };
     iconTheme = { name = "Numix-Circle"; package = pkgs.numix-icon-theme-circle; };
     gtk4.theme = null;
   };
