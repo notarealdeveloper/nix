@@ -60,22 +60,27 @@ let
   python314FreeThreading = pythonWithPackages pkgs.python314FreeThreading;
   #python315FreeThreading = pythonWithPackages pkgs.python315FreeThreading;
 
-  #noto-sans-imperial-aramaic = pkgs.stdenvNoCC.mkDerivation {
-  #  pname = "noto-sans-imperial-aramaic";
-  #  version = "latest";
-
-  #  src = pkgs.fetchurl {
-  #    url = "https://github.com/notofonts/imperial-aramaic/raw/main/fonts/ttf/NotoSansImperialAramaic-Regular.ttf";
-  #    hash = lib.fakeHash;
-  #  };
-
-  #  dontUnpack = true;
-
-  #  installPhase = ''
-  #    mkdir -p $out/share/fonts/truetype
-  #    cp $src $out/share/fonts/truetype/NotoSansImperialAramaic-Regular.ttf
-  #  '';
-  #};
+  bookFontPackages = with pkgs; [
+    noto-fonts                  # hebrew, telugu, arabic, egypt, phoenician, imperial aramaic
+    noto-fonts-cjk-sans         # chinese, japanese, korean
+    noto-fonts-cjk-serif        # ibid
+    noto-fonts-color-emoji      # obviously
+    source-han-serif            # ibid
+    culmus                      # hebrew
+    unifont                     # i forget
+    google-fonts                # ibid
+    wqy_zenhei                  # cjk
+    kodiPackages.robotocjksc    # cjk
+    arphic-ukai                 # cjk
+    arphic-uming                # cjk
+    babelstone-han              # cjk
+    texlivePackages.garuda-c90  # cjk
+    texlivePackages.lxgw-fonts  # cjk
+    texlivePackages.norasi-c90  # cjk
+    dejavu_fonts                # standard
+    liberation_ttf              # reasonable
+    #roboto                     # DON'T UNCOMMENT THIS, IT FUCKS UP LIGHTDM
+  ];
 
 in
 
@@ -348,32 +353,13 @@ in
     openai-whisper
 
     # fonts for the book
-    noto-fonts                  # hebrew, telugu, arabic, egypt, phoenician
-    noto-fonts-cjk-sans         # chinese, japanese, korean
-    noto-fonts-cjk-serif        # ibid
-    noto-fonts-color-emoji      # obviously
-    #noto-sans-imperial-aramaic  # doesn't come included
-    source-han-serif            # ibid
+  ] ++ bookFontPackages ++ [
     pango                       # παν語
     pandoc                      # obviously
     fontconfig                  # ibid
     #fontforge                   # proto-sinaitic font debugging
     fontforge-gtk               # ibid
     font-manager                # editing fonts
-    culmus                      # hebrew
-    unifont                     # i forget
-    google-fonts                # ibid
-    wqy_zenhei                  # cjk
-    kodiPackages.robotocjksc    # cjk
-    arphic-ukai                 # cjk
-    arphic-uming                # cjk
-    babelstone-han              # cjk
-    texlivePackages.garuda-c90  # cjk
-    texlivePackages.lxgw-fonts  # cjk
-    texlivePackages.norasi-c90  # cjk
-    dejavu_fonts                # standard
-    liberation_ttf              # reasonable
-    #roboto                     # DON'T UNCOMMENT THIS, IT FUCKS UP LIGHTDM
 
     # tex
     lua
@@ -559,9 +545,7 @@ in
 
   fonts = {
 
-    packages = [
-      #noto-sans-imperial-aramaic
-    ];
+    packages = bookFontPackages;
 
     fontconfig = {
       enable = true;
