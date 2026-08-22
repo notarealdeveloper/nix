@@ -70,7 +70,7 @@ let
     unifont                     # i forget
     google-fonts                # ibid
     wqy_zenhei                  # cjk
-    kodiPackages.robotocjksc    # cjk
+    #kodiPackages.robotocjksc   # cjk
     arphic-ukai                 # cjk
     arphic-uming                # cjk
     babelstone-han              # cjk
