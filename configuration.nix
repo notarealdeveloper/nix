@@ -416,7 +416,7 @@ in
     github-desktop
     transmission_4-gtk
     ffmpegthumbnailer
-    libreoffice-fresh
+    libreoffice-stable
 
     # ibus
     ibus
