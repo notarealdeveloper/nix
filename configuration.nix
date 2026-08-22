@@ -74,9 +74,9 @@ let
     arphic-ukai                 # cjk
     arphic-uming                # cjk
     babelstone-han              # cjk
-    texlivePackages.garuda-c90  # cjk
-    texlivePackages.lxgw-fonts  # cjk
-    texlivePackages.norasi-c90  # cjk
+    #texlivePackages.garuda-c90  # cjk
+    #texlivePackages.lxgw-fonts  # cjk
+    #texlivePackages.norasi-c90  # cjk
     dejavu_fonts                # standard
     liberation_ttf              # reasonable
     #roboto                     # DON'T UNCOMMENT THIS, IT FUCKS UP LIGHTDM
