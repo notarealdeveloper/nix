@@ -70,13 +70,9 @@ let
     unifont                     # i forget
     google-fonts                # ibid
     wqy_zenhei                  # cjk
-    #kodiPackages.robotocjksc   # cjk
     arphic-ukai                 # cjk
     arphic-uming                # cjk
     babelstone-han              # cjk
-    #texlivePackages.garuda-c90  # cjk
-    #texlivePackages.lxgw-fonts  # cjk
-    #texlivePackages.norasi-c90  # cjk
     dejavu_fonts                # standard
     liberation_ttf              # reasonable
     #roboto                     # DON'T UNCOMMENT THIS, IT FUCKS UP LIGHTDM
@@ -209,8 +205,6 @@ in
     automake
     cmake
     #cachix
-    #busybox
-    #toybox
 
     # debug
     iw
@@ -287,11 +281,11 @@ in
     sshfs
     openssh
     openvpn
-    #aws-cvpn   # I WANT THIS BUT BUILD NO NOT BROKE
     tcpdump
     arp-scan
     net-tools
     expressvpn
+    #aws-cvpn   # I WANT THIS BUT BUILD EEZ BROKE
 
     # tor
     tor
@@ -390,7 +384,7 @@ in
     evince
     vscode
     baobab
-    #nushell
+    nushell
     firefox
     dropbox
     gparted
@@ -523,16 +517,6 @@ in
 
   ];
 
-  #fonts.fontconfig = {
-  #  enable = true;
-  #  defaultFonts = {
-  #    serif = [ "DejaVu Serif" ];
-  #    sansSerif = [ "DejaVu Sans" ];
-  #    monospace = [ "DejaVu Sans Mono" ];
-  #    emoji = [ "Noto Color Emoji" ];
-  #  };
-  #};
-
   fonts = {
 
     packages = bookFontPackages;
@@ -550,9 +534,7 @@ in
   };
   services.tor.enable = true;
   services.tor.client.enable = true;
-
-  # for lord access via phone
-  services.tailscale.enable = true;
+  services.tailscale.enable = true;   # for lord access via phone
 
   # for adb over wifi
   services.avahi = {
@@ -619,7 +601,7 @@ in
   programs.dconf.enable = true;
 
   # os virtualization
-  #virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   gtk = {
     iconCache.enable = false; # i forget what this is for
@@ -729,7 +711,6 @@ in
   security.polkit.enable = true;
 
   networking.hosts = {
-    "165.227.186.223" = [ "epstein" ];
-    "167.172.219.109" = [ "fukkot" ];
+    #"167.172.219.109" = [ "fukkot" ];
   };
 }
