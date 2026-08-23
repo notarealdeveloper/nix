@@ -405,7 +405,7 @@ in
     parallel
     vbindiff
     lazpaint
-    #inkscape
+    inkscape
     obsidian
     #xournalpp
     #zed-editor
@@ -421,7 +421,6 @@ in
 
     # ibus
     ibus
-    #libpinyin
     ibus-engines.anthy
     ibus-engines.libpinyin
     ibus-engines.hangul
