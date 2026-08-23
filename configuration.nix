@@ -403,6 +403,7 @@ in
     dropbox
     gparted
     parallel
+    vbindiff
     lazpaint
     #inkscape
     obsidian
