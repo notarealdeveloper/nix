@@ -393,7 +393,7 @@ in
     gedit
     pinta
     conky
-    #guake
+    guake
     mupdf
     evince
     vscode
@@ -407,7 +407,7 @@ in
     lazpaint
     inkscape
     obsidian
-    #xournalpp
+    xournalpp
     #zed-editor
     #geckodriver
     chromedriver
@@ -434,7 +434,7 @@ in
     # video
     vlc
     ffmpeg-full
-    #kdePackages.kdenlive
+    kdePackages.kdenlive
     simplescreenrecorder
     rnnoise-plugin
 
