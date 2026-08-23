@@ -196,23 +196,19 @@ in
     dos2unix
 
     # build
-    stdenv.cc
+    stdenv.cc   # gcc, glibc, binutils
     perl
-    #gcc
-    #glibc
-    #glibc.dev
-    #binutils
     nasm
     bison
     clang
     meson
     ccache
-    #cachix
     gnumake
     gnum4
     autoconf
     automake
     cmake
+    #cachix
     #busybox
     #toybox
 
@@ -225,7 +221,7 @@ in
     strace
     ltrace
     ethtool
-    #binwalk
+    binwalk
     pciutils
     powertop
     patchelf
@@ -289,7 +285,6 @@ in
     # net
     nmap
     sshfs
-    #rclone
     openssh
     openvpn
     #aws-cvpn   # I WANT THIS BUT BUILD NO NOT BROKE
@@ -305,9 +300,9 @@ in
 
     # virt
     qemu
-    #docker
-    #docker-buildx
-    #docker-client
+    docker
+    docker-buildx
+    docker-client
 
     # fun
     sl
@@ -334,7 +329,6 @@ in
     # tty image previews in ranger
     ueberzugpp    # works
     w3m           # doesn't seem to
-    #fancy-cat    # kitty protocol seems to e (broken)
     enlightenment.terminology
     lsix
 
@@ -357,7 +351,6 @@ in
     pango                       # παν語
     pandoc                      # obviously
     fontconfig                  # ibid
-    #fontforge                   # proto-sinaitic font debugging
     fontforge-gtk               # ibid
     font-manager                # editing fonts
 
@@ -374,7 +367,6 @@ in
     ruby
 
     # phone
-    #android-tools is deprecated
     adbfs-rootless
     androidenv.androidPkgs.platform-tools
     avahi
@@ -408,8 +400,8 @@ in
     inkscape
     obsidian
     xournalpp
-    #zed-editor
-    #geckodriver
+    zed-editor
+    geckodriver
     chromedriver
     poppler-utils
     google-chrome
@@ -454,11 +446,9 @@ in
     dconf2nix
 
     # work
-    #nodePackages.nodejs
-    #nodePackages.npm
     glab
     awscli2
-    #teams-for-linux
+    teams-for-linux
     gitlab-ci-local
     gitlab-container-registry
     # intune-portal
