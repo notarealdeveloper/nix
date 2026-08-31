@@ -177,6 +177,7 @@ in
     lsof
     plocate
     ripgrep
+    git-filter-repo # tbrncl
 
     # mail
     msmtp
