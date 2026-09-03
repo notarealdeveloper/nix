@@ -172,6 +172,14 @@ in {
       "${personal.dst}/bin/setup-cinnamon"
     '');
 
+    setupGimp = lib.mkIf desktop (lib.hm.dag.entryAfter ["clonePublic"] ''
+      for dir in "$HOME"/.config/GIMP/*/; do
+        if [ -d "$dir" ]; then
+          ln -sfn "${exec.dst}/etc/gimp/shortcutsrc" "$dir/shortcutsrc"
+        fi
+      done
+    '');
+
     #setupNumix = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
     #  export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
     #  "${personal.dst}/bin/setup-numix"
