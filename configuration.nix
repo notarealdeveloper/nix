@@ -375,7 +375,6 @@ in
     qview
     geeqie
     meld
-    gimp2
     gimp
     ghex
     gedit
