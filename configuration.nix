@@ -349,12 +349,13 @@ in
     fontforge-gtk               # ibid
     font-manager                # editing fonts
 
-    # tex
+    # the book
     lua
     texmaker
     texlab
     texliveFull
     ghostscript
+    epubcheck
 
     # codex
     chatgpt-cli
