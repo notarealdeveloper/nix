@@ -356,6 +356,7 @@ in
     texliveFull
     ghostscript
     epubcheck
+    foliate
 
     # codex
     chatgpt-cli
