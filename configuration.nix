@@ -357,6 +357,7 @@ in
     ghostscript
     epubcheck
     foliate
+    calibre
 
     # codex
     chatgpt-cli
