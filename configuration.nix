@@ -358,7 +358,7 @@ in
     epubcheck
     foliate
     calibre
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
     curl
 
