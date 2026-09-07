@@ -358,6 +358,9 @@ in
     epubcheck
     foliate
     calibre
+    wineWowPackages.stable
+    winetricks
+    curl
 
     # codex
     chatgpt-cli
