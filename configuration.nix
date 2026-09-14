@@ -372,7 +372,6 @@ in
     androidenv.androidPkgs.platform-tools
     avahi
     scrcpy
-    adb-sync
     better-adb-sync
 
     # desktop
