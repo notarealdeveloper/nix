@@ -515,8 +515,8 @@ in
     ghc       # Haskell
     idris     # Dependent types
     idris2    # Dependenter types
-    lean4     # The Highest
     exiftool
+    #lean4    # The Highest
 
     # remote lord access
     tailscale
