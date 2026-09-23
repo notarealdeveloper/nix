@@ -227,6 +227,7 @@ in
     inotify-tools
     universal-ctags
     witr # witr = why is this running
+    busybox
 
     pinentry-tty
     pinentry-curses
