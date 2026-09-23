@@ -286,6 +286,7 @@ in
     arp-scan
     net-tools
     expressvpn
+    mullvad
     #aws-cvpn   # I WANT THIS BUT BUILD EEZ BROKE
 
     # tor
