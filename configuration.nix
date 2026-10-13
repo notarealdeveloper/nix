@@ -365,7 +365,6 @@ in
     curl
 
     # codex
-    chatgpt
     chatgpt-cli
     codex
     ruby
