@@ -390,7 +390,6 @@ in
     guake
     mupdf
     evince
-    vscode
     baobab
     nushell
     firefox
@@ -412,6 +411,11 @@ in
     transmission_4-gtk
     ffmpegthumbnailer
     libreoffice-stable
+
+    # editors
+    vscode
+    zed-editor-fhs
+    zod
 
     # ibus
     ibus
