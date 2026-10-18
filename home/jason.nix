@@ -251,12 +251,18 @@ ${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
       ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png".source = ./icons/obsidian.png;
 
       # ~/.local/share/applications
-      ".local/share/applications/obsidian.desktop".text =
-          let
-            src = builtins.readFile "${pkgs.obsidian}/share/applications/obsidian.desktop";
-            icon = "${config.home.homeDirectory}/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png";
-          in
-            builtins.replaceStrings ["Icon=obsidian"] ["Icon=${icon}"] src;
+      ".local/share/applications/md.obsidian.Obsidian.desktop".text = ''
+        [Desktop Entry]
+        Categories=Office
+        Comment=Knowledge base
+        Exec=obsidian %u
+        Icon=/home/jason/.local/share/icons/Numix-Circle/scalable/apps/obsidian.png
+        MimeType=x-scheme-handler/obsidian
+        Name=Obsidian
+        StartupWMClass=md.obsidian.Obsidian
+        Type=Application
+        Version=1.5
+      '';
     })
 
     # Private files (conditional)
