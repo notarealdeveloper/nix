@@ -366,6 +366,7 @@ in
 
     # codex
     chatgpt-cli
+    bubblewrap
     codex
     ruby
 
