@@ -442,6 +442,7 @@ in
     karere # whatsapp client like wasistlos
     zoom-us
     discord
+    slack
 
     # games
     # stepmania
