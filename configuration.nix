@@ -459,7 +459,6 @@ in
     teams-for-linux
     gitlab-ci-local
     gitlab-container-registry
-    uv
     # intune-portal
 
     # ports
