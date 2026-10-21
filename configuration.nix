@@ -424,7 +424,7 @@ in
     ibus-engines.libpinyin
     ibus-engines.hangul
     ibus-engines.pinyin
-    ibus-engines.mozc
+    #ibus-engines.mozc
 
     # themes
     mint-themes
