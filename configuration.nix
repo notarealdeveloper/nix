@@ -359,7 +359,7 @@ in
     ghostscript
     epubcheck
     foliate
-    calibre
+    #calibre
     wineWow64Packages.stable
     winetricks
     curl
