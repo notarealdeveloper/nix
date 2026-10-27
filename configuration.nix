@@ -82,35 +82,7 @@ in
 
 {
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    warn-dirty = false;
-    download-buffer-size = 64*(1024*1024);
-    max-jobs = "auto";
-    cores = 0; # 0 = give each build all cores (build systems may or may not use them)
-    http-connections = 50;  # faster parallel downloads
-  };
-
-  # time
-  time.timeZone = "America/Chicago";
-
-  environment.variables = {
-    EDITOR = "vim";
-  };
-
-  # internationalisation
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
+  imports = [ ./configuration-stage-one.nix ];
 
   i18n.inputMethod = {
     enable = true;
@@ -122,35 +94,8 @@ in
     ];
   };
 
-  services.libinput = {
-    enable = true;
-    touchpad = {
-      naturalScrolling = true;
-      tapping = true;
-      accelProfile = "adaptive";
-      accelSpeed = "0.5";
-    };
-  };
-
-  # x11 (todo: wayland)
-  services.xserver = {
-    enable = true;
-    xkb = {
-      options = "caps:escape";
-      layout  = "us,ara,il,in,in,ru,gr";
-      variant = ",mac-phonetic,phonetic,hin-kagapa,tel-kagapa,phonetic,";
-    };
-  };
-
-  # desktop
-  services.xserver.desktopManager.cinnamon.enable = true;
-
   # cups
   services.printing.enable = true;
-
-  # sound
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
 
   # intune for work
   # services.intune.enable = true;
@@ -162,21 +107,15 @@ in
 
 
     # python
-    python314 # first gets priority
+    (lib.hiPrio python314) # prefer the full environment over the bootstrap Python
     python315FreeThreading
     python313
     uv
 
     # unix
-    gh
-    git
-    wget
-    tree
     pcre
     acpi
-    lsof
     plocate
-    ripgrep
     git-filter-repo # tbrncl
 
     # mail
@@ -184,23 +123,17 @@ in
     mailutils
 
     # formats
-    jq
-    file
     cpio
     pigz
     qpdf # for zlib-flate
-    unzip
     dos2unix
 
     # build
-    stdenv.cc   # gcc, glibc, binutils
-    perl
     nasm
     bison
     clang
     meson
     ccache
-    gnumake
     gnum4
     autoconf
     automake
@@ -211,27 +144,23 @@ in
     iw
     gdb
     xev
-    htop
     iotop
     strace
     ltrace
     ethtool
     binwalk
-    pciutils
     powertop
     patchelf
     nvme-cli
     dmidecode
     tesseract
     aircrack-ng
-    inotify-tools
     universal-ctags
     witr # witr = why is this running
     busybox
 
     pinentry-tty
     pinentry-curses
-    pinentry-gnome3
 
     # matplotlib agg non-interactive bullshit
     cairo
@@ -269,19 +198,15 @@ in
     #bcc
 
     # doc
-    man-pages
     man-pages-posix
 
     # sec
-    gnupg
     foremost
-    cryptsetup
     thc-secure-delete
 
     # net
     nmap
     sshfs
-    openssh
     openvpn
     tcpdump
     arp-scan
@@ -306,7 +231,6 @@ in
     sl2
     figlet
     toilet
-    cowsay
     xcowsay
     cmatrix
     fastfetch
@@ -316,8 +240,6 @@ in
 
     # tty
     ghostty
-    vim-full
-    ranger
     bat
     highlight
     glow
@@ -330,8 +252,6 @@ in
     lsix
 
     # mid-level
-    xclip
-    xdotool
     glib
     zlib
     stdenv.cc.cc.lib   # provides libstdc++.so.6 which wheels often need
@@ -362,12 +282,10 @@ in
     #calibre
     wineWow64Packages.stable
     winetricks
-    curl
 
     # codex
     chatgpt-cli
     bubblewrap
-    codex
     ruby
 
     # phone
@@ -406,8 +324,6 @@ in
     geckodriver
     chromedriver
     poppler-utils
-    google-chrome
-    gnome-terminal
     github-desktop
     transmission_4-gtk
     ffmpegthumbnailer
@@ -450,7 +366,6 @@ in
     # nix
     nix-bash-completions
     nix-prefetch-github
-    home-manager
     dconf2nix
 
     # work
@@ -481,7 +396,6 @@ in
     xz.dev
     zstd
     zstd.dev
-    p7zip
     libffi
     libffi.dev
     readline
@@ -548,7 +462,6 @@ in
   };
   services.tor.enable = true;
   services.tor.client.enable = true;
-  services.tailscale.enable = true;   # for lord access via phone
 
   # for adb over wifi
   services.avahi = {
@@ -592,40 +505,8 @@ in
     };
   };
 
-  # login keyring
-  security.pam.services.login.enableGnomeKeyring = true;
-  security.pam.services.gdm.enableGnomeKeyring = true;      # harmless if you don't use gdm
-  security.pam.services.lightdm.enableGnomeKeyring = true;  # harmless if you don't use lightdm
-
-  # this combination seems to work best
-  services.gnome.gcr-ssh-agent.enable = true;   # keyring for ssh keys
-  services.gnome.gnome-keyring.enable = true;   # keyring for browser/passwords
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = true;
-      PermitRootLogin = "no";
-    };
-  };
-
-  hardware.graphics.enable = true;
-
-  # dconf
-  programs.dconf.enable = true;
-
   # os virtualization
   virtualisation.docker.enable = true;
-
-  gtk = {
-    iconCache.enable = false; # i forget what this is for
-  };
-
-  # vim: clipboard support
-  programs.vim = {
-    enable = true;
-    package = pkgs.vim-full;  # this is the default full-featured vim with +clipboard
-  };
 
   # Create autostart .desktop files for programs
   # that should be automatically started by all
@@ -641,89 +522,13 @@ in
   '';
 
   # net
-  networking.networkmanager.enable = true;
   networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
   programs.openvpn3.enable = true;
   services.expressvpn.enable = true;
 
-  # users
-  users.users.user = {
-    isNormalUser = true;
-    description = "User";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
-    packages = with pkgs; [
-    ];
-  };
-
-  users.users.jason = {
-    isNormalUser = true;
-    description = "Jason";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
-    packages = with pkgs; [
-    ];
-  };
-
-  users.users.luna = {
-    isNormalUser = true;
-    description = "Luna";
-    extraGroups = [ "audio" "video" ];
-    packages = with pkgs; [
-      yt-dlp
-      vlc
-    ];
-  };
-
-  # groups
-  users.extraGroups.plocate.members = [ "user" "jason" ];
-
-  security.sudo = {
-    enable = true;
-    extraRules = [
-      { users = [ "user" "jason" ]; commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
-    ];
-  };
-
-  # git (system level)
-  environment.etc."gitconfig".text = ''
-    [user]
-      name = "Jason Wilkes"
-      email = notarealdeveloper@gmail.com
-    [init]
-      defaultBranch = master
-    [pull]
-      rebase = true
-    [commit]
-      verbose = true
-  '';
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = false;
-  };
-
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  users.users.luna.packages = with pkgs; [ yt-dlp vlc ];
 
   programs.fuse.userAllowOther = true;
-
-  # bluetooth
-  hardware.bluetooth = {
-    enable = true;  # loads btusb
-    powerOnBoot = true;
-    # Turn off BlueZ privacy if the adapter throws 0x03 errors
-    settings.General.Privacy = "off";
-  };
-
-  services.blueman.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    wireplumber.enable = true;
-  };
-
-  security.polkit.enable = true;
 
   networking.hosts = {
     #"167.172.219.109" = [ "fukkot" ];

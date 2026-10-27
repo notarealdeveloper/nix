@@ -58,31 +58,53 @@
       config.allowUnfree = true;
     };
 
+    # Generated hardware modules can be replaced verbatim after a reinstall.
+    # Add a laptop here to give it both a full and a stage-one configuration.
+    laptops = {
+      turing = ./hw/system76.nix;
+      kleene = ./hw/lenovo.nix;
+    };
+
+    laptopConfigurations = nixpkgs.lib.concatMapAttrs (hostName: hardware:
+      let
+        laptop = stageOne: nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+          modules = [
+            hardware
+            ./os/linux-nixos.nix
+            (if stageOne then ./configuration-stage-one.nix else ./configuration.nix)
+            home-manager.nixosModules.home-manager
+            ({ config, lib, ... }: {
+              networking.hostName = hostName;
+              # First activation clones the public dotfile repositories.
+              systemd.services.home-manager-jason = {
+                wants = [ "network-online.target" ];
+                after = [ "network-online.target" ];
+                # The default login shell sources our personal .profile, whose
+                # X commands fail before login. Load only the system environment;
+                # setupDconf supplies its own D-Bus session during activation.
+                serviceConfig.ExecStart = lib.mkForce (toString (pkgs.writeShellScript "activate-jason-home" ''
+                  . /etc/profile
+                  exec ${config.home-manager.users.jason.home.activationPackage}/activate --driver-version ${if config.home-manager.enableLegacyProfileManagement then "0" else "1"}
+                ''));
+              };
+              home-manager = {
+                backupFileExtension = "backup";
+                extraSpecialArgs = { desktop = true; private = !stageOne; };
+                users.jason.imports = jasonHomeModules;
+              };
+            })
+          ];
+        };
+      in {
+        ${hostName} = laptop false;
+        "${hostName}-stage-one" = laptop true;
+      }
+    ) laptops;
+
   in {
 
-    nixosConfigurations = {
-
-      turing = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          ./hw/system76.nix
-          ./os/linux-nixos.nix
-          ./configuration.nix
-          { networking.hostName = "turing"; }
-          home-manager.nixosModules.home-manager
-        ];
-      };
-
-      kleene = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          ./hw/lenovo.nix
-          ./os/linux-nixos.nix
-          ./configuration.nix
-          { networking.hostName = "kleene"; }
-          home-manager.nixosModules.home-manager
-        ];
-      };
+    nixosConfigurations = laptopConfigurations // {
 
       gates = nixpkgs.lib.nixosSystem {
         inherit system pkgs;

@@ -21,6 +21,29 @@ let
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
+  # Cinnamon creates these files during its first login, after NixOS activation.
+  setupCinnamon = pkgs.writeShellScript "setup-cinnamon" ''
+    export PATH="${pkgs.python3}/bin:${pkgs.coreutils}/bin:$PATH"
+    for attempt in $(seq 1 30); do
+      ready=true
+      for file in \
+        menu@cinnamon.org/0.json \
+        calendar@cinnamon.org/13.json \
+        panel-launchers@cinnamon.org/15.json \
+        power@cinnamon.org/power@cinnamon.org.json; do
+        if [ ! -f "$HOME/.config/cinnamon/spices/$file" ]; then
+          ready=false
+        fi
+      done
+      if [ "$ready" = true ]; then
+        exec "${personal.dst}/bin/setup-cinnamon"
+      fi
+      if [ "''${1:-}" != --wait ]; then break; fi
+      sleep 1
+    done
+    echo "Cinnamon settings deferred until its applet files exist (next login or rebuild)."
+  '';
+
   notoSansFallbacks = [
     "Noto Sans Hebrew"
     "Noto Sans Arabic"
@@ -123,6 +146,8 @@ in {
     clonePublic = lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
 
       export PATH="${pkgs.git}/bin:$PATH"
+      export GIT_TERMINAL_PROMPT=0
+      mkdir -p "${config.home.homeDirectory}/src"
 
       if [ ! -d "${nix.dst}" ]; then
         git clone "${nix.src}" "${nix.dst}"
@@ -138,9 +163,11 @@ in {
     '';
 
     # git clone private repos (conditional)
-    clonePrivate = lib.mkIf private (lib.hm.dag.entryAfter ["writeBoundary" "installPackages"] ''
+    clonePrivate = lib.mkIf private (lib.hm.dag.entryAfter ["clonePublic" "linkGeneration"] ''
 
-      export PATH="${pkgs.git}/bin:$PATH"
+      export PATH="${pkgs.git}/bin:${pkgs.gh}/bin:$PATH"
+      export GIT_TERMINAL_PROMPT=0
+      mkdir -p "${config.home.homeDirectory}/src"
 
       if [ ! -d "${secret.dst}" ]; then
         git clone "${secret.src}" "${secret.dst}"
@@ -153,23 +180,13 @@ in {
     '');
 
     # desktop setup
-    setupDconf = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
-      export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
-      "${personal.dst}/bin/setup-dconf"
+    setupDconf = lib.mkIf desktop (lib.hm.dag.entryAfter ["clonePublic" "linkGeneration"] ''
+      export PATH="${config.home.path}/bin:${pkgs.dconf}/bin:${pkgs.glib}/bin:$PATH"
+      ${pkgs.dbus}/bin/dbus-run-session -- "${personal.dst}/bin/setup-dconf"
     '');
 
     setupCinnamon = lib.mkIf desktop (lib.hm.dag.entryAfter ["setupDconf"] ''
-      export PATH="${pkgs.python3}/bin:${pkgs.inotify-tools}/bin:$PATH"
-
-      # inotify can't watch paths that don't exist yet, so mkdir this
-      dir="$HOME/.config/cinnamon/spices/panel-launchers@cinnamon.org"
-      mkdir -pv "$dir"
-      if [[ $(ls "$dir" | wc -l) < 1 ]]; then
-        echo "Waiting for cinnamon to create panel-launchers."
-        inotifywait -qr -t 5 "$dir" || { echo Waiting for cinnamon timed out; } &&
-        echo "Panel launchers created, setting up cinnamon."
-      fi
-      "${personal.dst}/bin/setup-cinnamon"
+      ${setupCinnamon}
     '');
 
     setupGimp = lib.mkIf desktop (lib.hm.dag.entryAfter ["clonePublic"] ''
@@ -299,6 +316,15 @@ ${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
 
   # Desktop autostart configuration (conditional)
   xdg.configFile = lib.mkIf desktop {
+    "autostart/setup-cinnamon.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Personal Cinnamon settings
+      Exec=${setupCinnamon} --wait
+      X-GNOME-Autostart-enabled=true
+      NoDisplay=true
+    '';
+
     # ~/.config/autostart/conky.desktop
     "autostart/conky.desktop" = {
       text = ''

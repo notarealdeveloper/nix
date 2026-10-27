@@ -14,35 +14,47 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-label/NixOS";
-      fsType = "ext4";
+    { device = "/dev/mapper/luks-18e4a182-4278-4241-8239-a2386f1446c5";
+      fsType = "btrfs";
+    };
+
+  boot.initrd.luks.devices."luks-18e4a182-4278-4241-8239-a2386f1446c5".device = "/dev/disk/by-uuid/18e4a182-4278-4241-8239-a2386f1446c5";
+
+  fileSystems."/home" =
+    { device = "/dev/mapper/luks-18e4a182-4278-4241-8239-a2386f1446c5";
+      fsType = "btrfs";
+      options = [ "subvol=home" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/mapper/luks-18e4a182-4278-4241-8239-a2386f1446c5";
+      fsType = "btrfs";
+      options = [ "subvol=nix" ];
     };
 
   fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-label/EFI";
+    { device = "/dev/disk/by-uuid/393B-E380";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   fileSystems."/home/jason/Desktop" =
-    {
-      device = "/dev/disk/by-label/Desktop";
-      fsType = "ext4";
+    { device = "/dev/mapper/luks-069525dd-f8ed-4ec2-892b-77633cdd5381";
+      fsType = "btrfs";
     };
 
-  swapDevices =
-    [ {
-        device = "/dev/disk/by-label/Swap";
-      }
-    ];
+  boot.initrd.luks.devices."luks-069525dd-f8ed-4ec2-892b-77633cdd5381".device = "/dev/disk/by-uuid/069525dd-f8ed-4ec2-892b-77633cdd5381";
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
+  fileSystems."/home/jason/Desktop/stuff/mount" =
+    { device = "/dev/mapper/luks-ad9026e6-3dab-49cd-aab6-0d1fcc690037";
+      fsType = "btrfs";
+    };
+
+  boot.initrd.luks.devices."luks-ad9026e6-3dab-49cd-aab6-0d1fcc690037".device = "/dev/disk/by-uuid/ad9026e6-3dab-49cd-aab6-0d1fcc690037";
+
+  swapDevices =
+    [ { device = "/dev/mapper/luks-eabb871c-3783-4114-b142-243a7fd3a279"; }
+    ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
