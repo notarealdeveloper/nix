@@ -182,7 +182,7 @@ in {
     # desktop setup
     setupDconf = lib.mkIf desktop (lib.hm.dag.entryAfter ["clonePublic" "linkGeneration"] ''
       export PATH="${config.home.path}/bin:${pkgs.dconf}/bin:${pkgs.glib}/bin:$PATH"
-      ${pkgs.dbus}/bin/dbus-run-session -- "${personal.dst}/bin/setup-dconf"
+      ${pkgs.dbus}/bin/dbus-run-session --dbus-daemon=${pkgs.dbus}/bin/dbus-daemon -- "${personal.dst}/bin/setup-dconf"
     '');
 
     setupCinnamon = lib.mkIf desktop (lib.hm.dag.entryAfter ["setupDconf"] ''

@@ -12,7 +12,7 @@ UUID_TODO := TODO-TELL-AN-AGENT-TO-SWITCH-THE-UUIDS-TO-THE-LABELS-IN-dev-disk-by
 default: $(HOST)
 
 $(LAPTOPS) $(addsuffix -stage-one,$(LAPTOPS)):
-	sudo nixos-rebuild --extra-experimental-features 'nix-command flakes' --print-build-logs $(ACTION) --flake '$(FLAKE)#$@'
+	sudo nixos-rebuild --option extra-experimental-features 'nix-command flakes' --print-build-logs $(ACTION) --flake '$(FLAKE)#$@'
 	@if [ '$@' = turing ] || [ '$@' = turing-stage-one ]; then ./$(UUID_TODO) --remind; fi
 
 # Both spellings select exactly the same small system and home configuration.
