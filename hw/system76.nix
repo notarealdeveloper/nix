@@ -13,21 +13,24 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # These unique labels identify the decrypted filesystems. The outer LUKS
+  # containers and EFI filesystem have no labels, so their UUID lookups remain.
+  # Keep the mapper names: the initrd creates them before mounting by label.
   fileSystems."/" =
-    { device = "/dev/mapper/luks-18e4a182-4278-4241-8239-a2386f1446c5";
+    { device = "/dev/disk/by-label/NixOS";
       fsType = "btrfs";
     };
 
   boot.initrd.luks.devices."luks-18e4a182-4278-4241-8239-a2386f1446c5".device = "/dev/disk/by-uuid/18e4a182-4278-4241-8239-a2386f1446c5";
 
   fileSystems."/home" =
-    { device = "/dev/mapper/luks-18e4a182-4278-4241-8239-a2386f1446c5";
+    { device = "/dev/disk/by-label/NixOS";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/mapper/luks-18e4a182-4278-4241-8239-a2386f1446c5";
+    { device = "/dev/disk/by-label/NixOS";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
@@ -39,21 +42,24 @@
     };
 
   fileSystems."/home/jason/Desktop" =
-    { device = "/dev/mapper/luks-069525dd-f8ed-4ec2-892b-77633cdd5381";
+    { device = "/dev/disk/by-label/Desktop";
       fsType = "btrfs";
     };
 
   boot.initrd.luks.devices."luks-069525dd-f8ed-4ec2-892b-77633cdd5381".device = "/dev/disk/by-uuid/069525dd-f8ed-4ec2-892b-77633cdd5381";
 
   fileSystems."/home/jason/Desktop/stuff/mount" =
-    { device = "/dev/mapper/luks-ad9026e6-3dab-49cd-aab6-0d1fcc690037";
+    { device = "/dev/disk/by-label/mount";
       fsType = "btrfs";
     };
 
   boot.initrd.luks.devices."luks-ad9026e6-3dab-49cd-aab6-0d1fcc690037".device = "/dev/disk/by-uuid/ad9026e6-3dab-49cd-aab6-0d1fcc690037";
 
+  # The booted installation unlocks swap with a passphrase (initrd crypttab key "-").
+  boot.initrd.luks.devices."luks-eabb871c-3783-4114-b142-243a7fd3a279".device = "/dev/disk/by-uuid/eabb871c-3783-4114-b142-243a7fd3a279";
+
   swapDevices =
-    [ { device = "/dev/mapper/luks-eabb871c-3783-4114-b142-243a7fd3a279"; }
+    [ { device = "/dev/disk/by-label/swap"; }
     ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

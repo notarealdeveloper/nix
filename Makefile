@@ -6,14 +6,12 @@ LAPTOPS := turing kleene
 # path: includes a freshly copied hardware file even before git add.
 FLAKE ?= path:$(CURDIR)
 ACTION ?= switch
-UUID_TODO := TODO-TELL-AN-AGENT-TO-SWITCH-THE-UUIDS-TO-THE-LABELS-IN-dev-disk-by-label
 
 # Laptop configurations include Home Manager; a second home switch is unnecessary.
 default: $(HOST)
 
 $(LAPTOPS) $(addsuffix -stage-one,$(LAPTOPS)):
 	sudo nixos-rebuild --option extra-experimental-features 'nix-command flakes' --print-build-logs $(ACTION) --flake '$(FLAKE)#$@'
-	@if [ '$@' = turing ] || [ '$@' = turing-stage-one ]; then ./$(UUID_TODO) --remind; fi
 
 # Both spellings select exactly the same small system and home configuration.
 $(addsuffix -simple,$(LAPTOPS)): %-simple: %-stage-one
