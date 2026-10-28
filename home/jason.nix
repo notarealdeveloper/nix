@@ -21,6 +21,22 @@ let
 
   link = config.lib.file.mkOutOfStoreSymlink;
 
+  setupDconf = pkgs.writeShellScript "setup-dconf" ''
+    set -euo pipefail
+    export PATH="${config.home.path}/bin:${pkgs.dconf}/bin:${pkgs.glib}/bin:$PATH"
+    "${personal.dst}/bin/setup-dconf"
+    # The personal script still selects Numix, which we no longer install.
+    # Keep Cinnamon and GNOME consistent with the theme managed below.
+    dconf load / <<EOF
+    [org/cinnamon/desktop/interface]
+    gtk-theme='${config.gtk.theme.name}'
+    icon-theme='${config.gtk.iconTheme.name}'
+    [org/gnome/desktop/interface]
+    gtk-theme='${config.gtk.theme.name}'
+    icon-theme='${config.gtk.iconTheme.name}'
+    EOF
+  '';
+
   # Cinnamon creates these files during its first login, after NixOS activation.
   setupCinnamon = pkgs.writeShellScript "setup-cinnamon" ''
     export PATH="${pkgs.python3}/bin:${pkgs.coreutils}/bin:$PATH"
@@ -163,7 +179,9 @@ in {
     '';
 
     # git clone private repos (conditional)
-    clonePrivate = lib.mkIf private (lib.hm.dag.entryAfter ["clonePublic" "linkGeneration"] ''
+    # Authentication failures must not prevent public desktop settings applying.
+    clonePrivate = lib.mkIf private (lib.hm.dag.entryAfter
+      (["clonePublic" "linkGeneration"] ++ lib.optionals desktop ["setupCinnamon" "setupGimp"]) ''
 
       export PATH="${pkgs.git}/bin:${pkgs.gh}/bin:$PATH"
       export GIT_TERMINAL_PROMPT=0
@@ -181,8 +199,7 @@ in {
 
     # desktop setup
     setupDconf = lib.mkIf desktop (lib.hm.dag.entryAfter ["clonePublic" "linkGeneration"] ''
-      export PATH="${config.home.path}/bin:${pkgs.dconf}/bin:${pkgs.glib}/bin:$PATH"
-      ${pkgs.dbus}/bin/dbus-run-session --dbus-daemon=${pkgs.dbus}/bin/dbus-daemon -- "${personal.dst}/bin/setup-dconf"
+      ${pkgs.dbus}/bin/dbus-run-session --dbus-daemon=${pkgs.dbus}/bin/dbus-daemon -- ${setupDconf}
     '');
 
     setupCinnamon = lib.mkIf desktop (lib.hm.dag.entryAfter ["setupDconf"] ''
@@ -196,11 +213,6 @@ in {
         fi
       done
     '');
-
-    #setupNumix = lib.mkIf desktop (lib.hm.dag.entryAfter ["installPackages"] ''
-    #  export PATH="${config.home.path}/bin:${pkgs.glib.dev}/bin:$PATH"
-    #  "${personal.dst}/bin/setup-numix"
-    #'');
 
   };
 
@@ -331,7 +343,7 @@ ${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
         [Desktop Entry]
         Type=Application
         Name=Conky
-        Exec=${personal.dst}/conky-smart-start
+        Exec=${personal.dst}/bin/conky-smart-start
         X-GNOME-Autostart-enabled=true
         NoDisplay=false
         Comment=Start Conky at login
