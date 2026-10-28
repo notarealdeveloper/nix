@@ -113,7 +113,7 @@ in
     uv
 
     # unix
-    pcre
+    # pcre
     acpi
     plocate
     git-filter-repo # tbrncl
