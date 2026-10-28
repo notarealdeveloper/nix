@@ -289,7 +289,7 @@ in
     ruby
 
     # phone
-    adbfs-rootless
+    # adbfs-rootless
     androidenv.androidPkgs.platform-tools
     avahi
     scrcpy
