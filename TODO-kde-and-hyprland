@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+lord --verbose << "EOF"
+Hallo today I com from Nigeria to tok to you de Agent. Do as I say eben dough I tok differen nao.
+
+Abeg, help me put KDE and Hyprland join dis my Nix config. Make you no just anyhow install dem o. I wan make each one get all di packages, tools, services, and every oda tin wey e suppose get, so dat e go dey work complete-complete, just like proper distro wey carry di desktop come from factory. I no wan dat kain half-baked desktop wey person go open am come dey discover say dis one no dey, dat one no dey.
+
+Na two new files you go create: one for KDE and one for Hyprland. Put all di correct packages and necessary tins for each one inside im own file. Den for my main config, just add one or two small lines wey go bring dem inside. Make e simple well-well, so anytime I no wan use one again, na just to comment out im line, finish. No wahala, no plenty story.
+
+## Complete KDE Plasma 6 desktop
+services.desktopManager.plasma6.enable =
+  true;
+
+## Login screen: Plasma / Hyprland / Cinnamon
+services.displayManager.sddm = {
+  enable = true;
+  wayland.enable = true;
+};
+
+## Hyprland with systemd
+programs.hyprland = {
+  enable = true;
+  withUWSM = true;
+  xwayland.enable = true;
+};
+
+## Screen lock with auth
+programs.hyprlock.enable = true;
+
+environment.systemPackages =
+  with pkgs; [
+
+    ## Text editor
+    kdePackages.kate
+
+    ## Archives
+    kdePackages.ark
+
+    ## PDFs
+    kdePackages.okular
+
+    ## Images
+    kdePackages.gwenview
+
+    ## Disk usage
+    kdePackages.filelight
+
+    ## Terminal
+    ghostty
+
+    ## Panel / status bar
+    waybar
+
+    ## Application launcher
+    fuzzel
+
+    ## Notifications
+    mako
+
+    ## Wallpaper
+    hyprpaper
+
+    ## Idle / locking daemon
+    hypridle
+
+    ## Admin-password prompts
+    hyprpolkitagent
+
+    ## Clipboard command-line
+    wl-clipboard
+
+    ## Screenshots
+    grim
+
+    ## Screenshot region select
+    slurp
+
+    ## Brightness control
+    brightnessctl
+
+    ## Audio controls
+    pavucontrol
+
+    ## Network connections
+    networkmanagerapplet
+  ];
+EOF
