@@ -280,6 +280,18 @@ ${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
       ".local/share/icons/Numix-Circle/scalable/apps/obsidian.png".source = ./icons/obsidian.png;
 
       # ~/.local/share/applications
+      ".local/share/applications/chatgpt.desktop".text = ''
+        [Desktop Entry]
+        Name=ChatGPT
+        Comment=ChatGPT by OpenAI
+        Exec=${lib.getExe pkgs.llm-agents.chatgpt} %U
+        Icon=${pkgs.llm-agents.chatgpt}/share/pixmaps/chatgpt.png
+        Type=Application
+        Terminal=false
+        StartupNotify=true
+        Categories=Utility;
+      '';
+
       ".local/share/applications/md.obsidian.Obsidian.desktop".text = ''
         [Desktop Entry]
         Categories=Office
