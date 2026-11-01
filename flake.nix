@@ -9,6 +9,11 @@
 
     nixpkgs.url  = "github:NixOS/nixpkgs/nixos-unstable";
 
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,7 +36,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-on-droid, aws-cvpn-client, ... }:
+  outputs = { self, nixpkgs, llm-agents, home-manager, nixos-wsl, nix-on-droid, aws-cvpn-client, ... }:
 
   let
 
@@ -54,7 +59,7 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ overlay ];
+      overlays = [ overlay llm-agents.overlays.shared-nixpkgs ];
       config.allowUnfree = true;
     };
 

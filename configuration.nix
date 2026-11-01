@@ -284,7 +284,7 @@ in
     winetricks
 
     # codex
-    chatgpt
+    llm-agents.chatgpt
     chatgpt-cli
     bubblewrap
     ruby
