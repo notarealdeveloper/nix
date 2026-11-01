@@ -10,8 +10,6 @@ let
 
   cacheName = "notarealdeveloper";
 
-  pkgs.config.allowUnfree = true;
-
   pythonWithPackages = python: python.withPackages (ps: with ps; [
     pip
     build
