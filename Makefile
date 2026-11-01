@@ -7,8 +7,7 @@ LAPTOPS := turing kleene
 FLAKE ?= path:$(CURDIR)
 ACTION ?= switch
 
-# Laptop configurations include Home Manager; a second home switch is unnecessary.
-default: $(HOST)
+default: system home
 
 $(LAPTOPS) $(addsuffix -stage-one,$(LAPTOPS)):
 	sudo nixos-rebuild --option extra-experimental-features 'nix-command flakes' --print-build-logs $(ACTION) --flake '$(FLAKE)#$@'
