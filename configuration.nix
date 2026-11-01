@@ -57,7 +57,6 @@ let
 
   python313 = pythonWithPackages pkgs.python313;
   python314 = pythonWithPackages pkgs.python314;
-  python315 = pythonWithPackages pkgs.python315;
   python314FreeThreading = pythonWithPackages pkgs.python314FreeThreading;
   #python315FreeThreading = pythonWithPackages pkgs.python315FreeThreading;
 
@@ -108,8 +107,7 @@ in
 
 
     # python
-    (lib.hiPrio python315) # prefer the full environment over the bootstrap Python
-    python314
+    (lib.hiPrio python314) # prefer the full environment over the bootstrap Python
     python315FreeThreading
     python313
     uv
