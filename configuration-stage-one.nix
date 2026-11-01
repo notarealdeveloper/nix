@@ -48,6 +48,9 @@
     which
   ];
 
+  # Run generic Linux binaries, including Python interpreters downloaded by uv.
+  programs.nix-ld.enable = true;
+
   networking.networkmanager.enable = true;
   services.tailscale.enable = true;
 
