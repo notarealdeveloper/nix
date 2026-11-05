@@ -206,6 +206,7 @@ in
 
     # net
     nmap
+    socat
     sshfs
     openvpn
     tcpdump
