@@ -438,6 +438,7 @@ in
     ghc       # Haskell
     idris     # Dependent types
     idris2    # Dependenter types
+    nodejs    # Mistakes were made
     exiftool
     #lean4    # The Highest
 
