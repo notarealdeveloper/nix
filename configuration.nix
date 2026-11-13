@@ -326,10 +326,14 @@ in
     geckodriver
     chromedriver
     poppler-utils
-    github-desktop
     transmission_4-gtk
     ffmpegthumbnailer
     libreoffice-stable
+
+    # git
+    git
+    gitkraken
+    github-desktop
 
     # editors
     vscode
