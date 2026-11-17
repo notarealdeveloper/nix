@@ -2,9 +2,18 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  consoleFont = pkgs.runCommand "LatGrkCyr-16x32.psfu" {
+    nativeBuildInputs = [ pkgs.psftools ];
+  } ''
+    gzip -dc ${pkgs.kbd}/share/consolefonts/LatGrkCyr-8x16.psfu.gz \
+      | psfxform --scale --width=16 --height=32 --psf2 > "$out"
+  '';
+in
+
 {
 
-  console.font = "LatGrkCyr-8x16";
+  console.font = "${consoleFont}";
 
   # bootloader
   boot.loader.systemd-boot.enable = true;
