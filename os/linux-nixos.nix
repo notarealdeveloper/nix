@@ -4,6 +4,8 @@
 
 {
 
+  console.font = "LatGrkCyr-8x16";
+
   # bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
