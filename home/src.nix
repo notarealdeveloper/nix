@@ -30,7 +30,10 @@ let
 
   url = {
 
-    # system
+    # up
+    lord = "https://github.com/notarealdeveloper/lord";
+
+    # dn
     nix = "https://github.com/notarealdeveloper/nix";
 
     # team stuff: the "rw rw r-" parts of life
