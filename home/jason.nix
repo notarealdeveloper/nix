@@ -16,7 +16,7 @@ let
   email = "notarealdeveloper@gmail.com";
 
   src = import ./src.nix { inherit config; };
-  inherit (src) nix exec personal;
+  inherit (src) nix exec personal lord;
   inherit (src) secret legacy;
 
   link = config.lib.file.mkOutOfStoreSymlink;
@@ -167,6 +167,10 @@ in {
 
       if [ ! -d "${nix.dst}" ]; then
         git clone "${nix.src}" "${nix.dst}"
+      fi
+
+      if [ ! -d "${lord.dst}" ]; then
+        git clone "${lord.src}" "${lord.dst}"
       fi
 
       if [ ! -d "${exec.dst}" ]; then
@@ -320,6 +324,7 @@ ${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
 
   # PATH for login shells (consolidated with conditional private paths)
   home.sessionPath = [
+    "${lord.dst}/bin"
     "${exec.dst}/bin"
     "${personal.dst}/bin"
   ] ++ lib.optionals private [
@@ -331,6 +336,7 @@ ${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
   programs.bash = {
     enable = true;
     bashrcExtra = ''
+      source "${lord.dst}/etc/bashrc"
       source "${exec.dst}/etc/bashrc"
       source "${personal.dst}/etc/bashrc"
     '' + lib.optionalString private ''
