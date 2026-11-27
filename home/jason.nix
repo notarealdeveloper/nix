@@ -336,11 +336,19 @@ ${xmlFamilies ([ "Noto Sans Mono" ] ++ notoSansFallbacks)}
   programs.bash = {
     enable = true;
     bashrcExtra = ''
-      source "${lord.dst}/etc/bashrc"
-      source "${exec.dst}/etc/bashrc"
-      source "${personal.dst}/etc/bashrc"
+      if [ -f "${lord.dst}/etc/bashrc" ]; then
+        source "${lord.dst}/etc/bashrc"
+      fi
+      if [ -f "${exec.dst}/etc/bashrc" ]; then
+        source "${exec.dst}/etc/bashrc"
+      fi
+      if [ -f "${personal.dst}/etc/bashrc" ]; then
+        source "${personal.dst}/etc/bashrc"
+      fi
     '' + lib.optionalString private ''
-      source "${secret.dst}/etc/bashrc"
+      if [ -f "${secret.dst}/etc/bashrc" ]; then
+        source "${secret.dst}/etc/bashrc"
+      fi
     '';
   };
 
