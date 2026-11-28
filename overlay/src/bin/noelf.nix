@@ -27,18 +27,18 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -pv $out/bin
 
-    cp -v bin/LD        $out/bin/LD
+    cp -v bin/LD        $out/bin/ld.bin
     cp -v bin/mkdir.bin $out/bin/mkdir.bin
     cp -v bin/rmdir.bin $out/bin/rmdir.bin
 
     cat > $out/bin/LD-mkdir << EOF
     #!/usr/bin/env bash
-    $out/bin/LD $out/bin/mkdir.bin
+    $out/bin/ld.bin $out/bin/mkdir.bin
     EOF
 
     cat > $out/bin/LD-rmdir << EOF
     #!/usr/bin/env bash
-    $out/bin/LD $out/bin/rmdir.bin
+    $out/bin/ld.bin $out/bin/rmdir.bin
     EOF
 
     chmod +x $out/bin/LD-mkdir
